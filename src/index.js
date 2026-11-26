@@ -44,6 +44,7 @@ export * as bazaar from './market/bazaar.js';          // разбор отве�
 export * as bazaarList from './market/bazaar-list.js'; // список Bazaar с фильтрами
 export * as auctions from './market/auctions.js';      // лоты AH, проданные лоты
 export * as ahList from './market/ah-list.js';
+export * as myAuctions from './market/my-auctions.js'; // «Мои лоты»: статусы своих лотов и ставок
 export * as candles from './market/candles.js';        // свечи Bazaar
 export * as ahCandles from './market/ah-candles.js';   // свечи AH
 export * as marketHistory from './market/history.js';  // тренды цен

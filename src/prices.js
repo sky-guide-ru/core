@@ -13,6 +13,7 @@ import { auctionKey, createBinBuilder, createSoldStore, recordSale, pruneSold, s
 import { pushHourly, trend, trendLabel } from './market/history.js';
 import { variantKey } from './market/resale.js';
 import { makeQuote, buyOf } from './market/quote.js';
+import { createBidIndex } from './market/my-auctions.js';
 
 export const prices = {
   bazaar: new Map(),     // id -> { buy, sell, buyVol, sellVol, buyWeek, sellWeek, buyOrders, sellOrders, buyAvg, sellAvg }
@@ -174,6 +175,25 @@ async function keyOfAuction(a) {
 }
 
 let scanning = false;
+// Ставки игроков из последнего скана (блок «Мои лоты»): uuid → ставочные лоты, где игрок ставил
+let bidIndex = createBidIndex();
+/** Ставки игрока на висящие ставочные лоты (из последнего скана аукциона, без запроса с ключом) */
+export const bidsOf = uuid => bidIndex.get(uuid);
+
+/**
+ * Ключ предмета лота из item_bytes (строка base64 в скане или { data } в /skyblock/auction).
+ * @returns {Promise<{ key, count, variant } | null>}
+ */
+export async function auctionItemOf(itemBytes) {
+  const b64 = typeof itemBytes === 'string' ? itemBytes : itemBytes?.data;
+  if (!b64) return null;
+  try {
+    const { item, ea } = await decodeRaw(b64);
+    const k = auctionKey(item, ea);
+    return k ? { key: k.key, count: item.count || 1, variant: variantKey(item) } : null;
+  } catch { return null; }
+}
+
 export async function refreshAuctions() {
   if (scanning) return; // прошлый скан ещё идёт — этот пропускаем
   scanning = true;
@@ -184,12 +204,18 @@ export async function refreshAuctions() {
     const builder = createBinBuilder();
     const varBuilder = createBinBuilder();
     const seen = new Set();
+    const bids = createBidIndex();
     let n = 0;
     const handle = async auctions => {
       for (const a of auctions || []) {
         // Разбор NBT новых лотов синхронный: после перезапуска это десятки тысяч лотов подряд.
         // Каждые 200 лотов отдаём ход запросам сайта, иначе он замирает на время скана
         if (++n % 200 === 0) await yieldNow();
+        if (!a.bin && a.bids?.length) {
+          // Ставочный лот со ставками — в индекс ставок («Мои лоты»), с ключом предмета для картинки
+          seen.add(a.uuid);
+          bids.add(a, (await keyOfAuction(a))?.key || null);
+        }
         if (!a.bin || a.claimed) continue;
         seen.add(a.uuid);
         const k = await keyOfAuction(a);
@@ -212,6 +238,7 @@ export async function refreshAuctions() {
     const lowest = builder.result();
     if (!lowest.size) throw new Error('Аукцион вернул пустой список');
     prices.bin = lowest;
+    bidIndex = bids;
     prices.binVar = varBuilder.result();
     prices.binAt = Date.now();
     for (const [id, v] of lowest) pushHourly(prices.binHistory, counters.bin, id, prices.binAt, [v.price]);
