@@ -18,10 +18,18 @@
 ## Как подключить
 
 ```
-"@sky-guide/core": "github:sky-guide-ru/core#v0.1.0"
+npm install github:sky-guide-ru/core#v0.1.0
 ```
 
-Импорт по пути файла: `import { analyzeSacks } from '@sky-guide/core/stash/index.js'`. Версии — теги `vX.Y.Z`: ломающее изменение повышает среднюю цифру.
+```js
+import { bazaar, flips, calendar, damage } from '@sky-guide/core';
+```
+
+Главный вход `@sky-guide/core` — чистые расчёты: без диска, сети, `process.env` и таймеров, работают в Node, браузере,
+боте и моде на JS-движке. Это проверяет тест. Остальное доступно по пути файла (`@sky-guide/core/advisor/index.js`),
+но это внутренний слой сервера, он меняется без предупреждения. Слои и куда класть новый код — [docs/architecture.md](docs/architecture.md).
+
+Версии — теги `vX.Y.Z`, правила и что поменялось — [CONTRIBUTING.md](CONTRIBUTING.md#версии) и [CHANGELOG.md](CHANGELOG.md).
 
 ## Репо проекта
 
