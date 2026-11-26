@@ -53,7 +53,7 @@ export function createKeyed({ fetcher = getJson, usage = null, clock = () => Dat
     const same = inflight.get(apiPath);
     if (same) { usage?.skipped('deduped'); return same; }
     log.push(clock());
-    const id = (/[?&](?:uuid|profile)=([\w-]+)/i.exec(apiPath) || [])[1]?.replace(/-/g, '').toLowerCase();
+    const id = (/[?&](?:uuid|profile|player)=([\w-]+)/i.exec(apiPath) || [])[1]?.replace(/-/g, '').toLowerCase();
     usage?.count(KIND(apiPath), id && own.has(id) ? 'own' : 'others');
     const promise = Promise.resolve()
       .then(() => fetcher(`${BASE}${apiPath}`, { headers: { 'API-Key': key } }))
@@ -111,6 +111,8 @@ export const getProfiles = uuid => keyed(`/skyblock/profiles?uuid=${uuid}`);
 export const getGarden = profileId => keyed(`/skyblock/garden?profile=${profileId}`);
 export const getMuseum = profileId => keyed(`/skyblock/museum?profile=${profileId}`);
 export const getPlayer = uuid => keyed(`/player?uuid=${uuid}`);
+// Лоты игрока на Auction House (висящие и закончившиеся, но не забранные) — блок «Мои лоты»
+export const getPlayerAuctions = uuid => keyed(`/skyblock/auction?player=${uuid}`);
 // Публичные эндпоинты, ключ не нужен
 export const getBazaar = () => getJson(`${BASE}/skyblock/bazaar`);
 export const getAuctionPage = page => getJson(`${BASE}/skyblock/auctions?page=${page}`);

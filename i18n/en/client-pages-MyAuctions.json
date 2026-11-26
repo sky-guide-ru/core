@@ -1,0 +1,23 @@
+{
+ "Продан · забрать {0}": "Sold · claim {0}",
+ "Истёк · забрать предмет": "Expired · claim the item",
+ "Ставка {0} · ставок {1}": "Bid {0} · {1} bids",
+ "Ставок пока нет": "No bids yet",
+ "Есть дешевле на {0} · {1}": "Cheaper by {0} · {1}",
+ "Самый дешёвый · следующий {0}": "Cheapest · next {0}",
+ "Самый дешёвый": "Cheapest",
+ "Висит": "Listed",
+ "Лоты не загрузились: {0}": "Listings did not load: {0}",
+ "Открой свой профиль, чтобы увидеть лоты.": "Open your profile to see your listings.",
+ "Забрать {0}": "Claim {0}",
+ "Истекло: {0}": "Expired: {0}",
+ "Висит: {0}": "Listed: {0}",
+ "Есть дешевле: {0}": "Cheaper listed: {0}",
+ "Перебили ставок: {0}": "Outbid: {0}",
+ "Hypixel не ответил, показаны лоты на {0}.": "Hypixel did not respond, showing listings from {0}.",
+ "На Auction House нет лотов.": "No Auction House listings.",
+ "Ставки": "Bids",
+ "Перебили · твоя {0}": "Outbid · yours {0}",
+ "Твоя ставка выше всех": "Your bid is the highest",
+ "Лоты обновляются раз в 3 минуты, последний раз {0}. Ордера Bazaar Hypixel не показывает: их увидит только мод в игре.": "Listings refresh every 3 minutes, last {0}. Hypixel does not show Bazaar orders: only an in-game mod can see them."
+}
