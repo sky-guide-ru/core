@@ -18,7 +18,7 @@
 ## Как подключить
 
 ```
-npm install github:sky-guide-ru/core#v0.1.0
+npm install github:sky-guide-ru/core#v0.1.1
 ```
 
 ```js
