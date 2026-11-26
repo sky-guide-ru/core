@@ -171,5 +171,9 @@
  "Страница не перезагружается посреди чтения": "Pages no longer reload while you read",
  "Новая версия сайта открывается при переходе в другой раздел, а окошко «Что нового» приходит сразу.": "A new version of the site opens when you go to another section, and the “What's new” popup shows up right away.",
  "На одной странице через несколько минут внизу появится плашка «Сайт обновился» с кнопкой «Обновить».": "After a few minutes on one page, a “The site has been updated” bar with a Refresh button appears at the bottom.",
- "Исправлен сбой, из-за которого раздел иногда не открывался сразу после изменений на сайте.": "Fixed a bug where a section sometimes failed to open right after the site changed."
+ "Исправлен сбой, из-за которого раздел иногда не открывался сразу после изменений на сайте.": "Fixed a bug where a section sometimes failed to open right after the site changed.",
+ "Что доделать на своих аксессуарах": "What to finish on your accessories",
+ "В [Мои аксессуары](accessories/owned#acc-gaps) есть фильтры: без Recombobulator, не макс. tier, без enrichment.": "[My accessories](accessories/owned#acc-gaps) has filters: no Recombobulator, not max tier, no enrichment.",
+ "У аксессуара с апгрейдом видно, во что его вкачать дальше: Ring → Artifact → Relic.": "Accessories with an upgrade show what to upgrade them into next: Ring → Artifact → Relic.",
+ "Плитка «Без рекомба» открывает список аксессуаров без Recombobulator.": "The “Without recomb” tile opens the list of accessories without a Recombobulator."
 }
