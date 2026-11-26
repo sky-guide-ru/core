@@ -1,0 +1,38 @@
+# Выпуск версий без ручной кнопки Releases.
+# Номер версии задаёт PR: поменял "version" в package.json и раздел «## X.Y.Z» в CHANGELOG.md.
+# После слияния в main этот workflow ставит тег vX.Y.Z на коммит, где версия появилась, и создаёт GitHub Release
+# с текстом из CHANGELOG. Так же доставит пропущенные теги для старых версий из CHANGELOG.
+name: release
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: core
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: sky-guide-ru/web
+          path: web
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+        working-directory: core
+      - run: npm test
+        working-directory: core
+      - name: Теги и релизы для новых версий
+        working-directory: core
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/release.mjs
