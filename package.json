@@ -11,7 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/sky-guide-ru/core.git"
   },
+  "main": "./src/index.js",
   "exports": {
+    ".": "./src/index.js",
     "./package.json": "./package.json",
     "./i18n/*": "./i18n/*",
     "./test/fixtures/*": "./test/fixtures/*",
@@ -27,19 +29,21 @@
     "i18n": "node scripts/i18n.mjs"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^1.12.0",
-    "adm-zip": "^0.5.16",
-    "dotenv": "^18.0.10",
     "pngjs": "^7.0.0",
     "prismarine-nbt": "^2.7.0"
   },
   "devDependencies": {
+    "adm-zip": "^0.5.16",
     "rolldown": "^1.2.19"
   },
   "peerDependencies": {
+    "@anthropic-ai/sdk": "^1.12.0",
     "rolldown": "*"
   },
   "peerDependenciesMeta": {
+    "@anthropic-ai/sdk": {
+      "optional": true
+    },
     "rolldown": {
       "optional": true
     }
