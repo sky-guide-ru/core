@@ -3,7 +3,7 @@ import { isGuiItem } from '../lib/gui-items.js';
 import { neu, allAccessories, itemName } from '../neu.js';
 import { priceOf, petPriceOf } from '../prices.js';
 import { PET_TIERS } from '../nbt.js';
-import { buildUpgrades, NO_RECOMB } from '../lib/acc-upgrades.js';
+import { buildUpgrades, nextUpgrade, NO_RECOMB } from '../lib/acc-upgrades.js';
 import { tx } from '../../i18n/msg.js';
 
 export const MP_BY_RARITY = { COMMON: 3, UNCOMMON: 5, RARE: 8, EPIC: 12, LEGENDARY: 16, MYTHIC: 22, DIVINE: 22, SPECIAL: 3, 'VERY SPECIAL': 5 };
@@ -39,6 +39,10 @@ export function analyzeAccessories(member) {
   const covered = new Set();
   for (const id of owned.keys()) for (const c of coveredBy(id, up)) covered.add(c);
 
+  // Mythic и выше рекомб не поднимает по MP, Special/Very Special — отдельная шкала
+  const recombable = ['COMMON', 'UNCOMMON', 'RARE', 'EPIC', 'LEGENDARY'];
+  // Enrichment ставится только на Legendary и выше
+  const enrichable = ['LEGENDARY', 'MYTHIC', 'DIVINE'];
   let mp = 0;
   const list = [];
   for (const it of owned.values()) {
@@ -46,7 +50,15 @@ export function analyzeAccessories(member) {
     let gain = active ? (MP_BY_RARITY[it.rarity] || 0) : 0;
     if (it.id === 'HEGEMONY_ARTIFACT') gain *= 2;
     mp += gain;
-    list.push({ id: it.id, name: it.name, rarity: it.rarity, recomb: it.recomb, reforge: it.reforge, enrichment: it.enrichment || it.attributes?.enrichment || null, mp: gain, active, value: priceOf(it.id) });
+    // Пробелы для фильтров «Мои аксессуары»: следующий tier, рекомб, enrichment
+    const next = active ? nextUpgrade(it.id, up) : null;
+    list.push({
+      id: it.id, name: it.name, rarity: it.rarity, recomb: it.recomb, reforge: it.reforge,
+      enrichment: it.enrichment || it.attributes?.enrichment || null, mp: gain, active, value: priceOf(it.id),
+      next: next ? { id: next, name: itemName(next), rarity: neu.items.get(next)?.rarity || null } : null,
+      canRecomb: active && !it.recomb && recombable.includes(it.rarity) && !NO_RECOMB.has(it.id),
+      canEnrich: enrichable.includes(it.rarity),
+    });
   }
   if (member.riftPrism) mp += 11;
 
@@ -78,9 +90,7 @@ export function analyzeAccessories(member) {
   // Убираем дубли семейств: если есть и X и его апгрейд Y в рекомендациях — оставляем оба, но сортируем по цене за MP
   recs.sort((a, b) => (a.perMp ?? Infinity) - (b.perMp ?? Infinity));
 
-  // Mythic и выше рекомб не поднимает по MP, Special/Very Special — отдельная шкала
-  const recombable = ['COMMON', 'UNCOMMON', 'RARE', 'EPIC', 'LEGENDARY'];
-  const notRecomb = list.filter(a => a.active && !a.recomb && recombable.includes(a.rarity) && !NO_RECOMB.has(a.id));
+  const notRecomb = list.filter(a => a.canRecomb);
   const recombPrice = priceOf('RECOMBOBULATOR_3000');
 
   return {
