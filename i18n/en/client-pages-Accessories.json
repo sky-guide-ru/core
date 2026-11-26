@@ -26,5 +26,19 @@
  "не считается (есть старшая версия)": "not counted (a higher version is owned)",
  " · рекомб": " · recomb",
  " · обогащение: {0}": " · enrichment: {0}",
- "Maxwell: сила и Stats Tuning": "Maxwell: power and Stats Tuning"
+ "Maxwell: сила и Stats Tuning": "Maxwell: power and Stats Tuning",
+ "Не макс. tier": "Not max tier",
+ "Без Recombobulator": "No Recombobulator",
+ "Без enrichment": "No enrichment",
+ "Не считаются": "Not counted",
+ "Есть старшая версия: апгрейд даёт больше MP.": "A higher version exists: upgrading gives more MP.",
+ "Recombobulator 3000 поднимает редкость на одну ступень и даёт больше MP (~{0} за штуку).": "Recombobulator 3000 raises rarity by one tier and gives more MP (~{0} each).",
+ "Enrichment ставится на Legendary и выше: +1 очко Stats Tuning у Maxwell.": "Enrichment goes on Legendary and above: +1 Stats Tuning point at Maxwell.",
+ "Эти аксессуары перекрыты старшей версией в сумке и MP не дают: их можно продать.": "These accessories are covered by a higher version in the bag and give no MP: you can sell them.",
+ "Показать аксессуары без Recombobulator": "Show accessories without a Recombobulator",
+ " · без рекомба": " · no recomb",
+ " · без enrichment": " · no enrichment",
+ "В сумке нет аксессуаров.": "No accessories in the bag.",
+ "Здесь всё сделано.": "All done here.",
+ "Recombobulator 3000 поднимает редкость на одну ступень и даёт больше MP.": "Recombobulator 3000 raises rarity by one tier and gives more MP."
 }
