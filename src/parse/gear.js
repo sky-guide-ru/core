@@ -5,6 +5,7 @@ import { priceOf, petPriceOf } from '../prices.js';
 import { PET_TIERS } from '../nbt.js';
 import { buildUpgrades, nextUpgrade, NO_RECOMB } from '../lib/acc-upgrades.js';
 import { tx } from '../../i18n/msg.js';
+import { statOf, howOf, reqOf, tierOf, accSteps } from './acc-meta.js';
 
 export const MP_BY_RARITY = { COMMON: 3, UNCOMMON: 5, RARE: 8, EPIC: 12, LEGENDARY: 16, MYTHIC: 22, DIVINE: 22, SPECIAL: 3, 'VERY SPECIAL': 5 };
 const RARITY_ORDER = ['COMMON', 'UNCOMMON', 'RARE', 'EPIC', 'LEGENDARY', 'MYTHIC', 'DIVINE', 'SPECIAL', 'VERY SPECIAL'];
@@ -58,6 +59,7 @@ export function analyzeAccessories(member) {
       next: next ? { id: next, name: itemName(next), rarity: neu.items.get(next)?.rarity || null } : null,
       canRecomb: active && !it.recomb && recombable.includes(it.rarity) && !NO_RECOMB.has(it.id),
       canEnrich: enrichable.includes(it.rarity),
+      tier: tierOf(it.id, up, coveredBy), stat: statOf(neu.items.get(it.id)), how: howOf(it.id),
     });
   }
   if (member.riftPrism) mp += 11;
@@ -85,6 +87,7 @@ export function analyzeAccessories(member) {
       perMp: net ? net / gain : null, upgradeFrom: lower ? owned.get(lower).name : null,
       // семейство (младшие и старшие версии): из одного семейства в сумке работает только один аксессуар
       family: [...new Set([acc.id, ...coveredBy(acc.id, up), ...(up[acc.id] || [])])],
+      tier: tierOf(acc.id, up, coveredBy), stat: statOf(acc), how: howOf(acc.id), req: reqOf(acc.id, member),
     });
   }
   // Убираем дубли семейств: если есть и X и его апгрейд Y в рекомендациях — оставляем оба, но сортируем по цене за MP
@@ -92,6 +95,8 @@ export function analyzeAccessories(member) {
 
   const notRecomb = list.filter(a => a.canRecomb);
   const recombPrice = priceOf('RECOMBOBULATOR_3000');
+  // План «что сделать дальше»: все шаги (купить, tier, Recombobulator, Enrichment) по цене за 1 MP
+  const { steps, enrichPrice } = accSteps({ list, missing: recs, mpBy: MP_BY_RARITY });
 
   return {
     calculatedMp: mp,
@@ -102,6 +107,8 @@ export function analyzeAccessories(member) {
     cheapestNext: recs.filter(r => r.perMp).slice(0, 40),
     notRecombCount: notRecomb.length,
     recombPrice,
+    enrichPrice,
+    steps,
     // Рекомб повышает редкость на 1 — прирост MP зависит от редкости
     recombGain: notRecomb.reduce((s, a) => {
       const i = RARITY_ORDER.indexOf(a.rarity);

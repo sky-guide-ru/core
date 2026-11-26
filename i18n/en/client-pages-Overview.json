@@ -31,5 +31,9 @@
  "Состояние за время отслеживания": "Networth over the tracked period",
  "все графики →": "all charts →",
  "Самые ценные предметы": "Most valuable items",
- "Посчитано для боя: {0}. Сейчас надето другое.": "Calculated for combat: {0}. You're wearing something else now."
+ "Посчитано для боя: {0}. Сейчас надето другое.": "Calculated for combat: {0}. You're wearing something else now.",
+ "Общий Bank кооп-острова. Как заработать — на «Заработке»": "The co-op's shared Bank. How to make money — on \"Money making\"",
+ "Bank коопа": "Co-op Bank",
+ "кошелёк {0} · личный {1}": "purse {0} · personal {1}",
+ "кошелёк {0}": "purse {0}"
 }
