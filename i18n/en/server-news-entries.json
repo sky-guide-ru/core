@@ -184,5 +184,8 @@
  "Свои лоты Auction House": "Your Auction House listings",
  "Во вкладке [Мои лоты](money/auctions) видно, что продано, что истекло и что ещё висит на Auction House.": "The [My listings](money/auctions) tab shows what sold, what expired and what is still listed on the Auction House.",
  "У BIN-лота видно, есть ли на аукционе дешевле и на сколько.": "BIN listings show whether something cheaper is listed and by how much.",
- "Перебитые ставки на чужие аукционы стоят первыми.": "Outbid bids on other auctions come first."
+ "Перебитые ставки на чужие аукционы стоят первыми.": "Outbid bids on other auctions come first.",
+ "Живая лента на всю карточку": "Live feed fills its card",
+ "[Живая лента](overview#feed) занимает карточку целиком и листается, без пустого места внизу.": "The [Live feed](overview#feed) fills the whole card and scrolls, with no empty space below.",
+ "В подвале сайта есть «Связь»: почта и форма «Сообщить об ошибке».": "The site footer has a Contact column: email and the “Report a problem” form."
 }
