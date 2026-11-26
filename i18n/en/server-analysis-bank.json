@@ -1,0 +1,8 @@
+{
+ "Проценты на твоём счёте больше не растут после {0}. {1}": "Interest on your account no longer grows past {0}. {1}",
+ "Ещё ~{0} лежат без процентов: ради процентов их держать незачем, можно вложить в снаряжение или флипы.": "Another ~{0} sits without interest: there's no reason to keep it for interest, you can invest it in gear or flips.",
+ "До потолка процентов не хватает {0}: каждый миллион сверху даёт ещё {1} за начисление.": "{0} short of the interest cap: each extra million gives another {1} per payout.",
+ "Улучшать до {0} ради процентов не нужно: при твоём балансе прибавка 0. Улучшение нужно, только если хочешь хранить больше {1}.": "No need to upgrade to {0} for interest: at your balance the gain is 0. The upgrade is only needed if you want to hold more than {1}.",
+ "{0} даст всего +{1} за начисление, а стоит ~{2}: окупится только через ~{3} года. Ради процентов улучшать не стоит, только если нужно хранить больше {4}.": "{0} gives only +{1} per payout but costs ~{2}: it would pay off only in ~{3} years. Not worth upgrading for interest, only if you need to hold more than {4}.",
+ "{0}: +{1} за начисление (~{2} в день). Улучшение стоит ~{3}, окупится примерно за {4} дн.": "{0}: +{1} per payout (~{2} per day). The upgrade costs ~{3}, pays off in about {4} days."
+}

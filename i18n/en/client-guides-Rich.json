@@ -1,0 +1,21 @@
+{
+ "Механика": "Mechanic",
+ "Характеристика": "Stat",
+ "Место": "Location",
+ "Событие": "Event",
+ "Валюта": "Currency",
+ "Существо": "Creature",
+ "Навык": "Skill",
+ "Предмет": "Item",
+ "Этаж данжа": "Dungeon floor",
+ "Редкость": "Rarity",
+ "Как получить: ": "How to get: ",
+ "Нажми — откроется карточка: пошаговое получение, цены, рецепт": "Click to open the card: step-by-step obtaining, prices, recipe",
+ "Как это делать": "How to do it",
+ "Телепорт: {0}": "Teleport: {0}",
+ "{0}координаты {1}": "{0}coordinates {1}",
+ "Продаёт": "Sold by",
+ "Дроп": "Drop",
+ "Связанные предметы": "Related items",
+ "Нажми, чтобы закрепить подсказку": "Click to pin the tooltip"
+}

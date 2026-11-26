@@ -1,0 +1,29 @@
+@zealot
+Ender Pearl|6|1
+Enchanted Ender Pearl|1|0.02
+Summoning Eye|1|0.00238
+@ghost
+Volta|1|0.002
+Sorrow|1|0.0012
+Plasma|1|0.001
+Ghostly Boots|1|0.0001
+@automaton
+Rough Sapphire Gemstone|14|1
+Synthetic Heart|1|0.015
+Control Switch|1|0.015
+Superlite Motor|1|0.015
+Robotron Reflector|1|0.015
+FTX 3070|1|0.015
+Electron Transmitter|1|0.015
+@voidling-extremist
+Ender Pearl|32|1
+Enchanted Ender Pearl|1|0.16
+Enderman Cortex Rewriter|1|0.001
+Summoning Eye|1|0.0004
+@yog
+Rough Topaz Gemstone|12.8|1
+Yoggie|1|0.06
+@corleone
+Rough Ruby Gemstone|24|1
+Rough Jade Gemstone|33.9|1
+Corleonite|1|0.25

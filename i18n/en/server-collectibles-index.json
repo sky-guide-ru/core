@@ -1,0 +1,16 @@
+{
+ "севернее": "to the north",
+ "северо-восточнее": "to the northeast",
+ "восточнее": "to the east",
+ "юго-восточнее": "to the southeast",
+ "южнее": "to the south",
+ "юго-западнее": "to the southwest",
+ "западнее": "to the west",
+ "северо-западнее": "to the northwest",
+ "прямо здесь": "right here",
+ "от {0} — {1} бл. {2}": "from {0} — {1} blocks {2}",
+ "высоко, на {0} бл. выше варпа (y {1}): крыша, дерево или скала": "high up, {0} blocks above the warp (y {1}): a roof, tree or cliff",
+ "внизу, на {0} бл. ниже варпа (y {1}): пещера, подвал или под водой": "below, {0} blocks under the warp (y {1}): a cave, basement or underwater",
+ "рядом NPC {0} ({1} бл.)": "NPC {0} nearby ({1} blocks)",
+ "ориентир: NPC {0}, от него {1} бл. {2}": "landmark: NPC {0}, {1} blocks {2} from it"
+}

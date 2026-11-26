@@ -1,0 +1,9 @@
+{
+ "Hypixel ограничил частоту запросов: чужие профили обновятся чуть позже": "Hypixel limited the request rate: other players' profiles will update a bit later",
+ "Игрок {0} не найден": "Player {0} not found",
+ "Не удалось найти игрока {0}: {1}": "Couldn't find player {0}: {1}",
+ "У игрока {0} нет профилей SkyBlock (или API выключен в настройках)": "Player {0} has no SkyBlock profiles (or the API is off in the settings)",
+ "«{0}» — не ник Minecraft: ники пишутся только латиницей, цифрами и _": "\"{0}\" is not a Minecraft name: names use only Latin letters, digits and _",
+ "Такого ника не бывает: только латиница, цифры и _, до 16 символов": "There's no such name: only Latin letters, digits and _, up to 16 characters",
+ "Профиль загрузится, когда вкладку откроют": "The profile will load when the tab is opened"
+}

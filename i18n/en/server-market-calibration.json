@@ -1,0 +1,5 @@
+{
+ "Не указан метод заработка": "Money-making method not specified",
+ "Длительность должна быть от 1 минуты до 24 часов": "Duration must be from 1 minute to 24 hours",
+ "Заработок должен быть числом": "Earnings must be a number"
+}

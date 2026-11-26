@@ -1,0 +1,20 @@
+{
+  "_comment": "Ключевые питомцы по направлениям. tier — минимальная рекомендуемая редкость (индекс как в NEU: 3 EPIC, 4 LEGENDARY). when — условие, при котором питомец актуален.",
+  "pets": [
+    { "type": "ENDER_DRAGON", "tier": 4, "role": "Бой и данжи", "why": "универсальный урон: бонус к силе и крит. урону, стандарт для лучника в данжах", "when": "combat" },
+    { "type": "GOLDEN_DRAGON", "tier": 4, "role": "Бой (поздняя игра)", "why": "сильнейший боевой питомец при большом запасе монет в банке; качается до 200 уровня", "when": "late" },
+    { "type": "GRIFFIN", "tier": 4, "role": "Mythological Ritual (Diana)", "why": "нужен для событий мэра Diana, один из лучших заработков во время ивента", "when": "combat" },
+    { "type": "BLACK_CAT", "tier": 4, "role": "Magic Find", "why": "Magic Find и Pet Luck: шанс на редкий дроп со слееров и мобов", "when": "combat" },
+    { "type": "TIGER", "tier": 4, "role": "Slayers", "why": "свирепость (Ferocity) для слееров и мобов", "when": "slayer" },
+    { "type": "BLAZE", "tier": 4, "role": "Crimson Isle", "why": "усиливает Blaze-броню и даёт защиту от огня; полезен на Crimson Isle", "when": "crimson" },
+    { "type": "SPIRIT", "tier": 4, "role": "Dungeons (утилита)", "why": "шанс выжить в данже и дешёвый апгрейд по скорости", "when": "dungeons" },
+    { "type": "ELEPHANT", "tier": 4, "role": "Farming", "why": "Farming Fortune за скорость и защиту, лучший выбор для большинства культур", "when": "farming" },
+    { "type": "MOOSHROOM_COW", "tier": 4, "role": "Farming (грибы)", "why": "Farming Fortune за счёт силы, особенно хорош на грибах", "when": "farming" },
+    { "type": "BAL", "tier": 4, "role": "Добыча (жара)", "why": "иммунитет к жаре в Crystal Hollows и бонус к гемам", "when": "mining" },
+    { "type": "SCATHA", "tier": 4, "role": "Добыча (Crystal Hollows)", "why": "шанс на gemstone powder и дроп Worm Membrane", "when": "mining" },
+    { "type": "GLACITE_GOLEM", "tier": 4, "role": "Добыча (Glacite)", "why": "бонус в Glacite Tunnels и Mineshafts", "when": "mining" },
+    { "type": "FLYING_FISH", "tier": 4, "role": "Fishing", "why": "сила и защита рядом с водой/лавой, стандарт для лавовой рыбалки", "when": "fishing" },
+    { "type": "AMMONITE", "tier": 4, "role": "Fishing", "why": "Sea Creature Chance и скорость рыбалки", "when": "fishing" },
+    { "type": "MONKEY", "tier": 4, "role": "Foraging", "why": "Foraging Fortune и скорость рубки, помогает качать Foraging", "when": "foraging" }
+  ]
+}

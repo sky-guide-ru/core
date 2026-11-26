@@ -1,0 +1,12 @@
+{
+ "по уровню": "by level",
+ "по редкости": "by rarity",
+ "по имени": "by name",
+ "Питомцев не видно. Проверь, что в настройках API игры открыт доступ к инвентарю.": "No pets visible. Make sure inventory access is open in the game's API settings.",
+ "Питомцы: {0}": "Pets: {0}",
+ "максимального уровня: {0} из {1}": "max level: {0} of {1}",
+ "Найти питомца: dragon, golem, легендарный…": "Find a pet: dragon, golem, legendary…",
+ "{0} только не прокачанные": "{0} only not maxed",
+ "активен": "active",
+ "Под фильтр ничего не подошло.": "Nothing matches the filter."
+}

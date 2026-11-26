@@ -1,0 +1,192 @@
+@basic|KUUDRA_TIER_KEY
+ARMOR|1|4.31
+Aurora Staff|1|1.05
+Hollow Wand|1|1.05
+Molten Necklace|1|1.20
+Molten Cloak|1|1.20
+Molten Belt|1|1.20
+Molten Bracelet|1|1.20
+Tentacle Dye|1|0.001
+Wheel of Fate|2|0.53
+BOOK:Fatal Tempo I|2|0.03
+BOOK:Inferno I|2|0.03
+BOOK:Ferocious Mana I|2|21.87
+BOOK:Hardened Mana I|2|21.87
+BOOK:Mana Vampire I|2|21.87
+BOOK:Strong Mana I|2|21.87
+Bezal Shard|1|6.76
+Bezal Shard|2|11.93
+1 Kuudra Teeth|3|100
+80 Crimson Essence|4|100
+1 Kraken Shard|5|100
+@hot|KUUDRA_HOT_TIER_KEY
+ARMOR|1|4.06
+Aurora Staff|1|0.99
+Hollow Wand|1|0.99
+Molten Necklace|1|1.27
+Molten Cloak|1|1.27
+Molten Belt|1|1.27
+Molten Bracelet|1|1.27
+Tentacle Dye|1|0.00125
+Wheel of Fate|2|1.19
+BOOK:Fatal Tempo I|2|0.13
+BOOK:Inferno I|2|0.13
+BOOK:Ferocious Mana II|2|19.71
+BOOK:Hardened Mana II|2|19.71
+BOOK:Mana Vampire II|2|19.71
+BOOK:Strong Mana II|2|19.71
+Bezal Shard|1|6.36
+Bezal Shard|2|10.75
+Magma Slug Shard|1|5.30
+Magma Slug Shard|2|8.96
+1 Kuudra Teeth|4|100
+200 Crimson Essence|3|100
+1 Kraken Shard|5|100
+@burning|KUUDRA_BURNING_TIER_KEY
+ARMOR|1|3.43
+Aurora Staff|1|0.84
+Hollow Wand|1|0.84
+Burning Kuudra Core|1|0.12
+500 Crimson Essence|2|7.82
+5 Kuudra Teeth|2|7.82
+Mandraa|1|0.96
+Molten Necklace|1|1.19
+Molten Cloak|1|1.19
+Molten Belt|1|1.19
+Molten Bracelet|1|1.19
+Tentacle Dye|1|0.00167
+Wheel of Fate|2|1.25
+BOOK:Fatal Tempo I|2|0.16
+BOOK:Inferno I|2|0.16
+BOOK:Ferocious Mana III|2|12.81
+BOOK:Hardened Mana III|2|12.81
+BOOK:Mana Vampire III|2|12.81
+BOOK:Strong Mana III|2|12.81
+Bezal Shard|1|5.38
+Bezal Shard|2|7.04
+Magma Slug Shard|1|4.48
+Magma Slug Shard|2|5.87
+Kada Knight Shard|1|3.64
+Kada Knight Shard|2|4.77
+Wither Specter Shard|1|3.64
+Wither Specter Shard|2|4.77
+Matcho Shard|1|3.64
+Matcho Shard|2|4.77
+Lava Flame Shard|1|2.99
+Lava Flame Shard|2|3.91
+2 Kuudra Teeth|3|100
+400 Crimson Essence|4|100
+1 Kraken Shard|5|100
+@fiery|KUUDRA_FIERY_TIER_KEY
+ARMOR|1|3.09
+Aurora Staff|1|0.75
+Hollow Wand|1|0.75
+Burning Kuudra Core|1|0.32
+500 Crimson Essence|2|6.35
+2500 Crimson Essence|2|0.63
+3 Heavy Pearl|2|6.35
+5 Kuudra Teeth|2|6.35
+25 Kuudra Teeth|2|0.63
+Mandraa|1|1.08
+Molten Necklace|1|1.18
+Molten Cloak|1|1.18
+Molten Belt|1|1.18
+Molten Bracelet|1|1.18
+Tentacle Dye|1|0.0025
+Wheel of Fate|2|1.40
+BOOK:Fatal Tempo I|2|0.18
+BOOK:Inferno I|2|0.18
+BOOK:Ferocious Mana IV|2|10.47
+BOOK:Hardened Mana IV|2|10.47
+BOOK:Mana Vampire IV|2|10.47
+BOOK:Strong Mana IV|2|10.47
+Bezal Shard|1|4.84
+Bezal Shard|2|5.71
+Magma Slug Shard|1|4.03
+Magma Slug Shard|2|4.76
+Kada Knight Shard|1|3.28
+Kada Knight Shard|2|3.87
+Wither Specter Shard|1|3.28
+Wither Specter Shard|2|3.87
+Matcho Shard|1|3.28
+Matcho Shard|2|3.87
+Lava Flame Shard|1|2.69
+Lava Flame Shard|2|3.17
+Fire Eel Shard|1|2.04
+Fire Eel Shard|2|2.41
+Flare Shard|1|2.04
+Flare Shard|2|2.41
+Barbarian Duke X Shard|1|2.04
+Barbarian Duke X Shard|2|2.41
+Hellwisp Shard|1|1.67
+Hellwisp Shard|2|1.97
+XYZ Shard|1|1.34
+XYZ Shard|2|1.59
+800 Crimson Essence|3|100
+2 Kuudra Teeth|4|100
+1.25 Kraken Shard|5|100
+@infernal|KUUDRA_INFERNAL_TIER_KEY
+ARMOR|1|2.95
+Aurora Staff|1|0.72
+Hollow Wand|1|0.72
+Burning Kuudra Core|1|0.51
+500 Crimson Essence|2|5.89
+2500 Crimson Essence|2|0.59
+10000 Crimson Essence|2|0.06
+Hellstorm Wand|1|0.10
+3 Heavy Pearl|2|5.89
+10 Heavy Pearl|2|0.59
+5 Kuudra Teeth|2|5.89
+25 Kuudra Teeth|2|5.89
+100 Kuudra Teeth|2|5.89
+Mandraa|1|1.23
+Molten Necklace|1|1.23
+Molten Cloak|1|1.23
+Molten Belt|1|1.23
+Molten Bracelet|1|1.23
+Tentacle Dye|1|0.005
+Tormentor|1|0.10
+Wheel of Fate|2|1.65
+BOOK:Fatal Tempo I|2|0.22
+BOOK:Inferno I|2|0.22
+BOOK:Ferocious Mana V|2|9.72
+BOOK:Hardened Mana V|2|9.72
+BOOK:Mana Vampire V|2|9.72
+BOOK:Strong Mana V|2|9.72
+Bezal Shard|1|4.63
+Bezal Shard|2|5.30
+Magma Slug Shard|1|3.86
+Magma Slug Shard|2|5.30
+Kada Knight Shard|1|3.14
+Kada Knight Shard|2|3.59
+Wither Specter Shard|1|3.14
+Wither Specter Shard|2|3.59
+Matcho Shard|1|3.14
+Matcho Shard|2|3.59
+Lava Flame Shard|1|2.57
+Lava Flame Shard|2|2.95
+Fire Eel Shard|1|1.95
+Fire Eel Shard|2|2.24
+Flare Shard|1|1.95
+Flare Shard|2|2.24
+Barbarian Duke X Shard|1|1.95
+Barbarian Duke X Shard|2|2.24
+Hellwisp Shard|1|1.59
+Hellwisp Shard|2|1.83
+XYZ Shard|1|1.29
+XYZ Shard|2|1.47
+Taurus Shard|1|0.67
+Taurus Shard|2|0.77
+Lord Jawbus Shard|1|0.51
+Lord Jawbus Shard|2|0.59
+Cinderbat Shard|1|0.67
+Cinderbat Shard|2|0.77
+Daemon Shard|1|0.51
+Daemon Shard|2|0.59
+Moltenfish Shard|1|0.51
+Moltenfish Shard|2|0.59
+Ananke Shard|1|0.05
+Ananke Shard|2|0.06
+3 Kuudra Teeth|3|100
+2000 Crimson Essence|4|100
+1.5 Kraken Shard|5|100

@@ -1,0 +1,19 @@
+{
+ "Всего на улучшение: {0} эссенции Crimson, {1} Kuudra Teeth{2} и {3} монет{4}{5}": "Total for the upgrade: {0} Crimson essence, {1} Kuudra Teeth{2} and {3} coins{4}{5}",
+ " — по ценам Bazaar ~{0}": " — at Bazaar prices ~{0}",
+ " (с докупкой недостающих частей ~{0})": " (with buying the missing pieces ~{0})",
+ "{0}: части нет — купить {1}{2}": "{0}: piece missing — buy {1}{2}",
+ "звёзды {0}→10 ({1} эссенции{2})": "stars {0}→10 ({1} essence{2})",
+ "звёзды уже 10": "already 10 stars",
+ "{0}: {1}, затем престиж → {2} ({3} эссенции, {4} зубов, {5})": "{0}: {1}, then prestige → {2} ({3} essence, {4} teeth, {5})",
+ " · атрибуты: {0}": " · attributes: {0}",
+ "Как: звёзды и престиж ставятся в меню улучшения предмета у кузнеца (Blacksmith). Престиж доступен, когда на части 10 звёзд; после него звёзды обнуляются, поэтому качай по одному тиру": "How: stars and prestige are applied in the item upgrade menu at the Blacksmith. Prestige is available when the piece has 10 stars; after it the stars reset, so upgrade one tier at a time",
+ "Где брать: эссенция Crimson и Kuudra Teeth гарантированно падают из сундуков Kuudra (на высоких тирах больше) и продаются на Bazaar{0}": "Where to get: Crimson essence and Kuudra Teeth always drop from Kuudra chests (more on higher tiers) and are sold on the Bazaar{0}",
+ "Combat {0} (у тебя {1})": "Combat {0} (you have {1})",
+ "пройти Kuudra {0}": "complete Kuudra {0}",
+ "Чтобы надеть {0}, нужно: {1}. Улучшать можно заранее": "To wear {0} you need: {1}. You can upgrade in advance",
+ "Сейчас выгоднее купить готовый {0} (~{1}) и продать свой (~{2}): выходит ~{3} против ~{4} за улучшение": "Right now it's cheaper to buy a ready {0} (~{1}) and sell yours (~{2}): that's ~{3} versus ~{4} for upgrading",
+ "Для сравнения: купить готовый {0} ~{1}{2}{3}": "For comparison: buying a ready {0} ~{1}{2}{3}",
+ ", минус продажа своего ~{0} = ~{1}": ", minus selling yours ~{0} = ~{1}",
+ "; улучшать свой — ~{0}": "; upgrading yours — ~{0}"
+}

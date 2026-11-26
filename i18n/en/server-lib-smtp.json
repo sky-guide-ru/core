@@ -1,0 +1,10 @@
+{
+ "Почтовый сервер закрыл соединение": "The mail server closed the connection",
+ "Почтовый сервер не ответил вовремя": "The mail server didn't answer in time",
+ "Почта не пустила: неверный логин или пароль приложения (SMTP_USER / SMTP_PASS)": "Mail rejected the login: wrong login or app password (SMTP_USER / SMTP_PASS)",
+ "Почтовый сервер ответил: {0}": "The mail server answered: {0}",
+ "{0}; запасная отправка по SMTP: {1}": "{0}; fallback SMTP sending: {1}",
+ "Resend недоступен: {0}": "Resend unavailable: {0}",
+ "Resend не пустил ({0}): проверь RESEND_API_KEY и что MAIL_TO — та же почта, на которую зарегистрирован Resend. {1}": "Resend rejected ({0}): check RESEND_API_KEY and that MAIL_TO is the same email Resend is registered with. {1}",
+ "Resend ответил {0}: {1}": "Resend answered {0}: {1}"
+}

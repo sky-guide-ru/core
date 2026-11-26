@@ -1,0 +1,14 @@
+{
+ "шлем": "helmet",
+ "нагрудник": "chestplate",
+ "поножи": "leggings",
+ "ботинки": "boots",
+ "сила и крит. урон": "strength and crit damage",
+ "скорость и крит. урон, +5% к урону стрел": "speed and crit damage, +5% arrow damage",
+ "интеллект (урон способностей)": "intelligence (ability damage)",
+ "защита и здоровье": "defense and health",
+ "только здоровье и защита": "health and defense only",
+ "надетая броня": "equipped armor",
+ "слот гардероба {0} «{1}»": "wardrobe slot {0} \"{1}\"",
+ "слот гардероба {0}": "wardrobe slot {0}"
+}

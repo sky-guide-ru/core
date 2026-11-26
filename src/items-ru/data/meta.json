@@ -1,0 +1,31 @@
+{
+  "builtAt": "2026-11-23T04:18:19.118Z",
+  "neuVersion": "ref: refs/heads/master",
+  "items": 8993,
+  "withSource": 8112,
+  "translatedNames": 2868,
+  "curated": 17,
+  "byCategory": {
+    "cosmetic": 733,
+    "material": 2503,
+    "mob": 353,
+    "accessory": 432,
+    "enchant_book": 764,
+    "tool": 166,
+    "armor": 848,
+    "power_stone": 23,
+    "minion": 719,
+    "equipment": 150,
+    "npc": 529,
+    "weapon": 197,
+    "misc": 408,
+    "pet_item": 91,
+    "reforge_stone": 86,
+    "pet": 321,
+    "rune": 144,
+    "consumable": 79,
+    "shard": 326,
+    "sack": 61,
+    "gemstone": 60
+  }
+}

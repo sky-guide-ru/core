@@ -1,0 +1,7 @@
+{
+ "Примерная цена сейчас: {0} монет.": "Approximate price now: {0} coins.",
+ "{0}{1} в Hypixel SkyBlock.": "{0}{1} in Hypixel SkyBlock.",
+ "<h2>Описание в игре</h2><pre>{0}</pre>": "<h2>In-game description</h2><pre>{0}</pre>",
+ "<h2>Как получить</h2><ul>{0}</ul>": "<h2>How to get</h2><ul>{0}</ul>",
+ "<h2>Требования</h2><ul>{0}</ul>": "<h2>Requirements</h2><ul>{0}</ul>"
+}

@@ -1,0 +1,279 @@
+@F1|Obsidian
+Bonzo's Mask|4.93|1250000
+Bonzo's Staff|0.98|2250000
+Fuming Potato Book|2.99|1250000
+Hot Potato Book|10.13|250000
+Necromancer's Brooch|20.58|250000
+Recombobulator 3000|2.94|6000000
+Red Nose|6.08|250000
+@M1|Obsidian
+Bonzo's Mask|6.97|1250000
+Bonzo's Staff|1.74|2250000
+Fuming Potato Book|4.65|1250000
+Hot Potato Book|11.9|250000
+Master Skull|5.08|250000
+Necromancer's Brooch|23.84|250000
+Recombobulator 3000|6.77|6000000
+Red Nose|7.26|250000
+@F2|Obsidian
+Adaptive Blade|4.47|1500000
+Fuming Potato Book|8.5|1250000
+Hot Potato Book|16.66|500000
+Necromancer's Brooch|17.71|500000
+Recombobulator 3000|4.47|6000000
+Red Scarf|3.19|500000
+Scarf's Studies|13.48|500000
+@M2|Obsidian
+Adaptive Blade|5.24|1500000
+Fuming Potato Book|8.99|1250000
+Hot Potato Book|15.8|500000
+Master Skull|7.86|500000
+Necromancer's Brooch|19.46|500000
+Recombobulator 3000|7.86|6000000
+Red Scarf|3|500000
+Scarf's Studies|12.82|500000
+@F3|Obsidian
+Adaptive Boots|2.41|2000000
+Adaptive Chestplate|0.6|4000000
+Adaptive Helmet|2.41|2500000
+Adaptive Leggings|1.12|3000000
+Fuming Potato Book|3.36|1500000
+Hot Potato Book|5.98|1000000
+Necromancer's Brooch|4.98|1000000
+Recombobulator 3000|2.4|6000000
+Suspicious Vial|5.98|1000000
+@M3|Obsidian
+Adaptive Boots|4.82|2000000
+Adaptive Chestplate|1.98|4000000
+Adaptive Helmet|4.82|2500000
+Adaptive Leggings|2.37|3000000
+First Master Star|2.53|5000000
+Fuming Potato Book|6.78|1500000
+Hot Potato Book|11.82|1000000
+Master Skull|8.63|2000000
+Necromancer's Brooch|10.84|1000000
+Recombobulator 3000|8.63|6000000
+Suspicious Vial|12.2|1000000
+@F4|Obsidian
+Fuming Potato Book|6.92|1500000
+Hot Potato Book|11.9|1000000
+Spirit Pet|2.31|5000000
+Recombobulator 3000|3.61|6000000
+Spirit Bone|4.25|1500000
+Spirit Boots|1.2|4000000
+Spirit Bow|1.2|4000000
+Spirit Stone|4.8|1500000
+Spirit Sword|1.2|3000000
+Spirit Wing|2.41|2000000
+BOOK:Rend I|4.8|1000000
+@M4|Obsidian
+Fuming Potato Book|7.28|1500000
+Hot Potato Book|12.55|1000000
+Spirit Pet|2.48|5000000
+Master Skull|6.88|2000000
+Recombobulator 3000|6.88|6000000
+Second Master Star|4.21|6000000
+Spirit Bone|4.59|1500000
+Spirit Boots|2.29|4000000
+Spirit Bow|2.29|4000000
+Spirit Stone|4.96|1500000
+Spirit Sword|2.29|3000000
+Spirit Wing|4.59|2000000
+BOOK:Rend I|5.01|1000000
+@F5|Obsidian
+Fuming Potato Book|4.93|1000000
+Hot Potato Book|12.08|1000000
+Livid Dagger|0.31|7000000
+Recombobulator 3000|1.86|6000000
+Shadow Assassin Boots|6.57|1500000
+Shadow Assassin Helmet|4.03|2000000
+Shadow Assassin Leggings|1.24|4000000
+Warped Stone|0.31|5000000
+@F5|Bedrock
+Fuming Potato Book|11.45|2000000
+Last Breath|0.29|7000000
+Livid Dagger|1.16|7000000
+Recombobulator 3000|3|6000000
+Shadow Assassin Boots|8.67|2000000
+Shadow Assassin Chestplate|0.58|6000000
+Shadow Assassin Helmet|4.99|2000000
+Shadow Assassin Leggings|2.31|4000000
+Shadow Fury|0.29|15000000
+Warped Stone|0.92|5000000
+BOOK:Last Stand II|26.11|2000000
+BOOK:Ultimate Wise II|23.43|2000000
+BOOK:Wisdom II|15.04|2000000
+@M5|Obsidian
+Fuming Potato Book|5.09|1000000
+Hot Potato Book|12.06|1000000
+Livid Dagger|0.3|7000000
+Master Skull|2.11|2000000
+Recombobulator 3000|3.16|6000000
+Shadow Assassin Boots|7.21|1500000
+Shadow Assassin Helmet|4.21|2000000
+Shadow Assassin Leggings|1.95|4000000
+Third Master Star|0.3|7000000
+Warped Stone|0.53|5000000
+@M5|Bedrock
+Fuming Potato Book|13.67|2000000
+Last Breath|0.34|7000000
+Livid Dagger|2.21|7000000
+Master Skull|3.3|8000000
+Recombobulator 3000|3.96|6000000
+Shadow Assassin Boots|10.1|2000000
+Shadow Assassin Chestplate|1.03|6000000
+Shadow Assassin Helmet|6.81|2000000
+Shadow Assassin Leggings|2.89|4000000
+Shadow Fury|0.34|15000000
+Third Master Star|1.1|7000000
+Warped Stone|1.26|5000000
+BOOK:Last Stand II|24.31|2000000
+BOOK:Ultimate Wise II|21.06|2000000
+BOOK:Wisdom II|8.73|2000000
+@F6|Obsidian
+Ancient Rose|6.04|1000000
+Fuming Potato Book|3.98|1000000
+Giant Tooth|6.58|1000000
+Hot Potato Book|16.96|1000000
+Necromancer Lord Boots|2.42|1500000
+Necromancer Lord Helmet|1.44|2000000
+Necromancer Lord Leggings|0.65|4000000
+Necromancer Sword|0.43|10000000
+Recombobulator 3000|1.3|6000000
+Sadan's Brooch|1.61|1500000
+Summoning Ring|0.22|12000000
+@F6|Bedrock
+Ancient Rose|10.55|2000000
+Fuming Potato Book|14.1|2000000
+Giant Tooth|3.68|2000000
+Giant's Sword|0.11|25000000
+Necromancer Lord Boots|4.22|2000000
+Necromancer Lord Chestplate|0.29|10000000
+Necromancer Lord Helmet|2.57|2000000
+Necromancer Lord Leggings|1.93|4000000
+Necromancer Sword|1.18|10000000
+Precursor Eye|0.07|30000000
+Recombobulator 3000|6.42|6000000
+Sadan's Brooch|2.6|2000000
+Summoning Ring|0.36|12000000
+BOOK:Last Stand II|27.46|2000000
+BOOK:Ultimate Wise II|24.13|2000000
+BOOK:Wisdom II|16.84|2000000
+@M6|Obsidian
+Ancient Rose|6.42|1000000
+Fourth Master Star|0.64|8000000
+Fuming Potato Book|3.93|1000000
+Giant Tooth|6.5|1000000
+Hot Potato Book|16.79|1000000
+Master Skull|2.33|8000000
+Necromancer Lord Boots|2.57|1500000
+Necromancer Lord Helmet|1.55|2000000
+Necromancer Lord Leggings|1.16|4000000
+Necromancer Sword|0.69|10000000
+Recombobulator 3000|2.33|6000000
+Sadan's Brooch|1.71|1500000
+Summoning Ring|0.21|12000000
+@M6|Bedrock
+Ancient Rose|10.51|2000000
+Fourth Master Star|0.63|8000000
+Fuming Potato Book|14.39|2000000
+Giant Tooth|3.72|2000000
+Giant's Sword|0.17|25000000
+Master Skull|0.68|8000000
+Necromancer Lord Boots|4.25|2000000
+Necromancer Lord Chestplate|0.5|10000000
+Necromancer Lord Helmet|2.81|2000000
+Necromancer Lord Leggings|2.04|4000000
+Necromancer Sword|1.26|10000000
+Precursor Eye|0.07|30000000
+Recombobulator 3000|8.17|6000000
+Sadan's Brooch|2.84|2000000
+Summoning Ring|0.63|12000000
+BOOK:Last Stand II|26.64|2000000
+BOOK:Ultimate Wise II|23.41|2000000
+BOOK:Wisdom II|16.33|2000000
+@F7|Obsidian
+Fuming Potato Book|8.6|1000000
+Hot Potato Book|6.38|1000000
+Precursor Gear|10.09|1000000
+Recombobulator 3000|0.63|6000000
+Wither Blood|3.32|2500000
+Wither Boots|8.6|2500000
+Wither Catalyst|8.86|1000000
+Wither Chestplate|0.31|10000000
+Wither Cloak Sword|3.03|4500000
+Wither Helmet|3.32|4000000
+Wither Leggings|1.25|6000000
+BOOK:One For All I|0.31|2000000
+BOOK:Soul Eater I|8.37|1000000
+@F7|Bedrock
+Auto Recombobulator|0.53|10000000
+Fuming Potato Book|5.27|2000000
+Goldor the Fish|0.32|2000000
+Hot Potato Book|10.37|2000000
+Implosion|0.13|50000000
+Maxor the Fish|0.32|2000000
+Necron's Handle|0.1|100000000
+Precursor Gear|15.7|2000000
+Recombobulator 3000|4.29|6000000
+Shadow Warp|0.13|50000000
+Storm the Fish|0.32|2000000
+Wither Blood|5.95|3000000
+Wither Boots|6.3|2500000
+Wither Catalyst|5.27|2000000
+Wither Chestplate|0.53|10000000
+Wither Cloak Sword|5.44|4500000
+Wither Helmet|5.95|4000000
+Wither Leggings|3.43|6000000
+Wither Shield|0.13|50000000
+BOOK:Last Stand II|16.41|2000000
+BOOK:One For All I|0.59|2000000
+BOOK:Soul Eater I|9.91|2000000
+BOOK:Ultimate Wise II|11.1|2000000
+BOOK:Wisdom II|11.1|2000000
+@M7|Obsidian
+Fifth Master Star|0.32|9000000
+Fuming Potato Book|8.92|1000000
+Hot Potato Book|6.5|1000000
+Master Skull|2.26|8000000
+Precursor Gear|10.53|1000000
+Recombobulator 3000|1.13|6000000
+Wither Blood|3.84|2500000
+Wither Boots|9.03|2500000
+Wither Catalyst|9.03|1000000
+Wither Chestplate|0.32|10000000
+Wither Cloak Sword|3.65|4500000
+Wither Helmet|3.84|4000000
+Wither Leggings|2.26|6000000
+BOOK:One For All I|0.5|2000000
+BOOK:Soul Eater I|8.92|1000000
+@M7|Bedrock
+Auto Recombobulator|0.89|10000000
+Dark Claymore|0.08|150000000
+Fifth Master Star|0.33|9000000
+Fuming Potato Book|5.85|2000000
+Goldor the Fish|0.3|2000000
+Hot Potato Book|11.57|2000000
+Implosion|0.18|50000000
+Master Skull|0.32|32000000
+Maxor the Fish|0.3|2000000
+Necron's Handle|0.13|100000000
+Necron Dye|0.04|10000000
+Precursor Gear|17.15|2000000
+Recombobulator 3000|6.73|6000000
+Shadow Warp|0.18|50000000
+Storm the Fish|0.3|2000000
+Wither Blood|6.73|3000000
+Wither Boots|7|2500000
+Wither Catalyst|5.88|2000000
+Wither Chestplate|0.95|10000000
+Wither Cloak Sword|6.73|4500000
+Wither Helmet|6.73|4000000
+Wither Leggings|4.31|6000000
+Wither Shield|0.18|50000000
+BOOK:Thunderlord VII|0.3|2000000
+BOOK:Last Stand II|14.53|2000000
+BOOK:One For All I|1|2000000
+BOOK:Soul Eater I|11.52|2000000
+BOOK:Ultimate Wise II|11.72|2000000
+BOOK:Wisdom II|7.41|2000000

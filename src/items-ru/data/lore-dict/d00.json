@@ -1,0 +1,5 @@
+{
+  "$comment": "Абзацы питомцев: числа подставляются из petnums во время работы, поэтому ключи даны уже с заполненными числами.",
+  "Fourth Flare On 4th melee strike, ignite mobs, dealing {0}x your ☠ Crit Damage each second for {1} seconds": "Fourth Flare На 4-м ударе в ближнем бою поджигает мобов, нанося {0}x вашего ☠ Крит. урона каждую секунду в течение {1} с.",
+  "Rekindle Before death, become immune and gain {0} ❁ Strength for {1} seconds {2}s cooldown": "Rekindle Перед смертью становитесь неуязвимым и получаете {0} ❁ Силы на {1} с. Перезарядка {2} с."
+}

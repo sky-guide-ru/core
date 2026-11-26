@@ -1,0 +1,10 @@
+{
+ "Облегчённый режим включился сам: браузер рисует медленно. Чаще всего в его настройках выключено аппаратное ускорение — включи его, и через 3 дня сайт сам проверит снова": "Lite mode turned on by itself: the browser renders slowly. Usually hardware acceleration is off in its settings — turn it on, and the site will check again in 3 days",
+ "Облегчённый режим включён: фон не двигается, нет размытий и объёмных моделей — сайт быстрее на телефоне": "Lite mode is on: static background, no blur and no 3D models — the site is faster on phones",
+ "Полный режим: живой фон, анимации и 3D-модель игрока": "Full mode: animated background, animations and a 3D player model",
+ "Облегчённый режим": "Lite mode",
+ "авто: включён": "auto: on",
+ "авто: выключен": "auto: off",
+ "включён": "on",
+ "выключен": "off"
+}

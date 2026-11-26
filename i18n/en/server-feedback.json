@@ -1,0 +1,12 @@
+{
+ "Неверные данные": "Invalid data",
+ "Скриншот не похож на картинку": "The screenshot doesn't look like an image",
+ "Скриншот слишком большой": "The screenshot is too large",
+ "Только со страницы сайта": "Only from a site page",
+ "Слишком много отзывов подряд. Попробуй позже": "Too many feedback messages in a row. Try later",
+ "Почта не настроена": "Mail is not configured",
+ "другой браузер": "other browser",
+ "другая система": "other system",
+ "[Sky Guide] Отзыв": "[Sky Guide] Feedback",
+ "Письмо отправил сайт Sky Guide. Все отзывы — в разделе «Отзывы» (только для владельца).": "Sent by the Sky Guide site. All feedback is in the “Feedback” section (owner only)."
+}

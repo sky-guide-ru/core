@@ -1,0 +1,5 @@
+{
+ "<meta property=\"og:site_name\" content=\"SkyBlock трекер\" />": "<meta property=\"og:site_name\" content=\"SkyBlock tracker\" />",
+ "<!doctype html><title>SkyBlock трекер</title><p>Сайт ещё не собран: npm run build</p>": "<!doctype html><title>SkyBlock tracker</title><p>The site isn't built yet: npm run build</p>",
+ "Задай SITE_URL в .env": "Set SITE_URL in .env"
+}

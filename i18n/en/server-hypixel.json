@@ -1,0 +1,6 @@
+{
+ "примерно через {0} ч": "in about {0} h",
+ "Сайт израсходовал суточный лимит запросов к Hypixel. Профили обновятся {0}, пока показаны последние полученные данные": "The site used up its daily Hypixel request limit. Profiles will update {0}; the last data received is shown for now",
+ "Hypixel ограничил частоту запросов. Профили обновятся {0}": "Hypixel limited the request rate. Profiles will update {0}",
+ "Не задан HYPIXEL_API_KEY в файле .env": "HYPIXEL_API_KEY is not set in the .env file"
+}

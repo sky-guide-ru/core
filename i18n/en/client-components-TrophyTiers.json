@@ -1,0 +1,8 @@
+{
+ "Бронза": "Bronze",
+ "Серебро": "Silver",
+ "Золото": "Gold",
+ "Алмаз": "Diamond",
+ "{0}: поймано у {1} из {2} видов. С учётом старших тиров (так считает Odger): {3}/{4}.": "{0}: caught {1} of {2} kinds. Counting higher tiers (the way Odger counts): {3}/{4}.",
+ "с учётом старших: {0}/{1}": "counting higher tiers: {0}/{1}"
+}

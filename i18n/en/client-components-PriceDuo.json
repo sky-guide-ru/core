@@ -1,0 +1,15 @@
+{
+ "Bazaar. Купить — Instant Buy (сразу, по самому дешёвому ордеру на продажу). Продать — Instant Sell, после налога Bazaar ≈ {0}.": "Bazaar. Buy — Instant Buy (right away, from the cheapest sell offer). Sell — Instant Sell, after Bazaar tax ≈ {0}.",
+ "Auction House. Купить — самый дешёвый лот BIN{0}. Продать — {1}, после комиссий аукциона ≈ {2}.": "Auction House. Buy — the cheapest BIN listing{0}. Sell — {1}, after auction fees ≈ {2}.",
+ " (лотов: {0})": " (listings: {0})",
+ "средняя цена недавних продаж{0}": "average price of recent sales{0}",
+ " (за неделю продано {0})": " (sold this week: {0})",
+ "следующий по цене лот (продаж за неделю не было)": "the next cheapest listing (no sales this week)",
+ "Продать": "Sell",
+ "Купить ": "Buy ",
+ "{0} лот.": "{0} lots",
+ "{0} Нажми — график на «Рынке».": "{0} Click to open the chart on the Market.",
+ "Предмет сейчас нельзя купить на Bazaar и аукционе": "Can't be bought on the Bazaar or the auction right now",
+ "не продаётся": "not for sale",
+ "не дороже самого дешёвого лота (дорогие продажи — это копии с улучшениями)": "no higher than the cheapest listing (expensive sales are upgraded copies)"
+}

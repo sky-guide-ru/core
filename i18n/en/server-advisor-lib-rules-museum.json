@@ -1,0 +1,21 @@
+{
+ "Hub → Museum (рядом с Bazaar и Community Center), Madame Eleanor Q. Goldsworth III открывает меню музея.": "Hub → Museum (next to the Bazaar and Community Center), Madame Eleanor Q. Goldsworth III opens the museum menu.",
+ "Открой меню музея и кликни по предмету в своём инвентаре → Confirm Donation. Сет брони кладётся целиком: все части должны быть в инвентаре.": "Open the museum menu and click an item in your inventory → Confirm Donation. An armor set is donated as a whole: all pieces must be in the inventory.",
+ "Предмет станет Co-op Soulbound (продать его уже нельзя), но его можно в любой момент забрать обратно кликом в музее: XP останется.": "The item becomes Co-op Soulbound (it can't be sold anymore), but you can take it back any time with a click in the museum: the XP stays.",
+ "Включи Museum API, чтобы сайт видел музей": "Enable the Museum API so the site can see the museum",
+ "Hypixel не отдаёт музей этого игрока: в настройках выключен Museum API (или музей ещё ни разу не открывали). Без него не посчитать XP музея, вехи и что пожертвовать.": "Hypixel doesn't share this player's museum: the Museum API is off in the settings (or the museum has never been opened). Without it, museum XP, milestones and what to donate can't be calculated.",
+ "Через пару минут нажми «Обновить» на сайте.": "Press \"Refresh\" on the site in a couple of minutes.",
+ "Пожертвуй в музей {0} {1}, что уже есть: +{2} SkyBlock XP": "Donate {0} {1} you already have to the museum: +{2} SkyBlock XP",
+ "Они лежат у тебя ({0}), но ещё не в музее. Это бесплатный SkyBlock XP{1}. Пожертвованное можно забрать обратно — XP останется.": "You have them ({0}), but they're not in the museum yet. This is free SkyBlock XP{1}. Donated items can be taken back — the XP stays.",
+ " и сразу веха музея {0}": " and museum milestone {0} right away",
+ " — сейчас в ходу, жертвуй, только если не нужен": " — currently in use, donate only if you don't need it",
+ "Веха музея {0}: не хватает {1} XP — дешевле всего за {2}": "Museum milestone {0}: {1} XP missing — cheapest for {2}",
+ "Вехи идут каждые 100 SkyBlock XP музея и дают +1% к множителю Bits, +2% к процентам банка и свои награды{0}. Сейчас у тебя {1} XP музея, веха {2} из {3}.": "Milestones come every 100 museum SkyBlock XP and give +1% to the Bits multiplier, +2% to bank interest and their own rewards{0}. You now have {1} museum XP, milestone {2} of {3}.",
+ " (следующая: {0})": " (next: {0})",
+ "Купить: {0} — ~{1} (+{2} XP)": "Buy: {0} — ~{1} (+{2} XP)",
+ "Потом пожертвуй их в музее (Hub → Museum).": "Then donate them at the museum (Hub → Museum).",
+ "Дешёвый SkyBlock XP: {0} {1} для музея за {2} (+{3} XP)": "Cheap SkyBlock XP: {0} {1} for the museum for {2} (+{3} XP)",
+ "Самые выгодные по XP за монету предметы, которых нет в твоём музее. Каждый пожертвованный предмет навсегда добавляет SkyBlock XP.": "The best XP-per-coin items missing from your museum. Each donated item permanently adds SkyBlock XP.",
+ "Можно оценить музей: Museum Appraisal Service открыт": "The museum can be appraised: the Museum Appraisal Service is unlocked",
+ "Открывается на вехе 3. Разовая услуга (10 млн): Madame Goldsworth оценивает стоимость музея, и она появляется в профиле и в рейтингах. На прогресс не влияет — только если хочешь видеть оценку.": "Unlocks at milestone 3. A one-time service (10M): Madame Goldsworth appraises the museum's value, and it appears in the profile and leaderboards. Doesn't affect progress — only if you want to see the appraisal."
+}

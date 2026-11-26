@@ -1,0 +1,597 @@
+{
+ "_source": "SkyHanni-REPO constants/HoppityEggLocations.json (снято 2026-11-23) + fandom «Chocolate Factory» (престижи, Time Tower, Rabbit Shrine, Coach Jackrabbit)",
+ "maxRabbits": 577,
+ "maxPrestige": 6,
+ "residents": {
+  "HUB": [
+   "Castle",
+   "Towny",
+   "Oakly",
+   "Hubby",
+   "Rogue"
+  ],
+  "CRIMSON_ISLE": [
+   "Ember",
+   "Albus",
+   "Attila",
+   "Sulfur",
+   "Dojo"
+  ],
+  "GOLD_MINES": [
+   "Lazy",
+   "Picky",
+   "Brick",
+   "Boulder",
+   "Hole"
+  ],
+  "DEEP_CAVERNS": [
+   "Eisen",
+   "Carmine",
+   "Azure",
+   "Cave",
+   "Emma"
+  ],
+  "DUNGEON_HUB": [
+   "Krys",
+   "Mush Mush",
+   "Ruina",
+   "Morty",
+   "Soon"
+  ],
+  "SPIDER_DEN": [
+   "Harland",
+   "Striker",
+   "Webb",
+   "Gravler",
+   "Maxima"
+  ],
+  "DWARVEN_MINES": [
+   "Octavia",
+   "Kalumdai",
+   "Halmenrog",
+   "Mimi",
+   "Motfer"
+  ],
+  "THE_END": [
+   "Pearl",
+   "Egg",
+   "Ender",
+   "Mite",
+   "Zea"
+  ],
+  "THE_PARK": [
+   "Savannah",
+   "Canopus",
+   "Orchid",
+   "Jacqueline",
+   "Woody"
+  ],
+  "CRYSTAL_HOLLOWS": [
+   "Violet",
+   "Coltron",
+   "Grog",
+   "Jade",
+   "Kronk"
+  ],
+  "THE_FARMING_ISLANDS": [
+   "Rochie",
+   "Mutonio",
+   "Melon",
+   "Potato",
+   "Stinky"
+  ],
+  "BACKWATER_BAYOU": [
+   "Nearquaad",
+   "Sherk",
+   "Donkey",
+   "Onion",
+   "Bayou"
+  ],
+  "GALATEA": [
+   "Marshall",
+   "Figgy",
+   "Lumie",
+   "Grove"
+  ],
+  "LOTUS_ATOLL": [
+   "Croak",
+   "Hopscotch",
+   "Lotus",
+   "Toad",
+   "Ribbit"
+  ]
+ },
+ "eggLocations": {
+  "THE_PARK": [
+   "foraging_birch_launch_pad",
+   "foraging_flower_pot",
+   "foraging_rainmaker",
+   "foraging_pond_bridge",
+   "foraging_lonely_island",
+   "foraging_race",
+   "foraging_cultist",
+   "foraging_nyko",
+   "foraging_melody",
+   "foraging_sculpture",
+   "foraging_islands",
+   "foraging_clay_tunnel",
+   "foraging_funk",
+   "foraging_cobblestone",
+   "foraging_jungle"
+  ],
+  "HUB": [
+   "hub_big_useless_door",
+   "hub_shifty_shop",
+   "hub_wheat_minion",
+   "hub_blacksmith",
+   "hub_village_up",
+   "hub_bazaar",
+   "hub_mountain",
+   "hub_foraging_camp",
+   "hub_castle",
+   "hub_broken_cage",
+   "hub_colosseum",
+   "hub_wizard_tower",
+   "hub_green_ritual",
+   "hub_farm",
+   "hub_mountain_2",
+   "hub_wilderness",
+   "hub_fishing_outpost"
+  ],
+  "GOLD_MINES": [
+   "gold_mine_coal_pile",
+   "gold_mine_crate",
+   "gold_mine_gold_forger",
+   "gold_mine_rusty",
+   "gold_mine_stairs",
+   "gold_mine_launch_pad",
+   "gold_mine_fairy_soul",
+   "gold_mine_fire",
+   "gold_mine_pickaxe",
+   "gold_mine_iron_forger",
+   "gold_mine_windmill",
+   "gold_mine_lava",
+   "gold_mine_forge",
+   "gold_mine_entrance",
+   "gold_mine_mountain"
+  ],
+  "CRYSTAL_HOLLOWS": [
+   "crystal_hollows_sisko",
+   "crystal_hollows_greatforge",
+   "crystal_hollows_middle",
+   "crystal_hollows_diamond_essence",
+   "crystal_hollows_gold_ore",
+   "crystal_hollows_mithril",
+   "crystal_hollows_lava",
+   "crystal_hollows_stairwell",
+   "crystal_hollows_ledge",
+   "crystal_hollows_platform",
+   "crystal_hollows_pillar",
+   "crystal_hollows_magma_fields",
+   "crystal_hollows_amethyst",
+   "crystal_hollows_crystals",
+   "crystal_hollows_crystal_nucleus"
+  ],
+  "DEEP_CAVERNS": [
+   "deep_caverns_walter",
+   "deep_caverns_lapis_miner",
+   "deep_caverns_pigmen_sign",
+   "deep_caverns_redstone_miner",
+   "deep_caverns_diamond_sanctuary",
+   "deep_caverns_rhys",
+   "deep_caverns_slimehill",
+   "deep_caverns_fossil",
+   "deep_caverns_portal",
+   "deep_caverns_entrance_top",
+   "deep_caverns_peak",
+   "deep_caverns_platform",
+   "deep_caverns_gunpowder_mines",
+   "deep_caverns_fire",
+   "deep_caverns_entrance_steps"
+  ],
+  "THE_FARMING_ISLANDS": [
+   "farming_skull",
+   "farming_mason",
+   "farming_well",
+   "farming_aqueduct",
+   "farming_scarecrow",
+   "farming_moby",
+   "farming_trappers_den",
+   "farming_farmer_jon",
+   "farming_oasis",
+   "farming_carrots",
+   "farming_pasture",
+   "farming_barn",
+   "farming_windmill",
+   "farming_oasis_bridge",
+   "farming_hill"
+  ],
+  "THE_END": [
+   "end_highest_point",
+   "end_dragon_egg",
+   "end_race_checkpoint",
+   "end_dragons_view",
+   "end_pearl_dealer",
+   "end_race_stairs",
+   "end_void_sepulture",
+   "end_parkour",
+   "end_peak",
+   "end_spire",
+   "end_draconic_altar",
+   "end_bruiser_hideout",
+   "end_obsidian_spike",
+   "end_overlook",
+   "end_zealots"
+  ],
+  "DWARVEN_MINES": [
+   "dwarven_mines_broadjaw",
+   "dwarven_mines_emissary",
+   "dwarven_mines_miners_guild",
+   "dwarven_mines_lift",
+   "dwarven_mines_geo",
+   "dwarven_mines_royal_palace",
+   "dwarven_mines_hanging_court",
+   "dwarven_mines_dwarf_statue",
+   "dwarven_mines_ice_wall",
+   "dwarven_mines_forge",
+   "dwarven_mines_goblin_burrows",
+   "dwarven_mines_gold_gate",
+   "dwarven_mines_aristocrat_passage",
+   "dwarven_mines_mist",
+   "dwarven_mines_crystal"
+  ],
+  "SPIDER_DEN": [
+   "spiders_den_top",
+   "spiders_den_dragon_skeleton",
+   "spiders_den_archaeologist",
+   "spiders_den_crimson_isle",
+   "spiders_den_haymitch",
+   "spiders_den_sanctuary_egg",
+   "spiders_den_boulder",
+   "spiders_den_mushroom",
+   "spiders_den_spiders",
+   "spiders_den_house",
+   "spiders_den_sanctuary_high",
+   "spiders_den_fossil",
+   "spiders_den_den",
+   "spiders_den_relic",
+   "spiders_den_fairy_soul"
+  ],
+  "CRIMSON_ISLE": [
+   "crimson_isle_entrance",
+   "crimson_isle_phlegblast",
+   "crimson_isle_magma_chamber",
+   "crimson_isle_ashfang",
+   "crimson_isle_forgotten_skull",
+   "crimson_isle_colosseum",
+   "crimson_isle_engineer",
+   "crimson_isle_cathedral",
+   "crimson_isle_mage_outpost",
+   "crimson_isle_bladesoul",
+   "crimson_isle_tao",
+   "crimson_isle_hero_statue",
+   "crimson_isle_odger",
+   "crimson_isle_dragontail_shop",
+   "crimson_isle_bastion"
+  ],
+  "DUNGEON_HUB": [
+   "dungeon_hub_leaderboards",
+   "dungeon_hub_croesus",
+   "dungeon_hub_hub_portal",
+   "dungeon_hub_never_arriving",
+   "dungeon_hub_mort",
+   "dungeon_hub_blacksmith",
+   "dungeon_hub_selector",
+   "dungeon_hub_ophelia",
+   "dungeon_hub_statue",
+   "dungeon_hub_race",
+   "dungeon_hub_mushroom",
+   "dungeon_hub_crystal_core",
+   "dungeon_hub_precursor_ruins",
+   "dungeon_hub_catacombs",
+   "dungeon_hub_entrance"
+  ],
+  "BACKWATER_BAYOU": [
+   "bayou_wheel",
+   "bayou_path",
+   "bayou_dock",
+   "bayou_smokestacks",
+   "bayou_bridge",
+   "bayou_vines",
+   "bayou_hattie",
+   "bayou_waterfall",
+   "bayou_lilypad",
+   "bayou_ship",
+   "bayou_joel",
+   "bayou_roddy",
+   "bayou_pipe",
+   "bayou_gear",
+   "bayou_cave"
+  ],
+  "GALATEA": [
+   "foraging_2_launch_pad",
+   "foraging_2_amaury",
+   "foraging_2_swoop",
+   "foraging_2_condenser",
+   "foraging_2_banker",
+   "foraging_2_library",
+   "foraging_2_david",
+   "foraging_2_campfire",
+   "foraging_2_high_tree",
+   "foraging_2_cave",
+   "foraging_2_spruce_bridge",
+   "foraging_2_steps",
+   "foraging_2_sawyer",
+   "foraging_2_murkwater",
+   "foraging_2_vine"
+  ],
+  "LOTUS_ATOLL": [
+   "lotus_pond",
+   "lotus_temple",
+   "lotus_cave",
+   "lotus_stairway",
+   "lotus_bridge",
+   "lotus_lily_pad",
+   "lotus_waterfall",
+   "lotus_cherry",
+   "lotus_entrance",
+   "lotus_kay",
+   "lotus_flower",
+   "lotus_path",
+   "lotus_beach",
+   "lotus_treasure",
+   "lotus_jessica"
+  ],
+  "TORRHUS_CANYON": [
+   "foraging_3_blimp",
+   "foraging_3_prismarine",
+   "foraging_3_totem_pole",
+   "foraging_3_waterfall",
+   "foraging_3_mushroom_cave",
+   "foraging_3_island_entrance",
+   "foraging_3_bridge",
+   "foraging_3_honeys_stash",
+   "foraging_3_beacon",
+   "foraging_3_amethyst",
+   "foraging_3_honey",
+   "foraging_3_great_helix_tree",
+   "foraging_3_big_nest",
+   "foraging_3_campsite",
+   "foraging_3_torrhus_springs"
+  ]
+ },
+ "factoryMilestones": [
+  {
+   "amount": 1000,
+   "rabbit": "Almond Amaretto"
+  },
+  {
+   "amount": 10000,
+   "rabbit": "Buttercream Blossom"
+  },
+  {
+   "amount": 100000,
+   "rabbit": "Cocoa Comet"
+  },
+  {
+   "amount": 1000000,
+   "rabbit": "Dulce Drizzle"
+  },
+  {
+   "amount": 2500000,
+   "rabbit": "Espresso Eclair"
+  },
+  {
+   "amount": 5000000,
+   "rabbit": "Fudge Fountain"
+  },
+  {
+   "amount": 10000000,
+   "rabbit": "Ginger Glaze"
+  },
+  {
+   "amount": 25000000,
+   "rabbit": "Honey Hazelnut"
+  },
+  {
+   "amount": 50000000,
+   "rabbit": "Icing Ivy"
+  },
+  {
+   "amount": 100000000,
+   "rabbit": "Jasmine Jello"
+  },
+  {
+   "amount": 250000000,
+   "rabbit": "Kiwi Kiss"
+  },
+  {
+   "amount": 500000000,
+   "rabbit": "Lavender Lemon"
+  },
+  {
+   "amount": 1000000000,
+   "rabbit": "Maple Mirage"
+  },
+  {
+   "amount": 2500000000,
+   "rabbit": "Nougat Nebula"
+  },
+  {
+   "amount": 5000000000,
+   "rabbit": "Orange Obsidian"
+  },
+  {
+   "amount": 10000000000,
+   "rabbit": "Peppermint Pearl"
+  },
+  {
+   "amount": 25000000000,
+   "rabbit": "Quince Quark"
+  },
+  {
+   "amount": 50000000000,
+   "rabbit": "Raspberry Ripple"
+  },
+  {
+   "amount": 100000000000,
+   "rabbit": "Strawberry Swirl"
+  },
+  {
+   "amount": 150000000000,
+   "rabbit": "Toffee Tulip"
+  },
+  {
+   "amount": 200000000000,
+   "rabbit": "Ube Unicorn"
+  },
+  {
+   "amount": 300000000000,
+   "rabbit": "Vanilla Vortex"
+  },
+  {
+   "amount": 400000000000,
+   "rabbit": "Walnut Whirl"
+  },
+  {
+   "amount": 500000000000,
+   "rabbit": "Xoco Xanudu"
+  },
+  {
+   "amount": 600000000000,
+   "rabbit": "Yogurt Yucca"
+  },
+  {
+   "amount": 700000000000,
+   "rabbit": "Zest Zephyr"
+  }
+ ],
+ "shopMilestones": [
+  {
+   "amount": 2000000,
+   "rabbit": "Alpha"
+  },
+  {
+   "amount": 10000000,
+   "rabbit": "Beta"
+  },
+  {
+   "amount": 25000000,
+   "rabbit": "Gamma"
+  },
+  {
+   "amount": 50000000,
+   "rabbit": "Delta"
+  },
+  {
+   "amount": 100000000,
+   "rabbit": "Epsilon"
+  },
+  {
+   "amount": 250000000,
+   "rabbit": "Zeta"
+  },
+  {
+   "amount": 500000000,
+   "rabbit": "Eta"
+  },
+  {
+   "amount": 1000000000,
+   "rabbit": "Theta"
+  },
+  {
+   "amount": 2500000000,
+   "rabbit": "Iota"
+  },
+  {
+   "amount": 5000000000,
+   "rabbit": "Kappa"
+  },
+  {
+   "amount": 10000000000,
+   "rabbit": "Lambda"
+  },
+  {
+   "amount": 25000000000,
+   "rabbit": "Mu"
+  },
+  {
+   "amount": 50000000000,
+   "rabbit": "Nu"
+  },
+  {
+   "amount": 100000000000,
+   "rabbit": "Xi"
+  },
+  {
+   "amount": 150000000000,
+   "rabbit": "Omicron"
+  },
+  {
+   "amount": 200000000000,
+   "rabbit": "Pi"
+  },
+  {
+   "amount": 250000000000,
+   "rabbit": "Rho"
+  },
+  {
+   "amount": 300000000000,
+   "rabbit": "Sigma"
+  },
+  {
+   "amount": 350000000000,
+   "rabbit": "Tau"
+  },
+  {
+   "amount": 400000000000,
+   "rabbit": "Upsilon"
+  },
+  {
+   "amount": 500000000000,
+   "rabbit": "Phi"
+  },
+  {
+   "amount": 600000000000,
+   "rabbit": "Chi"
+  },
+  {
+   "amount": 700000000000,
+   "rabbit": "Psi"
+  },
+  {
+   "amount": 800000000000,
+   "rabbit": "Omega"
+  }
+ ],
+ "hitmanCosts": [
+  1000,
+  10000,
+  100000,
+  200000,
+  400000,
+  600000,
+  800000,
+  1000000,
+  1500000,
+  2000000,
+  3000000,
+  4000000,
+  5000000,
+  6000000,
+  7000000,
+  8500000,
+  10000000,
+  12000000,
+  14000000,
+  16000000,
+  18000000,
+  20000000,
+  22000000,
+  24000000,
+  26000000,
+  28000000,
+  30000000,
+  32000000
+ ]
+}

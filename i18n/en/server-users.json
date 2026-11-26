@@ -1,0 +1,11 @@
+{
+ "битый файл": "corrupted file",
+ "Нет такого аккаунта": "No such account",
+ "Пароль слишком короткий: нужно хотя бы {0} символов": "Password too short: at least {0} characters needed",
+ "Пароль слишком длинный": "Password too long",
+ "Ник: латиница, цифры и _, до 16 символов": "Name: Latin letters, digits and _, up to 16 characters",
+ "Аккаунт {0} уже есть": "Account {0} already exists",
+ "Лимит ИИ: число в долларах, например 0.05 (или пусто — по умолчанию)": "AI limit: a number in dollars, e.g. 0.05 (or empty for the default)",
+ "Ник владельца меняется в .env (PLAYER)": "The owner's name is changed in .env (PLAYER)",
+ "Аккаунт владельца удалить нельзя": "The owner's account can't be deleted"
+}

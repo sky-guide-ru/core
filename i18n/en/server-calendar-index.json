@@ -1,0 +1,21 @@
+{
+ "Смена мэра": "Mayor change",
+ "Итоги выборов: новый мэр и министр.": "Election results: new mayor and minister.",
+ "Победитель выборов становится мэром на год SkyBlock, второй по голосам — министром с одним перком.": "The election winner becomes mayor for a SkyBlock year, the runner-up becomes minister with one perk.",
+ "Открытие выборов": "Election opens",
+ "Election Booth в Hub: можно голосовать за мэра.": "Election Booth in the Hub: you can vote for the mayor.",
+ "Голосуй у Election Booth в Hub.": "Vote at the Election Booth in the Hub.",
+ "{0} ч{1}": "{0} h{1}",
+ " {0} мин": " {0} min",
+ "{0} дн {1} ч": "{0} d {1} h",
+ "Дата SkyBlock: {0} {1} ({2}), год {3}.": "SkyBlock date: {0} {1} ({2}), year {3}.",
+ "Мэр: {0}{1}, перки: {2}. До смены мэра {3}.": "Mayor: {0}{1}, perks: {2}. Until the mayor changes: {3}.",
+ "Мэр: неизвестен (данные выборов ещё не загружены).": "Mayor: unknown (election data not loaded yet).",
+ "Министр: {0}{1}.": "Minister: {0}{1}.",
+ ", перк {0}": ", perk {0}",
+ "Идут выборы, лидирует {0}{1}.": "The election is on, {0} leads{1}.",
+ "{0}, ещё {1}": "{0}, {1} more",
+ "Идёт сейчас: {0}.": "Happening now: {0}.",
+ "{0} через {1}": "{0} in {1}",
+ "Скоро: {0}.": "Soon: {0}."
+}

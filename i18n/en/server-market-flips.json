@@ -1,0 +1,14 @@
+{
+ "цена мгновенной покупки в {0} раза выше медианы за неделю": "instant buy price is {0} times the weekly median",
+ "цена мгновенной продажи в {0} раза выше медианы за неделю": "instant sell price is {0} times the weekly median",
+ "высокий": "high",
+ "средний": "medium",
+ "низкий": "low",
+ "Ордер на покупку по {0}, затем ордер на продажу по {1}. Прибыль после налога {2} за штуку": "Buy order at {0}, then a sell order at {1}. Profit after tax {2} each",
+ ", но обычно разрыв уже: в среднем {0} за штуку — по нему и считаем доход.": ", but usually the gap is narrower: on average {0} each — that's what the income is based on.",
+ "Цена на аукционе взята по реальным продажам за сутки. Проверь, что твой предмет такой же: звёзды, чары и перековка (reforge) здесь не учитываются.": "The auction price is taken from real sales over the last 24h. Make sure your item is the same: stars, enchantments and reforge aren't counted here.",
+ "Маржа {0}% подозрительно высокая: скорее всего, цена устарела или рынок почти пустой. Проверь стакан перед покупкой.": "A {0}% margin is suspiciously high: most likely the price is outdated or the market is nearly empty. Check the order book before buying.",
+ "Спрос маленький: реально продать около {0}.": "Low demand: you can realistically sell about {0}.",
+ "одной штуки в 10+ дней": "one item per 10+ days",
+ "{0} шт. в день": "{0} pcs per day"
+}

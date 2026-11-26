@@ -1,0 +1,241 @@
+// Снаряжение, аксессуары, Magical Power, оценка стоимости
+import { isGuiItem } from '../lib/gui-items.js';
+import { neu, allAccessories, itemName } from '../neu.js';
+import { priceOf, petPriceOf } from '../prices.js';
+import { PET_TIERS } from '../nbt.js';
+import { buildUpgrades, NO_RECOMB } from '../lib/acc-upgrades.js';
+import { tx } from '../../i18n/msg.js';
+
+export const MP_BY_RARITY = { COMMON: 3, UNCOMMON: 5, RARE: 8, EPIC: 12, LEGENDARY: 16, MYTHIC: 22, DIVINE: 22, SPECIAL: 3, 'VERY SPECIAL': 5 };
+const RARITY_ORDER = ['COMMON', 'UNCOMMON', 'RARE', 'EPIC', 'LEGENDARY', 'MYTHIC', 'DIVINE', 'SPECIAL', 'VERY SPECIAL'];
+
+// Числятся в NEU как аксессуары, но в сумку не кладутся
+const NOT_IN_BAG = new Set(['RIFT_PRISM']);
+
+let upCache = null;
+function upgradesMap() {
+  const raw = neu.constants.misc?.talisman_upgrades;
+  if (!upCache || upCache.raw !== raw) upCache = { raw, map: buildUpgrades(raw) };
+  return upCache.map;
+}
+
+// Все предметы, которые "покрывает" данный аксессуар (его младшие версии)
+function coveredBy(id, up) {
+  const out = new Set();
+  for (const [low, highs] of Object.entries(up)) if (highs.includes(id)) out.add(low);
+  return out;
+}
+
+export function analyzeAccessories(member) {
+  const up = upgradesMap();
+  const ignored = new Set(neu.constants.misc?.ignored_talisman || []);
+  const items = (member.inv.talismans || []).filter(Boolean).filter(i => i.id);
+  // Аксессуары в инвентаре/эндерсундуке тоже учитываются игрой только в сумке — показываем отдельно
+  const owned = new Map();
+  for (const it of items) {
+    const prev = owned.get(it.id);
+    if (!prev || RARITY_ORDER.indexOf(it.rarity) > RARITY_ORDER.indexOf(prev.rarity)) owned.set(it.id, it);
+  }
+  const covered = new Set();
+  for (const id of owned.keys()) for (const c of coveredBy(id, up)) covered.add(c);
+
+  let mp = 0;
+  const list = [];
+  for (const it of owned.values()) {
+    const active = !covered.has(it.id) && !ignored.has(it.id);
+    let gain = active ? (MP_BY_RARITY[it.rarity] || 0) : 0;
+    if (it.id === 'HEGEMONY_ARTIFACT') gain *= 2;
+    mp += gain;
+    list.push({ id: it.id, name: it.name, rarity: it.rarity, recomb: it.recomb, reforge: it.reforge, enrichment: it.enrichment || it.attributes?.enrichment || null, mp: gain, active, value: priceOf(it.id) });
+  }
+  if (member.riftPrism) mp += 11;
+
+  // Недостающие и апгрейды: сколько монет за 1 MP
+  const recs = [];
+  const all = allAccessories();
+  for (const acc of all) {
+    // Rift Prism — не аксессуар для сумки: его употребляют один раз (+11 MP), для него свой шаг mp-rift-prism
+    if (owned.has(acc.id) || covered.has(acc.id) || ignored.has(acc.id) || NOT_IN_BAG.has(acc.id)) continue;
+    const accMp = MP_BY_RARITY[acc.rarity] || 0;
+    if (!accMp) continue;
+    // если владеем младшей версией — считаем прирост
+    const lower = [...owned.keys()].find(o => (up[o] || []).includes(acc.id));
+    const lowerMp = lower ? (MP_BY_RARITY[owned.get(lower).rarity] || 0) : 0;
+    // если существует старшая версия, которую мы не покрыли — тоже ок, рекомендуем по цене
+    const gain = accMp - lowerMp;
+    if (gain <= 0) continue;
+    const price = priceOf(acc.id);
+    // апгрейд обычно крафтится из младшей версии или её можно продать — считаем доплату
+    const lowerValue = lower ? priceOf(lower) : 0;
+    const net = price ? Math.max(price - lowerValue, price * 0.1) : 0;
+    recs.push({
+      id: acc.id, name: acc.name, rarity: acc.rarity, gain, price: net || price, fullPrice: price,
+      perMp: net ? net / gain : null, upgradeFrom: lower ? owned.get(lower).name : null,
+      // семейство (младшие и старшие версии): из одного семейства в сумке работает только один аксессуар
+      family: [...new Set([acc.id, ...coveredBy(acc.id, up), ...(up[acc.id] || [])])],
+    });
+  }
+  // Убираем дубли семейств: если есть и X и его апгрейд Y в рекомендациях — оставляем оба, но сортируем по цене за MP
+  recs.sort((a, b) => (a.perMp ?? Infinity) - (b.perMp ?? Infinity));
+
+  // Mythic и выше рекомб не поднимает по MP, Special/Very Special — отдельная шкала
+  const recombable = ['COMMON', 'UNCOMMON', 'RARE', 'EPIC', 'LEGENDARY'];
+  const notRecomb = list.filter(a => a.active && !a.recomb && recombable.includes(a.rarity) && !NO_RECOMB.has(a.id));
+  const recombPrice = priceOf('RECOMBOBULATOR_3000');
+
+  return {
+    calculatedMp: mp,
+    highestMp: member.magicalPower,
+    count: owned.size,
+    list: list.sort((a, b) => b.mp - a.mp),
+    missing: recs,
+    cheapestNext: recs.filter(r => r.perMp).slice(0, 40),
+    notRecombCount: notRecomb.length,
+    recombPrice,
+    // Рекомб повышает редкость на 1 — прирост MP зависит от редкости
+    recombGain: notRecomb.reduce((s, a) => {
+      const i = RARITY_ORDER.indexOf(a.rarity);
+      const next = RARITY_ORDER[Math.min(i + 1, 5)];
+      return s + ((MP_BY_RARITY[next] || 0) - (MP_BY_RARITY[a.rarity] || 0));
+    }, 0),
+  };
+}
+
+const WEAPON_TYPES = /SWORD|BOW|WAND|LONGSWORD|STAFF|DEPLOYABLE|FISHING WEAPON|GAUNTLET/;
+const TOOL_TYPES = /PICKAXE|DRILL|HOE|AXE|SHOVEL|FISHING ROD|GAUNTLET|CHISEL/;
+const ARMOR_TYPES = /HELMET|CHESTPLATE|LEGGINGS|BOOTS/;
+const EQUIP_TYPES = /NECKLACE|CLOAK|BELT|GLOVES|BRACELET/;
+
+function itemType(it) {
+  const n = neu.items.get(it.id);
+  if (n?.type) return n.type;
+  const last = (it.lore?.[it.lore.length - 1] || '').replace(/§./g, '');
+  return last.replace(/^(?:a )?(VERY SPECIAL|COMMON|UNCOMMON|RARE|EPIC|LEGENDARY|MYTHIC|DIVINE|SPECIAL)\s*/, '').replace(/^DUNGEON\s+/, '');
+}
+
+// Камень перековки по имени модификатора (ea.modifier) — из constants/reforgestones NEU
+let stoneByModifier = null;
+function reforgeStone(mod) {
+  if (!mod) return null;
+  if (!stoneByModifier) {
+    stoneByModifier = new Map();
+    for (const [id, r] of Object.entries(neu.constants?.reforgestones || {})) {
+      stoneByModifier.set(String(r.nbtModifier || r.reforgeName || '').toLowerCase().replace(/\s+/g, '_'), id);
+    }
+    if (!stoneByModifier.size) { stoneByModifier = null; return null; }
+  }
+  return stoneByModifier.get(String(mod).toLowerCase()) || null;
+}
+
+const enchPrice = (name, lvl) => priceOf(tx`ENCHANTMENT_${String(name).toUpperCase()}_${lvl}`);
+
+// Оценка предмета с улучшениями: базовая цена + зачарования + гемы, звёзды, свитки, части и т.п.
+export function itemValue(it) {
+  if (!it?.id || isGuiItem(it)) return 0;
+  const count = it.count || 1;
+  if (it.id === 'ENCHANTED_BOOK') {
+    return Object.entries(it.enchants || {}).reduce((s, [n, l]) => s + enchPrice(n, l), 0) * count;
+  }
+  let v = priceOf(it.id) * count;
+  if (count > 1) return v; // стаки — обычные материалы
+  const parts = it.upgrades || [];
+  if (!it.upgrades) { // старые снимки без списка улучшений
+    if (it.recomb) parts.push({ id: 'RECOMBOBULATOR_3000', count: 1, mult: 0.8 });
+    if (it.hpb > 10) parts.push({ id: 'FUMING_POTATO_BOOK', count: it.hpb - 10, mult: 0.6 });
+  }
+  const ess = neu.constants?.essencecosts?.[it.id];
+  for (const p of parts) {
+    // Мастер-звёзды бывают только у данжевых предметов (звёзды 6–10). У брони Kuudra звёзды 6–10 — обычные, за эссенцию
+    if (p.kind === 'star' && ess?.['6']) continue;
+    v += priceOf(p.id) * p.count * p.mult;
+  }
+  // Звёзды за эссенцию: сумма стоимости уровней 1..N по constants/essencecosts NEU
+  if (ess?.type && it.stars > 0) {
+    let n = 0;
+    for (let i = 1; i <= it.stars && ess[i]; i++) n += ess[i];
+    v += n * priceOf(tx`ESSENCE_${String(ess.type).toUpperCase()}`) * 0.75;
+  }
+  for (const [n, l] of Object.entries(it.enchants || {})) {
+    const p = enchPrice(n, l);
+    if (p > 50_000) v += p * 0.85; // дешёвые книги почти ничего не добавляют к цене
+  }
+  const stone = reforgeStone(it.reforge);
+  if (stone) v += priceOf(stone) * 0.5;
+  return v;
+}
+
+export function allStoredItems(inv) {
+  const groups = [
+    ['Инвентарь', inv.inventory], ['Броня', inv.armor], ['Экипировка', inv.equipment], ['Wardrobe', inv.wardrobe], ['Wardrobe (Equipment)', inv.wardrobeEquipment], ['Backpacks', inv.backpackItems],
+    ['Ender Chest', inv.enderChest], ['Personal Vault', inv.vault], ['Accessory Bag', inv.talismans], ['Quiver', inv.quiver], ['Potion Bag', inv.potions], ['Sack of Sacks', inv.sacksBag],
+    ['Rift: инвентарь', inv.rift?.inventory], ['Rift: броня', inv.rift?.armor], ['Rift: экипировка', inv.rift?.equipment], ['Rift: Ender Chest', inv.rift?.enderChest],
+    ...Object.entries(inv.backpacks || {}).map(([k, v]) => [tx`Backpack ${Number(k) + 1}`, v]),
+  ];
+  const out = [];
+  for (const [where, list] of groups) for (const it of list || []) if (it?.id && !isGuiItem(it)) out.push({ ...it, where }); // служебные (меню SkyBlock) — не вещи
+  return out;
+}
+
+export function analyzeGear(member) {
+  const items = allStoredItems(member.inv);
+  const typed = items.map(it => ({ ...it, type: itemType(it), value: itemValue(it), basePrice: priceOf(it.id) }));
+  const weapons = typed.filter(i => WEAPON_TYPES.test(i.type || '')).sort((a, b) => b.value - a.value);
+  const tools = typed.filter(i => TOOL_TYPES.test(i.type || '') && !WEAPON_TYPES.test(i.type || '')).sort((a, b) => b.value - a.value);
+  const armorPieces = typed.filter(i => ARMOR_TYPES.test(i.type || '')).sort((a, b) => b.value - a.value);
+  const equipment = typed.filter(i => EQUIP_TYPES.test(i.type || '')).sort((a, b) => b.value - a.value);
+  const topItems = [...typed].sort((a, b) => b.value - a.value).slice(0, 30);
+  const itemsValue = typed.reduce((s, i) => s + i.value, 0);
+
+  // Сеты брони по префиксу id: по одной лучшей части на слот (дубликаты из разных хранилищ не складываем)
+  const sets = {};
+  for (const a of armorPieces) { // уже отсортированы по убыванию цены
+    // слот — по типу предмета (у BIOHAZARD_SUIT, *_TUNIC и т.п. в id нет слова CHESTPLATE)
+    const slot = (ARMOR_TYPES.exec(a.type || '') || /_(HELMET|CHESTPLATE|LEGGINGS|BOOTS)$/.exec(a.id) || [a.id])[0].replace(/^_/, '');
+    const base = a.id.replace(/_(HELMET|CHESTPLATE|LEGGINGS|BOOTS|SUIT|TUNIC|HOOD|CAP|MASK|SHIRT|VEST|PANTS|TROUSERS|SHOES|SANDALS|SLIPPERS)$/, '');
+    const set = (sets[base] ||= { id: base, pieces: [], value: 0, copies: 0, slots: new Set() });
+    set.copies++;
+    if (set.slots.has(slot)) continue;
+    set.slots.add(slot);
+    set.pieces.push(a);
+    set.value += a.value;
+  }
+  for (const set of Object.values(sets)) delete set.slots;
+
+  const sacksValue = Object.entries(member.inv.sacks || {}).reduce((s, [id, n]) => s + priceOf(id) * n, 0);
+  // питомец 100 уровня стоит заметно дороже первого — берём цену среди максимальных
+  const petsValue = member.pets.reduce((s, p) => s + petValue(p), 0);
+  // Предметы, сданные в музей, тоже принадлежат игроку (SkyCrypt учитывает их в networth)
+  const museumValue = museumItemsValue(member.museum);
+  const essenceValue = Object.entries(member.essence || {}).reduce((s, [k, n]) => s + priceOf(tx`ESSENCE_${k}`) * n, 0);
+  const coins = (member.purse || 0) + (member.bank || 0) + (member.personalBank || 0);
+
+  return {
+    worn: { armor: member.inv.armor.map(i => i && { ...i, value: itemValue(i) }), equipment: member.inv.equipment.map(i => i && { ...i, value: itemValue(i) }) },
+    weapons: weapons.slice(0, 25),
+    tools: tools.slice(0, 25),
+    armorSets: Object.values(sets).sort((a, b) => b.value - a.value).slice(0, 15),
+    equipment: equipment.slice(0, 20),
+    topItems,
+    topPets: member.pets.map(p => ({ id: p.id, type: p.type, tier: p.tier, level: p.level, heldItem: p.heldItem, skin: p.skin, value: petValue(p) })).sort((a, b) => b.value - a.value).slice(0, 15),
+    networth: {
+      total: itemsValue + sacksValue + petsValue + essenceValue + coins + museumValue,
+      items: itemsValue, sacks: sacksValue, pets: petsValue, essence: essenceValue, coins, museum: museumValue,
+    },
+    itemCount: typed.length,
+  };
+}
+
+// Питомец: цена по уровню (100 уровень — отдельная цена на аукционе) + предмет в руках + скин
+export function petValue(p) {
+  let v = petPriceOf(tx`${p.type};${PET_TIERS.indexOf(p.tier)}`, p.level >= 100);
+  if (p.heldItem) v += priceOf(p.heldItem);
+  if (p.skin) v += priceOf(tx`PET_SKIN_${p.skin}`) * 0.9;
+  return v;
+}
+
+// Музей: members[uuid].items[id].items.data (NBT) — разбирается в profile.js в museum.decoded
+function museumItemsValue(museum) {
+  return (museum?.decoded || []).reduce((s, it) => s + itemValue(it), 0);
+}
+
+export function petName(type) { return itemName(tx`${type};4`) || type; }

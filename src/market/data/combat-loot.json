@@ -1,0 +1,4483 @@
+{
+"$comment": "Таблицы дропа боевого контента с hypixel-skyblock.fandom.com (выгрузка 23.11.2026): слееры (Revenant_Horror, Tarantula_Broodfather, Sven_Packmaster, Voidgloom_Seraph, Inferno_Demonlord), сундуки данжей (Dungeon_Reward_Chest/Loot, колонка S+; только Obsidian и Bedrock, без дешёвых книг и дисков), сундук Kuudra (Kuudra/Loot, платный сундук), мобы (шаблон Mob Drops Table). Шансы базовые, без Magic Find и RNG-метра. qty — среднее количество, lvl — уровень слеера для дропа, cost — цена открытия сундука.",
+"slayers": {
+"zombie": {
+"cost": [
+2000,
+7500,
+20000,
+50000,
+100000
+],
+"drops": [
+{
+"id": "REVENANT_FLESH",
+"name": "Revenant Flesh",
+"lvl": 1,
+"qty": [
+2.0,
+13.5,
+40.0,
+57.0,
+63.5
+],
+"chance": [
+1.0,
+1.0,
+1.0,
+1.0,
+1.0
+]
+},
+{
+"id": "FOUL_FLESH",
+"name": "Foul Flesh",
+"lvl": 1,
+"qty": [
+null,
+1.0,
+1.5,
+2.5,
+3.5
+],
+"chance": [
+null,
+0.1616,
+0.1608,
+0.1622,
+0.1377
+]
+},
+{
+"id": "ZOMBIE_SLAYER_RUNE;1",
+"name": "Pestilence Rune",
+"lvl": 2,
+"qty": [
+null,
+1.0,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+0.0067,
+0.0261,
+0.0633,
+0.0542
+]
+},
+{
+"id": "UNDEAD_CATALYST",
+"name": "Undead Catalyst",
+"lvl": 3,
+"qty": [
+null,
+1.0,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+0.0202,
+0.0201,
+0.006,
+0.0169
+]
+},
+{
+"id": "SEVERED_HAND",
+"name": "Severed Hand",
+"lvl": 4,
+"qty": [
+null,
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.004,
+0.0081,
+0.0069
+]
+},
+{
+"id": "BEHEADED_HORROR",
+"name": "Beheaded Horror",
+"lvl": 5,
+"qty": [
+null,
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0008,
+0.0016,
+0.0014
+]
+},
+{
+"id": "REVENANT_CATALYST",
+"name": "Revenant Catalyst",
+"lvl": 6,
+"qty": [
+null,
+1.0,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+0.0101,
+0.0101,
+0.0101,
+0.0086
+]
+},
+{
+"id": "SNAKE_RUNE;1",
+"name": "Snake Rune",
+"lvl": 6,
+"qty": [
+null,
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0016,
+0.0014
+]
+},
+{
+"id": "SCYTHE_BLADE",
+"name": "Scythe Blade",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0006,
+0.001
+]
+},
+{
+"id": "REVENANT_VISCERA",
+"name": "Revenant Viscera",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+null,
+1.5
+],
+"chance": [
+null,
+null,
+null,
+null,
+0.1377
+]
+},
+{
+"id": "SEVERED_HAND",
+"name": "Severed Hand",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+null,
+0.0005
+]
+},
+{
+"id": "SHARD_REVENANT",
+"name": "Revenant Shard",
+"lvl": 0,
+"qty": [
+null,
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.008,
+0.0121,
+0.0136
+]
+},
+{
+"id": "SHARD_OF_THE_SHREDDED",
+"name": "Shredded Sinew",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+null,
+0.0006
+]
+},
+{
+"id": "WARDEN_HEART",
+"name": "Warden Heart",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+null,
+0.0001
+]
+}
+]
+},
+"spider": {
+"cost": [
+2000,
+7500,
+20000,
+50000,
+100000
+],
+"drops": [
+{
+"id": "TARANTULA_WEB",
+"name": "Tarantula Web",
+"lvl": 1,
+"qty": [
+3.0,
+6.0,
+24.0,
+40.0,
+64.0
+],
+"chance": [
+1.0,
+1.0,
+1.0,
+1.0,
+1.0
+]
+},
+{
+"id": "TOXIC_ARROW_POISON",
+"name": "Toxic Arrow Poison",
+"lvl": 1,
+"qty": [
+6.0,
+7.0,
+24.0,
+40.0,
+64.0
+],
+"chance": [
+0.18,
+0.1525,
+0.1485,
+0.1497,
+0.1282
+]
+},
+{
+"id": "BITE_RUNE;1",
+"name": "Bite Rune",
+"lvl": 1,
+"qty": [
+null,
+1.0,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+0.007,
+0.0267,
+0.0648,
+0.0648
+]
+},
+{
+"id": "DARKNESS_WITHIN_RUNE;1",
+"name": "Darkness Within Rune",
+"lvl": 1,
+"qty": [
+null,
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0039,
+0.0077
+]
+},
+{
+"id": "SPIDER_CATALYST",
+"name": "Spider Catalyst",
+"lvl": 2,
+"qty": [
+null,
+1.0,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0206,
+0.0062,
+0.0018
+]
+},
+{
+"id": "TARANTULA_SILK",
+"name": "Tarantula Silk",
+"lvl": 2,
+"qty": [
+null,
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+null,
+0.2
+]
+},
+{
+"id": "ENCHANTMENT_BANE_OF_ARTHROPODS_6",
+"name": "Enchanted Book Bane of Arthropods VI",
+"lvl": 4,
+"qty": [
+null,
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0021,
+0.0042,
+0.0036
+]
+},
+{
+"id": "TARANTULA_CATALYST",
+"name": "Tarantula Catalyst",
+"lvl": 4,
+"qty": [
+null,
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0025,
+0.0038,
+0.0043
+]
+},
+{
+"id": "FLY_SWATTER",
+"name": "Fly Swatter",
+"lvl": 5,
+"qty": [
+null,
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0008,
+0.0017,
+0.0021
+]
+},
+{
+"id": "VIAL_OF_VENOM",
+"name": "Vial of Venom",
+"lvl": 6,
+"qty": [
+null,
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0008,
+0.0014
+]
+},
+{
+"id": "TARANTULA_TALISMAN",
+"name": "Tarantula Talisman",
+"lvl": 6,
+"qty": [
+null,
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0008,
+0.0017,
+0.0021
+]
+},
+{
+"id": "DIGESTED_MOSQUITO",
+"name": "Digested Mosquito",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0006,
+0.0007
+]
+},
+{
+"id": "SHRIVELED_WASP",
+"name": "Shriveled Wasp",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+null,
+0.001
+]
+},
+{
+"id": "ENSNARED_SNAIL",
+"name": "Ensnared Snail",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+null,
+0.0006
+]
+},
+{
+"id": "PRIMORDIAL_EYE",
+"name": "Primordial Eye",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+null,
+0.0002
+]
+}
+]
+},
+"wolf": {
+"cost": [
+2000,
+7500,
+20000,
+50000
+],
+"drops": [
+{
+"id": "WOLF_TOOTH",
+"name": "Wolf Tooth",
+"lvl": 1,
+"qty": [
+2.0,
+13.5,
+40.0,
+57.0
+],
+"chance": [
+1.0,
+1.0,
+1.0,
+1.0
+]
+},
+{
+"id": "HAMSTER_WHEEL",
+"name": "Hamster Wheel",
+"lvl": 1,
+"qty": [
+null,
+1.0,
+3.0,
+4.5
+],
+"chance": [
+null,
+0.1667,
+0.1645,
+0.1635
+]
+},
+{
+"id": "SPIRIT_RUNE;1",
+"name": "Spirit Rune",
+"lvl": 2,
+"qty": [
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+0.0068,
+0.0266,
+0.0637
+]
+},
+{
+"id": "ENCHANTMENT_CRITICAL_6",
+"name": "Enchanted Book Critical VI",
+"lvl": 4,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0041,
+0.0081
+]
+},
+{
+"id": "FURBALL",
+"name": "Furball",
+"lvl": 4,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0082,
+0.0162
+]
+},
+{
+"id": "RED_CLAW_EGG",
+"name": "Red Claw Egg",
+"lvl": 5,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0004,
+0.0012
+]
+},
+{
+"id": "COUTURE_RUNE;1",
+"name": "Couture Rune",
+"lvl": 6,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0024
+]
+},
+{
+"id": "GRIZZLY_BAIT",
+"name": "Grizzly Salmon",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0006
+]
+},
+{
+"id": "OVERFLUX_CAPACITOR",
+"name": "Overflux Capacitor",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0004
+]
+}
+]
+},
+"enderman": {
+"cost": [
+2000,
+7500,
+20000,
+50000
+],
+"drops": [
+{
+"id": "NULL_SPHERE",
+"name": "Null Sphere",
+"lvl": 0,
+"qty": [
+2.5,
+19.0,
+70.0,
+130.0
+],
+"chance": [
+1.0,
+1.0,
+1.0,
+1.0
+]
+},
+{
+"id": "TWILIGHT_ARROW_POISON",
+"name": "Twilight Arrow Poison",
+"lvl": 0,
+"qty": [
+null,
+16.0,
+28.0,
+62.0
+],
+"chance": [
+null,
+0.1515,
+0.1341,
+0.127
+]
+},
+{
+"id": "ENDERSNAKE_RUNE;1",
+"name": "Endersnake Rune",
+"lvl": 0,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0242,
+0.0534
+]
+},
+{
+"id": "SUMMONING_EYE",
+"name": "Summoning Eye",
+"lvl": 1,
+"qty": [
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+0.0067,
+0.006,
+0.0056
+]
+},
+{
+"id": "ENCHANTMENT_MANA_STEAL_1",
+"name": "Enchanted Book Mana Steal I",
+"lvl": 2,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0447,
+0.0423
+]
+},
+{
+"id": "TRANSMISSION_TUNER",
+"name": "Transmission Tuner",
+"lvl": 3,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0223,
+0.0211
+]
+},
+{
+"id": "NULL_ATOM",
+"name": "Null Atom",
+"lvl": 4,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0373,
+0.0594
+]
+},
+{
+"id": "HAZMAT_ENDERMAN",
+"name": "Hazmat Enderman",
+"lvl": 4,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0104,
+0.0155
+]
+},
+{
+"id": "POCKET_ESPRESSO_MACHINE",
+"name": "Pocket Espresso Machine",
+"lvl": 4,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0039
+]
+},
+{
+"id": "ENCHANTMENT_SMARTY_PANTS_1",
+"name": "Enchanted Book Smarty Pants I",
+"lvl": 5,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0176
+]
+},
+{
+"id": "DRAGON_RUNE;1",
+"name": "End Rune",
+"lvl": 5,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.007
+]
+},
+{
+"id": "HANDY_BLOOD_CHALICE",
+"name": "Handy Blood Chalice",
+"lvl": 5,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0018
+]
+},
+{
+"id": "SINFUL_DICE",
+"name": "Sinful Dice",
+"lvl": 6,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0046
+]
+},
+{
+"id": "EXCEEDINGLY_RARE_ENDER_ARTIFACT_UPGRADER",
+"name": "Exceedingly Rare Ender Artifact Upgrade",
+"lvl": 6,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0003
+]
+},
+{
+"id": "PET_SKIN_ENDERMAN_SLAYER",
+"name": "Void Conqueror Enderman Skin",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0018
+]
+},
+{
+"id": "ETHERWARP_MERGER",
+"name": "Etherwarp Merger",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0042
+]
+},
+{
+"id": "JUDGEMENT_CORE",
+"name": "Judgement Core",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0006
+]
+},
+{
+"id": "ENCHANT_RUNE;1",
+"name": "Enchant Rune",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0005
+]
+},
+{
+"id": "ENCHANTMENT_ENDER_SLAYER_7",
+"name": "Enchanted Book Ender Slayer VII",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0001
+]
+}
+]
+},
+"blaze": {
+"cost": [
+10000,
+25000,
+60000,
+150000
+],
+"drops": [
+{
+"id": "DERELICT_ASHE",
+"name": "Derelict Ashe",
+"lvl": 0,
+"qty": [
+7.0,
+17.0,
+70.0,
+132.5
+],
+"chance": [
+1.0,
+1.0,
+1.0,
+1.0
+]
+},
+{
+"id": "ENCHANTED_BLAZE_POWDER",
+"name": "Enchanted Blaze Powder",
+"lvl": 0,
+"qty": [
+1.0,
+2.5,
+6.0,
+28.0
+],
+"chance": [
+0.2126,
+0.13171,
+0.125581,
+0.117269
+]
+},
+{
+"id": "LAVATEARS_RUNE;1",
+"name": "Lavatears Rune",
+"lvl": 1,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0107,
+0.0101
+]
+},
+{
+"id": "ARROW_BUNDLE_MAGMA",
+"name": "Bundle of Magma Arrows",
+"lvl": 1,
+"qty": [
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+0.0847,
+0.0811,
+0.0762
+]
+},
+{
+"id": "MANA_DISINTEGRATOR",
+"name": "Mana Disintegrator",
+"lvl": 2,
+"qty": [
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+0.0395,
+0.0378,
+0.0356
+]
+},
+{
+"id": "SCORCHED_BOOKS",
+"name": "Scorched Books",
+"lvl": 2,
+"qty": [
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+0.0226,
+0.0216,
+0.0203
+]
+},
+{
+"id": "KELVIN_INVERTER",
+"name": "Kelvin Inverter",
+"lvl": 3,
+"qty": [
+null,
+1.0,
+1.0,
+1.0
+],
+"chance": [
+null,
+0.0282,
+0.027,
+0.0254
+]
+},
+{
+"id": "BLAZE_ROD_DISTILLATE",
+"name": "Blaze Rod Distillate",
+"lvl": 3,
+"qty": [
+null,
+2.0,
+8.0,
+20.0
+],
+"chance": [
+null,
+0.0508,
+0.0486,
+0.0457
+]
+},
+{
+"id": "GLOWSTONE_DUST_DISTILLATE",
+"name": "Glowstone Distillate",
+"lvl": 3,
+"qty": [
+null,
+2.0,
+8.0,
+20.0
+],
+"chance": [
+null,
+0.0508,
+0.0486,
+0.0457
+]
+},
+{
+"id": "MAGMA_CREAM_DISTILLATE",
+"name": "Magma Cream Distillate",
+"lvl": 3,
+"qty": [
+null,
+2.0,
+8.0,
+20.0
+],
+"chance": [
+null,
+0.0508,
+0.0486,
+0.0457
+]
+},
+{
+"id": "NETHER_STALK_DISTILLATE",
+"name": "Nether Wart Distillate",
+"lvl": 3,
+"qty": [
+null,
+2.0,
+8.0,
+20.0
+],
+"chance": [
+null,
+0.0508,
+0.0486,
+0.0457
+]
+},
+{
+"id": "CRUDE_GABAGOOL_DISTILLATE",
+"name": "Gabagool Distillate",
+"lvl": 3,
+"qty": [
+null,
+2.0,
+8.0,
+20.0
+],
+"chance": [
+null,
+0.0282,
+0.027,
+0.0254
+]
+},
+{
+"id": "SCORCHED_POWER_CRYSTAL",
+"name": "Scorched Power Crystal",
+"lvl": 4,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0324,
+0.0305
+]
+},
+{
+"id": "ARCHFIEND_DICE",
+"name": "Archfiend Dice",
+"lvl": 4,
+"qty": [
+null,
+null,
+1.0,
+1.0
+],
+"chance": [
+null,
+null,
+0.0108,
+0.0102
+]
+},
+{
+"id": "ENCHANTMENT_FIRE_ASPECT_3",
+"name": "Enchanted Book Fire Aspect III",
+"lvl": 5,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0127
+]
+},
+{
+"id": "FIERY_BURST_RUNE;1",
+"name": "Fiery Burst Rune",
+"lvl": 5,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.002
+]
+},
+{
+"id": "FLAWED_OPAL_GEM",
+"name": "Flawed Opal Gemstone",
+"lvl": 5,
+"qty": [
+null,
+null,
+null,
+320.0
+],
+"chance": [
+null,
+null,
+null,
+0.0279
+]
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_REITERATE_1",
+"name": "Enchanted Book Duplex I",
+"lvl": 6,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0179
+]
+},
+{
+"id": "HIGH_CLASS_ARCHFIEND_DICE",
+"name": "High Class Archfiend Dice",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0025
+]
+},
+{
+"id": "WILSON_ENGINEERING_PLANS",
+"name": "Wilson's Engineering Plans",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0009
+]
+},
+{
+"id": "SUBZERO_INVERTER",
+"name": "Subzero Inverter",
+"lvl": 7,
+"qty": [
+null,
+null,
+null,
+1.0
+],
+"chance": [
+null,
+null,
+null,
+0.0009
+]
+}
+]
+}
+},
+"dungeons": {
+"F1": {
+"Obsidian": [
+{
+"id": "BONZO_MASK",
+"name": "Bonzo's Mask",
+"chance": 0.0493,
+"cost": 1250000
+},
+{
+"id": "BONZO_STAFF",
+"name": "Bonzo's Staff",
+"chance": 0.0098,
+"cost": 2250000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0299,
+"cost": 1250000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.1013,
+"cost": 250000
+},
+{
+"id": "NECROMANCER_BROOCH",
+"name": "Necromancer's Brooch",
+"chance": 0.2058,
+"cost": 250000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0294,
+"cost": 6000000
+},
+{
+"id": "RED_NOSE",
+"name": "Red Nose",
+"chance": 0.0608,
+"cost": 250000
+}
+]
+},
+"M1": {
+"Obsidian": [
+{
+"id": "BONZO_MASK",
+"name": "Bonzo's Mask",
+"chance": 0.0697,
+"cost": 1250000
+},
+{
+"id": "BONZO_STAFF",
+"name": "Bonzo's Staff",
+"chance": 0.0174,
+"cost": 2250000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0465,
+"cost": 1250000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.119,
+"cost": 250000
+},
+{
+"id": "NECROMANCER_BROOCH",
+"name": "Necromancer's Brooch",
+"chance": 0.2384,
+"cost": 250000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0677,
+"cost": 6000000
+},
+{
+"id": "RED_NOSE",
+"name": "Red Nose",
+"chance": 0.0726,
+"cost": 250000
+}
+]
+},
+"F2": {
+"Obsidian": [
+{
+"id": "STARRED_STONE_BLADE",
+"name": "Adaptive Blade",
+"chance": 0.0447,
+"cost": 1500000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.085,
+"cost": 1250000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.1666,
+"cost": 500000
+},
+{
+"id": "NECROMANCER_BROOCH",
+"name": "Necromancer's Brooch",
+"chance": 0.1771,
+"cost": 500000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0447,
+"cost": 6000000
+},
+{
+"id": "RED_SCARF",
+"name": "Red Scarf",
+"chance": 0.0319,
+"cost": 500000
+},
+{
+"id": "SCARF_STUDIES",
+"name": "Scarf's Studies",
+"chance": 0.1348,
+"cost": 500000
+}
+]
+},
+"M2": {
+"Obsidian": [
+{
+"id": "STARRED_STONE_BLADE",
+"name": "Adaptive Blade",
+"chance": 0.0524,
+"cost": 1500000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0899,
+"cost": 1250000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.158,
+"cost": 500000
+},
+{
+"id": "NECROMANCER_BROOCH",
+"name": "Necromancer's Brooch",
+"chance": 0.1946,
+"cost": 500000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0786,
+"cost": 6000000
+},
+{
+"id": "RED_SCARF",
+"name": "Red Scarf",
+"chance": 0.03,
+"cost": 500000
+},
+{
+"id": "SCARF_STUDIES",
+"name": "Scarf's Studies",
+"chance": 0.1282,
+"cost": 500000
+}
+]
+},
+"F3": {
+"Obsidian": [
+{
+"id": "ADAPTIVE_BOOTS",
+"name": "Adaptive Boots",
+"chance": 0.0241,
+"cost": 2000000
+},
+{
+"id": "ADAPTIVE_CHESTPLATE",
+"name": "Adaptive Chestplate",
+"chance": 0.006,
+"cost": 4000000
+},
+{
+"id": "ADAPTIVE_HELMET",
+"name": "Adaptive Helmet",
+"chance": 0.0241,
+"cost": 2500000
+},
+{
+"id": "ADAPTIVE_LEGGINGS",
+"name": "Adaptive Leggings",
+"chance": 0.0112,
+"cost": 3000000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0336,
+"cost": 1500000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.0598,
+"cost": 1000000
+},
+{
+"id": "NECROMANCER_BROOCH",
+"name": "Necromancer's Brooch",
+"chance": 0.0498,
+"cost": 1000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.024,
+"cost": 6000000
+},
+{
+"id": "SUSPICIOUS_VIAL",
+"name": "Suspicious Vial",
+"chance": 0.0598,
+"cost": 1000000
+}
+]
+},
+"M3": {
+"Obsidian": [
+{
+"id": "ADAPTIVE_BOOTS",
+"name": "Adaptive Boots",
+"chance": 0.0482,
+"cost": 2000000
+},
+{
+"id": "ADAPTIVE_CHESTPLATE",
+"name": "Adaptive Chestplate",
+"chance": 0.0198,
+"cost": 4000000
+},
+{
+"id": "ADAPTIVE_HELMET",
+"name": "Adaptive Helmet",
+"chance": 0.0482,
+"cost": 2500000
+},
+{
+"id": "ADAPTIVE_LEGGINGS",
+"name": "Adaptive Leggings",
+"chance": 0.0237,
+"cost": 3000000
+},
+{
+"id": "FIRST_MASTER_STAR",
+"name": "First Master Star",
+"chance": 0.0253,
+"cost": 5000000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0678,
+"cost": 1500000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.1182,
+"cost": 1000000
+},
+{
+"id": "NECROMANCER_BROOCH",
+"name": "Necromancer's Brooch",
+"chance": 0.1084,
+"cost": 1000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0863,
+"cost": 6000000
+},
+{
+"id": "SUSPICIOUS_VIAL",
+"name": "Suspicious Vial",
+"chance": 0.122,
+"cost": 1000000
+}
+]
+},
+"F4": {
+"Obsidian": [
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0692,
+"cost": 1500000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.119,
+"cost": 1000000
+},
+{
+"id": "SPIRIT;4",
+"name": "Spirit Pet",
+"chance": 0.0231,
+"cost": 5000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0361,
+"cost": 6000000
+},
+{
+"id": "SPIRIT_BONE",
+"name": "Spirit Bone",
+"chance": 0.0425,
+"cost": 1500000
+},
+{
+"id": "STARRED_THORNS_BOOTS",
+"name": "Spirit Boots",
+"chance": 0.012,
+"cost": 4000000
+},
+{
+"id": "BOSS_SPIRIT_BOW",
+"name": "Spirit Bow",
+"chance": 0.012,
+"cost": 4000000
+},
+{
+"id": "SPIRIT_DECOY",
+"name": "Spirit Stone",
+"chance": 0.048,
+"cost": 1500000
+},
+{
+"id": "SPIRIT_SWORD",
+"name": "Spirit Sword",
+"chance": 0.012,
+"cost": 3000000
+},
+{
+"id": "SPIRIT_WING",
+"name": "Spirit Wing",
+"chance": 0.0241,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_REND_1",
+"name": "Enchanted Book Rend I",
+"chance": 0.048,
+"cost": 1000000
+}
+]
+},
+"M4": {
+"Obsidian": [
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0728,
+"cost": 1500000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.1255,
+"cost": 1000000
+},
+{
+"id": "SPIRIT;4",
+"name": "Spirit Pet",
+"chance": 0.0248,
+"cost": 5000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0688,
+"cost": 6000000
+},
+{
+"id": "SECOND_MASTER_STAR",
+"name": "Second Master Star",
+"chance": 0.0421,
+"cost": 6000000
+},
+{
+"id": "SPIRIT_BONE",
+"name": "Spirit Bone",
+"chance": 0.0459,
+"cost": 1500000
+},
+{
+"id": "STARRED_THORNS_BOOTS",
+"name": "Spirit Boots",
+"chance": 0.0229,
+"cost": 4000000
+},
+{
+"id": "BOSS_SPIRIT_BOW",
+"name": "Spirit Bow",
+"chance": 0.0229,
+"cost": 4000000
+},
+{
+"id": "SPIRIT_DECOY",
+"name": "Spirit Stone",
+"chance": 0.0496,
+"cost": 1500000
+},
+{
+"id": "SPIRIT_SWORD",
+"name": "Spirit Sword",
+"chance": 0.0229,
+"cost": 3000000
+},
+{
+"id": "SPIRIT_WING",
+"name": "Spirit Wing",
+"chance": 0.0459,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_REND_1",
+"name": "Enchanted Book Rend I",
+"chance": 0.0501,
+"cost": 1000000
+}
+]
+},
+"F5": {
+"Obsidian": [
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0493,
+"cost": 1000000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.1208,
+"cost": 1000000
+},
+{
+"id": "LIVID_DAGGER",
+"name": "Livid Dagger",
+"chance": 0.0031,
+"cost": 7000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0186,
+"cost": 6000000
+},
+{
+"id": "SHADOW_ASSASSIN_BOOTS",
+"name": "Shadow Assassin Boots",
+"chance": 0.0657,
+"cost": 1500000
+},
+{
+"id": "SHADOW_ASSASSIN_HELMET",
+"name": "Shadow Assassin Helmet",
+"chance": 0.0403,
+"cost": 2000000
+},
+{
+"id": "SHADOW_ASSASSIN_LEGGINGS",
+"name": "Shadow Assassin Leggings",
+"chance": 0.0124,
+"cost": 4000000
+},
+{
+"id": "AOTE_STONE",
+"name": "Warped Stone",
+"chance": 0.0031,
+"cost": 5000000
+}
+],
+"Bedrock": [
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.1145,
+"cost": 2000000
+},
+{
+"id": "LAST_BREATH",
+"name": "Last Breath",
+"chance": 0.0029,
+"cost": 7000000
+},
+{
+"id": "LIVID_DAGGER",
+"name": "Livid Dagger",
+"chance": 0.0116,
+"cost": 7000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.03,
+"cost": 6000000
+},
+{
+"id": "SHADOW_ASSASSIN_BOOTS",
+"name": "Shadow Assassin Boots",
+"chance": 0.0867,
+"cost": 2000000
+},
+{
+"id": "SHADOW_ASSASSIN_CHESTPLATE",
+"name": "Shadow Assassin Chestplate",
+"chance": 0.0058,
+"cost": 6000000
+},
+{
+"id": "SHADOW_ASSASSIN_HELMET",
+"name": "Shadow Assassin Helmet",
+"chance": 0.0499,
+"cost": 2000000
+},
+{
+"id": "SHADOW_ASSASSIN_LEGGINGS",
+"name": "Shadow Assassin Leggings",
+"chance": 0.0231,
+"cost": 4000000
+},
+{
+"id": "SHADOW_FURY",
+"name": "Shadow Fury",
+"chance": 0.0029,
+"cost": 15000000
+},
+{
+"id": "AOTE_STONE",
+"name": "Warped Stone",
+"chance": 0.0092,
+"cost": 5000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_LAST_STAND_2",
+"name": "Enchanted Book Last Stand II",
+"chance": 0.2611,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISE_2",
+"name": "Enchanted Book Ultimate Wise II",
+"chance": 0.2343,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISDOM_2",
+"name": "Enchanted Book Wisdom II",
+"chance": 0.1504,
+"cost": 2000000
+}
+]
+},
+"M5": {
+"Obsidian": [
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0509,
+"cost": 1000000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.1206,
+"cost": 1000000
+},
+{
+"id": "LIVID_DAGGER",
+"name": "Livid Dagger",
+"chance": 0.003,
+"cost": 7000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0316,
+"cost": 6000000
+},
+{
+"id": "SHADOW_ASSASSIN_BOOTS",
+"name": "Shadow Assassin Boots",
+"chance": 0.0721,
+"cost": 1500000
+},
+{
+"id": "SHADOW_ASSASSIN_HELMET",
+"name": "Shadow Assassin Helmet",
+"chance": 0.0421,
+"cost": 2000000
+},
+{
+"id": "SHADOW_ASSASSIN_LEGGINGS",
+"name": "Shadow Assassin Leggings",
+"chance": 0.0195,
+"cost": 4000000
+},
+{
+"id": "THIRD_MASTER_STAR",
+"name": "Third Master Star",
+"chance": 0.003,
+"cost": 7000000
+},
+{
+"id": "AOTE_STONE",
+"name": "Warped Stone",
+"chance": 0.0053,
+"cost": 5000000
+}
+],
+"Bedrock": [
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.1367,
+"cost": 2000000
+},
+{
+"id": "LAST_BREATH",
+"name": "Last Breath",
+"chance": 0.0034,
+"cost": 7000000
+},
+{
+"id": "LIVID_DAGGER",
+"name": "Livid Dagger",
+"chance": 0.0221,
+"cost": 7000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0396,
+"cost": 6000000
+},
+{
+"id": "SHADOW_ASSASSIN_BOOTS",
+"name": "Shadow Assassin Boots",
+"chance": 0.101,
+"cost": 2000000
+},
+{
+"id": "SHADOW_ASSASSIN_CHESTPLATE",
+"name": "Shadow Assassin Chestplate",
+"chance": 0.0103,
+"cost": 6000000
+},
+{
+"id": "SHADOW_ASSASSIN_HELMET",
+"name": "Shadow Assassin Helmet",
+"chance": 0.0681,
+"cost": 2000000
+},
+{
+"id": "SHADOW_ASSASSIN_LEGGINGS",
+"name": "Shadow Assassin Leggings",
+"chance": 0.0289,
+"cost": 4000000
+},
+{
+"id": "SHADOW_FURY",
+"name": "Shadow Fury",
+"chance": 0.0034,
+"cost": 15000000
+},
+{
+"id": "THIRD_MASTER_STAR",
+"name": "Third Master Star",
+"chance": 0.011,
+"cost": 7000000
+},
+{
+"id": "AOTE_STONE",
+"name": "Warped Stone",
+"chance": 0.0126,
+"cost": 5000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_LAST_STAND_2",
+"name": "Enchanted Book Last Stand II",
+"chance": 0.2431,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISE_2",
+"name": "Enchanted Book Ultimate Wise II",
+"chance": 0.2106,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISDOM_2",
+"name": "Enchanted Book Wisdom II",
+"chance": 0.0873,
+"cost": 2000000
+}
+]
+},
+"F6": {
+"Obsidian": [
+{
+"id": "GOLEM_POPPY",
+"name": "Ancient Rose",
+"chance": 0.0604,
+"cost": 1000000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0398,
+"cost": 1000000
+},
+{
+"id": "GIANT_TOOTH",
+"name": "Giant Tooth",
+"chance": 0.0658,
+"cost": 1000000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.1696,
+"cost": 1000000
+},
+{
+"id": "NECROMANCER_LORD_BOOTS",
+"name": "Necromancer Lord Boots",
+"chance": 0.0242,
+"cost": 1500000
+},
+{
+"id": "NECROMANCER_LORD_HELMET",
+"name": "Necromancer Lord Helmet",
+"chance": 0.0144,
+"cost": 2000000
+},
+{
+"id": "NECROMANCER_LORD_LEGGINGS",
+"name": "Necromancer Lord Leggings",
+"chance": 0.0065,
+"cost": 4000000
+},
+{
+"id": "NECROMANCER_SWORD",
+"name": "Necromancer Sword",
+"chance": 0.0043,
+"cost": 10000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.013,
+"cost": 6000000
+},
+{
+"id": "SADAN_BROOCH",
+"name": "Sadan's Brooch",
+"chance": 0.0161,
+"cost": 1500000
+},
+{
+"id": "SUMMONING_RING",
+"name": "Summoning Ring",
+"chance": 0.0022,
+"cost": 12000000
+}
+],
+"Bedrock": [
+{
+"id": "GOLEM_POPPY",
+"name": "Ancient Rose",
+"chance": 0.1055,
+"cost": 2000000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.141,
+"cost": 2000000
+},
+{
+"id": "GIANT_TOOTH",
+"name": "Giant Tooth",
+"chance": 0.0368,
+"cost": 2000000
+},
+{
+"id": "GIANTS_SWORD",
+"name": "Giant's Sword",
+"chance": 0.0011,
+"cost": 25000000
+},
+{
+"id": "NECROMANCER_LORD_BOOTS",
+"name": "Necromancer Lord Boots",
+"chance": 0.0422,
+"cost": 2000000
+},
+{
+"id": "NECROMANCER_LORD_CHESTPLATE",
+"name": "Necromancer Lord Chestplate",
+"chance": 0.0029,
+"cost": 10000000
+},
+{
+"id": "NECROMANCER_LORD_HELMET",
+"name": "Necromancer Lord Helmet",
+"chance": 0.0257,
+"cost": 2000000
+},
+{
+"id": "NECROMANCER_LORD_LEGGINGS",
+"name": "Necromancer Lord Leggings",
+"chance": 0.0193,
+"cost": 4000000
+},
+{
+"id": "NECROMANCER_SWORD",
+"name": "Necromancer Sword",
+"chance": 0.0118,
+"cost": 10000000
+},
+{
+"id": "PRECURSOR_EYE",
+"name": "Precursor Eye",
+"chance": 0.0007,
+"cost": 30000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0642,
+"cost": 6000000
+},
+{
+"id": "SADAN_BROOCH",
+"name": "Sadan's Brooch",
+"chance": 0.026,
+"cost": 2000000
+},
+{
+"id": "SUMMONING_RING",
+"name": "Summoning Ring",
+"chance": 0.0036,
+"cost": 12000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_LAST_STAND_2",
+"name": "Enchanted Book Last Stand II",
+"chance": 0.2746,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISE_2",
+"name": "Enchanted Book Ultimate Wise II",
+"chance": 0.2413,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISDOM_2",
+"name": "Enchanted Book Wisdom II",
+"chance": 0.1684,
+"cost": 2000000
+}
+]
+},
+"M6": {
+"Obsidian": [
+{
+"id": "GOLEM_POPPY",
+"name": "Ancient Rose",
+"chance": 0.0642,
+"cost": 1000000
+},
+{
+"id": "FOURTH_MASTER_STAR",
+"name": "Fourth Master Star",
+"chance": 0.0064,
+"cost": 8000000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0393,
+"cost": 1000000
+},
+{
+"id": "GIANT_TOOTH",
+"name": "Giant Tooth",
+"chance": 0.065,
+"cost": 1000000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.1679,
+"cost": 1000000
+},
+{
+"id": "NECROMANCER_LORD_BOOTS",
+"name": "Necromancer Lord Boots",
+"chance": 0.0257,
+"cost": 1500000
+},
+{
+"id": "NECROMANCER_LORD_HELMET",
+"name": "Necromancer Lord Helmet",
+"chance": 0.0155,
+"cost": 2000000
+},
+{
+"id": "NECROMANCER_LORD_LEGGINGS",
+"name": "Necromancer Lord Leggings",
+"chance": 0.0116,
+"cost": 4000000
+},
+{
+"id": "NECROMANCER_SWORD",
+"name": "Necromancer Sword",
+"chance": 0.0069,
+"cost": 10000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0233,
+"cost": 6000000
+},
+{
+"id": "SADAN_BROOCH",
+"name": "Sadan's Brooch",
+"chance": 0.0171,
+"cost": 1500000
+},
+{
+"id": "SUMMONING_RING",
+"name": "Summoning Ring",
+"chance": 0.0021,
+"cost": 12000000
+}
+],
+"Bedrock": [
+{
+"id": "GOLEM_POPPY",
+"name": "Ancient Rose",
+"chance": 0.1051,
+"cost": 2000000
+},
+{
+"id": "FOURTH_MASTER_STAR",
+"name": "Fourth Master Star",
+"chance": 0.0063,
+"cost": 8000000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.1439,
+"cost": 2000000
+},
+{
+"id": "GIANT_TOOTH",
+"name": "Giant Tooth",
+"chance": 0.0372,
+"cost": 2000000
+},
+{
+"id": "GIANTS_SWORD",
+"name": "Giant's Sword",
+"chance": 0.0017,
+"cost": 25000000
+},
+{
+"id": "NECROMANCER_LORD_BOOTS",
+"name": "Necromancer Lord Boots",
+"chance": 0.0425,
+"cost": 2000000
+},
+{
+"id": "NECROMANCER_LORD_CHESTPLATE",
+"name": "Necromancer Lord Chestplate",
+"chance": 0.005,
+"cost": 10000000
+},
+{
+"id": "NECROMANCER_LORD_HELMET",
+"name": "Necromancer Lord Helmet",
+"chance": 0.0281,
+"cost": 2000000
+},
+{
+"id": "NECROMANCER_LORD_LEGGINGS",
+"name": "Necromancer Lord Leggings",
+"chance": 0.0204,
+"cost": 4000000
+},
+{
+"id": "NECROMANCER_SWORD",
+"name": "Necromancer Sword",
+"chance": 0.0126,
+"cost": 10000000
+},
+{
+"id": "PRECURSOR_EYE",
+"name": "Precursor Eye",
+"chance": 0.0007,
+"cost": 30000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0817,
+"cost": 6000000
+},
+{
+"id": "SADAN_BROOCH",
+"name": "Sadan's Brooch",
+"chance": 0.0284,
+"cost": 2000000
+},
+{
+"id": "SUMMONING_RING",
+"name": "Summoning Ring",
+"chance": 0.0063,
+"cost": 12000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_LAST_STAND_2",
+"name": "Enchanted Book Last Stand II",
+"chance": 0.2664,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISE_2",
+"name": "Enchanted Book Ultimate Wise II",
+"chance": 0.2341,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISDOM_2",
+"name": "Enchanted Book Wisdom II",
+"chance": 0.1633,
+"cost": 2000000
+}
+]
+},
+"F7": {
+"Obsidian": [
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.086,
+"cost": 1000000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.0638,
+"cost": 1000000
+},
+{
+"id": "PRECURSOR_GEAR",
+"name": "Precursor Gear",
+"chance": 0.1009,
+"cost": 1000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0063,
+"cost": 6000000
+},
+{
+"id": "WITHER_BLOOD",
+"name": "Wither Blood",
+"chance": 0.0332,
+"cost": 2500000
+},
+{
+"id": "WITHER_BOOTS",
+"name": "Wither Boots",
+"chance": 0.086,
+"cost": 2500000
+},
+{
+"id": "WITHER_CATALYST",
+"name": "Wither Catalyst",
+"chance": 0.0886,
+"cost": 1000000
+},
+{
+"id": "WITHER_CHESTPLATE",
+"name": "Wither Chestplate",
+"chance": 0.0031,
+"cost": 10000000
+},
+{
+"id": "WITHER_CLOAK",
+"name": "Wither Cloak Sword",
+"chance": 0.0303,
+"cost": 4500000
+},
+{
+"id": "WITHER_HELMET",
+"name": "Wither Helmet",
+"chance": 0.0332,
+"cost": 4000000
+},
+{
+"id": "WITHER_LEGGINGS",
+"name": "Wither Leggings",
+"chance": 0.0125,
+"cost": 6000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_ONE_FOR_ALL_1",
+"name": "Enchanted Book One For All I",
+"chance": 0.0031,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_SOUL_EATER_1",
+"name": "Enchanted Book Soul Eater I",
+"chance": 0.0837,
+"cost": 1000000
+}
+],
+"Bedrock": [
+{
+"id": "AUTO_RECOMBOBULATOR",
+"name": "Auto Recombobulator",
+"chance": 0.0053,
+"cost": 10000000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0527,
+"cost": 2000000
+},
+{
+"id": "GOLDOR_THE_FISH",
+"name": "Goldor the Fish",
+"chance": 0.0032,
+"cost": 2000000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.1037,
+"cost": 2000000
+},
+{
+"id": "IMPLOSION_SCROLL",
+"name": "Implosion",
+"chance": 0.0013,
+"cost": 50000000
+},
+{
+"id": "MAXOR_THE_FISH",
+"name": "Maxor the Fish",
+"chance": 0.0032,
+"cost": 2000000
+},
+{
+"id": "NECRON_HANDLE",
+"name": "Necron's Handle",
+"chance": 0.001,
+"cost": 100000000
+},
+{
+"id": "PRECURSOR_GEAR",
+"name": "Precursor Gear",
+"chance": 0.157,
+"cost": 2000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0429,
+"cost": 6000000
+},
+{
+"id": "SHADOW_WARP_SCROLL",
+"name": "Shadow Warp",
+"chance": 0.0013,
+"cost": 50000000
+},
+{
+"id": "STORM_THE_FISH",
+"name": "Storm the Fish",
+"chance": 0.0032,
+"cost": 2000000
+},
+{
+"id": "WITHER_BLOOD",
+"name": "Wither Blood",
+"chance": 0.0595,
+"cost": 3000000
+},
+{
+"id": "WITHER_BOOTS",
+"name": "Wither Boots",
+"chance": 0.063,
+"cost": 2500000
+},
+{
+"id": "WITHER_CATALYST",
+"name": "Wither Catalyst",
+"chance": 0.0527,
+"cost": 2000000
+},
+{
+"id": "WITHER_CHESTPLATE",
+"name": "Wither Chestplate",
+"chance": 0.0053,
+"cost": 10000000
+},
+{
+"id": "WITHER_CLOAK",
+"name": "Wither Cloak Sword",
+"chance": 0.0544,
+"cost": 4500000
+},
+{
+"id": "WITHER_HELMET",
+"name": "Wither Helmet",
+"chance": 0.0595,
+"cost": 4000000
+},
+{
+"id": "WITHER_LEGGINGS",
+"name": "Wither Leggings",
+"chance": 0.0343,
+"cost": 6000000
+},
+{
+"id": "WITHER_SHIELD_SCROLL",
+"name": "Wither Shield",
+"chance": 0.0013,
+"cost": 50000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_LAST_STAND_2",
+"name": "Enchanted Book Last Stand II",
+"chance": 0.1641,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_ONE_FOR_ALL_1",
+"name": "Enchanted Book One For All I",
+"chance": 0.0059,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_SOUL_EATER_1",
+"name": "Enchanted Book Soul Eater I",
+"chance": 0.0991,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISE_2",
+"name": "Enchanted Book Ultimate Wise II",
+"chance": 0.111,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISDOM_2",
+"name": "Enchanted Book Wisdom II",
+"chance": 0.111,
+"cost": 2000000
+}
+]
+},
+"M7": {
+"Obsidian": [
+{
+"id": "FIFTH_MASTER_STAR",
+"name": "Fifth Master Star",
+"chance": 0.0032,
+"cost": 9000000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0892,
+"cost": 1000000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.065,
+"cost": 1000000
+},
+{
+"id": "PRECURSOR_GEAR",
+"name": "Precursor Gear",
+"chance": 0.1053,
+"cost": 1000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0113,
+"cost": 6000000
+},
+{
+"id": "WITHER_BLOOD",
+"name": "Wither Blood",
+"chance": 0.0384,
+"cost": 2500000
+},
+{
+"id": "WITHER_BOOTS",
+"name": "Wither Boots",
+"chance": 0.0903,
+"cost": 2500000
+},
+{
+"id": "WITHER_CATALYST",
+"name": "Wither Catalyst",
+"chance": 0.0903,
+"cost": 1000000
+},
+{
+"id": "WITHER_CHESTPLATE",
+"name": "Wither Chestplate",
+"chance": 0.0032,
+"cost": 10000000
+},
+{
+"id": "WITHER_CLOAK",
+"name": "Wither Cloak Sword",
+"chance": 0.0365,
+"cost": 4500000
+},
+{
+"id": "WITHER_HELMET",
+"name": "Wither Helmet",
+"chance": 0.0384,
+"cost": 4000000
+},
+{
+"id": "WITHER_LEGGINGS",
+"name": "Wither Leggings",
+"chance": 0.0226,
+"cost": 6000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_ONE_FOR_ALL_1",
+"name": "Enchanted Book One For All I",
+"chance": 0.005,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_SOUL_EATER_1",
+"name": "Enchanted Book Soul Eater I",
+"chance": 0.0892,
+"cost": 1000000
+}
+],
+"Bedrock": [
+{
+"id": "AUTO_RECOMBOBULATOR",
+"name": "Auto Recombobulator",
+"chance": 0.0089,
+"cost": 10000000
+},
+{
+"id": "DARK_CLAYMORE",
+"name": "Dark Claymore",
+"chance": 0.0008,
+"cost": 150000000
+},
+{
+"id": "FIFTH_MASTER_STAR",
+"name": "Fifth Master Star",
+"chance": 0.0033,
+"cost": 9000000
+},
+{
+"id": "FUMING_POTATO_BOOK",
+"name": "Fuming Potato Book",
+"chance": 0.0585,
+"cost": 2000000
+},
+{
+"id": "GOLDOR_THE_FISH",
+"name": "Goldor the Fish",
+"chance": 0.003,
+"cost": 2000000
+},
+{
+"id": "HOT_POTATO_BOOK",
+"name": "Hot Potato Book",
+"chance": 0.1157,
+"cost": 2000000
+},
+{
+"id": "IMPLOSION_SCROLL",
+"name": "Implosion",
+"chance": 0.0018,
+"cost": 50000000
+},
+{
+"id": "MAXOR_THE_FISH",
+"name": "Maxor the Fish",
+"chance": 0.003,
+"cost": 2000000
+},
+{
+"id": "NECRON_HANDLE",
+"name": "Necron's Handle",
+"chance": 0.0013,
+"cost": 100000000
+},
+{
+"id": "DYE_NECRON",
+"name": "Necron Dye",
+"chance": 0.0004,
+"cost": 10000000
+},
+{
+"id": "PRECURSOR_GEAR",
+"name": "Precursor Gear",
+"chance": 0.1715,
+"cost": 2000000
+},
+{
+"id": "RECOMBOBULATOR_3000",
+"name": "Recombobulator 3000",
+"chance": 0.0673,
+"cost": 6000000
+},
+{
+"id": "SHADOW_WARP_SCROLL",
+"name": "Shadow Warp",
+"chance": 0.0018,
+"cost": 50000000
+},
+{
+"id": "STORM_THE_FISH",
+"name": "Storm the Fish",
+"chance": 0.003,
+"cost": 2000000
+},
+{
+"id": "WITHER_BLOOD",
+"name": "Wither Blood",
+"chance": 0.0673,
+"cost": 3000000
+},
+{
+"id": "WITHER_BOOTS",
+"name": "Wither Boots",
+"chance": 0.07,
+"cost": 2500000
+},
+{
+"id": "WITHER_CATALYST",
+"name": "Wither Catalyst",
+"chance": 0.0588,
+"cost": 2000000
+},
+{
+"id": "WITHER_CHESTPLATE",
+"name": "Wither Chestplate",
+"chance": 0.0095,
+"cost": 10000000
+},
+{
+"id": "WITHER_CLOAK",
+"name": "Wither Cloak Sword",
+"chance": 0.0673,
+"cost": 4500000
+},
+{
+"id": "WITHER_HELMET",
+"name": "Wither Helmet",
+"chance": 0.0673,
+"cost": 4000000
+},
+{
+"id": "WITHER_LEGGINGS",
+"name": "Wither Leggings",
+"chance": 0.0431,
+"cost": 6000000
+},
+{
+"id": "WITHER_SHIELD_SCROLL",
+"name": "Wither Shield",
+"chance": 0.0018,
+"cost": 50000000
+},
+{
+"id": "ENCHANTMENT_THUNDERLORD_7",
+"name": "Enchanted Book Thunderlord VII",
+"chance": 0.003,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_LAST_STAND_2",
+"name": "Enchanted Book Last Stand II",
+"chance": 0.1453,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_ONE_FOR_ALL_1",
+"name": "Enchanted Book One For All I",
+"chance": 0.01,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_SOUL_EATER_1",
+"name": "Enchanted Book Soul Eater I",
+"chance": 0.1152,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISE_2",
+"name": "Enchanted Book Ultimate Wise II",
+"chance": 0.1172,
+"cost": 2000000
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_WISDOM_2",
+"name": "Enchanted Book Wisdom II",
+"chance": 0.0741,
+"cost": 2000000
+}
+]
+}
+},
+"kuudra": {
+"basic": {
+"key": "KUUDRA_TIER_KEY",
+"drops": [
+{
+"armor": true,
+"chance": 0.0431,
+"slot": 1
+},
+{
+"id": "RUNIC_STAFF",
+"name": "Aurora Staff",
+"qty": 1,
+"slot": 1,
+"chance": 0.0105
+},
+{
+"id": "HOLLOW_WAND",
+"name": "Hollow Wand",
+"qty": 1,
+"slot": 1,
+"chance": 0.0105
+},
+{
+"id": "MOLTEN_NECKLACE",
+"name": "Molten Necklace",
+"qty": 1,
+"slot": 1,
+"chance": 0.012
+},
+{
+"id": "MOLTEN_CLOAK",
+"name": "Molten Cloak",
+"qty": 1,
+"slot": 1,
+"chance": 0.012
+},
+{
+"id": "MOLTEN_BELT",
+"name": "Molten Belt",
+"qty": 1,
+"slot": 1,
+"chance": 0.012
+},
+{
+"id": "MOLTEN_BRACELET",
+"name": "Molten Bracelet",
+"qty": 1,
+"slot": 1,
+"chance": 0.012
+},
+{
+"id": "DYE_TENTACLE",
+"name": "Tentacle Dye",
+"qty": 1,
+"slot": 1,
+"chance": 1e-05
+},
+{
+"id": "WHEEL_OF_FATE",
+"name": "Wheel of Fate",
+"qty": 1,
+"slot": 2,
+"chance": 0.0053
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_FATAL_TEMPO_1",
+"name": "Enchanted Book Fatal Tempo I",
+"qty": 1,
+"slot": 2,
+"chance": 0.0003
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_INFERNO_1",
+"name": "Enchanted Book Inferno I",
+"qty": 1,
+"slot": 2,
+"chance": 0.0003
+},
+{
+"id": "ENCHANTMENT_FEROCIOUS_MANA_1",
+"name": "Enchanted Book Ferocious Mana I",
+"qty": 1,
+"slot": 2,
+"chance": 0.2187
+},
+{
+"id": "ENCHANTMENT_HARDENED_MANA_1",
+"name": "Enchanted Book Hardened Mana I",
+"qty": 1,
+"slot": 2,
+"chance": 0.2187
+},
+{
+"id": "ENCHANTMENT_MANA_VAMPIRE_1",
+"name": "Enchanted Book Mana Vampire I",
+"qty": 1,
+"slot": 2,
+"chance": 0.2187
+},
+{
+"id": "ENCHANTMENT_STRONG_MANA_1",
+"name": "Enchanted Book Strong Mana I",
+"qty": 1,
+"slot": 2,
+"chance": 0.2187
+},
+{
+"id": "SHARD_BEZAL",
+"name": "Bezal Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0676
+},
+{
+"id": "SHARD_BEZAL",
+"name": "Bezal Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.1193
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 1.0,
+"slot": 3,
+"chance": 1.0
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 80.0,
+"slot": 4,
+"chance": 1.0
+},
+{
+"id": "SHARD_KRAKEN",
+"name": "Kraken Shard",
+"qty": 1.0,
+"slot": 5,
+"chance": 1.0
+}
+]
+},
+"hot": {
+"key": "KUUDRA_HOT_TIER_KEY",
+"drops": [
+{
+"armor": true,
+"chance": 0.0406,
+"slot": 1
+},
+{
+"id": "RUNIC_STAFF",
+"name": "Aurora Staff",
+"qty": 1,
+"slot": 1,
+"chance": 0.0099
+},
+{
+"id": "HOLLOW_WAND",
+"name": "Hollow Wand",
+"qty": 1,
+"slot": 1,
+"chance": 0.0099
+},
+{
+"id": "MOLTEN_NECKLACE",
+"name": "Molten Necklace",
+"qty": 1,
+"slot": 1,
+"chance": 0.0127
+},
+{
+"id": "MOLTEN_CLOAK",
+"name": "Molten Cloak",
+"qty": 1,
+"slot": 1,
+"chance": 0.0127
+},
+{
+"id": "MOLTEN_BELT",
+"name": "Molten Belt",
+"qty": 1,
+"slot": 1,
+"chance": 0.0127
+},
+{
+"id": "MOLTEN_BRACELET",
+"name": "Molten Bracelet",
+"qty": 1,
+"slot": 1,
+"chance": 0.0127
+},
+{
+"id": "DYE_TENTACLE",
+"name": "Tentacle Dye",
+"qty": 1,
+"slot": 1,
+"chance": 1.3e-05
+},
+{
+"id": "WHEEL_OF_FATE",
+"name": "Wheel of Fate",
+"qty": 1,
+"slot": 2,
+"chance": 0.0119
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_FATAL_TEMPO_1",
+"name": "Enchanted Book Fatal Tempo I",
+"qty": 1,
+"slot": 2,
+"chance": 0.0013
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_INFERNO_1",
+"name": "Enchanted Book Inferno I",
+"qty": 1,
+"slot": 2,
+"chance": 0.0013
+},
+{
+"id": "ENCHANTMENT_FEROCIOUS_MANA_2",
+"name": "Enchanted Book Ferocious Mana II",
+"qty": 1,
+"slot": 2,
+"chance": 0.1971
+},
+{
+"id": "ENCHANTMENT_HARDENED_MANA_2",
+"name": "Enchanted Book Hardened Mana II",
+"qty": 1,
+"slot": 2,
+"chance": 0.1971
+},
+{
+"id": "ENCHANTMENT_MANA_VAMPIRE_2",
+"name": "Enchanted Book Mana Vampire II",
+"qty": 1,
+"slot": 2,
+"chance": 0.1971
+},
+{
+"id": "ENCHANTMENT_STRONG_MANA_2",
+"name": "Enchanted Book Strong Mana II",
+"qty": 1,
+"slot": 2,
+"chance": 0.1971
+},
+{
+"id": "SHARD_BEZAL",
+"name": "Bezal Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0636
+},
+{
+"id": "SHARD_BEZAL",
+"name": "Bezal Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.1075
+},
+{
+"id": "SHARD_MAGMA_SLUG",
+"name": "Magma Slug Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.053
+},
+{
+"id": "SHARD_MAGMA_SLUG",
+"name": "Magma Slug Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0896
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 1.0,
+"slot": 4,
+"chance": 1.0
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 200.0,
+"slot": 3,
+"chance": 1.0
+},
+{
+"id": "SHARD_KRAKEN",
+"name": "Kraken Shard",
+"qty": 1.0,
+"slot": 5,
+"chance": 1.0
+}
+]
+},
+"burning": {
+"key": "KUUDRA_BURNING_TIER_KEY",
+"drops": [
+{
+"armor": true,
+"chance": 0.0343,
+"slot": 1
+},
+{
+"id": "RUNIC_STAFF",
+"name": "Aurora Staff",
+"qty": 1,
+"slot": 1,
+"chance": 0.0084
+},
+{
+"id": "HOLLOW_WAND",
+"name": "Hollow Wand",
+"qty": 1,
+"slot": 1,
+"chance": 0.0084
+},
+{
+"id": "BURNING_KUUDRA_CORE",
+"name": "Burning Kuudra Core",
+"qty": 1,
+"slot": 1,
+"chance": 0.0012
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 500.0,
+"slot": 2,
+"chance": 0.0782
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 5.0,
+"slot": 2,
+"chance": 0.0782
+},
+{
+"id": "MANDRAA",
+"name": "Mandraa",
+"qty": 1,
+"slot": 1,
+"chance": 0.0096
+},
+{
+"id": "MOLTEN_NECKLACE",
+"name": "Molten Necklace",
+"qty": 1,
+"slot": 1,
+"chance": 0.0119
+},
+{
+"id": "MOLTEN_CLOAK",
+"name": "Molten Cloak",
+"qty": 1,
+"slot": 1,
+"chance": 0.0119
+},
+{
+"id": "MOLTEN_BELT",
+"name": "Molten Belt",
+"qty": 1,
+"slot": 1,
+"chance": 0.0119
+},
+{
+"id": "MOLTEN_BRACELET",
+"name": "Molten Bracelet",
+"qty": 1,
+"slot": 1,
+"chance": 0.0119
+},
+{
+"id": "DYE_TENTACLE",
+"name": "Tentacle Dye",
+"qty": 1,
+"slot": 1,
+"chance": 1.7e-05
+},
+{
+"id": "WHEEL_OF_FATE",
+"name": "Wheel of Fate",
+"qty": 1,
+"slot": 2,
+"chance": 0.0125
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_FATAL_TEMPO_1",
+"name": "Enchanted Book Fatal Tempo I",
+"qty": 1,
+"slot": 2,
+"chance": 0.0016
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_INFERNO_1",
+"name": "Enchanted Book Inferno I",
+"qty": 1,
+"slot": 2,
+"chance": 0.0016
+},
+{
+"id": "ENCHANTMENT_FEROCIOUS_MANA_3",
+"name": "Enchanted Book Ferocious Mana III",
+"qty": 1,
+"slot": 2,
+"chance": 0.1281
+},
+{
+"id": "ENCHANTMENT_HARDENED_MANA_3",
+"name": "Enchanted Book Hardened Mana III",
+"qty": 1,
+"slot": 2,
+"chance": 0.1281
+},
+{
+"id": "ENCHANTMENT_MANA_VAMPIRE_3",
+"name": "Enchanted Book Mana Vampire III",
+"qty": 1,
+"slot": 2,
+"chance": 0.1281
+},
+{
+"id": "ENCHANTMENT_STRONG_MANA_3",
+"name": "Enchanted Book Strong Mana III",
+"qty": 1,
+"slot": 2,
+"chance": 0.1281
+},
+{
+"id": "SHARD_BEZAL",
+"name": "Bezal Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0538
+},
+{
+"id": "SHARD_BEZAL",
+"name": "Bezal Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0704
+},
+{
+"id": "SHARD_MAGMA_SLUG",
+"name": "Magma Slug Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0448
+},
+{
+"id": "SHARD_MAGMA_SLUG",
+"name": "Magma Slug Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0587
+},
+{
+"id": "SHARD_KADA_KNIGHT",
+"name": "Kada Knight Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0364
+},
+{
+"id": "SHARD_KADA_KNIGHT",
+"name": "Kada Knight Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0477
+},
+{
+"id": "SHARD_WITHER_SPECTER",
+"name": "Wither Specter Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0364
+},
+{
+"id": "SHARD_WITHER_SPECTER",
+"name": "Wither Specter Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0477
+},
+{
+"id": "SHARD_MATCHO",
+"name": "Matcho Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0364
+},
+{
+"id": "SHARD_MATCHO",
+"name": "Matcho Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0477
+},
+{
+"id": "SHARD_LAVA_FLAME",
+"name": "Lava Flame Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0299
+},
+{
+"id": "SHARD_LAVA_FLAME",
+"name": "Lava Flame Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0391
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 2.0,
+"slot": 3,
+"chance": 1.0
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 400.0,
+"slot": 4,
+"chance": 1.0
+},
+{
+"id": "SHARD_KRAKEN",
+"name": "Kraken Shard",
+"qty": 1.0,
+"slot": 5,
+"chance": 1.0
+}
+]
+},
+"fiery": {
+"key": "KUUDRA_FIERY_TIER_KEY",
+"drops": [
+{
+"armor": true,
+"chance": 0.0309,
+"slot": 1
+},
+{
+"id": "RUNIC_STAFF",
+"name": "Aurora Staff",
+"qty": 1,
+"slot": 1,
+"chance": 0.0075
+},
+{
+"id": "HOLLOW_WAND",
+"name": "Hollow Wand",
+"qty": 1,
+"slot": 1,
+"chance": 0.0075
+},
+{
+"id": "BURNING_KUUDRA_CORE",
+"name": "Burning Kuudra Core",
+"qty": 1,
+"slot": 1,
+"chance": 0.0032
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 500.0,
+"slot": 2,
+"chance": 0.0635
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 2500.0,
+"slot": 2,
+"chance": 0.0063
+},
+{
+"id": "HEAVY_PEARL",
+"name": "Heavy Pearl",
+"qty": 3.0,
+"slot": 2,
+"chance": 0.0635
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 5.0,
+"slot": 2,
+"chance": 0.0635
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 25.0,
+"slot": 2,
+"chance": 0.0063
+},
+{
+"id": "MANDRAA",
+"name": "Mandraa",
+"qty": 1,
+"slot": 1,
+"chance": 0.0108
+},
+{
+"id": "MOLTEN_NECKLACE",
+"name": "Molten Necklace",
+"qty": 1,
+"slot": 1,
+"chance": 0.0118
+},
+{
+"id": "MOLTEN_CLOAK",
+"name": "Molten Cloak",
+"qty": 1,
+"slot": 1,
+"chance": 0.0118
+},
+{
+"id": "MOLTEN_BELT",
+"name": "Molten Belt",
+"qty": 1,
+"slot": 1,
+"chance": 0.0118
+},
+{
+"id": "MOLTEN_BRACELET",
+"name": "Molten Bracelet",
+"qty": 1,
+"slot": 1,
+"chance": 0.0118
+},
+{
+"id": "DYE_TENTACLE",
+"name": "Tentacle Dye",
+"qty": 1,
+"slot": 1,
+"chance": 2.5e-05
+},
+{
+"id": "WHEEL_OF_FATE",
+"name": "Wheel of Fate",
+"qty": 1,
+"slot": 2,
+"chance": 0.014
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_FATAL_TEMPO_1",
+"name": "Enchanted Book Fatal Tempo I",
+"qty": 1,
+"slot": 2,
+"chance": 0.0018
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_INFERNO_1",
+"name": "Enchanted Book Inferno I",
+"qty": 1,
+"slot": 2,
+"chance": 0.0018
+},
+{
+"id": "ENCHANTMENT_FEROCIOUS_MANA_4",
+"name": "Enchanted Book Ferocious Mana IV",
+"qty": 1,
+"slot": 2,
+"chance": 0.1047
+},
+{
+"id": "ENCHANTMENT_HARDENED_MANA_4",
+"name": "Enchanted Book Hardened Mana IV",
+"qty": 1,
+"slot": 2,
+"chance": 0.1047
+},
+{
+"id": "ENCHANTMENT_MANA_VAMPIRE_4",
+"name": "Enchanted Book Mana Vampire IV",
+"qty": 1,
+"slot": 2,
+"chance": 0.1047
+},
+{
+"id": "ENCHANTMENT_STRONG_MANA_4",
+"name": "Enchanted Book Strong Mana IV",
+"qty": 1,
+"slot": 2,
+"chance": 0.1047
+},
+{
+"id": "SHARD_BEZAL",
+"name": "Bezal Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0484
+},
+{
+"id": "SHARD_BEZAL",
+"name": "Bezal Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0571
+},
+{
+"id": "SHARD_MAGMA_SLUG",
+"name": "Magma Slug Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0403
+},
+{
+"id": "SHARD_MAGMA_SLUG",
+"name": "Magma Slug Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0476
+},
+{
+"id": "SHARD_KADA_KNIGHT",
+"name": "Kada Knight Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0328
+},
+{
+"id": "SHARD_KADA_KNIGHT",
+"name": "Kada Knight Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0387
+},
+{
+"id": "SHARD_WITHER_SPECTER",
+"name": "Wither Specter Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0328
+},
+{
+"id": "SHARD_WITHER_SPECTER",
+"name": "Wither Specter Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0387
+},
+{
+"id": "SHARD_MATCHO",
+"name": "Matcho Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0328
+},
+{
+"id": "SHARD_MATCHO",
+"name": "Matcho Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0387
+},
+{
+"id": "SHARD_LAVA_FLAME",
+"name": "Lava Flame Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0269
+},
+{
+"id": "SHARD_LAVA_FLAME",
+"name": "Lava Flame Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0317
+},
+{
+"id": "SHARD_FIRE_EEL",
+"name": "Fire Eel Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0204
+},
+{
+"id": "SHARD_FIRE_EEL",
+"name": "Fire Eel Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0241
+},
+{
+"id": "SHARD_FLARE",
+"name": "Flare Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0204
+},
+{
+"id": "SHARD_FLARE",
+"name": "Flare Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0241
+},
+{
+"id": "SHARD_BARBARIAN_DUKE_X",
+"name": "Barbarian Duke X Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0204
+},
+{
+"id": "SHARD_BARBARIAN_DUKE_X",
+"name": "Barbarian Duke X Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0241
+},
+{
+"id": "SHARD_HELLWISP",
+"name": "Hellwisp Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0167
+},
+{
+"id": "SHARD_HELLWISP",
+"name": "Hellwisp Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0197
+},
+{
+"id": "SHARD_XYZ",
+"name": "XYZ Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0134
+},
+{
+"id": "SHARD_XYZ",
+"name": "XYZ Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0159
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 800.0,
+"slot": 3,
+"chance": 1.0
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 2.0,
+"slot": 4,
+"chance": 1.0
+},
+{
+"id": "SHARD_KRAKEN",
+"name": "Kraken Shard",
+"qty": 1.25,
+"slot": 5,
+"chance": 1.0
+}
+]
+},
+"infernal": {
+"key": "KUUDRA_INFERNAL_TIER_KEY",
+"drops": [
+{
+"armor": true,
+"chance": 0.0295,
+"slot": 1
+},
+{
+"id": "RUNIC_STAFF",
+"name": "Aurora Staff",
+"qty": 1,
+"slot": 1,
+"chance": 0.0072
+},
+{
+"id": "HOLLOW_WAND",
+"name": "Hollow Wand",
+"qty": 1,
+"slot": 1,
+"chance": 0.0072
+},
+{
+"id": "BURNING_KUUDRA_CORE",
+"name": "Burning Kuudra Core",
+"qty": 1,
+"slot": 1,
+"chance": 0.0051
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 500.0,
+"slot": 2,
+"chance": 0.0589
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 2500.0,
+"slot": 2,
+"chance": 0.0059
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 10000.0,
+"slot": 2,
+"chance": 0.0006
+},
+{
+"id": "HELLSTORM_STAFF",
+"name": "Hellstorm Wand",
+"qty": 1,
+"slot": 1,
+"chance": 0.001
+},
+{
+"id": "HEAVY_PEARL",
+"name": "Heavy Pearl",
+"qty": 3.0,
+"slot": 2,
+"chance": 0.0589
+},
+{
+"id": "HEAVY_PEARL",
+"name": "Heavy Pearl",
+"qty": 10.0,
+"slot": 2,
+"chance": 0.0059
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 5.0,
+"slot": 2,
+"chance": 0.0589
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 25.0,
+"slot": 2,
+"chance": 0.0589
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 100.0,
+"slot": 2,
+"chance": 0.0589
+},
+{
+"id": "MANDRAA",
+"name": "Mandraa",
+"qty": 1,
+"slot": 1,
+"chance": 0.0123
+},
+{
+"id": "MOLTEN_NECKLACE",
+"name": "Molten Necklace",
+"qty": 1,
+"slot": 1,
+"chance": 0.0123
+},
+{
+"id": "MOLTEN_CLOAK",
+"name": "Molten Cloak",
+"qty": 1,
+"slot": 1,
+"chance": 0.0123
+},
+{
+"id": "MOLTEN_BELT",
+"name": "Molten Belt",
+"qty": 1,
+"slot": 1,
+"chance": 0.0123
+},
+{
+"id": "MOLTEN_BRACELET",
+"name": "Molten Bracelet",
+"qty": 1,
+"slot": 1,
+"chance": 0.0123
+},
+{
+"id": "DYE_TENTACLE",
+"name": "Tentacle Dye",
+"qty": 1,
+"slot": 1,
+"chance": 5e-05
+},
+{
+"id": "TORMENTOR",
+"name": "Tormentor",
+"qty": 1,
+"slot": 1,
+"chance": 0.001
+},
+{
+"id": "WHEEL_OF_FATE",
+"name": "Wheel of Fate",
+"qty": 1,
+"slot": 2,
+"chance": 0.0165
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_FATAL_TEMPO_1",
+"name": "Enchanted Book Fatal Tempo I",
+"qty": 1,
+"slot": 2,
+"chance": 0.0022
+},
+{
+"id": "ENCHANTMENT_ULTIMATE_INFERNO_1",
+"name": "Enchanted Book Inferno I",
+"qty": 1,
+"slot": 2,
+"chance": 0.0022
+},
+{
+"id": "ENCHANTMENT_FEROCIOUS_MANA_5",
+"name": "Enchanted Book Ferocious Mana V",
+"qty": 1,
+"slot": 2,
+"chance": 0.0972
+},
+{
+"id": "ENCHANTMENT_HARDENED_MANA_5",
+"name": "Enchanted Book Hardened Mana V",
+"qty": 1,
+"slot": 2,
+"chance": 0.0972
+},
+{
+"id": "ENCHANTMENT_MANA_VAMPIRE_5",
+"name": "Enchanted Book Mana Vampire V",
+"qty": 1,
+"slot": 2,
+"chance": 0.0972
+},
+{
+"id": "ENCHANTMENT_STRONG_MANA_5",
+"name": "Enchanted Book Strong Mana V",
+"qty": 1,
+"slot": 2,
+"chance": 0.0972
+},
+{
+"id": "SHARD_BEZAL",
+"name": "Bezal Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0463
+},
+{
+"id": "SHARD_BEZAL",
+"name": "Bezal Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.053
+},
+{
+"id": "SHARD_MAGMA_SLUG",
+"name": "Magma Slug Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0386
+},
+{
+"id": "SHARD_MAGMA_SLUG",
+"name": "Magma Slug Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.053
+},
+{
+"id": "SHARD_KADA_KNIGHT",
+"name": "Kada Knight Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0314
+},
+{
+"id": "SHARD_KADA_KNIGHT",
+"name": "Kada Knight Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0359
+},
+{
+"id": "SHARD_WITHER_SPECTER",
+"name": "Wither Specter Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0314
+},
+{
+"id": "SHARD_WITHER_SPECTER",
+"name": "Wither Specter Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0359
+},
+{
+"id": "SHARD_MATCHO",
+"name": "Matcho Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0314
+},
+{
+"id": "SHARD_MATCHO",
+"name": "Matcho Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0359
+},
+{
+"id": "SHARD_LAVA_FLAME",
+"name": "Lava Flame Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0257
+},
+{
+"id": "SHARD_LAVA_FLAME",
+"name": "Lava Flame Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0295
+},
+{
+"id": "SHARD_FIRE_EEL",
+"name": "Fire Eel Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0195
+},
+{
+"id": "SHARD_FIRE_EEL",
+"name": "Fire Eel Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0224
+},
+{
+"id": "SHARD_FLARE",
+"name": "Flare Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0195
+},
+{
+"id": "SHARD_FLARE",
+"name": "Flare Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0224
+},
+{
+"id": "SHARD_BARBARIAN_DUKE_X",
+"name": "Barbarian Duke X Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0195
+},
+{
+"id": "SHARD_BARBARIAN_DUKE_X",
+"name": "Barbarian Duke X Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0224
+},
+{
+"id": "SHARD_HELLWISP",
+"name": "Hellwisp Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0159
+},
+{
+"id": "SHARD_HELLWISP",
+"name": "Hellwisp Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0183
+},
+{
+"id": "SHARD_XYZ",
+"name": "XYZ Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0129
+},
+{
+"id": "SHARD_XYZ",
+"name": "XYZ Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0147
+},
+{
+"id": "SHARD_TAURUS",
+"name": "Taurus Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0067
+},
+{
+"id": "SHARD_TAURUS",
+"name": "Taurus Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0077
+},
+{
+"id": "SHARD_LORD_JAWBUS",
+"name": "Lord Jawbus Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0051
+},
+{
+"id": "SHARD_LORD_JAWBUS",
+"name": "Lord Jawbus Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0059
+},
+{
+"id": "SHARD_CINDERBAT",
+"name": "Cinderbat Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0067
+},
+{
+"id": "SHARD_CINDERBAT",
+"name": "Cinderbat Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0077
+},
+{
+"id": "SHARD_DAEMON",
+"name": "Daemon Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0051
+},
+{
+"id": "SHARD_DAEMON",
+"name": "Daemon Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0059
+},
+{
+"id": "SHARD_MOLTENFISH",
+"name": "Moltenfish Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0051
+},
+{
+"id": "SHARD_MOLTENFISH",
+"name": "Moltenfish Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0059
+},
+{
+"id": "SHARD_ANANKE",
+"name": "Ananke Shard",
+"qty": 1,
+"slot": 1,
+"chance": 0.0005
+},
+{
+"id": "SHARD_ANANKE",
+"name": "Ananke Shard",
+"qty": 1,
+"slot": 2,
+"chance": 0.0006
+},
+{
+"id": "KUUDRA_TEETH",
+"name": "Kuudra Teeth",
+"qty": 3.0,
+"slot": 3,
+"chance": 1.0
+},
+{
+"id": "ESSENCE_CRIMSON",
+"name": "Crimson Essence",
+"qty": 2000.0,
+"slot": 4,
+"chance": 1.0
+},
+{
+"id": "SHARD_KRAKEN",
+"name": "Kraken Shard",
+"qty": 1.5,
+"slot": 5,
+"chance": 1.0
+}
+]
+}
+},
+"mobs": {
+"zealot": [
+{
+"id": "ENDER_PEARL",
+"name": "Ender Pearl",
+"qty": 6.0,
+"chance": 1.0
+},
+{
+"id": "ENCHANTED_ENDER_PEARL",
+"name": "Enchanted Ender Pearl",
+"qty": 1.0,
+"chance": 0.02
+},
+{
+"id": "SUMMONING_EYE",
+"name": "Summoning Eye",
+"qty": 1.0,
+"chance": 0.00238
+}
+],
+"ghost": [
+{
+"id": "VOLTA",
+"name": "Volta",
+"qty": 1.0,
+"chance": 0.002
+},
+{
+"id": "SORROW",
+"name": "Sorrow",
+"qty": 1.0,
+"chance": 0.0012
+},
+{
+"id": "PLASMA",
+"name": "Plasma",
+"qty": 1.0,
+"chance": 0.001
+},
+{
+"id": "GHOST_BOOTS",
+"name": "Ghostly Boots",
+"qty": 1.0,
+"chance": 0.0001
+}
+],
+"automaton": [
+{
+"id": "ROUGH_SAPPHIRE_GEM",
+"name": "Rough Sapphire Gemstone",
+"qty": 14.0,
+"chance": 1.0
+},
+{
+"id": "SYNTHETIC_HEART",
+"name": "Synthetic Heart",
+"qty": 1.0,
+"chance": 0.015
+},
+{
+"id": "CONTROL_SWITCH",
+"name": "Control Switch",
+"qty": 1.0,
+"chance": 0.015
+},
+{
+"id": "SUPERLITE_MOTOR",
+"name": "Superlite Motor",
+"qty": 1.0,
+"chance": 0.015
+},
+{
+"id": "ROBOTRON_REFLECTOR",
+"name": "Robotron Reflector",
+"qty": 1.0,
+"chance": 0.015
+},
+{
+"id": "FTX_3070",
+"name": "FTX 3070",
+"qty": 1.0,
+"chance": 0.015
+},
+{
+"id": "ELECTRON_TRANSMITTER",
+"name": "Electron Transmitter",
+"qty": 1.0,
+"chance": 0.015
+}
+],
+"voidling-extremist": [
+{
+"id": "ENDER_PEARL",
+"name": "Ender Pearl",
+"qty": 32.0,
+"chance": 1.0
+},
+{
+"id": "ENCHANTED_ENDER_PEARL",
+"name": "Enchanted Ender Pearl",
+"qty": 1.0,
+"chance": 0.16
+},
+{
+"id": "ENDERMAN_CORTEX_REWRITER",
+"name": "Enderman Cortex Rewriter",
+"qty": 1.0,
+"chance": 0.001
+},
+{
+"id": "SUMMONING_EYE",
+"name": "Summoning Eye",
+"qty": 1.0,
+"chance": 0.0004
+}
+],
+"yog": [
+{
+"id": "ROUGH_TOPAZ_GEM",
+"name": "Rough Topaz Gemstone",
+"qty": 12.8,
+"chance": 1.0
+},
+{
+"id": "YOGGIE",
+"name": "Yoggie",
+"qty": 1.0,
+"chance": 0.06
+}
+],
+"corleone": [
+{
+"id": "ROUGH_RUBY_GEM",
+"name": "Rough Ruby Gemstone",
+"qty": 24.0,
+"chance": 1.0
+},
+{
+"id": "ROUGH_JADE_GEM",
+"name": "Rough Jade Gemstone",
+"qty": 33.9,
+"chance": 1.0
+},
+{
+"id": "CORLEONITE",
+"name": "Corleonite",
+"qty": 1.0,
+"chance": 0.25
+}
+]
+}
+}

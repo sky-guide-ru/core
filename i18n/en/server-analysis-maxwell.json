@@ -1,0 +1,15 @@
+{
+ "бой и данжи (урон оружием)": "combat and dungeons (weapon damage)",
+ "маг (урон способностями)": "mage (ability damage)",
+ "Сила не выбрана: открой Accessory Bag → Accessory Bag Thaumaturgy (Maxwell) и выбери силу, иначе Magical Power почти ничего не даёт.": "No power selected: open Accessory Bag → Accessory Bag Thaumaturgy (Maxwell) and pick a power, otherwise Magical Power gives almost nothing.",
+ "Для стиля «{0}» {1} даёт больше ({2} против {3} очков Strength+Crit Damage{4}). {5}": "For the \"{0}\" style {1} gives more ({2} vs {3} Strength+Crit Damage points{4}). {5}",
+ "Она уже открыта — просто переключись у Maxwell.": "It's already unlocked — just switch at Maxwell.",
+ "Нужно 9 × {0} у Thaumaturgist в Hub{1}.": "Requires 9 × {0} at the Thaumaturgist in the Hub{1}.",
+ " и Combat {0}": " and Combat {0}",
+ "{0} — одна из лучших сил для стиля «{1}». Менять не нужно.": "{0} is one of the best powers for the \"{1}\" style. No need to change it.",
+ "Сейчас стоит стартовая сила ({0}). Силы из Power Stone заметно сильнее: см. таблицу.": "A starter power is selected ({0}). Powers from Power Stones are noticeably stronger: see the table.",
+ "Не распределено {0} очков Tuning из {1}: это бесплатные статы. Stats Tuning в том же меню.": "{0} of {1} Tuning points unassigned: these are free stats. Stats Tuning is in the same menu.",
+ "Mage почти все очки — в Intelligence (2 Intelligence за очко).": "Mage puts almost all points into Intelligence (2 Intelligence per point).",
+ "Для урона оружием делят между Strength и Crit Damage (по 1 за очко). Выгоднее докладывать в тот стат, которого у тебя меньше относительно другого: урон растёт как (1 + Strength/100) × (1 + Crit Damage/100).": "For weapon damage, split between Strength and Crit Damage (1 per point). It's better to add to the stat that's lower relative to the other: damage grows as (1 + Strength/100) × (1 + Crit Damage/100).",
+ "Все {0} очков сейчас в {1}. Если {2} у тебя заметно меньше, часть очков лучше перенести туда.": "All {0} points are in {1} now. If your {2} is noticeably lower, move some points there."
+}

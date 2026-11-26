@@ -1,0 +1,41 @@
+// Готовая замена server/analysis/roadmap.js в ядре.
+// Модуль advisor копируется в server/advisor/, этот файл — в server/analysis/roadmap.js.
+// Сигнатура buildRoadmap(member, acc, gear) не меняется, state.js править не нужно.
+import { priceOf } from '../prices.js';
+import { neu, itemName } from '../neu.js';
+import { moneyMethods } from './money.js';
+import * as advisor from '../advisor/index.js';
+import { activePerks } from '../calendar/index.js';
+
+let collectionTiers = null;
+/** Ядро может один раз передать пороги коллекций из /v2/resources/skyblock/collections. */
+export function setCollectionsResource(resp) { collectionTiers = advisor.collectionTiersFromResources(resp); }
+
+function opts(member) {
+  let methods = [];
+  try { methods = moneyMethods(member); } catch {}
+  return {
+    price: priceOf,
+    // itemName убирает шаблон «[Lvl {LVL}]» из названий питомцев NEU
+    itemName: id => itemName(id)?.replace(/§./g, ''),
+    constants: neu.constants,
+    moneyMethods: methods,
+    collectionTiers,
+    // Перки мэра и министра сейчас (Aatrox и т. п.)
+    mayorPerks: (() => { try { return activePerks(); } catch { return []; } })(),
+  };
+}
+
+export function buildRoadmap(member, acc, gear) {
+  return advisor.buildRoadmap(member, acc, gear, opts(member));
+}
+
+export function buildProgressMap(member, acc, gear) {
+  return advisor.buildProgressMap(member, acc, gear, opts(member));
+}
+
+export function advise(member, acc, gear) {
+  return advisor.advise(member, acc, gear, opts(member));
+}
+
+export const diffRoadmaps = advisor.diffRoadmaps;

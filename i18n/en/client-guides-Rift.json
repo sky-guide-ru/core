@@ -1,0 +1,18 @@
+{
+ "возможно найдена": "maybe found",
+ "не найдена": "not found",
+ "{0}: показать души": "{0}: show souls",
+ "{0}: ещё не открыта": "{0}: not unlocked yet",
+ "{0}{1} / {2} душ": "{0}{1} / {2} souls",
+ "+{0} с к Rift Time от плаща": "+{0} s of Rift Time from the cloak",
+ "Hypixel записал {0} из найденных душ кодами, которые нельзя сопоставить с конкретной душой. Души с пометкой «возможно» — кандидаты. Нажми «Найдена» у тех, что ты уже собрал, и список станет точным.": "Hypixel stored {0} of the found souls with codes that can't be matched to a specific soul. Souls marked \"maybe\" are candidates. Click \"Found\" on the ones you've already collected, and the list becomes exact.",
+ "недостающие": "missing",
+ "найденные": "found",
+ "все зоны ×": "all zones ×",
+ " · отмечено": " · marked",
+ "Найдена": "Found",
+ "Нет": "No",
+ "Здесь все души найдены 🎉": "All souls found here 🎉",
+ "Таймчармы: {0}": "Timecharms: {0}",
+ "Глаза Porhtal: {0}": "Porhtal eyes: {0}"
+}

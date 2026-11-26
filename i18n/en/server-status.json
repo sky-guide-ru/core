@@ -1,0 +1,10 @@
+{
+ "исчерпан суточный лимит запросов к Hypixel — профили показаны по последним данным": "the daily Hypixel request limit is used up — profiles show the last data",
+ "Hypixel просит подождать — профили обновятся через несколько минут": "Hypixel asks to wait — profiles will update in a few minutes",
+ "сервер отвечает с задержкой": "the server responds with a delay",
+ "почти исчерпан лимит запросов к Hypixel": "the Hypixel request limit is almost used up",
+ "много одновременных запросов": "many simultaneous requests",
+ "много запросов к Hypixel — чужие профили могут обновляться реже": "many Hypixel requests — other players' profiles may update less often",
+ "сервер занят": "the server is busy",
+ "всё спокойно": "all calm"
+}

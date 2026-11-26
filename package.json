@@ -1,0 +1,47 @@
+{
+  "name": "@sky-guide/core",
+  "version": "0.1.0",
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "description": "Расчёты Sky Guide для Hypixel SkyBlock: разбор профиля, план, рынок, гайды, переводы",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sky-guide-ru/core.git"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./i18n/*": "./i18n/*",
+    "./test/fixtures/*": "./test/fixtures/*",
+    "./*": "./src/*"
+  },
+  "files": [
+    "src",
+    "i18n",
+    "test/fixtures"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "i18n": "node scripts/i18n.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.12.0",
+    "adm-zip": "^0.5.16",
+    "dotenv": "^18.0.10",
+    "pngjs": "^7.0.0",
+    "prismarine-nbt": "^2.7.0"
+  },
+  "devDependencies": {
+    "rolldown": "^1.2.19"
+  },
+  "peerDependencies": {
+    "rolldown": "*"
+  },
+  "peerDependenciesMeta": {
+    "rolldown": {
+      "optional": true
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+ "Музей →": "Museum →",
+ " Входит в сет {0}: в музей сдаётся весь сет целиком.": " Part of the {0} set: the whole set is donated to the museum together.",
+ "🏛 Особый предмет, уже выставлен в музее ✔": "🏛 Special item, already displayed in the museum ✔",
+ "🏛 Особый предмет (Special Items): можно выставить в музее, XP не даёт.": "🏛 Special item (Special Items): can be displayed in the museum, gives no XP.",
+ "🏛 В музее ✔ {0}": "🏛 In the museum ✔ {0}",
+ "🏛 В музее ✔, сейчас одолжен обратно: XP засчитан {0}": "🏛 In the museum ✔, currently borrowed back: XP counted {0}",
+ "🏛 Засчитан в музее через {0} ✔ {1}": "🏛 Counted in the museum via {0} ✔ {1}",
+ "(высший тир засчитывает низший)": "(a higher tier counts the lower one)",
+ "🏛 Можно пожертвовать: +{0} SkyBlock XP. Он у тебя есть, но ещё не в музее. После пожертвования предмет станет Co-op Soulbound, но его можно забрать обратно.": "🏛 Can be donated: +{0} SkyBlock XP. You have it, but it's not in the museum yet. After donating, the item becomes Co-op Soulbound, but you can take it back.",
+ "🏛 Нет в музее: пожертвуешь — +{0} SkyBlock XP {1}": "🏛 Not in the museum: donate it for +{0} SkyBlock XP {1}",
+ "🏛 Принимается в музей ({0}).{1}": "🏛 Accepted by the museum ({0}).{1}",
+ " Museum API у игрока выключен — статус не виден.": " The player's Museum API is off — status not visible.",
+ " Засчитают и высшие тиры: {0}.": " Higher tiers count too: {0}.",
+ "раздел «{0}», {1} XP": "section «{0}», {1} XP"
+}

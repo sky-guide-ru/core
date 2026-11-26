@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "lastUpdated": 1795430000000,
+  "mayor": {
+    "key": "mythological", "name": "Diana",
+    "perks": [
+      { "name": "Lucky!", "description": "§7Gain §d+25♣ Pet Luck§7.", "minister": false },
+      { "name": "Mythological Ritual", "description": "§7Start the Mythological Ritual event...", "minister": true },
+      { "name": "Pet XP Buff", "description": "§7Gain §d35%§7 more pet XP.", "minister": false }
+    ],
+    "minister": { "key": "fishing", "name": "Marina", "perk": { "name": "Fishing Festival", "description": "§7Start a special fishing event...", "minister": true } },
+    "election": { "year": 525, "candidates": [] }
+  },
+  "current": {
+    "year": 526,
+    "candidates": [
+      { "key": "dungeons", "name": "Paul", "perks": [{ "name": "EZPZ", "description": "§7Gain 10 bonus score" }, { "name": "Marauder", "description": "§7Dungeon reward chests are 20% cheaper" }], "votes": 61234 },
+      { "key": "slayer", "name": "Aatrox", "perks": [{ "name": "Slayer XP Buff", "description": "x" }, { "name": "Brand New Perk", "description": "§aSomething §lnew" }], "votes": 30210 },
+      { "key": "events", "name": "Foxy", "perks": [{ "name": "Chivalrous Carnival", "description": "x" }], "votes": 9000 }
+    ]
+  }
+}

@@ -1,0 +1,482 @@
+{
+ "_comment": "Лестницы снаряжения: тиры от слабого к сильному. Для брони указывается set (префикс id), предмет считается полученным при 3+ частях сета; для оружия/инструментов — ids (любой из них). stage — этап, на котором ветка важна. ID проверены по репозиторию NEU.",
+ "ladders": [
+  {
+   "id": "dungeon-archer-weapon",
+   "cat": "Dungeons",
+   "kind": "weapon",
+   "classes": [
+    "archer"
+   ],
+   "titleRu": "Оружие лучника для данжей",
+   "tiers": [
+    {
+     "ids": [
+      "MACHINE_GUN_BOW",
+      "ITEM_SPIRIT_BOW"
+     ],
+     "name": "Machine Gun Shortbow / Spirit Shortbow",
+     "note": "стартовые луки для F4–F6"
+    },
+    {
+     "ids": [
+      "JUJU_SHORTBOW",
+      "LAST_BREATH"
+     ],
+     "name": "Juju Shortbow / Last Breath",
+     "note": "закрывают F7 и первые Master-этажи",
+     "req": {
+      "slayer": "enderman",
+      "level": 5,
+      "orFloor": 5
+     }
+    },
+    {
+     "ids": [
+      "TERMINATOR"
+     ],
+     "name": "Terminator",
+     "note": "лучшее оружие лучника для F7 и всего Master Mode",
+     "req": {
+      "slayer": "enderman",
+      "level": 7
+     }
+    }
+   ]
+  },
+  {
+   "id": "dungeon-mage-weapon",
+   "cat": "Dungeons",
+   "kind": "weapon",
+   "classes": [
+    "mage",
+    "healer"
+   ],
+   "titleRu": "Оружие мага для данжей",
+   "tiers": [
+    {
+     "ids": [
+      "BONZO_STAFF",
+      "BAT_WAND"
+     ],
+     "name": "Bonzo's Staff / Spirit Sceptre",
+     "note": "ранний маг"
+    },
+    {
+     "ids": [
+      "MIDAS_STAFF",
+      "NECRON_BLADE"
+     ],
+     "name": "Midas Staff / Necron's Blade",
+     "note": "основа для Hyperion"
+    },
+    {
+     "ids": [
+      "HYPERION",
+      "ASTRAEA",
+      "SCYLLA",
+      "VALKYRIE"
+     ],
+     "name": "Hyperion (или другой меч из Necron's Blade со свитками)",
+     "note": "топ для мага и зачистки мобов"
+    }
+   ]
+  },
+  {
+   "id": "dungeon-armor",
+   "cat": "Dungeons",
+   "kind": "armor",
+   "titleRu": "Броня для данжей",
+   "tiers": [
+    {
+     "set": "SUPERIOR_DRAGON",
+     "name": "Superior Dragon Armor",
+     "note": "универсальный ранний сет"
+    },
+    {
+     "set": "SHADOW_ASSASSIN",
+     "name": "Shadow Assassin Armor",
+     "note": "дроп F5, хорош для F6–F7",
+     "req": {
+      "floor": 5
+     }
+    },
+    {
+     "set": "POWER_WITHER",
+     "altSets": [
+      "WISE_WITHER",
+      "TANK_WITHER",
+      "SPEED_WITHER"
+     ],
+     "name": "Necron's Armor (или другой сет Wither)",
+     "note": "броня F7: Necron для урона, Storm для мага, Goldor для танка",
+     "req": {
+      "floor": 7
+     }
+    }
+   ]
+  },
+  {
+   "id": "ender-slayer-weapon",
+   "cat": "Slayers",
+   "kind": "weapon",
+   "titleRu": "Оружие против Voidgloom Seraph",
+   "tiers": [
+    {
+     "ids": [
+      "VOIDWALKER_KATANA"
+     ],
+     "name": "Voidwalker Katana",
+     "note": "без требований"
+    },
+    {
+     "ids": [
+      "VOIDEDGE_KATANA"
+     ],
+     "name": "Voidedge Katana",
+     "note": "Enderman Slayer 3",
+     "req": {
+      "slayer": "enderman",
+      "level": 3
+     }
+    },
+    {
+     "ids": [
+      "VORPAL_KATANA"
+     ],
+     "name": "Vorpal Katana",
+     "note": "Enderman Slayer 5",
+     "req": {
+      "slayer": "enderman",
+      "level": 5
+     }
+    },
+    {
+     "ids": [
+      "ATOMSPLIT_KATANA"
+     ],
+     "name": "Atomsplit Katana",
+     "note": "Enderman Slayer 6, лучший урон по эндерменам",
+     "req": {
+      "slayer": "enderman",
+      "level": 6
+     }
+    }
+   ]
+  },
+  {
+   "id": "ender-slayer-armor",
+   "cat": "Slayers",
+   "kind": "armor",
+   "titleRu": "Броня против эндерменов",
+   "tiers": [
+    {
+     "set": "FINAL_DESTINATION",
+     "name": "Final Destination Armor",
+     "note": "растёт от убийств эндерменов, топ для Voidgloom T4"
+    }
+   ]
+  },
+  {
+   "id": "zombie-slayer-weapon",
+   "cat": "Slayers",
+   "kind": "weapon",
+   "titleRu": "Оружие против Revenant Horror",
+   "tiers": [
+    {
+     "ids": [
+      "REVENANT_SWORD"
+     ],
+     "name": "Revenant Falchion",
+     "note": "Zombie Slayer 3",
+     "req": {
+      "slayer": "zombie",
+      "level": 3
+     }
+    },
+    {
+     "ids": [
+      "REAPER_SWORD"
+     ],
+     "name": "Reaper Falchion",
+     "note": "Zombie Slayer 6",
+     "req": {
+      "slayer": "zombie",
+      "level": 6
+     }
+    },
+    {
+     "ids": [
+      "AXE_OF_THE_SHREDDED"
+     ],
+     "name": "Halberd of the Shredded",
+     "note": "Zombie Slayer 8, лечит при ударе",
+     "req": {
+      "slayer": "zombie",
+      "level": 8
+     }
+    }
+   ]
+  },
+  {
+   "id": "blaze-slayer-weapon",
+   "cat": "Slayers",
+   "kind": "weapon",
+   "titleRu": "Кинжалы против Inferno Demonlord",
+   "tiers": [
+    {
+     "ids": [
+      "FIREDUST_DAGGER",
+      "MAWDUST_DAGGER"
+     ],
+     "name": "Firedust Dagger / Twilight Dagger",
+     "note": "Blaze Slayer 2",
+     "req": {
+      "slayer": "blaze",
+      "level": 2
+     }
+    },
+    {
+     "ids": [
+      "BURSTFIRE_DAGGER",
+      "BURSTMAW_DAGGER"
+     ],
+     "name": "Kindlebane Dagger / Mawdredge Dagger",
+     "note": "Blaze Slayer 4",
+     "req": {
+      "slayer": "blaze",
+      "level": 4
+     }
+    },
+    {
+     "ids": [
+      "HEARTFIRE_DAGGER",
+      "HEARTMAW_DAGGER"
+     ],
+     "name": "Pyrochaos Dagger / Deathripper Dagger",
+     "note": "Blaze Slayer 6, для T4",
+     "req": {
+      "slayer": "blaze",
+      "level": 6
+     }
+    }
+   ]
+  },
+  {
+   "id": "kuudra-armor",
+   "cat": "Crimson Isle и Kuudra",
+   "kind": "kuudra-armor",
+   "titleRu": "Броня Kuudra",
+   "families": [
+    "CRIMSON",
+    "AURORA",
+    "TERROR",
+    "FERVOR",
+    "HOLLOW"
+   ],
+   "tiers": [
+    {
+     "prefix": "",
+     "name": "Базовый тир",
+     "note": "из сундуков Basic Kuudra или у торговцев фракций"
+    },
+    {
+     "prefix": "HOT_",
+     "name": "Hot",
+     "note": "улучшается из базового за Kuudra Teeth и эссенцию Crimson"
+    },
+    {
+     "prefix": "BURNING_",
+     "name": "Burning",
+     "note": "нужно для стабильных Burning и Fiery"
+    },
+    {
+     "prefix": "FIERY_",
+     "name": "Fiery",
+     "note": "для Fiery и Infernal"
+    },
+    {
+     "prefix": "INFERNAL_",
+     "name": "Infernal",
+     "note": "максимальный тир"
+    }
+   ]
+  },
+  {
+   "id": "mining-drill",
+   "cat": "Mining",
+   "kind": "tool",
+   "titleRu": "Бур (Drill)",
+   "tiers": [
+    {
+     "ids": [
+      "MITHRIL_DRILL_1",
+      "MITHRIL_DRILL_2",
+      "GEMSTONE_DRILL_1"
+     ],
+     "name": "Mithril Drill / Ruby Drill",
+     "note": "старт в Dwarven Mines",
+     "req": {
+      "hotm": 2
+     }
+    },
+    {
+     "ids": [
+      "GEMSTONE_DRILL_2",
+      "TITANIUM_DRILL_1",
+      "TITANIUM_DRILL_2"
+     ],
+     "name": "Gemstone / Titanium Drill DR-X555",
+     "note": "середина",
+     "req": {
+      "hotm": 4
+     }
+    },
+    {
+     "ids": [
+      "GEMSTONE_DRILL_3",
+      "GEMSTONE_DRILL_4",
+      "TITANIUM_DRILL_3",
+      "TITANIUM_DRILL_4"
+     ],
+     "name": "Topaz Drill KGR-12 / Jasper Drill X / Titanium DR-X455+",
+     "note": "сильные буры",
+     "req": {
+      "hotm": 5
+     }
+    },
+    {
+     "ids": [
+      "DIVAN_DRILL"
+     ],
+     "name": "Divan's Drill",
+     "note": "топ для гемов",
+     "req": {
+      "hotm": 6
+     }
+    }
+   ]
+  },
+  {
+   "id": "mining-armor",
+   "cat": "Mining",
+   "kind": "armor",
+   "titleRu": "Броня для добычи",
+   "tiers": [
+    {
+     "set": "MINERAL",
+     "altSets": [
+      "GLACITE"
+     ],
+     "name": "Mineral / Glacite Armor",
+     "note": "ранняя"
+    },
+    {
+     "set": "SORROW",
+     "name": "Sorrow Armor",
+     "note": "Mining Wisdom"
+    },
+    {
+     "set": "DIVAN",
+     "name": "Divan's Armor",
+     "note": "максимум Mining Fortune для гемов"
+    }
+   ]
+  },
+  {
+   "id": "farming-armor",
+   "cat": "Garden",
+   "kind": "armor",
+   "titleRu": "Фермерская броня",
+   "tiers": [
+    {
+     "set": "MELON",
+     "name": "Melon Armor",
+     "note": "первый сет из Garden"
+    },
+    {
+     "set": "CROPIE",
+     "name": "Cropie Armor",
+     "note": "улучшение Melon"
+    },
+    {
+     "set": "SQUASH",
+     "name": "Squash Armor",
+     "note": "улучшение Cropie"
+    },
+    {
+     "set": "FERMENTO",
+     "name": "Fermento Armor",
+     "note": "лучший сет Farming Fortune"
+    }
+   ]
+  },
+  {
+   "id": "fishing-armor",
+   "cat": "Fishing",
+   "kind": "armor",
+   "titleRu": "Рыболовная броня",
+   "tiers": [
+    {
+     "set": "SPONGE",
+     "altSets": [
+      "SHARK_SCALE"
+     ],
+     "name": "Sponge / Shark Scale Armor",
+     "note": "обычная вода"
+    },
+    {
+     "set": "THUNDER",
+     "altSets": [
+      "MAGMA_LORD"
+     ],
+     "name": "Thunder / Magma Lord Armor",
+     "note": "лавовая рыбалка в Crimson Isle, лучший опыт Fishing"
+    }
+   ]
+  },
+  {
+   "id": "fishing-rod",
+   "cat": "Fishing",
+   "kind": "tool",
+   "titleRu": "Удочка",
+   "tiers": [
+    {
+     "ids": [
+      "ROD_OF_THE_SEA",
+      "AUGER_ROD"
+     ],
+     "name": "Rod of the Sea / Auger Rod",
+     "note": "обычная вода",
+     "req": {
+      "skill": "fishing",
+      "level": 25
+     }
+    },
+    {
+     "ids": [
+      "MAGMA_ROD",
+      "INFERNO_ROD"
+     ],
+     "name": "Magma / Inferno Rod",
+     "note": "лавовая рыбалка",
+     "req": {
+      "skill": "fishing",
+      "level": 30
+     }
+    },
+    {
+     "ids": [
+      "HELLFIRE_ROD"
+     ],
+     "name": "Hellfire Rod",
+     "note": "топ для лавы",
+     "req": {
+      "skill": "fishing",
+      "level": 35
+     }
+    }
+   ]
+  }
+ ]
+}

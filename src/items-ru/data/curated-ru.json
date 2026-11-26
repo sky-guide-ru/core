@@ -1,0 +1,115 @@
+{
+  "$comment": "Ручные русские пояснения к ключевым предметам. Поля: nameRu (если нужно своё имя), descriptionRu (добавляется к автоописанию), tipRu (совет по прогрессии), whereToGet (дополнительные источники в формате базы). Сборщик подмешивает их поверх данных NEU. Добавляйте только проверенные факты.",
+  "HYPERION": {
+    "descriptionRu": "Главный меч мага в данжах. С тремя свитками (Implosion, Shadow Warp, Wither Shield) получает способность Wither Impact: телепорт вперёд, взрыв по области и щит.",
+    "tipRu": "Свитки выпадают с Necron (F7/M7) или покупаются на аукционе. Без свитков меч почти бесполезен."
+  },
+  "NECRON_BLADE": {
+    "descriptionRu": "Основа для четырёх мечей F7: Hyperion (маг), Valkyrie (берсерк), Astraea (танк), Scylla (хилер)."
+  },
+  "TERMINATOR": {
+    "descriptionRu": "Сильнейший лук для данжей и слееров: шортбоу, стреляет тремя стрелами сразу.",
+    "tipRu": "Самая дорогая часть — Judgement Core с Voidgloom Seraph IV."
+  },
+  "JUJU_SHORTBOW": {
+    "descriptionRu": "Доступный шортбоу для лучника и слееров, обычный шаг перед Terminator."
+  },
+  "WITHER_CHESTPLATE": {
+    "descriptionRu": "Базовая броня Wither с F7. Её превращают в один из четырёх сетов: Necron's (урон), Storm's (маг), Goldor's (танк), Maxor's (скорость)."
+  },
+  "POWER_WITHER_CHESTPLATE": {
+    "descriptionRu": "Часть сета Necron's Armor — лучший сет на урон для берсерка и лучника в данжах."
+  },
+  "WISE_WITHER_CHESTPLATE": {
+    "descriptionRu": "Часть сета Storm's Armor — лучший сет для мага в данжах."
+  },
+  "SHADOW_ASSASSIN_CHESTPLATE": {
+    "descriptionRu": "Сет Shadow Assassin с F5 (Livid): хороший промежуточный сет для берсерка до брони с F7."
+  },
+  "GIANTS_SWORD": {
+    "descriptionRu": "Меч с F6 (Sadan): способность Giant's Slam бьёт по большой области. Популярен у магов и для зачистки мобов."
+  },
+  "DARK_CLAYMORE": {
+    "descriptionRu": "Длинный меч с Master Mode 7. Очень большой урон за удар, нужен для поздних этапов Master Mode."
+  },
+  "ASPECT_OF_THE_VOID": {
+    "descriptionRu": "Улучшенный Aspect of the End: телепорт и, после наложения Etherwarp Conduit, способность Ether Transmission (точный телепорт к блоку при приседании).",
+    "tipRu": "Для Etherwarp нужен Etherwarp Merger + Etherwarp Conduit."
+  },
+  "RECOMBOBULATOR_3000": {
+    "descriptionRu": "Повышает редкость предмета на один уровень: больше характеристик и Magical Power у аксессуаров.",
+    "tipRu": "Выгоднее всего на дорогом оружии, броне и аксессуарах с высокой редкостью.",
+    "whereToGet": [
+      {
+        "kind": "drop",
+        "source": null,
+        "textRu": "Наградные сундуки данжей (в том числе Master Mode); продаётся на аукционе"
+      }
+    ]
+  },
+  "HOT_POTATO_BOOK": {
+    "descriptionRu": "Накладывается на наковальне, до 10 штук на предмет: оружию даёт +2 к урону и силе, броне +4 к здоровью и +2 к защите за книгу."
+  },
+  "FUMING_POTATO_BOOK": {
+    "descriptionRu": "Продолжает Hot Potato Book: накладывается после 10 горячих книг, ещё до 5 штук (с 11-й по 15-ю)."
+  },
+  "BOOSTER_COOKIE": {
+    "descriptionRu": "Даёт 4 дня бонусов: +Magic Find, +мудрость навыков, доступ к Bazaar и аукциону откуда угодно, сохранение монет при смерти и Bits.",
+    "tipRu": "Поддерживайте печенье постоянно: Bits обмениваются на ценные предметы у Elizabeth в Хабе.",
+    "whereToGet": [
+      {
+        "kind": "shop",
+        "source": null,
+        "textRu": "Community Shop (Elizabeth в Хабе) за SkyBlock Gems; на Bazaar перепродаётся за монеты"
+      }
+    ]
+  },
+  "ENDER_DRAGON;4": {
+    "descriptionRu": "Легендарный боевой питомец: усиливает все боевые характеристики в процентах и меч Aspect of the Dragons."
+  },
+  "SPEED_TALISMAN": {
+    "tipRu": "Первая ступень линейки Speed Talisman → Ring → Artifact → Relic. Храните только старшую версию, младшие не дают Magical Power вместе со старшей."
+  },
+  "KUUDRA_TEETH": {
+    "whereToGet": [
+      {
+        "kind": "drop",
+        "source": null,
+        "textRu": "Падает из наградных сундуков Kuudra (чем выше тир, тем больше)"
+      }
+    ]
+  },
+  "ESSENCE_WITHER": {
+    "whereToGet": [
+      {
+        "kind": "drop",
+        "source": null,
+        "textRu": "Основной источник — наградные сундуки Catacombs (с F4 и выше больше) и разбор (Salvage) данжевых предметов в Dungeon Hub"
+      }
+    ]
+  },
+  "MOLTEN_POWDER": {
+    "whereToGet": [
+      {
+        "kind": "other",
+        "source": null,
+        "textRu": "Делается из Derelict Ashe, которые падают с Inferno Demonlord (Blaze Slayer); рецепт ниже"
+      }
+    ]
+  },
+  "RUNEBOOK": {
+    "tipRu": "Растёт сам: за каждую цифру на счётчике убитых Runic Mobs +1 редкость, до Legendary на 1 000 убийств. Recombobulator 3000 к нему не применяется.",
+    "whereToGet": [
+      {
+        "kind": "drop",
+        "source": null,
+        "textRu": "Падает с Runic Mobs с шансом 0,1% (Magic Find не влияет)"
+      },
+      {
+        "kind": "other",
+        "source": null,
+        "textRu": "Продаётся на аукционе: из-за ошибки игры лот всегда стоит не больше 50 тыс., какой бы ни была редкость"
+      }
+    ]
+  }
+}

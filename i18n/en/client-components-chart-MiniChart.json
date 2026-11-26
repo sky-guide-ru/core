@@ -1,0 +1,12 @@
+{
+ "Изменение цены продажи за период": "Sell price change over the period",
+ "История цены ещё копится": "Price history is still being collected",
+ "━ продажа": "━ sell",
+ "┅ покупка": "┅ buy",
+ "📈 Открыть на рынке →": "📈 Open in the market →",
+ "Изменение самого дешёвого лота за период": "Change of the cheapest listing over the period",
+ "━ самый дешёвый лот{0}": "━ cheapest listing{0}",
+ "┅ продажи{0}": "┅ sales{0}",
+ "━ продать{0}": "━ sell{0}",
+ "┅ купить{0}": "┅ buy{0}"
+}

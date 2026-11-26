@@ -1,0 +1,18 @@
+{
+ "{0}: гайд по Hypixel SkyBlock": "{0}: Hypixel SkyBlock guide",
+ "Гайд «{0}» по Hypixel SkyBlock на русском.": "\"{0}\" guide for Hypixel SkyBlock.",
+ "<nav><a href=\"/\">Главная</a> · {0}</nav>": "<nav><a href=\"/en/\">Home</a> · {0}</nav>",
+ "<h1>{0}</h1>{1}<ul>{2}</ul>{3}<h2>Гайды</h2>{4}": "<h1>{0}</h1>{1}<ul>{2}</ul>{3}<h2>Guides</h2>{4}",
+ "Главная": "Home",
+ "{0} — {1} в Hypixel SkyBlock: как получить и цена": "{0} — {1} in Hypixel SkyBlock: how to get and price",
+ "## Разделы": "## Sections",
+ "## Гайды": "## Guides",
+ "## Предметы": "## Items",
+ "- Карточка любого предмета: {0}/item/<SkyBlock ID>, например [Hyperion]({1}/item/HYPERION) — русское описание, характеристики, как получить и цена.": "- Card for any item: {0}/item/<SkyBlock ID>, e.g. [Hyperion]({1}/item/HYPERION) — description, stats, how to get and price.",
+ "- Все адреса: {0}/sitemap.xml": "- All URLs: {0}/sitemap.xml",
+ "## Полный текст": "## Full text",
+ "- [Все гайды одним файлом]({0}/llms-full.txt)": "- [All guides in one file]({0}/llms-full.txt)",
+ "# {0}: все гайды по Hypixel SkyBlock на русском": "# {0}: all Hypixel SkyBlock guides",
+ "> Источник: {0}/guides. Названия предметов, NPC и мест — по-английски, как в игре.": "> Source: {0}/guides. Item, NPC and location names are in English, as in the game.",
+ "Адрес: {0}/guides/{1}": "URL: {0}/guides/{1}"
+}

@@ -1,0 +1,16 @@
+{
+ "Купить у NPC {0} за {1}": "Buy from NPC {0} for {1}",
+ "Крафт: {0}{1}": "Craft: {0}{1}",
+ ". Нужно: {0}": ". Requires: {0}",
+ "Падает с: {0}{1}": "Drops from: {0}{1}",
+ "Обмен у NPC{0}": "Trade at an NPC{0}",
+ "Улучшение питомца у Kat из {0}": "Pet upgrade at Kat from {0}",
+ "Покупается на Bazaar или аукционе": "Bought on the Bazaar or auction",
+ "Стоит здесь: {0}.": "Located here: {0}.",
+ "Sea Creature: клюёт вместо рыбы. Где: {0}.{1}{2}": "Sea Creature: bites instead of a fish. Where: {0}.{1}{2}",
+ " Открывается на Fishing {0}.": " Unlocks at Fishing {0}.",
+ " Bestiary: {0} убийств до максимума.": " Bestiary: {0} kills to max.",
+ "Возьми удочку для лавы и рыбачь в указанном месте.": "Take a lava fishing rod and fish at the stated spot.",
+ "Рыбачь в указанном месте; Sea Creature Chance повышает шанс.": "Fish at the stated spot; Sea Creature Chance raises the chance.",
+ "Когда клюнет — убей существо: опыт и дроп идут только за убийство.": "When it bites, kill the creature: XP and drops come only from the kill."
+}
