@@ -1,4 +1,5 @@
-import 'dotenv/config';
+// .env читает тот, кто запускает сервер (api: первой строкой `import 'dotenv/config'`), а не ядро.
+// Этот модуль — для серверного слоя; чистые расчёты (src/index.js) его не импортируют.
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 

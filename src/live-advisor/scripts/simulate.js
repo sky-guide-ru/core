@@ -57,7 +57,7 @@ const QUESTIONS = {
 // ---------- советчик ----------
 let client;
 if (LIVE) {
-  if (!process.env.ANTHROPIC_API_KEY) { console.error('Нужен ANTHROPIC_API_KEY в окружении (или в .env)'); process.exit(1); }
+  if (!process.env.ANTHROPIC_API_KEY) { console.error('Нужен ANTHROPIC_API_KEY в окружении (или node --env-file=.env …)'); process.exit(1); }
 } else client = createMockClient({ clock });
 
 fs.mkdirSync(OUT, { recursive: true });
