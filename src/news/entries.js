@@ -14,12 +14,23 @@
 
 export const NEWS = [
   {
+    id: '2026-11-26-accplan',
+    date: '2026-11-26',
+    kind: 'better',
+    title: 'План и список аксессуаров вместе',
+    items: [
+      'В [плане](accessories#acc-planner) покупки, tier, Recombobulator и Enrichment идут по цене за 1 MP.',
+      'Бюджет и цену шага можно задать любой суммой: в поле или ползунком.',
+      'Фильтры общие для плана и списка: редкость, что даёт, как получить, что не доделано.',
+    ],
+  },
+  {
     id: '2026-11-26-accgaps',
     date: '2026-11-26',
     kind: 'better',
     title: 'Что доделать на своих аксессуарах',
     items: [
-      'В [Мои аксессуары](accessories/owned#acc-gaps) есть фильтры: без Recombobulator, не макс. tier, без enrichment.',
+      'В [Аксессуарах](accessories#acc-planner) есть фильтры: без Recombobulator, не макс. tier, без enrichment.',
       'У аксессуара с апгрейдом видно, во что его вкачать дальше: Ring → Artifact → Relic.',
       'Плитка «Без рекомба» открывает список аксессуаров без Recombobulator.',
     ],

@@ -71,7 +71,7 @@ export function lightAnalysis(a) {
   const { gear, acc, chocolate, petScore, map, ...rest } = a;
   if (gear) rest.gear = { networth: gear.networth, itemCount: gear.itemCount, topItems: (gear.topItems || []).slice(0, 10) };
   if (acc) {
-    const { missing, list, cheapestNext, ...nums } = acc;
+    const { missing, list, cheapestNext, steps, ...nums } = acc;
     rest.acc = nums; // count, notRecombCount, recombPrice, calculatedMp…
   }
   return rest;
