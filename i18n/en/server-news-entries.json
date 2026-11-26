@@ -180,5 +180,8 @@
  "В [плане](accessories#acc-planner) покупки, tier, Recombobulator и Enrichment идут по цене за 1 MP.": "In the [plan](accessories#acc-planner), purchases, tiers, Recombobulator and Enrichment are sorted by price per 1 MP.",
  "Бюджет и цену шага можно задать любой суммой: в поле или ползунком.": "Budget and step price take any amount: type it in or use the slider.",
  "Фильтры общие для плана и списка: редкость, что даёт, как получить, что не доделано.": "Filters are shared by the plan and the list: rarity, stats, how to get, what's unfinished.",
- "В [Аксессуарах](accessories#acc-planner) есть фильтры: без Recombobulator, не макс. tier, без enrichment.": "[Accessories](accessories#acc-planner) has filters: no Recombobulator, not max tier, no enrichment."
+ "В [Аксессуарах](accessories#acc-planner) есть фильтры: без Recombobulator, не макс. tier, без enrichment.": "[Accessories](accessories#acc-planner) has filters: no Recombobulator, not max tier, no enrichment.",
+ "Живая лента на всю карточку": "Live feed fills its card",
+ "[Живая лента](overview#feed) занимает карточку целиком и листается, без пустого места внизу.": "The [Live feed](overview#feed) fills the whole card and scrolls, with no empty space below.",
+ "В подвале сайта есть «Связь»: почта и форма «Сообщить об ошибке».": "The site footer has a Contact column: email and the “Report a problem” form."
 }
