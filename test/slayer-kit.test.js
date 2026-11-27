@@ -129,6 +129,13 @@ test('Blaze T2 без кинжала: расчёт с парой кинжало�
   assert.equal(p.tiers[1].hypo.best.armor.slot, 2, 'броня под кинжал — боевой сет');
 });
 
+test('Blaze: победы на T4 засчитывают T2, даже если кинжалов не видно', () => {
+  const m = member({ slayers: { enderman: { level: 7, kills: { 3: 10, 4: 50 } }, blaze: { level: 7, kills: { 1: 20, 2: 3, 3: 40, 4: 120 } } } });
+  const p = slayerPlan(m, 'blaze', buildKit(m, {}), [5, 25, 100, 500]);
+  assert.deepEqual(p.tiers.map(t => t.verdict), ['proven', 'proven', 'proven', 'proven']);
+  assert.equal(p.farm.tier, 4);
+});
+
 test('подробности вещи и дешёвые улучшения', () => {
   const it = { id: 'HOT_CRIMSON_HELMET', name: '§6Fierce Hot Crimson Helmet §6✪✪✪', stars: 3, reforge: 'fierce', recomb: false, hpb: 4, enchants: { protection: 5 }, lore: [] };
   const d = pieceDetail(it);

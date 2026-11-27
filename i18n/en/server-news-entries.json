@@ -276,5 +276,7 @@
  "[Museum](museum) и Pet Score у Ironman, Stranded и Bingo считают покупки только у NPC, без цен AH.": "[Museum](museum) and Pet Score on Ironman, Stranded and Bingo count only NPC purchases, without AH prices.",
  "Покупка на аукционе в «Как получить»": "Buying on the Auction House in “How to get”",
  "«Купить на аукционе» есть и у вещей, чьи лоты сейчас разобраны: с ценой недавних продаж.": "“Buy on the Auction House” also shows for items whose listings are sold out, at the recent sale price.",
- "У дропа с Master Mode понятнее написано, что нужно: уровень Catacombs и пройденный F7.": "Master Mode drops say more clearly what is needed: a Catacombs level and a completed F7."
+ "У дропа с Master Mode понятнее написано, что нужно: уровень Catacombs и пройденный F7.": "Master Mode drops say more clearly what is needed: a Catacombs level and a completed F7.",
+ "Гайд Blaze верно оценивает младшие тиры": "Blaze guide rates lower tiers correctly",
+ "Исправлена ошибка: в [гайде Blaze](guides/slayer-blaze#wear) тир ниже пройденного иногда считался непосильным.": "Fixed a bug: in the [Blaze guide](guides/slayer-blaze#wear) a tier below one already cleared was sometimes rated as out of reach."
 }
