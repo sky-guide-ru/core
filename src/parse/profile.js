@@ -13,6 +13,24 @@ import { parseEffects } from '../lib/effects.js';
 const hasTruthy = v => v && typeof v === 'object' ? Object.values(v).some(hasTruthy) : !!v;
 const g = (o, path, d = undefined) => path.split('.').reduce((a, k) => (a == null ? a : a[k]), o) ?? d;
 
+// История Jacob's Contest: ключ «год:месяц_день:КУЛЬТУРА» → { collected, claimed_medal, claimed_position, claimed_participants }.
+// Медали тут — заработанные за всё время (medals_inv — только неистраченные).
+const MEDALS = ['diamond', 'platinum', 'gold', 'silver', 'bronze'];
+export function contestStats(contests = {}) {
+  const list = Object.entries(contests || {}).filter(([, c]) => c && typeof c === 'object');
+  const medals = Object.fromEntries(MEDALS.map(k => [k, 0]));
+  let best = null;
+  for (const [key, c] of list) {
+    if (MEDALS.includes(c.claimed_medal)) medals[c.claimed_medal]++;
+    const pos = Number(c.claimed_position), n = Number(c.claimed_participants);
+    if (pos >= 0 && n > 0) {
+      const top = (pos + 1) / n;
+      if (!best || top < best.top) best = { crop: key.split(':')[2] || null, place: pos + 1, of: n, top };
+    }
+  }
+  return { total: list.length, claimed: list.filter(([, c]) => c.claimed_rewards).length, medals, best };
+}
+
 // Abiphone: контакты в телефоне (active_contacts) и NPC, с которыми уже было общение (ключи contact_data).
 export function parseAbiphone(m) {
   const a = g(m, 'nether_island_player_data.abiphone', null);
@@ -288,6 +306,11 @@ export async function parseMember(profile, uuid, extra = {}) {
     fastestS: cata.fastest_time_s || {},
     fastestSPlus: cata.fastest_time_s_plus || {},
     masterFastestSPlus: master.fastest_time_s_plus || {},
+    // Рекорды этажей: лучший счёт (300+ — S+), самый большой урон по классам
+    bestScore: cata.best_score || {},
+    masterBestScore: master.best_score || {},
+    mostDamage: Object.fromEntries(Object.keys(CLASSES).map(k => [k, Math.max(Number(g(cata, tx`most_damage_${k}.best`, 0)) || 0, Number(g(master, tx`most_damage_${k}.best`, 0)) || 0)]).filter(([, v]) => v > 0)),
+    watcherKills: g(cata, 'watcher_kills.total', 0),
     secrets: d.secrets || g(m, 'player_stats.dungeons.secrets', 0) || 0,
   };
 
@@ -472,6 +495,7 @@ export async function parseMember(profile, uuid, extra = {}) {
       perks: g(m, 'jacobs_contest.perks', {}),
       uniqueBrackets: g(m, 'jacobs_contest.unique_brackets', {}),
       personalBests: g(m, 'jacobs_contest.personal_bests', {}),
+      contests: contestStats(g(m, 'jacobs_contest.contests', {})),
     },
     rift: {
       motes: g(m, 'currencies.motes_purse', 0),

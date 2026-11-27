@@ -14,6 +14,16 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-records',
+    date: '2026-11-27',
+    kind: 'better',
+    title: "Рекорды данжей и Jacob's Contest",
+    items: [
+      'У каждого этажа Catacombs на [Прогрессе](skills) видны лучшая оценка и самое быстрое S+.',
+      "В карточке [Garden](skills#jacob) — медали Jacob's Contest за всё время и лучшая медаль по каждой культуре.",
+    ],
+  },
+  {
     id: '2026-11-27-hypixel',
     date: '2026-11-27',
     kind: 'new',

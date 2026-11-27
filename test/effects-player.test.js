@@ -55,3 +55,18 @@ test('/player: сведения берутся из того же ответа, 
   await rankFor('u-test-1', { fetcher });
   assert.equal(calls, 1);
 });
+
+import { contestStats } from '../src/parse/profile.js';
+test("Jacob's Contest: медали за всё время и лучшее место (позиция с нуля)", () => {
+  const s = contestStats({
+    '471:6_18:MOONFLOWER': { collected: 1, claimed_medal: 'platinum', claimed_position: 7, claimed_participants: 1400, claimed_rewards: true },
+    '472:3_6:CARROT_ITEM': { collected: 1, claimed_medal: 'silver', claimed_position: 461, claimed_participants: 1583, claimed_rewards: true },
+    '472:3_9:WHEAT': { collected: 5 },
+  });
+  assert.equal(s.total, 3);
+  assert.equal(s.claimed, 2);
+  assert.equal(s.medals.platinum, 1);
+  assert.equal(s.medals.silver, 1);
+  assert.deepEqual([s.best.crop, s.best.place, s.best.of], ['MOONFLOWER', 8, 1400]);
+  assert.equal(contestStats(null).total, 0);
+});

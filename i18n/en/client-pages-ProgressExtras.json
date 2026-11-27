@@ -75,5 +75,11 @@
  "Trapper: шкур": "Trapper: pelts",
  "Рекорды и статистика": "Records and stats",
  "Лучшие гонки": "Best races",
- "по всем профилям": "across all profiles"
+ "по всем профилям": "across all profiles",
+ "контест": "contest",
+ "контеста": "contests",
+ "контестов": "contests",
+ "Лучшее место: {0} из {1} ({2}).": "Best placement: {0} of {1} ({2}).",
+ "Лучшая медаль: {0}": "Best medal: {0}",
+ "Медали ещё нет": "No medal yet"
 }
