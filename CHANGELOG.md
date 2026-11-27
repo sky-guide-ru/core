@@ -4,6 +4,11 @@
 
 ## Не выпущено
 
+## 0.2.43
+
+- Museum и Pet Score без рынка (Ironman, Stranded, Bingo): цены NPC за монеты (`npcCoinPrice`) вместо AH. `museumPage(m, { items })` и `analyzeMember` ставят `npcOnly: true`; у Pet Score нет варианта «питомец максимального уровня» с AH.
+- Новость «План для Bingo и Stranded»: пункт про Museum и Pet Score.
+
 ## 0.2.42
 
 - `makeBuy(prices, { soldStats })` в `market/quote.js` (перенесён из api): если BIN-лотов нет, но за неделю были продажи — цена по медиане продаж с `noLots: true`. «Как получить» показывает «Купить на аукционе» и для таких вещей (Master Skull и т. п.), шаги без «самый дешёвый сейчас».

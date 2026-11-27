@@ -31,6 +31,7 @@ export const NEWS = [
     items: [
       'У Bingo первым шагом [плана](roadmap) идут невыполненные цели нынешнего ивента с условиями.',
       'У Stranded в плане нет Dungeons, Kuudra, Crimson Isle, Rift, HOTM и HOTF: туда с острова не попасть.',
+      '[Museum](museum) и Pet Score у Ironman, Stranded и Bingo считают покупки только у NPC, без цен AH.',
     ],
   },
   {

@@ -148,3 +148,19 @@ test('Stranded: нет шагов про острова, куда не попа�
   assert.deepEqual(stranded.filter(s => away.test(s.id)).map(s => s.id), []);
   assert.ok(stranded.length > 0);
 });
+
+import { museumPage } from '../src/museum/index.js';
+
+test('Музей без рынка: цены только NPC, обычный профиль — по рынку', () => {
+  const items = new Map([['SHOP_NPC', { id: 'SHOP_NPC', name: 'Shop', recipes: [{ type: 'npc_shop', cost: ['SKYBLOCK_COIN:300'], result: 'FANCY_SWORD' }] }]]);
+  const mu = { status: 'ok', keys: [], borrowing: [], special: [], value: 0, appraisal: false };
+  const price = id => ({ FANCY_SWORD: 100, ROGUE_SWORD: 500 })[id] || 0;
+  const iron = museumPage({ museum: mu, inv: {}, gameMode: 'ironman' }, { price, items });
+  assert.equal(iron.npcOnly, true);
+  const cost = Object.fromEntries(iron.cheapest.map(x => [x.id, x.cost]));
+  assert.equal(cost.FANCY_SWORD, 300, 'цена NPC, а не рынка');
+  assert.equal(cost.ROGUE_SWORD, undefined, 'NPC не продаёт — без цены');
+  const normal = museumPage({ museum: mu, inv: {} }, { price, items });
+  assert.equal(normal.npcOnly, false);
+  assert.equal(Object.fromEntries(normal.cheapest.map(x => [x.id, x.cost])).ROGUE_SWORD, 500);
+});
