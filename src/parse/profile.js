@@ -7,6 +7,7 @@ import { SKILLS, SLAYERS, CLASSES } from '../../i18n/ru.js';
 import { parseFishing } from './fishing.js';
 import * as xv from './extras-view.js';
 import { tx } from '../../i18n/msg.js';
+import { parseEffects } from '../lib/effects.js';
 
 // Есть ли в объекте хоть одно непустое значение (пустые {} Hypixel создаёт для всех зон Рифта сразу)
 const hasTruthy = v => v && typeof v === 'object' ? Object.values(v).some(hasTruthy) : !!v;
@@ -437,6 +438,8 @@ export async function parseMember(profile, uuid, extra = {}) {
       by: String(t?.initiator_name || '').replace(/§./g, '').trim(),
     })),
     cookie: (g(m, 'profile.cookie_buff_active', false)),
+    // Зелья (active/paused/disabled) и торты Century Cake — блок «Зелья и баффы» и прибавка к статам на главной
+    effects: parseEffects(m.player_data || {}),
     essence: Object.fromEntries(Object.entries(g(m, 'currencies.essence', {})).map(([k, v]) => [k, v.current || 0])),
     fairySouls: { collected: g(m, 'fairy_soul.total_collected', 0), exchanges: g(m, 'fairy_soul.fairy_exchanges', 0), unspent: g(m, 'fairy_soul.unspent_souls', 0) },
     abiphone: parseAbiphone(m),

@@ -187,5 +187,11 @@
  "Перебитые ставки на чужие аукционы стоят первыми.": "Outbid bids on other auctions come first.",
  "Живая лента на всю карточку": "Live feed fills its card",
  "[Живая лента](overview#feed) занимает карточку целиком и листается, без пустого места внизу.": "The [Live feed](overview#feed) fills the whole card and scrolls, with no empty space below.",
- "В подвале сайта есть «Связь»: почта и форма «Сообщить об ошибке».": "The site footer has a Contact column: email and the “Report a problem” form."
+ "В подвале сайта есть «Связь»: почта и форма «Сообщить об ошибке».": "The site footer has a Contact column: email and the “Report a problem” form.",
+ "Профиль Hypixel рядом с ником": "Hypixel profile next to your name",
+ "На [главной](overview) под ником видны Network Level, Achievement Points и год прихода на Hypixel.": "The [home page](overview) shows Network Level, Achievement Points and the year you joined Hypixel under the name.",
+ "В «Рекордах и статистике» на [Прогрессе](skills) — SkyBlock-достижения сразу по всем профилям.": "\"Records and stats\" on [Progress](skills) now has SkyBlock achievements across all profiles.",
+ "Зелья и баффы в статах": "Potions and buffs in stats",
+ "В блоке [Что делать прямо сейчас](overview#now) видны действующие зелья, Century Cake и сколько им осталось.": "The [What to do right now](overview#now) block shows active potions, Century Cakes and how long they last.",
+ "Прибавка от зелий к Strength, Crit Damage и Defense подсвечена зелёным рядом с цифрой.": "Bonus from potions to Strength, Crit Damage and Defense is highlighted in green next to the number."
 }

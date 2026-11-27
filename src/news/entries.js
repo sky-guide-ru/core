@@ -14,6 +14,26 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-hypixel',
+    date: '2026-11-27',
+    kind: 'new',
+    title: 'Профиль Hypixel рядом с ником',
+    items: [
+      'На [главной](overview) под ником видны Network Level, Achievement Points и год прихода на Hypixel.',
+      'В «Рекордах и статистике» на [Прогрессе](skills) — SkyBlock-достижения сразу по всем профилям.',
+    ],
+  },
+  {
+    id: '2026-11-27-potions',
+    date: '2026-11-27',
+    kind: 'new',
+    title: 'Зелья и баффы в статах',
+    items: [
+      'В блоке [Что делать прямо сейчас](overview#now) видны действующие зелья, Century Cake и сколько им осталось.',
+      'Прибавка от зелий к Strength, Crit Damage и Defense подсвечена зелёным рядом с цифрой.',
+    ],
+  },
+  {
     id: '2026-11-26-myauctions',
     date: '2026-11-26',
     kind: 'new',
