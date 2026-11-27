@@ -1,5 +1,6 @@
 import { ru } from '../../i18n/msg.js';
 import { activeAccessories } from './stats.js';
+import { petScoreReward } from '../analysis/pet-score.js';
 // Magic Find после реворка SkyBlock 0.27.3 (17.11.2026): откуда у игрока MF, чего не хватает и что взять дальше.
 // Чистые функции: профиль, константы NEU и цены приходят параметрами.
 //
@@ -36,7 +37,8 @@ export function slayerMf(key, level) {
 
 /** MF от Pet Score по таблице NEU (порог → MF) */
 export function petScoreMf(score, table) {
-  let mf = 0;
+  // В NEU таблица обрывается на 325 (+10), а в игре пороги идут до 500 (+13): берём большее из NEU и таблицы SkyCrypt
+  let mf = petScoreReward(score).mf;
   for (const [min, v] of Object.entries(table || {})) if (score >= Number(min)) mf = Math.max(mf, Number(v?.magic_find) || 0);
   return mf;
 }

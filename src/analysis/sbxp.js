@@ -73,7 +73,8 @@ export function sbxpPlan(m, o = {}) {
 
   // Abiphone: 10 XP за контакт
   const contacts = m.abiphone?.active?.length ?? m.crimson?.abiphoneContacts ?? 0;
-  if (contacts || m.crimson?.faction) rows.push({ id: 'abiphone', title: 'Abiphone', have: contacts * SBXP.perAbiphone, max: SBXP.abiphoneMax, perXp: null,
+  if (contacts || m.crimson?.faction) rows.push({ id: 'abiphone', title: 'Abiphone', have: contacts * SBXP.perAbiphone, max: Math.max(SBXP.abiphoneMax, contacts * SBXP.perAbiphone), // контактов в игре больше, чем было в таблице: «700 / 490» не показываем
+    perXp: null,
     text: '10 XP за каждый контакт в Abiphone: у многих NPC свой небольшой квест.', href: '#/guides/crimson' });
 
   // Порядок: бесплатное сейчас, потом за монеты по цене за XP, потом то, что требует времени

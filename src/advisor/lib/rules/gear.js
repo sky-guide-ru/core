@@ -154,7 +154,7 @@ export function ladderRules(ctx, add) {
         title: plan.cheaper === 'buy' ? ru`Броня Kuudra: ${from} → ${to} (выгоднее купить готовую)` : ru`Улучши свою броню Kuudra: ${from} → ${to}`,
         why: ru`${capFirst(tierLabel(l, targetIdx).note)}. Свой сет не надо менять: каждую часть можно поднять на следующий тир у кузнеца.${cost ? ru` Выйдет ~${fmtCoins(cost)}.` : ''}`,
         how: plan.lines,
-        items: [...['ESSENCE_CRIMSON', 'KUUDRA_TEETH'], ...(plan.totals.pearls ? ['HEAVY_PEARL'] : []), ...plan.pieces.map(p => p.id || p.buyId)],
+        items: [...['ESSENCE_CRIMSON', 'KUUDRA_TEETH'], ...(plan.totals.pearls ? ['HEAVY_PEARL'] : []), ...plan.pieces.map(p => p.id || p.buyId).filter(Boolean)],
         cost: cost || undefined,
         payoff: ru`${to}: больше статов и сильнее бонус сета`,
         link: 'gear',

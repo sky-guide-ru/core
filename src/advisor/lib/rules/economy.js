@@ -247,8 +247,8 @@ export function petRules(ctx, add) {
 
   // Недостающие ключевые питомцы
   const missing = KEY_PETS.pets.filter(p => goals.has(p.when)).filter(p => {
-    const have = best.get(p.type);
-    return !have || petTierIndex(have.tier) < p.tier;
+    const ok = t => { const have = best.get(t); return have && petTierIndex(have.tier) >= p.tier; };
+    return ![p.type, ...(p.alt || [])].some(ok);
   });
   if (missing.length) {
     const rows = missing.map(p => ({ ...p, price: ctx.price(tx`${p.type};${p.tier}`) }));
@@ -321,7 +321,8 @@ const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 
 const minionTypeName = t => MINION_NAMES[t] || prettyId(t);
 
 export function minionRules(ctx, add) {
-  const list = ctx.m.minions || [];
+  // Уникальные крафты в коопе складываются, слоты общие — как на странице «Миньоны»
+  const list = [...new Set([...(ctx.m.minions || []), ...(ctx.m.coop?.minions || [])])];
   if (!list.length && ctx.m.inv?.apiDisabled) return;
   const unique = new Set(list).size;
   const slots = [...MINION_SLOTS].reverse().find(([n]) => unique >= n)?.[1] || 5;
@@ -367,7 +368,8 @@ export function collectionRules(ctx, add) {
   if (!tiers) return;
   const rows = [];
   for (const [id, thresholds] of Object.entries(tiers)) {
-    const have = ctx.m.collections?.[id] || 0;
+    // В коопе количество общее (как на странице «Коллекции»): своё — только доля игрока
+    const have = Math.max(ctx.m.collections?.[id] || 0, Number(ctx.m.coop?.collections?.[id] || 0));
     const nextIdx = thresholds.findIndex(t => have < t);
     if (nextIdx < 0) continue;
     const need = thresholds[nextIdx] - have;

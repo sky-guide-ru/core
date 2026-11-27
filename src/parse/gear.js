@@ -7,7 +7,7 @@ import { PET_TIERS } from '../nbt.js';
 import { buildUpgrades, nextUpgrade, NO_RECOMB } from '../lib/acc-upgrades.js';
 import { tx } from '../../i18n/msg.js';
 import { canSellCopy } from '../lib/item-props.js';
-import { statOf, howOf, reqOf, tierOf, accSteps } from './acc-meta.js';
+import { statOf, howOf, reqOf, tierOf, accSteps, up1 } from './acc-meta.js';
 
 export const MP_BY_RARITY = { COMMON: 3, UNCOMMON: 5, RARE: 8, EPIC: 12, LEGENDARY: 16, MYTHIC: 22, DIVINE: 22, SPECIAL: 3, 'VERY SPECIAL': 5 };
 const RARITY_ORDER = ['COMMON', 'UNCOMMON', 'RARE', 'EPIC', 'LEGENDARY', 'MYTHIC', 'DIVINE', 'SPECIAL', 'VERY SPECIAL'];
@@ -77,10 +77,12 @@ export function analyzeAccessories(member) {
   for (const acc of all) {
     // Rift Prism — не аксессуар для сумки: его употребляют один раз (+11 MP), для него свой шаг mp-rift-prism
     if (owned.has(acc.id) || covered.has(acc.id) || ignored.has(acc.id) || NOT_IN_BAG.has(acc.id)) continue;
-    const accMp = MP_BY_RARITY[acc.rarity] || 0;
-    if (!accMp) continue;
+    if (!(MP_BY_RARITY[acc.rarity] || 0)) continue;
     // если владеем младшей версией — считаем прирост
     const lower = [...owned.keys()].find(o => (up[o] || []).includes(acc.id));
+    // Recombobulator переходит на улучшенную версию: у рекомбнутой младшей старшая тоже будет на ступень выше
+    // (так же считает шаг «tier» в accSteps — иначе план и раздел «Аксессуары» расходились)
+    const accMp = MP_BY_RARITY[lower && owned.get(lower).recomb ? up1(acc.rarity) : acc.rarity] || 0;
     const lowerMp = lower ? (MP_BY_RARITY[owned.get(lower).rarity] || 0) : 0;
     // если существует старшая версия, которую мы не покрыли — тоже ок, рекомендуем по цене
     const gain = accMp - lowerMp;

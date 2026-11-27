@@ -31,5 +31,8 @@
  "Они живут на островах круглый год, каждый в своём месте: зайди на остров и кликни по кролику. Не тронуты {0} {1} целиком. Список по островам — ниже, места подсвечивает мод SkyHanni.": "They live on the islands all year round, each in its own spot: go to the island and click the rabbit. {0} {1} are untouched entirely. The list by island is below; the SkyHanni mod highlights the spots.",
  "остров": "island",
  "острова": "islands",
- "островов": "islands"
+ "островов": "islands",
+ "Chocolate у потолка фабрики: {0}": "Chocolate at the factory cap: {0}",
+ "Они живут на островах круглый год, каждый в своём месте: зайди на остров и кликни по кролику.{0} Список по островам — ниже, места подсвечивает мод SkyHanni.": "They live on the islands all year round, each in its own spot: go to the island and click the rabbit.{0} The list by island is below; the SkyHanni mod highlights the spots.",
+ " Не тронуты {0} {1} целиком.": " {0} {1} not touched at all."
 }

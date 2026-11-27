@@ -193,7 +193,8 @@ function better(a, b) {
  * @returns {{ best, saved: Array, weaponless: boolean }}
  */
 export function bestKit(kit, target, o = {}) {
-  const weapons = kit.weapons.filter(w => (target.dagger ? w.type === 'DAGGER' && o.daggerIds?.has(w.id) : true) && (!o.weaponFilter || o.weaponFilter(w)));
+  // Кинжалы Blaze в лоре подписаны «LEGENDARY SLAYER SWORD», не DAGGER: узнаём их только по id
+  const weapons = kit.weapons.filter(w => (target.dagger ? !!o.daggerIds?.has(w.id) : true) && (!o.weaponFilter || o.weaponFilter(w)));
   if (!weapons.length) return { best: null, saved: [], weaponless: true };
   const KEYS = ['strength', 'crit_damage', 'crit_chance', 'attack_speed', 'ferocity', 'health', 'defense', 'true_defense'];
   const types = target.types || [];

@@ -14,6 +14,18 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-strong',
+    date: '2026-11-27',
+    kind: 'fix',
+    title: 'Точнее советы для сильных профилей',
+    items: [
+      'Свои кинжалы Blaze из хранилищ учитываются в [гайде Blaze](guides/slayer-blaze#wear) и наборе по частям.',
+      'В коопе [план](roadmap) считает слоты миньонов и коллекции по общим крафтам, как в игре.',
+      'Ender Dragon не советуется при Golden Dragon, шлем Kuudra — при другом шлеме в том же сете.',
+      'Magic Find от Pet Score выше 325 очков и улучшения аксессуаров с Recombobulator считаются верно.',
+    ],
+  },
+  {
     id: '2026-11-27-blazetiers',
     date: '2026-11-27',
     kind: 'fix',

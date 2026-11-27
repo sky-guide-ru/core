@@ -5,7 +5,7 @@ import { fmtCoins, fmtNum, plural } from '../util.js';
 import { ru } from '../../../../i18n/msg.js';
 import { tx } from '../../../../i18n/msg.js';
 
-const IN_USE = new Set(['Инвентарь', 'Надето', 'Экипировка', 'Wardrobe']);
+const IN_USE = new Set(['Инвентарь', 'Надето', 'Экипировка', 'Wardrobe', 'Wardrobe (экипировка)']);
 
 const HOW_DONATE = [
   'Hub → Museum (рядом с Bazaar и Community Center), Madame Eleanor Q. Goldsworth III открывает меню музея.',
@@ -14,7 +14,7 @@ const HOW_DONATE = [
 ];
 
 export function museumRules(ctx, add) {
-  const mu = analyzeMuseum(ctx.m, { constants: ctx.opts?.constants, price: ctx.price, name: ctx.name, owned: ctx.owned });
+  const mu = analyzeMuseum(ctx.m, { constants: ctx.opts?.constants, price: ctx.price, name: ctx.name });
   const nm = id => mu.names?.[id] || ctx.name(id);
   if (mu.status === 'off') {
     add({
