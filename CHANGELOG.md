@@ -4,6 +4,12 @@
 
 ## Не выпущено
 
+## 0.2.42
+
+- `makeBuy(prices, { soldStats })` в `market/quote.js` (перенесён из api): если BIN-лотов нет, но за неделю были продажи — цена по медиане продаж с `noLots: true`. «Как получить» показывает «Купить на аукционе» и для таких вещей (Master Skull и т. п.), шаги без «самый дешёвый сейчас».
+- Шаги дропа с Master Mode: «Catacombs 24 и пройденный F7 — без него Master Mode закрыт».
+- Новость «Покупка на аукционе в „Как получить“».
+
 ## 0.2.40
 
 - Bingo: `bingoGoalsLeft(resp, event)` в `lib/live-status.js` (цели ивента с `lore`), `member.bingoGoals` у профиля Bingo, шаг плана `bingo-goals` (`bingoRules`).

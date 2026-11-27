@@ -123,5 +123,11 @@
  "«{0}» выпадает не каждый раз: за аукцион выходит {1} случайных лотов{2}. Ставка — от {3}.": "\"{0}\" doesn't show up every time: each auction has {1} random lots{2}. Bids start at {3}.",
  ", а этот предмет бывает только с перком Darker Auctions мэра Scorpius": ", and this item only appears with Mayor Scorpius's Darker Auctions perk",
  "Сравни с аукционом: там сейчас от {0}. Ставки на Dark Auction часто уходят выше.": "Compare with the auction house: it's from {0} there now. Dark Auction bids often go higher.",
- "Продать: дороже самого дешёвого лота ({0}) не уйдёт, после комиссий аукциона ~{1}. Дорогие продажи — это копии с улучшениями.": "Sell: it won’t go above the cheapest listing ({0}), ~{1} after auction fees. Expensive sales are upgraded copies."
+ "Продать: дороже самого дешёвого лота ({0}) не уйдёт, после комиссий аукциона ~{1}. Дорогие продажи — это копии с улучшениями.": "Sell: it won’t go above the cheapest listing ({0}), ~{1} after auction fees. Expensive sales are upgraded copies.",
+ "Босс этажа {0} в Catacombs{1}. Предмет лежит в сундуках награды после победы над боссом (чем выше оценка рана, тем лучше сундуки).": "Floor {0} boss in the Catacombs{1}. The item is in the reward chests after the boss is defeated (the higher the run score, the better the chests).",
+ " (Master Mode — усложнённые этажи)": " (Master Mode: the harder floors)",
+ "Catacombs {0} и пройденный {1}": "Catacombs {0} and a completed {1}",
+ "F7 — без него Master Mode закрыт": "F7: Master Mode stays locked without it",
+ "Сейчас BIN-лотов с «{0}» нет, но вещь продаётся: за неделю {1} шт., в среднем по {2}. Загляни позже — новые лоты появляются регулярно.": "No BIN listings of “{0}” right now, but it does sell: {1} sold this week, {2} on average. Check back later, new listings show up regularly.",
+ " На аукционе 1 шт. уходит в среднем за {0}.": " On the Auction House 1 sells for {0} on average."
 }
