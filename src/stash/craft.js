@@ -13,7 +13,9 @@ function haveOf(inv, id) {
 
 /**
  * @param {Object} member  state.member
- * @param {Object} o { items: NEU Map, name(id), roadmap: [{ id, title, done, items }], cartIds: [] }
+ * @param {Object} o { items: NEU Map, name(id), roadmap: [{ id, title, done, items }], cartIds: [],
+ *   buy?(id) → цена покупки сейчас: с ней (обычный профиль) показываем крафт, только если докупить недостающее
+ *   дешевле, чем купить вещь готовой; у вещи появляются buyCost (готовая), missCost (докупить), saving }
  * @returns {{ items: Array<{ id, name, step, ready, parts: Array<{ id, name, need, have, fromStash }> }> }}
  *   ready — сколько рецепта уже есть, в среднем по частям (0..1); fromStash — сколько недостающего можно скрафтить из своих запасов.
  */
@@ -44,8 +46,23 @@ export function analyzeCraft(member, o = {}) {
     // Готовность — среднее по частям рецепта: 1 Fermento Boots из 1 весит столько же, сколько 64 Compacted Sunflower
     const ready = rows.reduce((s, r) => s + Math.min(1, (r.have + r.fromStash) / r.need), 0) / rows.length;
     if (!ready) continue; // ничего из рецепта нет — это уже не «потратить запасы»
-    out.push({ id, name: o.name?.(id) || id, step, ready, parts: rows });
+    const item = { id, name: o.name?.(id) || id, step, ready, parts: rows };
+    if (o.buy) {
+      // Рынок есть: крафт из запасов имеет смысл, только если докупить недостающее дешевле готовой вещи
+      const buyCost = o.buy(id) || 0;
+      let missCost = 0, unknown = false;
+      for (const r of rows) {
+        const miss = Math.max(0, r.need - r.have - r.fromStash);
+        if (!miss) continue;
+        const p = o.buy(r.id) || 0;
+        if (!p) unknown = true;
+        missCost += p * miss;
+      }
+      if (unknown || !buyCost || missCost >= buyCost) continue;
+      Object.assign(item, { buyCost: Math.round(buyCost), missCost: Math.round(missCost), saving: Math.round(buyCost - missCost) });
+    }
+    out.push(item);
   }
-  out.sort((a, b) => b.ready - a.ready);
+  out.sort((a, b) => (o.buy ? b.saving - a.saving : 0) || b.ready - a.ready);
   return { items: out.slice(0, LIMIT) };
 }
