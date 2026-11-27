@@ -14,6 +14,7 @@
 
 import { buildUpgrades, nextUpgrade } from '../lib/acc-upgrades.js';
 import { tx } from '../../i18n/msg.js';
+import { canSellCopy } from '../lib/item-props.js';
 
 let upMemo = null;
 const upgradesFor = raw => (upMemo && upMemo.raw === raw ? upMemo : (upMemo = { raw, map: buildUpgrades(raw) })).map;
@@ -454,10 +455,12 @@ function extraSteps(it, cls, ctx) {
     const rawUp = ctx.constants?.misc?.talisman_upgrades;
     const next = rawUp?.[it.id]?.[0] || nextUpgrade(it.id, upgradesFor(rawUp));
     if (next) {
-      const p = ctx.priceOf(next), own = (ctx.sellOf || ctx.priceOf)(it.id);
+      // сданную в Museum или Soulbound старую версию не продать: доплата — полная цена
+      const sellOld = canSellCopy(it);
+      const p = ctx.priceOf(next), own = sellOld ? (ctx.sellOf || ctx.priceOf)(it.id) : 0;
       const nextRarity = ctx.getItem(next)?.rarity;
       const mp = nextRarity ? (MP_BY_RARITY[RARITIES[Math.min(RARITIES.indexOf(nextRarity) + (it.recomb ? 1 : 0), 6)]] || 0) - (MP_BY_RARITY[it.rarity] || 0) : 0;
-      s.push({ key: 'acc_upgrade', group: 'core', title: tx`Следующая версия: ${ctx.getItem(next)?.name || title(next)}`, current: it.name || it.id, target: ctx.getItem(next)?.name || next, done: false, cost: p ? Math.max(p - own, p * 0.1) : null, parts: [{ id: next, count: 1, price: p }], impact: 5, why: 'больше Magical Power; старую версию можно продать', approx: true, ...mpGain(mp) });
+      s.push({ key: 'acc_upgrade', group: 'core', title: tx`Следующая версия: ${ctx.getItem(next)?.name || title(next)}`, current: it.name || it.id, target: ctx.getItem(next)?.name || next, done: false, cost: p ? Math.max(p - own, p * 0.1) : null, parts: [{ id: next, count: 1, price: p }], impact: 5, why: sellOld ? 'больше Magical Power; старую версию можно продать' : 'больше Magical Power; старая версия в Museum или Soulbound, её не продать', approx: true, ...mpGain(mp) });
     }
   }
   if (it.attributes && typeof it.attributes === 'object') {

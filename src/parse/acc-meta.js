@@ -88,7 +88,8 @@ export function accSteps({ list, missing, mpBy }) {
       const nr = a.recomb ? up1(a.next.rarity) : a.next.rarity;
       const gain = (mpBy[nr] || 0) - a.mp;
       const full = buyPriceOf(a.next.id) || 0;
-      const cost = full ? Math.max(full - (a.value || 0), full * 0.1) : null;
+      // младшую из Museum или Soulbound не продать — без вычета
+      const cost = full ? Math.max(full - (a.sellable === false ? 0 : a.value || 0), full * 0.1) : null;
       if (gain > 0) steps.push({ kind: 'tier', id: a.id, name: a.next.name, target: a.next.id, from: a.name, rarity: nr, cost, gain });
     }
     if (a.canRecomb) steps.push({ kind: 'recomb', id: a.id, name: a.name, rarity: a.rarity, to: up1(a.rarity), cost: recombPrice, gain: (mpBy[up1(a.rarity)] || 0) - (mpBy[a.rarity] || 0) });

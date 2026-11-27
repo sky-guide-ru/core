@@ -150,6 +150,13 @@ test('Аксессуар: рекомб и следующая версия сем
   assert.equal(step(plan, 'recomb').gain.mp, 4);
 });
 
+test('Аксессуар из Museum: доплата за следующую версию — полная цена, старую не продать', () => {
+  const plan = planItemUpgrades({ id: 'ENDER_ARTIFACT', name: 'Ender Artifact', rarity: 'EPIC', museum: true, upgrades: [], lore: NEU.ENDER_ARTIFACT.lore }, ctx);
+  const s = step(plan, 'acc_upgrade');
+  assert.equal(s.cost, 300e6);
+  assert.match(s.why, /не продать/);
+});
+
 test('Питомец: уровень, редкость (Tier Boost), предмет', () => {
   const plan = planItemUpgrades({ isPet: true, id: 'ENDER_DRAGON;3', type: 'ENDER_DRAGON', tier: 'EPIC', exp: 1, level: 51, maxLevel: 100 }, ctx);
   assert.equal(plan.kind, 'pet');
