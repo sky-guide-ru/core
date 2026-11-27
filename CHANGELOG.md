@@ -4,6 +4,10 @@
 
 ## Не выпущено
 
+## 0.2.14
+
+- Новость «Роль Verified в Discord» и перевод страницы /discord (привязка Discord к нику, api) для /en/.
+
 ## 0.2.12
 
 - Лестницы снаряжения получили `style` (bow / melee / mage). Новая лестница `dungeon-melee-weapon` для Berserk: Livid Dagger / Shadow Fury (F5) → Giant's Sword (F6) → Dark Claymore (M7); требование `masterFloor`.
