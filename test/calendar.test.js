@@ -150,3 +150,18 @@ test('гайд Diana: ивент идёт / не идёт', () => {
   assert.ok(off.next.some(n => /Griffin/.test(n.title)));
   setElection(RAW, NOW);
 });
+
+import { setFireSales, fireSaleEvents, nowAndNext } from '../src/calendar/index.js';
+test('Fire Sales: идут в «Скоро» и «Идёт сейчас», закончившиеся отброшены', () => {
+  const now = Date.UTC(2026, 10, 27, 12);
+  setFireSales({ success: true, sales: [
+    { item_id: 'PET_SKIN_TEST_A', start: now + 3600_000, end: now + 5 * 86400_000, amount: 5000, price: 650 },
+    { item_id: 'PET_SKIN_TEST_B', start: now - 86400_000, end: now - 1000, amount: 1, price: 1 },
+  ] });
+  const ev = fireSaleEvents(now);
+  assert.equal(ev.length, 1);
+  assert.equal(ev[0].icon, 'PET_SKIN_TEST_A');
+  assert.match(ev[0].what, /5000 шт\. по 650 SkyBlock Gems/);
+  assert.ok(nowAndNext(now, { limit: 50 }).upcoming.some(e => e.id === 'firesale-PET_SKIN_TEST_A'));
+  setFireSales({ sales: [] });
+});

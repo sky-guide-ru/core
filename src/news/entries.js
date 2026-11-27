@@ -14,6 +14,15 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-firesale',
+    date: '2026-11-27',
+    kind: 'new',
+    title: 'Fire Sales в «Событиях»',
+    items: [
+      'В [Событиях](events) видны Fire Sales: какая косметика, сколько штук и цена в SkyBlock Gems.',
+    ],
+  },
+  {
     id: '2026-11-27-records',
     date: '2026-11-27',
     kind: 'better',
