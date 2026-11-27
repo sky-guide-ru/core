@@ -4,6 +4,12 @@
 
 ## Не выпущено
 
+## 0.2.13
+
+- `calendar/announce.js`: `dueAnnouncements(now)` — какие объявления событий пора отправить в Discord (Jacob и Dark Auction за 5 минут, большие события года и Fishing Festival за 10, открытие выборов, новый мэр с министром, Fire Sales). Только по уже загруженным выборам и Fire Sales, без своих запросов к Hypixel.
+- `calendar/jacob.js`: культуры конкурсов Jacob из открытого расписания elitebot.dev (`createJacobCrops`), запрос раз в год SkyBlock.
+- `calendar/index.js`: `fireSalesList()`.
+
 ## 0.2.12
 
 - Лестницы снаряжения получили `style` (bow / melee / mage). Новая лестница `dungeon-melee-weapon` для Berserk: Livid Dagger / Shadow Fury (F5) → Giant's Sword (F6) → Dark Claymore (M7); требование `masterFloor`.
