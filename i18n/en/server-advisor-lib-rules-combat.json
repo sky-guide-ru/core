@@ -126,5 +126,9 @@
  " T{0} по твоим статам {1}, а опыта за босса больше.": " T{0} at your stats is {1}, and gives more XP per boss.",
  "Осталось {0} опыта слеера{1}.{2}{3}{4}": "{0} Slayer XP left{1}.{2}{3}{4}",
  ", квесты ~{0}": ", quests ~{0}",
- "Kuudra: фарми {0}": "Kuudra: farm {0}"
+ "Kuudra: фарми {0}": "Kuudra: farm {0}",
+ "На 2 уровне скрафти {0}: два кинжала закрывают все четыре Attunement": "At level 2 craft {0}: two daggers cover all four Attunements",
+ "{0}: Firedust — 30 Silver Magmafish и 1 Molten Powder, Twilight — 5 Enchanted Sulphur и 1 Molten Powder": "{0}: Firedust — 30 Silver Magmafish and 1 Molten Powder, Twilight — 5 Enchanted Sulphur and 1 Molten Powder",
+ "Купи на Auction House или скрафти": "Buy on the Auction House or craft",
+ "Скрафти": "Craft"
 }

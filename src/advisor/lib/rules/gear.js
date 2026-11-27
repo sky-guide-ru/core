@@ -148,7 +148,7 @@ export function ladderRules(ctx, add) {
     if (own && own.tier === best) {
       const plan = kuudraUpgradePlan(ctx, own, targetIdx);
       const from = kuudraSetName(own.fam, own.tier), to = kuudraSetName(own.fam, targetIdx);
-      const cost = plan.cheaper === 'buy' ? plan.buyNet : plan.upgradeCost || plan.buyNet;
+      const cost = !ctx.market ? 0 : plan.cheaper === 'buy' ? plan.buyNet : plan.upgradeCost || plan.buyNet;
       add({
         id: tx`gear-${l.id}`, cat: l.cat, priority: 62 + 8, effort: 'монеты',
         title: plan.cheaper === 'buy' ? ru`Броня Kuudra: ${from} → ${to} (выгоднее купить готовую)` : ru`Улучши свою броню Kuudra: ${from} → ${to}`,
@@ -181,9 +181,11 @@ export function ladderRules(ctx, add) {
       title: best >= 0 ? tx`${l.titleRu}: ${have} → ${next.name}` : ru`${l.titleRu}: начни с ${next.name}`,
       why: tx`${capFirst(next.note)}.${req.ok ? '' : ru` Сначала ${req.text}.`}${cost ? ru` Цена сейчас ~${fmtCoins(cost)}.` : ''}`,
       how: [
-        cost ? ru`Купить: ${next.name} — ~${fmtCoins(cost)} на Auction House` : ru`Получить: ${next.name}`,
-        ...(l.kind === 'kuudra-armor' ? ['Следующий тир можно получить и престижем: часть с 10 звёздами улучшается у кузнеца (Blacksmith) за эссенцию Crimson, Kuudra Teeth и монеты — часто дешевле, чем покупать готовый сет'] : []),
-        ...(best >= 0 ? [ru`Старое снаряжение (${tierLabel(l, best).name}) можно продать, когда перейдёшь на новое`] : []),
+        // Без рынка: где добыть (по первой части сета — у частей один источник), или у какого NPC купить
+        !ctx.market && items.length ? (() => { const h = ctx.obtain(items[0]); return h?.kind === 'npc' ? ru`Купить у NPC ${h.npcName}: ${next.name}` : ru`Добыть: ${next.name} — ${h?.text || 'добыть самому'}`; })()
+          : cost ? ru`Купить: ${next.name} — ~${fmtCoins(cost)} на Auction House` : ru`Получить: ${next.name}`,
+        ...(l.kind === 'kuudra-armor' && ctx.market ? ['Следующий тир можно получить и престижем: часть с 10 звёздами улучшается у кузнеца (Blacksmith) за эссенцию Crimson, Kuudra Teeth и монеты — часто дешевле, чем покупать готовый сет'] : []),
+        ...(best >= 0 ? [ctx.market ? ru`Старое снаряжение (${tierLabel(l, best).name}) можно продать, когда перейдёшь на новое` : ru`Старое снаряжение (${tierLabel(l, best).name}) можно продать NPC, когда перейдёшь на новое`] : []),
         ...(bowAlt ? [ru`У тебя есть ${bow.name}: лук — свой стиль игры. Если ходишь на этого босса с луком, меч можно не брать; он нужен для ближнего боя`] : []),
       ],
       items,

@@ -131,6 +131,8 @@ export function npcFlips(ctx, { limit = 30, mode = 'order', share = 0.05, minPro
  */
 export function buyPrice(ctx, id, mode = 'instant') {
   if (id === 'SKYBLOCK_COIN') return { price: 1, market: 'монеты' };
+  // Профиль без рынка (Ironman, Stranded, Bingo): купить можно только у NPC за монеты
+  if (ctx.npcOnly) { const c = ctx.npcBuy?.(id) || 0; return c > 0 ? { price: c, market: 'NPC' } : null; }
   const bz = ctx.bazaar.get(id);
   if (bz && (bz.buy || bz.sell)) {
     const price = mode === 'order' ? (bz.sell ? bz.sell + TICK : bz.buy) : (bz.buy || bz.sell * 1.05);
@@ -148,6 +150,8 @@ export function buyPrice(ctx, id, mode = 'instant') {
  * @returns {{ net: number, gross: number, market: string, volumeDay: number, sold24h?: number } | null}
  */
 export function sellValue(ctx, id, mode = 'offer') {
+  // Профиль без рынка: продать можно только NPC, без налога и без предела по спросу
+  if (ctx.npcOnly) { const p = ctx.npc?.get(id) || 0; return p > 0 ? { net: p, gross: p, market: 'NPC', volumeDay: Infinity } : null; }
   const tax = ctx.tax ?? DEFAULT_BAZAAR_TAX;
   const bz = ctx.bazaar.get(id);
   if (bz && (bz.buy || bz.sell)) {

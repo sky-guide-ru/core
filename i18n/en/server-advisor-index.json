@@ -7,5 +7,8 @@
  " (Bank общий на кооп-острове)": " (the Bank is shared on the co-op island)",
  "Покупки": "Purchases",
  "Главное сейчас: {0}": "Main thing now: {0}",
- "Всё основное сделано": "All the main things are done"
+ "Всё основное сделано": "All the main things are done",
+ "Купить у NPC {0}: {1} — ~{2}": "Buy from NPC {0}: {1} — ~{2}",
+ "Добыть: {0} — {1}": "Obtain: {0} — {1}",
+ "нужно добыть": "needs farming"
 }

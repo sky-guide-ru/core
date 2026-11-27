@@ -4,6 +4,7 @@ import { englishName } from '../../names.js';
 import { combatSnapshot, neuForCalc } from '../../calc/power.js';
 import { buildKit } from '../../calc/kit.js';
 import { tx } from '../../../i18n/msg.js';
+import { profileMode } from '../../lib/profile-mode.js';
 
 /**
  * @typedef {Object} AdvisorOptions
@@ -13,6 +14,8 @@ import { tx } from '../../../i18n/msg.js';
  * @property {Array<Object>} [moneyMethods]  Результат moneyMethods(member) из модуля prices.
  * @property {Object<string, number[]>} [collectionTiers]  id коллекции → пороги тиров (из /v2/resources/skyblock/collections).
  * @property {number} [now]  Метка времени (для тестов).
+ * @property {(id: string) => ({ kind: string, text: string, coins?: number }|null)} [obtain]  Как добыть предмет без рынка
+ *   (lib/npc-shop.js obtainHint): для Ironman, Stranded и Bingo план пишет «купить у NPC» или «добыть: где».
  */
 
 /** Собирает контекст с безопасными значениями по умолчанию. */
@@ -57,6 +60,10 @@ export function makeCtx(member, acc, gear, opts = {}) {
     data,
     price,
     hasPrices: !!rawPrice,
+    // Ironman, Stranded, Bingo: нет Bazaar и аукциона — правила пишут свой вариант текста (добыть, а не купить)
+    mode: profileMode(member.gameMode),
+    market: profileMode(member.gameMode).market,
+    obtain: id => { try { return (opts.obtain && id && opts.obtain(id)) || null; } catch { return null; } },
     // Питомцы в NEU называются «[Lvl {LVL}] Megalodon»: шаблон уровня не показываем, где бы ни взялось имя
     name: id => String((opts.itemName && opts.itemName(id)) || englishName(id)).replace(/§./g, '').replace(/^\[Lvl \{LVL\}\]\s*/, ''),
     owned,

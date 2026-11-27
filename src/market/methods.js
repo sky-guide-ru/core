@@ -17,6 +17,7 @@ import { PASSIVE_METHODS } from './methods-passive.js';
 import { PASSIVE_DETAILS } from './method-details-passive.js';
 import { mayorBoost, mayorNoteText } from './mayor-boost.js';
 import { tx } from '../../i18n/msg.js';
+import { npcCoinPrice } from '../lib/npc-shop.js';
 
 Object.assign(METHOD_DETAILS, PASSIVE_DETAILS);
 
@@ -214,6 +215,7 @@ export function estimateFarmingFortune(m) {
 }
 
 function marketPrice(ctx, id) {
+  if (ctx.npcOnly) return ctx.npc?.get(id) || 0;
   const bz = ctx.bazaar.get(id);
   if (bz) return bz.sell || bz.buy || 0;
   return ctx.bin.get(id)?.price || 0;
@@ -229,9 +231,24 @@ function marketPrice(ctx, id) {
 // Методы, которые целиком держатся на Bazaar/аукционе: в Ironman, Stranded и Bingo их нет
 const MARKET_ONLY = new Set(['bazaar-flip', 'craft-flip']);
 
-export function moneyMethods(member, ctx, opts = {}) {
+// Вариант рынка для Ironman, Stranded и Bingo: продают только NPC (по цене NPC, без налога),
+// покупают только у NPC за монеты. Те же расчёты методов, но доход — тот, что реально получит такой игрок.
+const npcCtxCache = new WeakMap();
+export function npcOnlyCtx(ctx) {
+  if (!ctx || ctx.npcOnly) return ctx;
+  if (npcCtxCache.has(ctx)) return npcCtxCache.get(ctx);
+  const npcBuy = id => npcCoinPrice(ctx.items, id);
+  const bazaar = new Map();
+  for (const [id, p] of ctx.npc || []) if (p > 0) bazaar.set(id, { id, sell: p, buy: npcBuy(id), sellWeek: 1e12, buyWeek: 1e12 });
+  const out = { ...ctx, npcOnly: true, npcBuy, bazaar, bin: new Map(), binVar: null, sold: null, history: null, binHistory: null, tax: 0 };
+  npcCtxCache.set(ctx, out);
+  return out;
+}
+
+export function moneyMethods(member, ctx0, opts = {}) {
   const out = [];
   const mode = profileMode(member?.gameMode);
+  const ctx = mode.market ? ctx0 : npcOnlyCtx(ctx0);
   for (const def of METHODS) {
     if (!mode.market && (MARKET_ONLY.has(def.id) || def.marketOnly)) continue;
     const reqs = def.req(member, opts);

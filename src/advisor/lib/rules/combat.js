@@ -180,7 +180,7 @@ export function slayerRules(ctx, add) {
         how: [
           wearLine(t1),
           ru`Квест T1 у Maddox the Slayer (${fmtCoins(costs[0])}), бой в ${SLAYER_WHERE.blaze}`,
-          ru`На 2 уровне купи на Auction House или скрафти ${DAGGERS_TEXT}: два кинжала закрывают все четыре Attunement${daggerCost ? ru` (сейчас ~${fmtCoins(daggerCost)} за оба)` : ''}`,
+          !ctx.market ? ru`На 2 уровне скрафти ${DAGGERS_TEXT}: два кинжала закрывают все четыре Attunement` : ru`На 2 уровне купи на Auction House или скрафти ${DAGGERS_TEXT}: два кинжала закрывают все четыре Attunement${daggerCost ? ru` (сейчас ~${fmtCoins(daggerCost)} за оба)` : ''}`,
           t2Line(plan),
           'Крафт: Firedust — 30 Silver Magmafish и 1 Molten Powder, Twilight — 5 Enchanted Sulphur и 1 Molten Powder; ПКМ меняет Attunement, цвет должен совпадать со щитом',
         ].filter(Boolean),
@@ -211,7 +211,7 @@ export function slayerRules(ctx, add) {
         id: 'slayer-blaze', cat: 'Slayers', priority: 80, effort: 'минуты',
         title: 'Возьми кинжалы для Inferno Demonlord T2+',
         why: ru`Blaze ${sl.level} уровня открывает кинжалы, а без них по T2+ проходит только 1% урона. Нужны оба: ${DAGGERS_TEXT}.`,
-        how: ['Купи на Auction House или скрафти: Firedust — 30 Silver Magmafish и 1 Molten Powder, Twilight — 5 Enchanted Sulphur и 1 Molten Powder', 'ПКМ меняет Attunement, щит босса меняется каждые 8 ударов', t2Line(plan)].filter(Boolean),
+        how: [tx`${ctx.market ? 'Купи на Auction House или скрафти' : 'Скрафти'}: Firedust — 30 Silver Magmafish и 1 Molten Powder, Twilight — 5 Enchanted Sulphur и 1 Molten Powder`, 'ПКМ меняет Attunement, щит босса меняется каждые 8 ударов', t2Line(plan)].filter(Boolean),
         payoff: 'Доступ к T2–T4',
         items: ['FIREDUST_DAGGER', 'MAWDUST_DAGGER'],
         link: 'slayers',

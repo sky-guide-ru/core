@@ -38,7 +38,7 @@
  "Мод с вэйпоинтами (SkyHanni, Skytils, NEU) покажет точку по координатам": "A waypoint mod (SkyHanni, Skytils, NEU) shows the spot by coordinates",
  "до {0} обменов у Tia": "up to {0} trades at Tia",
  "Активируй Booster Cookie": "Activate a Booster Cookie",
- "+25 к Wisdom всех скиллов (≈+25% опыта), +10 Magic Find, Bits для магазина Elizabeth, монеты не теряются при смерти, /ah и /bazaar откуда угодно.": "+25 Wisdom for all skills (≈+25% XP), +10 Magic Find, Bits for Elizabeth's shop, no coins lost on death, /ah and /bazaar from anywhere.",
+ "+25 к Wisdom всех скиллов (≈+25% опыта), +10 Magic Find, Bits для магазина Elizabeth, монеты не теряются при смерти, /ah и /bazaar откуда угодно.": "+25 Wisdom on all skills (≈+25% XP), +10 Magic Find, Bits for Elizabeth's shop, no coin loss on death, /ah and /bazaar from anywhere.",
  "Купи Booster Cookie на Bazaar{0} и съешь": "Buy a Booster Cookie on the Bazaar{0} and eat it",
  " (сейчас ~{0})": " (now ~{0})",
  "Осталось {0} {1}, до {2} — {3} опыта. Каждый уровень даёт статы и SkyBlock XP; Skill Average сейчас {4}.{5}": "{0} {1} left, {3} XP to {2}. Each level gives stats and SkyBlock XP; Skill Average is {4} now.{5}",
@@ -86,10 +86,13 @@
  "Обменяй феи у Tia the Fairy: {0} {1}": "Exchange fairy souls with Tia the Fairy: {0} {1}",
  "Свободных фей {0}: каждые 5 меняются у неё на постоянную награду.": "Free fairy souls: {0}. Every 5 are exchanged with her for a permanent reward.",
  "Собери оставшиеся феи: осталось {0} из {1}": "Collect the remaining fairy souls: {0} of {1} left",
- "+25 к Wisdom всех скиллов (≈+25% опыта), +10 Magic Find, Bits для магазина Elizabeth, монеты не теряются при смерти, /ah и /bazaar откуда угодно.": "+25 Wisdom on all skills (≈+25% XP), +10 Magic Find, Bits for Elizabeth's shop, no coin loss on death, /ah and /bazaar from anywhere.",
  "Топоры Galatea (Fig Axe → Figstone Splitter → Helix Chopper) и питомец Sloth": "Galatea axes (Fig Axe → Figstone Splitter → Helix Chopper) and a Sloth pet",
  "До 27 — вода (Backwater Bayou, Moonglade Marsh на Galatea, Хотспоты), с 27 — лава Crimson Isle": "Up to 27: water (Backwater Bayou, Moonglade Marsh on Galatea, Hotspots); from 27: Crimson Isle lava",
  "Задания Hina в Moonglade Marsh дают опыт HotF": "Hina's tasks in Moonglade Marsh give HotF XP",
  "Рубка Fig, Mangrove и Helix и Tree Gifts дают Forest и Desert Whispers на перки HotF": "Chopping Fig, Mangrove and Helix and opening Tree Gifts give Forest and Desert Whispers for HotF perks",
- "Вкладывай Whispers в Sweep и Foraging Fortune в первую очередь": "Spend Whispers on Sweep and Foraging Fortune first"
+ "Вкладывай Whispers в Sweep и Foraging Fortune в первую очередь": "Spend Whispers on Sweep and Foraging Fortune first",
+ "Ингредиенты копи заранее: миньоны сахарного тростника и Blaze": "Stock up on ingredients in advance: Sugar Cane and Blaze minions",
+ "Крафт на верстаке: массовый крафт из своих материалов (миньоны, мешки Sacks)": "Crafting at a workbench: bulk-craft from your own materials (minions, Sacks)",
+ "+25 к Wisdom всех скиллов (≈+25% опыта), +10 Magic Find, Bits для магазина Elizabeth, монеты не теряются при смерти.": "+25 Wisdom for all skills (≈+25% XP), +10 Magic Find, Bits for Elizabeth's shop, no coins lost on death.",
+ "Купи Booster Cookie в Community Shop у Elizabeth (Hub) за SkyBlock Gems и съешь": "Buy a Booster Cookie in the Community Shop from Elizabeth (Hub) for SkyBlock Gems and eat it"
 }

@@ -8,7 +8,6 @@ import { quickRules, skillRules, foragingRules, miningRules, gardenRules, riftRu
 import { museumRules } from './lib/rules/museum.js';
 import { petScoreRules, chocolateRules } from './lib/rules/extras.js';
 import { buildMap } from './lib/map.js';
-import { profileMode } from '../lib/profile-mode.js';
 import { ru } from '../../i18n/msg.js';
 import { tx } from '../../i18n/msg.js';
 
@@ -85,14 +84,34 @@ function run(ctx) {
       add({ id: tx`error-${rule.name}`, cat: 'Служебное', priority: 0, effort: '—', title: ru`Правило ${rule.name} не сработало`, why: String(e?.message || e), how: [] });
     }
   }
-  // Ironman / Stranded / Bingo: без Bazaar и аукциона. «Купить: …» → добыть самому, без цены и «накопить»
-  const mode = profileMode(ctx.m?.gameMode);
-  if (!mode.market) {
+  // Ironman / Stranded / Bingo: без Bazaar и аукциона. Покупать можно только у NPC за монеты, остальное — добыть самому.
+  // «Купить: X» → «Купить у NPC …: X — ~цена NPC» или «Добыть: X — где»; цена шага — только то, что продаёт NPC.
+  if (!ctx.market) {
+    const mode = ctx.mode;
     for (let i = steps.length - 1; i >= 0; i--) {
       const s = steps[i];
       if (MARKET_STEPS.has(s.id)) { steps.splice(i, 1); continue; }
-      if (s.how?.length) s.how = s.how.map(h => (/^Купить: /.test(h) ? ru`Добудь или скрафти сам: ${h.replace(/^Купить: /, '').replace(/ — ~.*$/, '')} (в ${mode.label} нет Bazaar и аукциона)` : h));
-      if (s.cost) { delete s.cost; s.why = s.why.replace(/ (Цена сейчас|Выйдет) ~[^.]*\./g, ''); }
+      const byName = new Map((s.items || []).map(id => [ctx.name(id).toLowerCase(), id]));
+      if (s.how?.length) s.how = s.how.map(h => {
+        const mm = /^Купить: (.+?)(?: — ~.*)?$/.exec(h);
+        if (!mm) return h;
+        const label = mm[1];
+        const id = byName.get(label.replace(/ \([^)]*\)$/, '').toLowerCase()) || byName.get(label.toLowerCase());
+        const hint = id ? ctx.obtain(id) : null;
+        if (hint?.kind === 'npc') return ru`Купить у NPC ${hint.npcName}: ${label} — ~${fmtCoins(hint.coins)}`;
+        if (hint) return ru`Добыть: ${label} — ${hint.text}`;
+        return ru`Добудь или скрафти сам: ${label} (в ${mode.label} нет Bazaar и аукциона)`;
+      });
+      // «монеты», «нужны монеты» → добывать; «Всего ~65 млн» по ценам рынка — неправда для такого профиля
+      if (/монет/.test(s.effort || '') && !(s.items?.length && s.items.every(id => ctx.obtain(id)?.kind === 'npc'))) s.effort = 'нужно добыть';
+      if (s.why) s.why = s.why.replace(/ Всего ~[^.]*\./g, '');
+      if (s.cost) {
+        // Цена остаётся, только если всё из шага продаёт NPC за монеты
+        const npc = (s.items || []).map(id => ctx.obtain(id));
+        const npcCost = npc.length && npc.every(h => h?.kind === 'npc') ? npc.reduce((sum, h) => sum + h.coins, 0) : 0;
+        s.why = s.why.replace(/ (Цена сейчас|Выйдет) ~[^.]*\./g, '');
+        if (npcCost > 0) s.cost = npcCost; else delete s.cost;
+      }
     }
   }
   // Поправка на доступность: шаг, на который надо копить, не может быть «главным сейчас» —

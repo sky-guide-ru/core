@@ -46,6 +46,38 @@ export function bestPowerForMelee(m, base) {
   return best;
 }
 
+// Порядок способов без рынка: купить у NPC, скрафтить, сделать в Forge, выбить, обменять, остальное
+const EASE = { npc: 0, craft: 1, forge: 2, drop: 3, shop: 4, other: 5 };
+
+/** Аксессуары для Ironman, Stranded и Bingo: что проще всего добыть, с подсказкой где. */
+function noMarketAccessories(ctx, add, acc, mp, nextMs) {
+  const need = nextMs ? nextMs - mp : 50;
+  const rows = acc.missing.map(r => ({ ...r, hint: ctx.obtain(r.id) || { kind: 'other', text: 'добыть самому' } }))
+    .sort((a, b) => (EASE[a.hint.kind] ?? 9) - (EASE[b.hint.kind] ?? 9) || (a.hint.coins || 0) / a.gain - (b.hint.coins || 0) / b.gain || b.gain - a.gain);
+  const pick = [];
+  let got = 0;
+  for (const r of rows) {
+    if (pick.length >= 15 || (got >= need && pick.length >= 5)) break;
+    if (r.family && pick.some(p => p.family?.includes(r.id) || r.family.includes(p.id))) continue;
+    pick.push(r);
+    got += r.gain;
+  }
+  if (!pick.length) return;
+  const gain = pick.reduce((g, r) => g + r.gain, 0);
+  const coins = pick.reduce((c, r) => c + (r.hint.kind === 'npc' ? r.hint.coins : 0), 0);
+  add({
+    id: 'mp-cheap', cat: 'Аксессуары и Magical Power', priority: 88, effort: 'часы',
+    title: ru`Добудь ${pick.length} ${plural(pick.length, 'аксессуар', 'аксессуара', 'аксессуаров')}: +${gain} MP`,
+    why: ru`Сейчас ${fmtNum(mp)} MP${nextMs ? ru`, до ${nextMs} не хватает ${nextMs - mp}` : ''}. В ${ctx.mode.label} аксессуары не купить на рынке, поэтому сначала те, что продаёт NPC или легко скрафтить.`,
+    how: pick.map(r => ru`${r.name} — +${r.gain} MP: ${r.hint.text}${r.hint.kind === 'npc' ? tx` (~${fmtCoins(r.hint.coins)})` : ''}${r.upgradeFrom ? ru`, апгрейд из ${r.upgradeFrom}` : ''}`),
+    items: pick.map(r => r.id),
+    cost: coins && pick.every(r => r.hint.kind === 'npc') ? coins : undefined,
+    payoff: tx`+${gain} MP`,
+    calc: mpCalc(ctx, gain, 0) || undefined,
+    link: 'accessories',
+  });
+}
+
 // Граница «выгодного» аксессуара: сколько монет за 1 Magical Power ещё считаем дёшево
 export const CHEAP_MP_COINS = 15_000_000;
 export const MP_MILESTONES = [500, 750, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700];
@@ -58,7 +90,9 @@ export function accessoryRules(ctx, add) {
   const mp = m.magicalPower || acc?.highestMp || 0;
   const nextMs = MP_MILESTONES.find(x => x > mp);
 
-  if (acc?.cheapestNext?.length) {
+  // Ironman, Stranded, Bingo: аксессуары не купить — порядок по тому, что проще добыть (NPC → крафт → дроп), а не по цене AH
+  if (!ctx.market && acc?.missing?.length) noMarketAccessories(ctx, add, acc, mp, nextMs);
+  else if (acc?.cheapestNext?.length) {
     // Две группы: выгодные (дёшево за 1 MP) — наверх плана, дорогие — отдельным шагом «на потом».
     // Иначе в один шаг попадали аксессуары по 100+ млн за 1 MP, и «главным» становилась покупка на миллиарды.
     const need = nextMs ? nextMs - mp : 50;
@@ -109,10 +143,12 @@ export function accessoryRules(ctx, add) {
 
   if (acc?.notRecombCount > 0 && acc.recombPrice) {
     const perMp = acc.recombGain ? acc.recombPrice * acc.notRecombCount / acc.recombGain : null;
+    const recombHint = !ctx.market && ctx.obtain('RECOMBOBULATOR_3000');
     add({
-      id: 'mp-recomb', cat: 'Аксессуары и Magical Power', priority: 58, effort: 'дорого',
+      id: 'mp-recomb', cat: 'Аксессуары и Magical Power', priority: 58, effort: ctx.market ? 'дорого' : 'нужно добыть',
       title: ru`Рекомбобулируй аксессуары: ${acc.notRecombCount} шт., до +${acc.recombGain} MP`,
-      why: ru`Recombobulator 3000 поднимает редкость на ступень. Сейчас ~${fmtCoins(acc.recombPrice)} за штуку${perMp ? ru`, в среднем ~${fmtCoins(perMp)} за 1 MP` : ''}. Делай это, когда дешёвые новые аксессуары закончатся (сравни с ценой за MP в шаге выше).`,
+      why: !ctx.market ? ru`Recombobulator 3000 поднимает редкость на ступень. В ${ctx.mode.label} его не купить${recombHint ? ru`: ${recombHint.text}` : ''}. Сначала добывай новые аксессуары, рекомб — когда они закончатся.`
+        : ru`Recombobulator 3000 поднимает редкость на ступень. Сейчас ~${fmtCoins(acc.recombPrice)} за штуку${perMp ? ru`, в среднем ~${fmtCoins(perMp)} за 1 MP` : ''}. Делай это, когда дешёвые новые аксессуары закончатся (сравни с ценой за MP в шаге выше).`,
       how: ['Начинай с Legendary-аксессуаров: Legendary → Mythic даёт +6 MP', 'Применяется на Reforge Anvil'],
       items: ['RECOMBOBULATOR_3000'],
     });
@@ -138,8 +174,8 @@ export function accessoryRules(ctx, add) {
     } else if (price && (perMp <= cheapLimit || price <= (ctx.liquid || 0))) {
       add({
         id: 'mp-rift-prism', cat: 'Аксессуары и Magical Power', priority: perMp <= cheapLimit ? 70 : 38, effort: 'дорого',
-        title: ru`Rift Prism: +11 MP за ~${fmtCoins(price)}`,
-        why: ru`Покупается на аукционе, ~${fmtCoins(perMp)} за 1 MP. После употребления даёт +11 Magical Power навсегда и бесплатный вход в Rift.`,
+        title: ctx.market ? ru`Rift Prism: +11 MP за ~${fmtCoins(price)}` : 'Rift Prism: +11 MP навсегда',
+        why: !ctx.market ? 'После употребления даёт +11 Magical Power навсегда и бесплатный вход в Rift.' : ru`Покупается на аукционе, ~${fmtCoins(perMp)} за 1 MP. После употребления даёт +11 Magical Power навсегда и бесплатный вход в Rift.`,
         how: [ru`Купить: Rift Prism — ~${fmtCoins(price)}`, 'Сравни цену за 1 MP с шагами про аксессуары: обычно сначала выгоднее они'],
         items: ['RIFT_PRISM'],
         cost: price,
@@ -217,10 +253,13 @@ export function petRules(ctx, add) {
     const rows = missing.map(p => ({ ...p, price: ctx.price(tx`${p.type};${p.tier}`) }));
     rows.sort((a, b) => (a.price || Infinity) - (b.price || Infinity));
     add({
-      id: 'pets-missing', cat: 'Питомцы', priority: 60, effort: 'монеты',
+      id: 'pets-missing', cat: 'Питомцы', priority: 60, effort: ctx.market ? 'монеты' : 'нужно добыть',
       title: ru`Недостающие ключевые питомцы: ${rows.length}`,
       why: 'Под каждое занятие есть питомец, который даёт заметный прирост. Ниже — те, которых у тебя нет или которые ниже нужной редкости.',
-      how: rows.map(p => tx`${prettyId(p.type)} (${PET_TIER_RU[p.tier]}) — ${p.role}: ${p.why}${p.price ? tx`, ~${fmtCoins(p.price)}` : ''}`),
+      how: rows.map(p => {
+        const hint = !ctx.market && ctx.obtain(tx`${p.type};${p.tier}`);
+        return tx`${prettyId(p.type)} (${PET_TIER_RU[p.tier]}) — ${p.role}: ${p.why}${ctx.market ? (p.price ? tx`, ~${fmtCoins(p.price)}` : '') : hint && hint.kind !== 'other' ? ru`; где взять: ${hint.text}` : ''}`;
+      }),
       items: rows.map(p => tx`${p.type};${p.tier}`),
       // Цена самого дешёвого из списка: если не по карману даже он, шаг уходит вниз как покупка «накопить»
       cost: rows[0]?.price || undefined,
@@ -240,7 +279,7 @@ export function petRules(ctx, add) {
       how: [
         'Hub → Pet Care → George: отдай ему питомца из списка (продажа George), порядок любой',
         ...plan.candidates.map(c => ru`Нужен: ${line(c)}`),
-        'Своего рабочего питомца не отдавай: дешевле купить отдельного на аукционе',
+        ctx.market ? 'Своего рабочего питомца не отдавай: дешевле купить отдельного на аукционе' : 'Своего рабочего питомца не отдавай: добудь или скрафти отдельного',
       ],
       payoff: ru`+${left} к капу Taming`,
       link: 'pets',
@@ -306,7 +345,8 @@ export function minionRules(ctx, add) {
     title: ru`Скрафти ${need} ${plural(need, 'новый тир', 'новых тира', 'новых тиров')} миньонов: откроется ${next[1]}-й слот`,
     why: ru`Уникальных крафтов: ${unique} из ${total}, слотов сейчас ${slots} (без слотов из Community Shop). Каждый слот — ещё один пассивный источник дохода.`,
     how: [
-      'Засчитывается каждый новый тир каждого типа; низкие тиры самые дешёвые — материалы бери на Bazaar',
+      ctx.market ? 'Засчитывается каждый новый тир каждого типа; низкие тиры самые дешёвые — материалы бери на Bazaar'
+        : 'Засчитывается каждый новый тир каждого типа; низкие тиры самые дешёвые — материалы копят сами миньоны и мешки Sacks',
       ...(() => {
         const fresh = candidates.filter(c => !c.cur).slice(0, 8).map(c => minionTypeName(c.type));
         const low = candidates.filter(c => c.cur).slice(0, 8).map(c => ru`${minionTypeName(c.type)} (есть до ${ROMAN[c.cur] || c.cur})`);
@@ -341,7 +381,7 @@ export function collectionRules(ctx, add) {
     id: 'collections-near', cat: 'Коллекции', priority: 32, effort: 'часы',
     title: ru`Коллекции, близкие к следующему тиру: ${top.length}`,
     why: ru`Не на максимуме ${rows.length} коллекций. Тиры коллекций открывают рецепты и дают SkyBlock XP; эти ближе всего к следующему тиру.`,
-    how: top.map(r => ru`${ctx.name(r.id)}: до тира ${r.tier} из ${r.max} осталось ${fmtNum(r.need)}${r.cost ? ru` (на Bazaar ~${fmtCoins(r.cost)}, но покупка не засчитывается — нужно добыть самому)` : ''}`),
+    how: top.map(r => ru`${ctx.name(r.id)}: до тира ${r.tier} из ${r.max} осталось ${fmtNum(r.need)}${r.cost && ctx.market ? ru` (на Bazaar ~${fmtCoins(r.cost)}, но покупка не засчитывается — нужно добыть самому)` : ''}`),
     link: 'collections',
   });
 }
