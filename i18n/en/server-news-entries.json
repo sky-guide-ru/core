@@ -260,5 +260,6 @@
  "У каждой видно, где выгоднее продать: Bazaar, AH или NPC, и сколько выйдет после налога.": "Each shows where it sells best: Bazaar, AH or NPC, and how much you get after tax.",
  "Материалы для шагов плана и «Плана покупок» попадают в «Лучше оставить».": "Materials for plan steps and the Shopping plan go to “Better to keep”.",
  "Вещи из Museum не советуют продать": "Museum items are no longer suggested for sale",
- "Предметы, сданные в Museum и одолженные обратно, больше не попадают в «Без дела лежит» в [плане](roadmap).": "Items donated to the Museum and borrowed back no longer show up in “Sitting idle” in the [plan](roadmap)."
+ "Предметы, сданные в Museum и одолженные обратно, больше не попадают в «Без дела лежит» в [плане](roadmap).": "Items donated to the Museum and borrowed back no longer show up in “Sitting idle” in the [plan](roadmap).",
+ "Блок «На что потратить» — вещи из плана, которые из своих запасов скрафтить дешевле, чем купить.": "The \"What to spend it on\" block lists plan items that are cheaper to craft from your stash than to buy."
 }
