@@ -29,6 +29,10 @@ function coveredBy(id, up) {
 }
 
 export function analyzeAccessories(member) {
+  // Accessory Bag не виден (выключен Inventory API): план «купить всё с нуля» был бы неправдой
+  if (member.inv?.apiDisabled) {
+    return { hidden: true, calculatedMp: 0, highestMp: member.magicalPower, count: 0, list: [], missing: [], cheapestNext: [], notRecombCount: 0, recombPrice: priceOf('RECOMBOBULATOR_3000'), enrichPrice: 0, steps: [], recombGain: 0 };
+  }
   const up = upgradesMap();
   const ignored = new Set(neu.constants.misc?.ignored_talisman || []);
   const items = (member.inv.talismans || []).filter(Boolean).filter(i => i.id);

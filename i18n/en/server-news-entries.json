@@ -244,5 +244,8 @@
  "План покупок можно править": "The shopping plan is editable",
  "Лишнее из [плана покупок](roadmap/plan) убирается крестиком, своя вещь добавляется поиском.": "Remove anything from the [shopping plan](roadmap/plan#cart) with the cross and add your own items via search.",
  "Кнопка «+ В план покупок» есть в карточке любого предмета.": "Every item card has a “+ To shopping plan” button.",
- "Что уже лежит в запасах, вычитается из цены, а купленное уходит из списка само.": "Items already in storage are subtracted from the price, and bought items drop off the list on their own."
+ "Что уже лежит в запасах, вычитается из цены, а купленное уходит из списка само.": "Items already in storage are subtracted from the price, and bought items drop off the list on their own.",
+ "Аксессуары при закрытом инвентаре": "Accessories with a hidden inventory",
+ "[Аксессуары](accessories) профиля с закрытым доступом к инвентарю сообщают об этом, а не строят план с нуля.": "[Accessories](accessories) on a profile with inventory access turned off say so instead of planning from scratch.",
+ "Над таким профилем появляется подсказка, где в настройках игры открыть доступ.": "Such profiles show a hint on where to turn inventory access back on in the game settings."
 }
