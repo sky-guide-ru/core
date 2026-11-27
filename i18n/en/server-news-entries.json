@@ -231,5 +231,9 @@
  "Magic Find по новым правилам": "Magic Find under the new rules",
  "Блок Magic Find в [Снаряжении](gear): все источники MF и сколько осталось до потолка 500.": "A Magic Find block in [Gear](gear): every MF source and how far you are from the 500 cap.",
  "Что взять дальше — по цене за 1 MF: осколки Cinderbat, Looting VII, Anguish.": "What to get next, sorted by price per 1 MF: Cinderbat shards, Looting VII, Anguish.",
- "Расчёт по правилам реворка 17.11.2026: MF от Combat, Slayers и Looting, Bestiary.": "Calculated by the 17.11.2026 rework rules: MF from Combat, Slayers and Looting, Bestiary."
+ "Расчёт по правилам реворка 17.11.2026: MF от Combat, Slayers и Looting, Bestiary.": "Calculated by the 17.11.2026 rework rules: MF from Combat, Slayers and Looting, Bestiary.",
+ "План покупок можно править": "The shopping plan is editable",
+ "Лишнее из [плана покупок](roadmap/plan) убирается крестиком, своя вещь добавляется поиском.": "Remove anything from the [shopping plan](roadmap/plan#cart) with the cross and add your own items via search.",
+ "Кнопка «+ В план покупок» есть в карточке любого предмета.": "Every item card has a “+ To shopping plan” button.",
+ "Что уже лежит в запасах, вычитается из цены, а купленное уходит из списка само.": "Items already in storage are subtracted from the price, and bought items drop off the list on their own."
 }

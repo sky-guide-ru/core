@@ -385,10 +385,13 @@ export function moneyRules(ctx, add) {
   }
 }
 
+/** Лучший активный заработок игрока, монет в час (0 — способы заработка не посчитаны). */
+export const bestPerHour = ctx => Math.max(0, ...((ctx.opts.moneyMethods || []).filter(x => x.available && x.mode !== 'passive').map(x => x.coinsPerHour || 0)));
+
 /** План покупок: шаги с ценой по порядку приоритета и сколько часов заработка они стоят. */
 export function purchasePlan(steps, ctx) {
   const buy = steps.filter(s => s.cost > 0).sort((a, b) => b.priority - a.priority);
-  const perHour = Math.max(0, ...((ctx.opts.moneyMethods || []).filter(x => x.available && x.mode !== 'passive').map(x => x.coinsPerHour || 0)));
+  const perHour = bestPerHour(ctx);
   let acc = 0;
   return buy.map(s => {
     acc += s.cost;
