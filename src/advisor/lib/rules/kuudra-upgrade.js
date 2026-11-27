@@ -7,6 +7,7 @@
 //  - носить тир можно с Combat 22/27/32/37/42 и после прохождения Kuudra того же тира.
 // Цены звёзд берутся из constants/essencecosts NEU (у всех пяти семейств они одинаковые).
 import { fmtCoins } from '../util.js';
+import { armorLoadouts } from '../loadouts.js';
 import { ru } from '../../../../i18n/msg.js';
 import { tx } from '../../../../i18n/msg.js';
 
@@ -64,9 +65,16 @@ export function kuudraUpgradePlan(ctx, own, target) {
   const { fam, tier: from } = own;
   const totals = { essence: 0, teeth: 0, pearls: 0, coins: 0, buyMissing: 0 };
   const pieces = [];
-  for (const slot of SLOTS) {
+  // Сет из гардероба, где лежат части этого семейства: недостающий слот там часто занят другой бронёй
+  // (Warden Helmet + 3 части Crimson). Тогда эту часть покупать не надо — игрок её и не носит.
+  const isFam = it => it?.id && new RegExp(`^(${KUUDRA_PREFIX.filter(Boolean).join('|')})?${fam}_`).test(it.id);
+  const lo = armorLoadouts(ctx.m).filter(l => l.items.filter(isFam).length >= 3)
+    .sort((a, b) => b.items.filter(isFam).length - a.items.filter(isFam).length || Number(b.equipped) - Number(a.equipped))[0];
+  for (const [si, slot] of SLOTS.entries()) {
     const id = tx`${KUUDRA_PREFIX[from]}${fam}_${slot}`;
     const it = (ctx.owned.get(id) || []).slice().sort((a, b) => (b.stars || 0) - (a.stars || 0))[0]; // самая прокачанная копия
+    const other = !it && lo?.items[si] && !isFam(lo.items[si]) ? lo.items[si] : null;
+    if (other) { pieces.push({ slot, other: true, name: other.name || ctx.name?.(other.id) || other.id }); continue; }
     if (!it) {
       const buyId = tx`${KUUDRA_PREFIX[target]}${fam}_${slot}`;
       const p = ctx.price(buyId);
@@ -87,8 +95,9 @@ export function kuudraUpgradePlan(ctx, own, target) {
   const ep = ctx.price('ESSENCE_CRIMSON'), tp = ctx.price('KUUDRA_TEETH'), pp = ctx.price('HEAVY_PEARL');
   const unpriced = (totals.essence && !ep) || (totals.teeth && !tp) || (totals.pearls && !pp);
   const upgradeCost = totals.essence * ep + totals.teeth * tp + totals.pearls * pp + totals.coins + totals.buyMissing;
-  const buyCost = SLOTS.reduce((s, sl) => s + ctx.price(tx`${KUUDRA_PREFIX[target]}${fam}_${sl}`), 0);
-  const resale = pieces.filter(p => !p.missing).reduce((s, p) => s + ctx.price(p.id), 0);
+  // Готовый сет для сравнения — только те части, что игрок носит из этого семейства
+  const buyCost = SLOTS.filter(sl => !pieces.find(p => p.slot === sl)?.other).reduce((s, sl) => s + ctx.price(tx`${KUUDRA_PREFIX[target]}${fam}_${sl}`), 0);
+  const resale = pieces.filter(p => !p.missing && !p.other).reduce((s, p) => s + ctx.price(p.id), 0);
   const buyNet = buyCost ? Math.max(0, buyCost - resale) : 0;
   // Без рынка (Ironman, Stranded, Bingo) готовый сет не купить: только улучшать свой
   const cheaper = ctx.market !== false && !unpriced && buyNet && buyNet < upgradeCost * 0.9 ? 'buy' : 'upgrade';
@@ -98,6 +107,7 @@ export function kuudraUpgradePlan(ctx, own, target) {
   const lines = [];
   lines.push(ru`Всего на улучшение: ${n(totals.essence)} эссенции Crimson, ${n(totals.teeth)} Kuudra Teeth${totals.pearls ? tx`, ${n(totals.pearls)} Heavy Pearl` : ''} и ${fmtCoins(totals.coins)} монет${upgradeCost && !unpriced && ctx.market !== false ? ru` — по ценам Bazaar ~${fmtCoins(upgradeCost)}` : ''}${totals.buyMissing ? ru` (с докупкой недостающих частей ~${fmtCoins(totals.buyMissing)})` : ''}`);
   for (const p of pieces) {
+    if (p.other) { lines.push(ru`${SLOT_RU[p.slot]}: в этом сете носишь ${p.name} — эту часть покупать не нужно`); continue; }
     if (p.missing) { lines.push(ctx.market === false ? ru`${SLOT_RU[p.slot]}: части нет — нужна из сундуков Kuudra (${targetName})` : ru`${SLOT_RU[p.slot]}: части нет — купить ${targetName}${p.price ? tx` ~${fmtCoins(p.price)}` : ''}`); continue; }
     const parts = p.steps.map(s => {
       const starTxt = s.starsFrom < 10 ? ru`звёзды ${s.starsFrom}→10 (${n(s.stars.essence)} эссенции${s.stars.pearls ? tx`, ${s.stars.pearls} Heavy Pearl` : ''})` : 'звёзды уже 10';

@@ -108,8 +108,9 @@ export function analyzeCollections(m, o = {}) {
       const amount = Math.max(mine, Number(coopCols?.[id] || 0));
       let tier = 0;
       for (const t of tiers) if (amount >= t.amountRequired) tier = t.tier;
-      tier = Math.max(tier, unlocked.get(id) || 0);
       const max = it.maxTiers || tiers.length;
+      // Тир из unlocked_coll_tiers бывает выше, чем знает справочник: не показываем «801 / 793»
+      tier = Math.min(Math.max(max, tiers.length), Math.max(tier, unlocked.get(id) || 0));
       const nextT = tiers.find(t => t.tier === tier + 1) || null;
       const prevReq = tiers.find(t => t.tier === tier)?.amountRequired || 0;
       const entry = {

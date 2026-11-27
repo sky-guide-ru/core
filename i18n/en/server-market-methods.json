@@ -32,5 +32,8 @@
  "подешевел": "went down",
  "Сейчас выгоднее всего: {0} — около {1} в час ({2}).": "The most profitable right now: {0} — about {1} per hour ({2}).",
  " Следующая цель: {0} (около {1} в час), не хватает: {2}.": " Next goal: {0} (about {1} per hour), missing: {2}.",
- "Нет данных о ценах — дождись первого обновления Bazaar.": "No price data — wait for the first Bazaar update."
+ "Нет данных о ценах — дождись первого обновления Bazaar.": "No price data — wait for the first Bazaar update.",
+ "Копаешь Griffin Burrows: Chimera, Minos Relic, Daedalus Stick. Только когда у мэра или министра Diana перк Mythological Ritual.": "Dig Griffin Burrows: Chimera, Minos Relic, Daedalus Stick. Only while the mayor or minister Diana has the Mythological Ritual perk.",
+ "Идёт Mythological Ritual (перк Diana)": "Mythological Ritual is on (Diana's perk)",
+ "сейчас мэр {0}, у министра перка нет": "the mayor now is {0}, the minister doesn't have the perk"
 }

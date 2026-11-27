@@ -24,6 +24,8 @@ const tierIndex = t => RARITIES.indexOf(String(t || '').toUpperCase());
 /** Редкость с учётом Tier Boost (как в игре и SkyCrypt). */
 export function effectiveTier(p) {
   let i = tierIndex(p.tier);
+  // Special / Very Special (например, Phoenix с ивента): в игре засчитывается как Common — сверено с «в игре записано»
+  if (i < 0 && /^(VERY_)?SPECIAL$/.test(String(p.tier || '').toUpperCase())) return 0;
   if (i >= 0 && p.heldItem === 'PET_ITEM_TIER_BOOST') i = Math.min(i + 1, RARITIES.length - 1);
   return i;
 }

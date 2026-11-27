@@ -98,7 +98,8 @@ export function chocolateAdvice(ch) {
   }
   // 2. Chocolate упёрся в предел фабрики
   if (P.maxChocolate && ch.chocolate >= P.maxChocolate * 0.9) {
-    tips.push({ id: 'cf-full', prio: 90, title: tx`Chocolate почти под потолок: ${short(ch.chocolate)} из ${short(P.maxChocolate)}`,
+    // Больше предела из таблицы — значит, у фабрики свой предел выше (бонусы игры): «из 60 млрд» при 67 млрд было бы неправдой
+    tips.push({ id: 'cf-full', prio: 90, title: ch.chocolate > P.maxChocolate ? tx`Chocolate у потолка фабрики: ${short(ch.chocolate)}` : tx`Chocolate почти под потолок: ${short(ch.chocolate)} из ${short(P.maxChocolate)}`,
       text: 'Сверх предела фабрика не копит. Потрать на улучшения ниже или в Chocolate Shop (траты там открывают кроликов-вех).' });
   }
   // 3. Сотрудники ниже капа
@@ -166,7 +167,7 @@ export function chocolateAdvice(ch) {
   if (residentsKnown && residents.length) {
     const full = byIsland.filter(r => r.missing.length === r.missing.length + r.found.length).length;
     tips.push({ id: 'cf-residents', prio: 55, title: tx`Rabbits-резиденты: найдено ${residentsFound} из ${residentsFound + residents.length}`,
-      text: tx`Они живут на островах круглый год, каждый в своём месте: зайди на остров и кликни по кролику. Не тронуты ${full} ${full === 1 ? 'остров' : full < 5 ? 'острова' : 'островов'} целиком. Список по островам — ниже, места подсвечивает мод SkyHanni.` });
+      text: tx`Они живут на островах круглый год, каждый в своём месте: зайди на остров и кликни по кролику.${full ? tx` Не тронуты ${full} ${full === 1 ? 'остров' : full < 5 ? 'острова' : 'островов'} целиком.` : ''} Список по островам — ниже, места подсвечивает мод SkyHanni.` });
   }
 
   // 8. Яйца Hoppity по местам (collected_locations в API)

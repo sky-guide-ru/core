@@ -278,5 +278,12 @@
  "«Купить на аукционе» есть и у вещей, чьи лоты сейчас разобраны: с ценой недавних продаж.": "“Buy on the Auction House” also shows for items whose listings are sold out, at the recent sale price.",
  "У дропа с Master Mode понятнее написано, что нужно: уровень Catacombs и пройденный F7.": "Master Mode drops say more clearly what is needed: a Catacombs level and a completed F7.",
  "Гайд Blaze верно оценивает младшие тиры": "Blaze guide rates lower tiers correctly",
- "Исправлена ошибка: в [гайде Blaze](guides/slayer-blaze#wear) тир ниже пройденного иногда считался непосильным.": "Fixed a bug: in the [Blaze guide](guides/slayer-blaze#wear) a tier below one already cleared was sometimes rated as out of reach."
+ "Исправлена ошибка: в [гайде Blaze](guides/slayer-blaze#wear) тир ниже пройденного иногда считался непосильным.": "Fixed a bug: in the [Blaze guide](guides/slayer-blaze#wear) a tier below one already cleared was sometimes rated as out of reach.",
+ "Точнее советы для сильных профилей": "More accurate advice for strong profiles",
+ "Свои кинжалы Blaze из хранилищ учитываются в [гайде Blaze](guides/slayer-blaze#wear) и наборе по частям.": "Your own Blaze daggers from storage count in the [Blaze guide](guides/slayer-blaze#wear) and the piece-by-piece kit.",
+ "В коопе [план](roadmap) считает слоты миньонов и коллекции по общим крафтам, как в игре.": "In a co-op the [plan](roadmap) counts minion slots and collections from shared crafts, like the game does.",
+ "Ender Dragon не советуется при Golden Dragon, шлем Kuudra — при другом шлеме в том же сете.": "Ender Dragon is no longer suggested if you have Golden Dragon, nor a Kuudra helmet if the set uses another helmet.",
+ "Magic Find от Pet Score выше 325 очков и улучшения аксессуаров с Recombobulator считаются верно.": "Magic Find from Pet Score above 325 points and accessory upgrades with a Recombobulator are counted correctly.",
+ "Головы игроков — по их скину": "Player heads match their skin",
+ "Исправлен сбой, из-за которого у части игроков вместо их головы показывался Steve.": "Fixed a glitch where some players were shown Steve instead of their own head."
 }

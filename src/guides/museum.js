@@ -8,7 +8,7 @@ import { tx } from '../../i18n/msg.js';
 const icon = (x) => (x.set ? setIcon(x.set) : x.id);
 
 export function build(m, ctx) {
-  const mu = analyzeMuseum(m, { constants: constants(ctx), price: ctx.price, name: ctx.name, owned: ctx.owned });
+  const mu = analyzeMuseum(m, { constants: constants(ctx), price: ctx.price, name: ctx.name });
   const cat = museumCatalog(constants(ctx));
   const nm = id => { const e = cat.entries.get(id); return e?.set ? setName(e.set, ctx.name) : ctx.name(id); };
   const sections = [];

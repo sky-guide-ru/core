@@ -17,5 +17,6 @@
  ", минус продажа своего ~{0} = ~{1}": ", minus selling yours ~{0} = ~{1}",
  "; улучшать свой — ~{0}": "; upgrading yours — ~{0}",
  "{0}: части нет — нужна из сундуков Kuudra ({1})": "{0}: piece missing — get it from Kuudra chests ({1})",
- "Где брать: эссенция Crimson и Kuudra Teeth гарантированно падают из сундуков Kuudra (на высоких тирах больше)": "Where to get: Crimson Essence and Kuudra Teeth always drop from Kuudra chests (more on higher tiers)"
+ "Где брать: эссенция Crimson и Kuudra Teeth гарантированно падают из сундуков Kuudra (на высоких тирах больше)": "Where to get: Crimson Essence and Kuudra Teeth always drop from Kuudra chests (more on higher tiers)",
+ "{0}: в этом сете носишь {1} — эту часть покупать не нужно": "{0}: you wear {1} in this set — no need to buy this piece"
 }

@@ -73,7 +73,7 @@ const runs = n => (n > 0 ? tx`пройден ${fmtN(n)} ${raz(n)}` : 'ещё н�
 const fmtM = n => tx`${(n / M).toLocaleString('ru-RU', { maximumFractionDigits: 1 })} млн`;
 
 /** Живые деньги игрока: кошелёк + Bank. */
-const liquid = m => Number(m?.purse || 0) + Number(m?.bank || 0);
+const liquid = m => Number(m?.purse || 0) + Number(m?.bank || 0) + Number(m?.personalBank || 0); // как в плане: кошелёк, Bank и личный Bank
 /**
  * Сколько игрок реально может вложить в один крафт: живые деньги, а если богатство известно — до 20% от него
  * (часть можно продать). Крафт за 500 млн при богатстве 300 млн не предлагаем.
@@ -107,7 +107,7 @@ export const METHODS = [
   {
     id: 'bazaar-flip', title: 'Флипы на Bazaar', tag: 'Торговля', mode: 'active',
     desc: 'Ставишь ордера на покупку и продажу по самым ходовым товарам и перебиваешь конкурентов. Нужен стартовый капитал и внимание; доход — сумма трёх лучших флипов прямо сейчас.',
-    req: m => [{ text: 'Капитал от 10 млн', ok: Number(m?.purse || 0) + Number(m?.bank || 0) >= 10 * M, soft: true, have: tx`монет в кошельке и банке: ${fmtM(Number(m?.purse || 0) + Number(m?.bank || 0))}` }],
+    req: m => [{ text: 'Капитал от 10 млн', ok: liquid(m) >= 10 * M, soft: true, have: tx`монет в кошельке и банке: ${fmtM(liquid(m))}` }],
     compute: (ctx, m, o) => {
       // в обороте держим половину живых денег и делим её между тремя товарами (раньше каждому давали весь бюджет)
       const budget = Math.max(10 * M, liquid(m)) * 0.5;
@@ -170,9 +170,15 @@ export const METHODS = [
   ...COMBAT_METHODS,
   {
     id: 'diana', title: 'Mythological Ritual (Diana)', tag: 'Ивенты', mode: 'active', range: [10, 30],
-    desc: 'Копаешь Griffin Burrows: Chimera, Minos Relic, Daedalus Stick. Только когда мэр — Diana.',
+    desc: 'Копаешь Griffin Burrows: Chimera, Minos Relic, Daedalus Stick. Только когда у мэра или министра Diana перк Mythological Ritual.',
     req: (m, o) => [
-      { text: 'Мэр сейчас Diana', ok: o.mayor ? /diana/i.test(o.mayor) : false, unknown: !o.mayor, have: o.mayor ? tx`сейчас мэр ${o.mayor}` : 'мэр пока неизвестен' },
+      // Ивент даёт перк Mythological Ritual — у мэра или у министра Diana (как Fishing Festival у Marina)
+      (() => {
+        const perks = Array.isArray(o.perks) && o.perks.length ? o.perks : null;
+        const on = perks ? perks.includes('Mythological Ritual') : !!o.mayor && /diana/i.test(o.mayor);
+        return { text: 'Идёт Mythological Ritual (перк Diana)', ok: on, unknown: !perks && !o.mayor,
+          have: !perks && !o.mayor ? 'мэр пока неизвестен' : on ? 'перк действует сейчас' : tx`сейчас мэр ${o.mayor || 'другой'}, у министра перка нет` };
+      })(),
       { text: 'Питомец Griffin', ok: (m?.pets || []).some(p => p?.type === 'GRIFFIN'), soft: true, buy: ['GRIFFIN;4'] },
     ],
     drops: ['ENCHANTMENT_ULTIMATE_CHIMERA_1', 'MINOS_RELIC', 'DAEDALUS_STICK', 'GRIFFIN_FEATHER'],

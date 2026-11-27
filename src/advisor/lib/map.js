@@ -160,7 +160,7 @@ export function buildMap(ctx) {
   B.push(branch('pets', 'Питомцы', petNodes, ru`${best.size} ${plural(best.size, 'тип', 'типа', 'типов')} питомцев`));
 
   // ===== Миньоны =====
-  const unique = new Set(m.minions || []).size;
+  const unique = new Set([...(m.minions || []), ...(m.coop?.minions || [])]).size; // в коопе крафты общие
   const idx = MINION_SLOTS.findIndex(([n]) => n > unique);
   const window = MINION_SLOTS.slice(Math.max(0, (idx < 0 ? MINION_SLOTS.length : idx) - 2), (idx < 0 ? MINION_SLOTS.length : idx) + 3);
   const minNodes = window.map(([n, slots]) => ({ id: tx`minions:${slots}`, title: tx`${slots} ${plural(slots, 'слот', 'слота', 'слотов')}`, status: unique >= n ? 'done' : 'available', detail: tx`${n} ${plural(n, 'уникальный крафт', 'уникальных крафта', 'уникальных крафтов')}`, stepId: 'minions-slots' }));
@@ -180,7 +180,7 @@ export function buildMap(ctx) {
 
   // ===== Музей =====
   if (m.museum?.status === 'ok') {
-    const mu = analyzeMuseum(m, { constants: ctx.opts?.constants, price: ctx.price, name: ctx.name, owned: ctx.owned });
+    const mu = analyzeMuseum(m, { constants: ctx.opts?.constants, price: ctx.price, name: ctx.name });
     const ms = mu.milestone;
     const from = Math.max(1, Math.min(ms.max - 4, ms.n - 1));
     const muNodes = [];

@@ -8,7 +8,7 @@ import { tx } from '../../../i18n/msg.js';
 
 const M = 1_000_000;
 const fmtM = n => tx`${(n / M).toLocaleString('ru-RU', { maximumFractionDigits: 1 })} млн`;
-const liquid = m => Number(m?.purse || 0) + Number(m?.bank || 0);
+const liquid = m => Number(m?.purse || 0) + Number(m?.bank || 0) + Number(m?.personalBank || 0); // как в плане: кошелёк, Bank и личный Bank
 const budgetOf = (m, o) => Math.max(liquid(m), Number(o?.networth || 0) * 0.2, 1 * M);
 const capitalReq = (m, min) => ({ text: tx`Капитал от ${fmtM(min)}`, ok: liquid(m) >= min, soft: true, have: tx`монет в кошельке и банке: ${fmtM(liquid(m))}` });
 const roman = n => ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][n] || String(n);
