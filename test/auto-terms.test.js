@@ -14,6 +14,9 @@ const items = new Map(Object.entries({
   MELON: { id: 'MELON', name: 'Melon Slice', rarity: 'COMMON', lore: [], recipes: [] },
   KAT_NPC: { id: 'KAT_NPC', name: 'Kat (NPC)', lore: [], recipes: [] },
   MADDOX_THE_SLAYER_NPC: { id: 'MADDOX_THE_SLAYER_NPC', name: 'Maddox the Slayer (NPC)', lore: [], recipes: [] },
+  RUNEBOOK: { id: 'RUNEBOOK', name: 'Runebook', rarity: 'COMMON', type: 'ACCESSORY', lore: [], recipes: [] },
+  INFINIPOT: { id: 'INFINIPOT', name: 'InfiniPot™', rarity: 'RARE', type: 'ACCESSORY', lore: [], recipes: [] },
+  INFINI_VACUUM_HOOVERIUS: { id: 'INFINI_VACUUM_HOOVERIUS', name: 'InfiniVacuum™ Hooverius', rarity: 'EPIC', lore: [], recipes: [] },
   REED_RIFT_NPC: { id: 'REED_RIFT_NPC', name: 'Reed (Rift NPC)', lore: [], recipes: [] },
   ENCHANTED_CARROT: { id: 'ENCHANTED_CARROT', name: 'Enchanted Carrot', rarity: 'UNCOMMON', lore: [], recipes: [] },
 }));
@@ -71,4 +74,7 @@ test('питомцы, ресурсы коллекций, NPC, зоны и мен
   assert.equal(ref('Wyld Woods'), 't:zone.rift.wyld_woods');
   assert.equal(ref('Jade'), 't:gem.Jade');
   assert.equal(ref('Mages'), 't:factions');
+  assert.equal(ref('Runebook — +3 MP'), 'i:RUNEBOOK', 'COMMON-аксессуар из одного слова');
+  assert.equal(ref('InfiniPot™ — +8 MP'), 'i:INFINIPOT', '™ не мешает');
+  assert.equal(ref('InfiniVacuum™ Hooverius'), 'i:INFINI_VACUUM_HOOVERIUS', '™ внутри названия');
 });

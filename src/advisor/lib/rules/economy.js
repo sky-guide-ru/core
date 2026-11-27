@@ -2,7 +2,7 @@
 import KEY_PETS from '../../data/key-pets.json' with { type: 'json' };
 import LADDERS from '../../data/ladders.json' with { type: 'json' };
 import { tamingCapPlan, RARITIES } from '../../../analysis/pet-score.js';
-import { fmtCoins, fmtNum, plural, prettyId, bestPets, petLevel, petTierIndex, PET_TIER_RU } from '../util.js';
+import { fmtCoins, fmtNum, plural, prettyId, petName, bestPets, petLevel, petTierIndex, PET_TIER_RU } from '../util.js';
 import { mpGainStats, hitGain } from '../../../calc/power.js';
 import { powerStats, POWERS, tuningPoints } from '../../../calc/stats.js';
 import { ru } from '../../../../i18n/msg.js';
@@ -259,7 +259,7 @@ export function petRules(ctx, add) {
       why: 'Под каждое занятие есть питомец, который даёт заметный прирост. Ниже — те, которых у тебя нет или которые ниже нужной редкости.',
       how: rows.map(p => {
         const hint = !ctx.market && ctx.obtain(tx`${p.type};${p.tier}`);
-        return tx`${prettyId(p.type)} (${PET_TIER_RU[p.tier]}) — ${p.role}: ${p.why}${ctx.market ? (p.price ? tx`, ~${fmtCoins(p.price)}` : '') : hint && hint.kind !== 'other' ? ru`; где взять: ${hint.text}` : ''}`;
+        return tx`${petName(prettyId(p.type))} (${PET_TIER_RU[p.tier]}) — ${p.role}: ${p.why}${ctx.market ? (p.price ? tx`, ~${fmtCoins(p.price)}` : '') : hint && hint.kind !== 'other' ? ru`; где взять: ${hint.text}` : ''}`;
       }),
       items: rows.map(p => tx`${p.type};${p.tier}`),
       // Цена самого дешёвого из списка: если не по карману даже он, шаг уходит вниз как покупка «накопить»
@@ -272,7 +272,7 @@ export function petRules(ctx, add) {
   if ((m.tamingCap || 50) < 60) {
     const plan = tamingCapPlan({ tamingCap: m.tamingCap || 50, sacrificed: m.tamingSacrificedTypes || [], pets: m.pets || [], price: ctx.price });
     const left = plan.left;
-    const line = c => ru`${prettyId(c.type)} (${PET_TIER_RU[RARITIES.indexOf(c.minTier)]} или выше)${c.owned ? ' — уже есть у тебя' : c.cost ? tx`, ~${fmtCoins(c.cost)}` : ''}`;
+    const line = c => ru`${petName(prettyId(c.type))} (${PET_TIER_RU[RARITIES.indexOf(c.minTier)]} или выше)${c.owned ? ' — уже есть у тебя' : c.cost ? tx`, ~${fmtCoins(c.cost)}` : ''}`;
     add({
       id: 'pets-taming-cap', cat: 'Питомцы', priority: 66, effort: 'монеты',
       title: ru`Подними кап Taming: ${m.tamingCap} → 60`,
@@ -291,7 +291,7 @@ export function petRules(ctx, add) {
   if (active && !active.heldItem) {
     add({
       id: 'pets-held-item', cat: 'Быстрые победы', priority: 72, effort: 'минуты',
-      title: ru`Дай активному питомцу (${prettyId(active.type)}) предмет`,
+      title: ru`Дай активному питомцу (${petName(prettyId(active.type))}) предмет`,
       why: 'Pet Item усиливает питомца или ускоряет его прокачку. Пустой слот — потерянный бонус.',
       how: [
         ru`Для прокачки — Exp Boost своего скилла${ctx.price('PET_ITEM_ALL_SKILLS_BOOST_COMMON') ? ru` (All Skills Exp Boost от ~${fmtCoins(ctx.price('PET_ITEM_ALL_SKILLS_BOOST_COMMON'))})` : ''}; для боя — предмет под статы питомца`,
@@ -310,7 +310,7 @@ export function petRules(ctx, add) {
       id: 'pets-level', cat: 'Питомцы', priority: 40, effort: 'часы',
       title: ru`Докачай важных легендарных питомцев до 100: ${lowLeg.length} шт.`,
       why: ru`Питомец даёт полный бонус только на 100 уровне. Сейчас на 100 уровне: ${lvl100} из ${best.size} типов.`,
-      how: lowLeg.slice(0, 8).map(p => ru`${prettyId(p.type)} — ${petLevel(ctx, p)} ур.`).concat(['Качай на основном занятии; второй питомец получает часть опыта через предмет EXP Share']),
+      how: lowLeg.slice(0, 8).map(p => ru`${petName(prettyId(p.type))} — ${petLevel(ctx, p)} ур.`).concat(['Качай на основном занятии; второй питомец получает часть опыта через предмет EXP Share']),
       link: 'pets',
     });
   }

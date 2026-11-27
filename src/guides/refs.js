@@ -18,6 +18,8 @@ import { tx } from '../../i18n/msg.js';
 
 const strip = s => String(s || '').replace(/§./g, '').trim();
 const normQ = s => s.replace(/[’`]/g, '\'');
+// ™ ® © в словарь не идут: в тексте они не часть слова, «InfiniPot™» ищется как «InfiniPot»
+const MARKS = /[™®©]/g;
 const ENTITY = { NPC: 'n', 'Rift NPC': 'n', Monster: 'm', 'Sea Creature': 'm', Boss: 'm', Miniboss: 'm', Creature: 'm', Mayor: 'n' };
 const RARITY_RANK = { COMMON: 0, UNCOMMON: 1, RARE: 2, EPIC: 3, LEGENDARY: 4, MYTHIC: 5 };
 // Слова, которые совпадают с названием предмета, но в тексте почти всегда значат другое
@@ -54,7 +56,7 @@ function entryOf(items, constants) {
   // phrase → { ref, pri }; меньше pri — важнее
   const lex = new Map();
   const set = (phrase, ref, pri) => {
-    const p = normQ(phrase.trim());
+    const p = normQ(phrase.replace(MARKS, '').trim());
     if (!p || (p.length < 3 && !/^[FM][1-7]$/.test(p))) return;
     const cur = lex.get(p);
     if (!cur || pri < cur.pri) lex.set(p, { ref, pri });
@@ -105,11 +107,12 @@ function entryOf(items, constants) {
       continue;
     }
     // Одно слово — только для заметных предметов (не COMMON): иначе «Mushroom», «Bucket», «Emerald» подчёркивались бы везде
-    if (!/\s/.test(name) && !(RARITY_RANK[it.rarity] >= 1)) continue;
+    // Исключение — аксессуары (Runebook): их называют советы про Magical Power, и обычным словом они не бывают
+    if (!/\s/.test(name) && !(RARITY_RANK[it.rarity] >= 1) && !/ACCESSORY/.test(it.type || '')) continue;
     let pri = 1;
     if (/_NEW$|^STARRED_|_SKIN|^DUNGEON_|_RIFT$|^RIFT_TROPHY/.test(it.id)) pri = 1.5;
     if (/^Minion|Minion [IVX]+$/.test(name)) pri = 1.4;
-    if (!STOP.has(name)) set(name, `i:${it.id}`, pri + it.id.length / 1000);
+    if (!STOP.has(name.replace(MARKS, ''))) set(name, `i:${it.id}`, pri + it.id.length / 1000);
     const armor = /^(.+?) (Chestplate|Tunic|Shirt)$/.exec(name);
     if (armor) set(`${armor[1]} Armor`, `i:${it.id}`, 1.2 + it.id.length / 1000);
   }
@@ -167,9 +170,9 @@ export function findPhrases(text, lex) {
     for (let n = Math.min(MAX_WORDS, words.length - i); n >= 1; n--) {
       // слова фразы должны идти через один пробел или «. » (Mk. II), иначе это разные куски текста
       let ok = true;
-      for (let k = i + 1; k < i + n; k++) { const gap = s.slice(words[k - 1].end, words[k].start); if (!/^(\s|\.\s|\s&\s|\s-\s)$/.test(gap)) { ok = false; break; } }
+      for (let k = i + 1; k < i + n; k++) { const gap = s.slice(words[k - 1].end, words[k].start); if (!/^[™®©]?(\s|\.\s|\s&\s|\s-\s)$/.test(gap)) { ok = false; break; } }
       if (!ok) continue;
-      const raw = normQ(s.slice(words[i].start, words[i + n - 1].end));
+      const raw = normQ(s.slice(words[i].start, words[i + n - 1].end).replace(MARKS, ''));
       const e = lex.get(raw);
       if (e) { hit = { phrase: s.slice(words[i].start, words[i + n - 1].end), ref: e.ref, n }; break; }
     }
