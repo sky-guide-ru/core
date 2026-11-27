@@ -14,6 +14,16 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-weapons',
+    date: '2026-11-27',
+    kind: 'better',
+    title: 'Лук и меч — разные пути',
+    items: [
+      'Меч против слеера в [плане](roadmap) не обязателен, если уже есть Juju Shortbow или Terminator.',
+      'Для Berserk в плане есть путь мечей для данжей: Livid Dagger, Giant\'s Sword, Dark Claymore.',
+    ],
+  },
+  {
     id: '2026-11-27-advice',
     date: '2026-11-27',
     kind: 'fix',

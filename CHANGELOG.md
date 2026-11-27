@@ -4,6 +4,11 @@
 
 ## Не выпущено
 
+## 0.2.12
+
+- Лестницы снаряжения получили `style` (bow / melee / mage). Новая лестница `dungeon-melee-weapon` для Berserk: Livid Dagger / Shadow Fury (F5) → Giant's Sword (F6) → Dark Claymore (M7); требование `masterFloor`.
+- Меч против слеера (Revenant, Voidgloom) при луке Juju/Terminator опускается на 15 и поясняет, что лук — свой стиль. Кинжалы Blaze не трогаем: они обязательны.
+
 ## 0.2.11
 
 - Перевод новости «Советы плана стали точнее» для /en/ (api-тест seo падал на русском тексте).

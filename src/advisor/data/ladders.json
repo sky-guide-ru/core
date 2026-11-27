@@ -5,6 +5,7 @@
    "id": "dungeon-archer-weapon",
    "cat": "Dungeons",
    "kind": "weapon",
+   "style": "bow",
    "classes": [
     "archer"
    ],
@@ -48,6 +49,7 @@
    "id": "dungeon-mage-weapon",
    "cat": "Dungeons",
    "kind": "weapon",
+   "style": "mage",
    "classes": [
     "mage",
     "healer"
@@ -79,6 +81,49 @@
      ],
      "name": "Hyperion (или другой меч из Necron's Blade со свитками)",
      "note": "топ для мага и зачистки мобов"
+    }
+   ]
+  },
+  {
+   "id": "dungeon-melee-weapon",
+   "cat": "Dungeons",
+   "kind": "weapon",
+   "style": "melee",
+   "classes": [
+    "berserk"
+   ],
+   "titleRu": "Оружие ближнего боя для данжей",
+   "tiers": [
+    {
+     "ids": [
+      "LIVID_DAGGER",
+      "SHADOW_FURY"
+     ],
+     "name": "Livid Dagger / Shadow Fury",
+     "note": "ближний бой с F5",
+     "req": {
+      "floor": 5
+     }
+    },
+    {
+     "ids": [
+      "GIANTS_SWORD"
+     ],
+     "name": "Giant's Sword",
+     "note": "основной меч Berserk для F7 и Master Mode",
+     "req": {
+      "floor": 6
+     }
+    },
+    {
+     "ids": [
+      "DARK_CLAYMORE"
+     ],
+     "name": "Dark Claymore",
+     "note": "сильнейший меч Berserk, после M7",
+     "req": {
+      "masterFloor": 7
+     }
     }
    ]
   },
@@ -120,6 +165,7 @@
    "id": "ender-slayer-weapon",
    "cat": "Slayers",
    "kind": "weapon",
+   "style": "melee",
    "titleRu": "Оружие против Voidgloom Seraph",
    "tiers": [
     {
@@ -181,6 +227,7 @@
    "id": "zombie-slayer-weapon",
    "cat": "Slayers",
    "kind": "weapon",
+   "style": "melee",
    "titleRu": "Оружие против Revenant Horror",
    "tiers": [
     {
@@ -222,6 +269,7 @@
    "id": "blaze-slayer-weapon",
    "cat": "Slayers",
    "kind": "weapon",
+   "style": "melee",
    "titleRu": "Кинжалы против Inferno Demonlord",
    "tiers": [
     {
