@@ -3,6 +3,9 @@ import { rankFor, hypixelInfo } from './rank.js';
 import { rankOf } from './lib/profile-mode.js';
 import { hypixelInfoOf } from './lib/hypixel-player.js';
 import { guildFor } from './guild.js';
+import { statusFor, bingoRawFor } from './live.js';
+import { statusOf, bingoOf } from './lib/live-status.js';
+import { bingoEvent } from './calendar/index.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { EventEmitter } from 'node:events';
@@ -236,6 +239,9 @@ async function doRefreshProfile() {
     const uuid = state.player.uuid;
     // Гильдия — параллельно с профилем: из кэша (час) сразу, иначе один запрос, который не задерживает профиль
     const guildP = state.demo ? Promise.resolve(null) : guildFor(uuid).catch(() => null);
+    // Онлайн и остров (/status) — только пока профиль смотрят, Bingo — раз в 6 часов (live.js)
+    const statusP = state.demo || Date.now() - watchedAt >= WATCH_MS ? Promise.resolve(null) : statusFor(uuid).catch(() => null);
+    const bingoP = state.demo ? Promise.resolve(null) : bingoRawFor(uuid).catch(() => null);
     setMoneyOwner(uuid); // личные настройки «Заработка» (Fortune, Forge, сессии) — только для своего профиля
     // Первый запуск после перезапуска сайта: свежий (до 10 минут) ответ с диска вместо запросов в Hypixel
     let disk = !useFixture && !state.raw ? ownerDisk.get('owner', 10 * 60_000) : null, staleErr = null;
@@ -277,6 +283,9 @@ async function doRefreshProfile() {
     if (!state.demo) { state.member.rank = await rankFor(uuid).catch(() => null); state.member.hypixel = hypixelInfo(uuid); }
     else { try { const pl = JSON.parse(fs.readFileSync(path.join(config.dataDir, 'fixture-player.json'), 'utf8')).player; state.member.rank = rankOf(pl); state.member.hypixel = hypixelInfoOf(pl); } catch { /* в демо /player может не быть */ } }
     state.member.guild = await guildP;
+    const demoFile = f => { try { return JSON.parse(fs.readFileSync(path.join(config.dataDir, f), 'utf8')); } catch { return null; } };
+    state.member.online = state.demo ? statusOf(demoFile('fixture-status.json')) : await statusP;
+    state.member.bingo = bingoOf(state.demo ? demoFile('fixture-bingo.json') : await bingoP, bingoEvent());
     const gear = reanalyze();
     const snap = snapshot(state.member, gear);
     const prev = lastSnap || state.history[state.history.length - 1];

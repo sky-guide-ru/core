@@ -1,6 +1,7 @@
 // Мэр, министр, выборы и календарь событий SkyBlock.
 //   setElection(raw)        — ответ /v2/resources/skyblock/election (обновляется в money.js → refreshMayor)
 //   setFireSales(raw)       — ответ /v2/skyblock/firesales (там же, раз в 20 минут; ключ не нужен)
+//   setBingo(raw)           — ответ /v2/resources/skyblock/bingo (там же; ключ не нужен)
 //   calendarView(now, year) — всё для страницы «События»: мэр, выборы, что идёт, что скоро, сетка года
 //   calendarBrief(now)      — коротко для советчика (что идёт сейчас и что скоро)
 //   GET /api/calendar?year= — маршрут
@@ -9,6 +10,7 @@ import { yearlyIn, cultIn, hourlyNext, nextTermChange, electionWindow, perkEvent
 import { mayorView, PERKS, perkTitle, stripCodes } from './mayors.js';
 import { MAYOR_RULES } from '../market/mayor-boost.js';
 import { tx } from '../../i18n/msg.js';
+import { bingoEventOf } from '../lib/live-status.js';
 
 export { sbDate, MONTHS };
 
@@ -36,6 +38,20 @@ export function fireSaleEvents(now = Date.now()) {
       tip: 'Ограниченная косметика за SkyBlock Gems: покупается в Community Center (Elizabeth → Fire Sales), пока не кончатся штуки.',
     };
   });
+}
+
+// Bingo: ивент месяца для Bingo-профилей. { id, name, start, end, modifier, goals }
+let bingo = null;
+export function setBingo(raw) { const b = bingoEventOf(raw); if (b) bingo = b; }
+export const bingoEvent = () => bingo;
+export function bingoEvents(now = Date.now()) {
+  if (!bingo?.start || !(bingo.end > now)) return [];
+  return [{
+    id: tx`bingo-${bingo.id}`, name: tx`Bingo: ${bingo.name || bingo.id}`, icon: 'EMPTY_MAP', color: '#ffd23f', tier: 'big',
+    start: bingo.start, end: bingo.end,
+    what: bingo.goals.length ? tx`${bingo.goals.length} целей` : '',
+    tip: 'Ивент для Bingo-профиля: за выполненные цели дают Bingo Points, их тратят в магазине Bingo в Hub.',
+  }];
 }
 
 function ministerView(raw) {
@@ -71,6 +87,7 @@ function allEvents(now) {
   for (let i = 0; i < 2; i++) { const mm = (month + i) % 12, yy = year + Math.floor((month + i) / 12); ev.push(...cultIn(yy, mm)); }
   ev.push(...hourlyNext(now, 3));
   ev.push(...fireSaleEvents(now));
+  ev.push(...bingoEvents(now));
   const w = electionWindow(now);
   ev.push({ id: 'term', name: 'Смена мэра', icon: 'PAPER', color: '#c3a6ff', tier: 'big', start: termEnd, end: termEnd + DAY,
     what: 'Итоги выборов: новый мэр и министр.', tip: 'Победитель выборов становится мэром на год SkyBlock, второй по голосам — министром с одним перком.' });

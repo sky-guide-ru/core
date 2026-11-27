@@ -4,6 +4,14 @@
 
 ## Не выпущено
 
+## 0.2.7
+
+- `live.js`: запросы с ключом ради «живых» сведений, с кэшем (`createCached`). `/status` — онлайн и остров (`member.online`), пока профиль смотрят (у чужих — пока хватает лимита), не чаще раза в 2 минуты на игрока. `/skyblock/bingo` — `member.bingo` (очки, ивенты, нынешний ивент), раз в 6 часов; у чужих игроков — только при Bingo-профиле. `/skyblock/news` — `skyblockNews()`, патчноуты SkyBlock, раз в 3 часа на весь сайт.
+- `lib/live-status.js`: разбор ответов (`statusOf`, `islandName`, `bingoOf`, `bingoEventOf`, `skyblockNewsOf`).
+- Календарь: `setBingo` / `bingoEvent` / `bingoEvents` — ивент Bingo из `/resources/skyblock/bingo` (без ключа, вместе с Fire Sales).
+- Расход ключа: вид запросов `status`.
+- Демо: `data/fixture-status.json`, `data/fixture-bingo.json`.
+
 ## 0.2.6
 
 - Перевод подсказки «Гильдия {0}» (название гильдии без тега в «Рейтинге»).

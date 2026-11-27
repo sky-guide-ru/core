@@ -15,7 +15,7 @@ const BASE = 'https://api.hypixel.net/v2';
 // - после ответа 429 (лимит за 5 минут или суточный лимит ключа разработчика) ключ стоит на паузе до сброса:
 //   запросы не уходят и сразу получают ошибку RATE, а сайт показывает последние полученные данные;
 // - счётчик расхода по дням (server/lib/key-usage.js) для страницы «Сервер».
-const KIND = p => (/\/skyblock\/(profiles|garden|museum)/.exec(p) || [])[1] || (p.startsWith('/player') ? 'player' : p.startsWith('/guild') ? 'guild' : 'other');
+const KIND = p => (/\/skyblock\/(profiles|garden|museum)/.exec(p) || [])[1] || (p.startsWith('/player') ? 'player' : p.startsWith('/guild') ? 'guild' : p.startsWith('/status') ? 'status' : 'other');
 
 export function createKeyed({ fetcher = getJson, usage = null, clock = () => Date.now(), apiKey = () => config.apiKey, pauseFile = null } = {}) {
   const log = [];
@@ -113,6 +113,9 @@ export const getMuseum = profileId => keyed(`/skyblock/museum?profile=${profileI
 export const getPlayer = uuid => keyed(`/player?uuid=${uuid}`);
 // Гильдия игрока (src/guild.js хранит ответ час)
 export const getGuild = uuid => keyed(`/guild?player=${uuid}`);
+export const getStatus = uuid => keyed(`/status?uuid=${uuid}`);
+export const getBingo = uuid => keyed(`/skyblock/bingo?uuid=${uuid}`);
+export const getSkyblockNews = () => keyed('/skyblock/news');
 // Лоты игрока на Auction House (висящие и закончившиеся, но не забранные) — блок «Мои лоты»
 export const getPlayerAuctions = uuid => keyed(`/skyblock/auction?player=${uuid}`);
 // Публичные эндпоинты, ключ не нужен
@@ -122,3 +125,4 @@ export const getItemsResource = () => getJson(`${BASE}/resources/skyblock/items`
 export const getCollectionsResource = () => getJson(`${BASE}/resources/skyblock/collections`);
 export const getElection = () => getJson(`${BASE}/resources/skyblock/election`);
 export const getFireSales = () => getJson(`${BASE}/skyblock/firesales`);
+export const getBingoResource = () => getJson(`${BASE}/resources/skyblock/bingo`);
