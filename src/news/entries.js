@@ -14,6 +14,36 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-comeback',
+    date: '2026-11-27',
+    kind: 'new',
+    title: '«Обзор» после перерыва и дела дня',
+    items: [
+      'После перерыва от 30 дней [Обзор](overview#returning) подскажет, с чего начать и что вышло в SkyBlock.',
+      '[Дела на сегодня](overview#dailies): Experiments, квесты Crimson Isle, Matriarch и Garden Visitors отмечаются сами.',
+    ],
+  },
+  {
+    id: '2026-11-27-sbxp',
+    date: '2026-11-27',
+    kind: 'new',
+    title: 'Где SkyBlock XP дешевле',
+    items: [
+      '[Прогресс](skills#sbxp) показывает, где SkyBlock XP бесплатно и где дешевле всего за монету.',
+      'Карточка Dungeons подсказывает, какие сундуки открывать и стоят ли Dungeon Chest Key и Kismet Feather.',
+    ],
+  },
+  {
+    id: '2026-11-27-interests',
+    date: '2026-11-27',
+    kind: 'better',
+    title: 'План под свои интересы',
+    items: [
+      'Категории [плана](roadmap#interests) можно отметить «Нравится» или «Не хочу»: шаги поднимутся выше или уйдут.',
+      'В «Как получить» у ингредиентов крафта видно, сколько уже лежит в Sacks и сколько докупить.',
+    ],
+  },
+  {
     id: '2026-11-27-magicfind',
     date: '2026-11-27',
     kind: 'new',

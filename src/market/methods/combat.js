@@ -172,6 +172,38 @@ export function floorValue(ctx, f) {
   return { floor: f, main, low: a.ev + lift, high: a.ev + extra + lift, rows: a.rows, unpriced: a.unpriced, key, secondEv: second?.ev || 0, meter };
 }
 
+const FLOOR_ORDER = ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6', 'M7'];
+
+/**
+ * «Открывать сундуки или нет» для карточки Dungeons: по каждому открытому этажу — сколько в среднем даёт главный
+ * сундук на S+, стоит ли второй (Obsidian) за Dungeon Chest Key и окупается ли Kismet Feather (перебросить сундук).
+ * @returns {null | { key: number, kismet: number, floors: Array<{ floor, main, ev, keyEv, keyWorth, kismetWorth, worth: Array<{id,name,gain,chance}>, keyItems: Array<{id,name,gain}> }> }}
+ */
+export function dungeonChests(ctx, m) {
+  const key = buyPrice(ctx, 'DUNGEON_CHEST_KEY')?.price || 0;
+  const kismet = buyPrice(ctx, 'KISMET_FEATHER')?.price || 0;
+  const open = FLOOR_ORDER.filter(f => floorOpen(m, f) || floorRuns(m, f) > 0);
+  const floors = [];
+  for (const f of open) {
+    const chests = LOOT.dungeons[f];
+    if (!chests) continue;
+    const main = chests.Bedrock ? 'Bedrock' : 'Obsidian';
+    const a = chestValue(ctx, chests[main]);
+    const b = main === 'Bedrock' && key ? chestValue(ctx, chests.Obsidian, key) : null;
+    floors.push({
+      floor: f, main, ev: Math.round(a.ev),
+      keyEv: b ? Math.round(b.ev) : null,
+      keyWorth: !!(b && b.rows.length),
+      // Kismet перебрасывает сундук: окупается в среднем, если сундук в среднем дороже пера
+      kismetWorth: kismet > 0 && a.ev > kismet,
+      worth: a.rows.slice(0, 4).map(r => ({ id: r.id, name: r.name, gain: Math.round(r.unit - r.cost), chance: r.chance })),
+      keyItems: b ? b.rows.slice(0, 3).map(r => ({ id: r.id, name: r.name, gain: Math.round(r.unit - r.cost - key) })) : [],
+    });
+  }
+  // Цен ещё нет (сервер только запустился) — блок не показываем, чтобы не писать «≈0» везде
+  return floors.some(f => f.ev > 0) ? { key: Math.round(key), kismet: Math.round(kismet), floors } : null;
+}
+
 function dungeonCompute(floors) {
   return (ctx, m) => {
     const vals = floors.map(f => ({ ...floorValue(ctx, f), open: floorOpen(m, f), rate: FLOOR_RATE[f] })).filter(v => v.main && (v.low > 0 || v.rows.length));

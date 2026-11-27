@@ -14,7 +14,7 @@ import { resolveUuid, getProfiles, getGarden, getMuseum, keyedPause, setKeyOwner
 import { pickProfile, parseMember, parseGarden } from './parse/profile.js';
 import { analyzeAccessories, analyzeGear } from './parse/gear.js';
 import { advise, diffRoadmaps } from './analysis/roadmap.js';
-import { moneyMethods, setMoneyOwner } from './analysis/money.js';
+import { moneyMethods, setMoneyOwner, marketCtx } from './analysis/money.js';
 import { SKILLS, SLAYERS } from '../i18n/ru.js';
 import { pricesReady, priceOf, buyPriceOf, prices } from './prices.js';
 import { magicFind } from './calc/magic-find.js';
@@ -22,6 +22,10 @@ import { buildUpgrades } from './lib/acc-upgrades.js';
 import { petScoreSummary } from './analysis/pet-score.js';
 import { enrichGuide } from './guides/refs.js';
 import { chocolateAdvice } from './analysis/chocolate.js';
+import { returningInfo } from './analysis/returning.js';
+import { dailiesOf } from './analysis/dailies.js';
+import { sbxpPlan } from './analysis/sbxp.js';
+import { dungeonChests } from './market/methods/combat.js';
 import { listByCategory } from './items-ru/index.js';
 import { neu, itemName } from './neu.js';
 import { museumSummary } from './museum/index.js';
@@ -168,7 +172,13 @@ export function analyzeMember(m) {
   if (gear) {
     try { gear.mf = magicFind(m, { constants: neu.constants, price: buyPriceOf, name: itemName, upgrades: mfUpgrades() }); } catch (e) { console.warn('[magic find]', e.message); }
   }
-  return { acc, gear, roadmap, map, plan, summary, power, methods, museum, petScore, chocolate };
+  const safe = (name, fn) => { try { return fn(); } catch (e) { console.warn(tx`[${name}]`, e.message); return null; } };
+  // «Обзор»: перерыв в игре и ежедневные дела; «Прогресс»: дешёвый SkyBlock XP и сундуки данжей
+  const returning = safe('возвращение', () => returningInfo(m));
+  const dailies = safe('дейлики', () => dailiesOf(m));
+  const sbxp = safe('SkyBlock XP', () => sbxpPlan(m, { acc, petScore, museumBest: museum?.best || null, museumFreeXp: museum?.canDonateXp || 0 }));
+  const chests = safe('сундуки', () => dungeonChests(marketCtx(), m));
+  return { acc, gear, roadmap, map, plan, summary, power, methods, museum, petScore, chocolate, returning, dailies, sbxp, chests };
 }
 
 let upMemo = null;

@@ -30,5 +30,19 @@
  ", самый быстрый S+ за {0}": ", fastest S+ in {0}",
  ", самый быстрый S за {0}": ", fastest S in {0}",
  "Watcher убит {0} раз": "Watcher killed {0} times",
- "рекорд урона за {0}: {1}": "{0} damage record: {1}"
+ "рекорд урона за {0}: {1}": "{0} damage record: {1}",
+ "Сундуки: открывать или нет": "Chests: open or not",
+ "последние 3": "last 3",
+ "все этажи ({0})": "all floors ({0})",
+ "Сундук": "Chest",
+ "В среднем": "Average",
+ "С ключом": "With key",
+ "Ради чего": "Worth it for",
+ "не стоит": "not worth it",
+ "Считается сундук на S+: открывать, если внутри предмет дороже цены открытия. Dungeon Chest Key {0}{1}.": "Based on an S+ chest: open it if the item inside is worth more than the opening cost. Dungeon Chest Key {0}{1}.",
+ "SkyBlock Level: где XP дешевле": "SkyBlock Level: cheapest XP",
+ "уровень {0} · до {1}: {2} XP": "level {0} · to {1}: {2} XP",
+ "+{0} XP бесплатно": "+{0} XP free",
+ "{0} за 1 XP": "{0} per 1 XP",
+ "за время": "takes time"
 }

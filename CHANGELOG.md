@@ -4,6 +4,15 @@
 
 ## Не выпущено
 
+## 0.2.24
+
+- «С возвращением»: метки активности профиля (parse/activity.js) вместо пустого last_save, перерыв 30+ дней и что нового (analysis/returning.js).
+- «Дела на сегодня»: Experiments, квесты Crimson Isle, Matriarch, Garden Visitors по меткам API, сброс в полночь по Нью-Йорку (analysis/dailies.js).
+- «Дешёвый SkyBlock XP»: XP по категориям и цена за 1 XP (analysis/sbxp.js, данные NEU sblevels/misc); museumSummary.best.
+- Сундуки данжей по открытым этажам: Bedrock/Obsidian, Dungeon Chest Key, Kismet Feather (dungeonChests в market/methods/combat.js).
+- «Как получить»: запасы из Sacks в дереве крафта (have/need/rest, fromStock).
+- analyzeMember отдаёт returning, dailies, sbxp, chests; новости и переводы.
+
 ## 0.2.23
 
 - Magic Find после реворка 0.27.3 (`calc/magic-find.js`): источники MF игрока, что взять дальше по цене за 1 MF, временные баффы, что не видно в API, MF на отдельных мобов и Bestiary. В разборе — `analysis.gear.mf`.

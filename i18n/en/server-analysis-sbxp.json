@@ -1,0 +1,12 @@
+{
+ "Несданные души ({0}) отнести Tia в Wilderness.": "Bring unspent souls ({0}) to Tia in the Wilderness.",
+ "Каждые 5 найденных душ у Tia в Wilderness — 10 XP.": "Every 5 souls found give 10 XP at Tia in the Wilderness.",
+ "1 XP за каждый Magical Power. Дешевле всего: {0} (+{1} MP).": "1 XP per Magical Power. Cheapest: {0} (+{1} MP).",
+ "3 XP за очко Pet Score. Дешевле всего: {0} (+{1}).": "3 XP per Pet Score point. Cheapest: {0} (+{1}).",
+ "Пожертвовать то, что уже есть: +{0} XP бесплатно.": "Donate what you already have: +{0} XP for free.",
+ "Дешевле всего за XP: {0} (+{1} XP).": "Cheapest per XP: {0} (+{1} XP).",
+ "Каждый новый крафт миньона даёт XP, больше всего — тиры XI (12 XP) и XII (24 XP).": "Every new minion craft gives XP, tiers XI (12 XP) and XII (24 XP) give the most.",
+ "4 XP за каждый новый тир коллекции.": "4 XP for every new collection tier.",
+ "Уровни скиллов: до 10 — по 5 XP, до 25 — по 10, до 50 — по 20, дальше по 30.": "Skill levels: up to 10 give 5 XP each, up to 25 give 10, up to 50 give 20, then 30.",
+ "10 XP за каждый контакт в Abiphone: у многих NPC свой небольшой квест.": "10 XP for every Abiphone contact: many NPCs have a small quest."
+}

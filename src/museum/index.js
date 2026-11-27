@@ -13,6 +13,8 @@ export function museumSummary(m, o) {
     status: a.status, donated: a.donated, total: a.total, xp: a.xp, xpMax: a.xpMax, value: a.value, appraisal: !!a.appraisal,
     milestone: a.milestone, canDonate: a.canDonate.length, canDonateXp: a.canDonateXp || 0, borrowed: a.borrowed.length, special: a.special.count,
     categories: a.categories.map(c => ({ id: c.id, ru: c.ru, donated: c.donated, total: c.total })),
+    // Самое дешёвое за 1 SkyBlock XP (для «Дешёвого SkyBlock XP» на «Прогрессе»)
+    best: a.bestValue?.[0] ? (({ id, cost, gain, perXp }) => ({ id, name: o.name?.(id) || id, cost, gain, perXp }))(a.bestValue[0]) : null,
   };
 }
 
