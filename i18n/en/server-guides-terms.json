@@ -156,5 +156,21 @@
  " для {0}": " for {0}",
  " (камень у Reforge Anvil)": " (stone at the Reforge Anvil)",
  " (у Blacksmith)": " (at the Blacksmith)",
- " На Legendary: {0}.": " At Legendary: {0}."
+ " На Legendary: {0}.": " At Legendary: {0}.",
+ "Больше брёвен Fig Log с каждого дерева Fig (Galatea).": "More Fig Log from every Fig tree (Galatea).",
+ "Больше брёвен Mangrove Log с каждого дерева Mangrove (Galatea).": "More Mangrove Log from every Mangrove tree (Galatea).",
+ "Больше добычи с деревьев Helix в Torrhus Canyon.": "More loot from Helix trees in Torrhus Canyon.",
+ "Больше шардов при охоте (Hunting).": "More shards when hunting (Hunting).",
+ "Городок на Galatea: Hunting, Fusion Machine и NPC охоты.": "A town on Galatea: Hunting, the Fusion Machine and hunting NPCs.",
+ "Подводная зона Galatea: ловушки для водных шардов.": "An underwater area of Galatea: traps for water shards.",
+ "Озеро на Galatea.": "A lake on Galatea.",
+ "Затопленная часть гробницы на Galatea: рыбалка ради шардов.": "The flooded part of a tomb on Galatea: fishing for shards.",
+ "Гробница на Galatea.": "A tomb on Galatea.",
+ "Зона Dwarven Mines с рудой Mithril и Titanium.": "A Dwarven Mines area with Mithril and Titanium ore.",
+ "Лагерь у входа в Glacite Tunnels (/warp basecamp).": "The camp at the entrance to the Glacite Tunnels (/warp basecamp).",
+ "Логово босса Bal в Magma Fields (Crystal Hollows).": "Bal's lair in the Magma Fields (Crystal Hollows).",
+ "Crimson Isle и Glacite Tunnels": "Crimson Isle and Glacite Tunnels",
+ "Зона Рифта. {0}": "Rift area. {0}",
+ "Зона: {0}. {1}": "Area: {0}. {1}",
+ "Гем: в слоте снаряжения даёт {0}. Где добывать: {1}. Ступени: Rough → Flawed → Fine → Flawless → Perfect.": "Gemstone: in a gear slot it gives {0}. Where to mine: {1}. Tiers: Rough → Flawed → Fine → Flawless → Perfect."
 }

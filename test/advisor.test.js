@@ -259,8 +259,8 @@ test('имена питомцев без шаблона «[Lvl {LVL}]»: у св
   m.pets = [...m.pets, { id: 'GOLEM_X;4', type: 'GOLEM_X', tier: 'LEGENDARY', level: 96, maxLevel: 100, exp: 0 }];
   const steps = buildRoadmap(m, ACC, GEAR, { price: id => price(id) || (id.includes(';') ? 1e5 : 0), itemName: id => (id.includes(';') ? `[Lvl {LVL}] ${id.split(';')[0]}` : null) });
   const ps = steps.find(s => s.id === 'pets-score');
-  assert.ok(ps.how.some(h => /^Докачай GOLEM_X \(Lvl 96 → 100\)/.test(h)), ps.how.join(' | '));
-  assert.ok(ps.how.some(h => /^Купить: \S+ \((Common|Uncommon|Rare|Epic|Legendary|Mythic)\) — /.test(h)), ps.how.join(' | '));
+  assert.ok(ps.how.some(h => /^Докачай GOLEM_X Pet \(Lvl 96 → 100\)/.test(h)), ps.how.join(' | '));
+  assert.ok(ps.how.some(h => /^Купить: \S+ Pet \((Common|Uncommon|Rare|Epic|Legendary|Mythic)\) — /.test(h)), ps.how.join(' | '));
   assert.ok(!ps.how.some(h => /^Купить:.*Lvl/.test(h)), 'в покупках нет уровня');
   for (const s of steps) {
     const text = [s.title, s.why, ...s.how, ...Object.values(s.itemNames || {})].join(' ');

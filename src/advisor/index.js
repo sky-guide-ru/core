@@ -96,7 +96,8 @@ function run(ctx) {
         const mm = /^Купить: (.+?)(?: — ~.*)?$/.exec(h);
         if (!mm) return h;
         const label = mm[1];
-        const id = byName.get(label.replace(/ \([^)]*\)$/, '').toLowerCase()) || byName.get(label.toLowerCase());
+        const base = label.replace(/ \([^)]*\)$/, '');
+        const id = byName.get(base.toLowerCase()) || byName.get(base.replace(/ Pet$/, '').toLowerCase()) || byName.get(label.toLowerCase());
         const hint = id ? ctx.obtain(id) : null;
         if (hint?.kind === 'npc') return ru`Купить у NPC ${hint.npcName}: ${label} — ~${fmtCoins(hint.coins)}`;
         if (hint) return ru`Добыть: ${label} — ${hint.text}`;

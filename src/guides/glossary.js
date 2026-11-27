@@ -223,6 +223,22 @@ export const GLOSSARY = {
     how: ['Каждый день бери 5 квестов на доске в городе своей фракции (Dragontail у Barbarians, Scarleton у Mages).'],
   },
 
+  factions: {
+    names: ['Mages', 'Barbarians', 'Mage Faction', 'Barbarian Faction'], kind: 'mech', title: 'Фракции Crimson Isle',
+    text: 'На Crimson Isle две фракции: Mages (город Scarleton) и Barbarians (Dragontail). Выбираешь одну; её квесты и магазин дают репутацию, броню и доступ к Kuudra.',
+  },
+  fallen_star: {
+    names: ['Fallen Star', 'Fallen Stars'], kind: 'event', title: 'Fallen Star',
+    text: 'Упавшая звезда в Dwarven Mines: появляется время от времени, её добывают вместе с другими игроками ради Starfall и Mithril Powder.',
+  },
+  fusion_machine: {
+    names: ['Fusion Machine'], kind: 'mech', title: 'Fusion Machine',
+    text: 'Машина в Tangleburg (Galatea): из двух шардов делает новый. Так получают шарды, которые не ловятся охотой.',
+  },
+  skyblock_menu: {
+    names: ['SkyBlock Menu'], kind: 'mech', title: 'SkyBlock Menu',
+    text: 'Главное меню игры: звезда Nether Star в последнем слоте инвентаря или команда /sbmenu. Отсюда открываются скиллы, коллекции, Settings и прочие разделы.',
+  },
   dojo: {
     names: ['Dojo'], kind: 'place', title: 'Dojo',
     text: 'Арена на Crimson Isle с семью испытаниями (Force, Stamina, Mastery, Discipline, Swiftness, Control, Tenacity). Ранг от F до S по очкам; за общий счёт Master Tao выдаёт пояса.',
@@ -314,6 +330,19 @@ export const GLOSSARY = {
     names: ['Crop Upgrades', 'Crop Upgrade'], kind: 'mech', title: 'Crop Upgrades',
     text: 'Улучшения культур в Garden за Copper: +5 Farming Fortune этой культуре за уровень, максимум 9.',
     how: ['В Garden: Desk → Crop Upgrades.'],
+  },
+  garden_desk: {
+    names: ['Desk', 'Garden Desk'], kind: 'mech', title: 'Desk (Garden)',
+    text: 'Стол в Barn в Garden: главное меню Garden. Отсюда открываются Crop Upgrades, участки (Plots), Garden Level, Crop Milestones и Composter.',
+    how: ['/warp garden, подойди к столу в Barn и нажми ПКМ.'],
+  },
+  skymart: {
+    names: ['SkyMart'], kind: 'place', title: 'SkyMart',
+    text: 'Магазин в Garden за Copper: инструменты фермера, улучшения и предметы для Garden.',
+  },
+  plots: {
+    names: ['Plots', 'Plot'], kind: 'mech', title: 'Plots',
+    text: 'Участки Garden вокруг Barn: всего 24. Открываются за Compost в Desk → Configure Plots; на каждом можно растить свою культуру.',
   },
   composter: {
     names: ['Composter', 'Compost'], kind: 'mech', title: 'Composter',
