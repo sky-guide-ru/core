@@ -273,5 +273,8 @@
  "План для Bingo и Stranded": "Plan for Bingo and Stranded",
  "У Bingo первым шагом [плана](roadmap) идут невыполненные цели нынешнего ивента с условиями.": "On Bingo, the first step of the [plan](roadmap) lists the current event's unfinished goals with their conditions.",
  "У Stranded в плане нет Dungeons, Kuudra, Crimson Isle, Rift, HOTM и HOTF: туда с острова не попасть.": "On Stranded, the plan has no Dungeons, Kuudra, Crimson Isle, Rift, HOTM or HOTF: they can't be reached from the island.",
- "[Museum](museum) и Pet Score у Ironman, Stranded и Bingo считают покупки только у NPC, без цен AH.": "[Museum](museum) and Pet Score on Ironman, Stranded and Bingo count only NPC purchases, without AH prices."
+ "[Museum](museum) и Pet Score у Ironman, Stranded и Bingo считают покупки только у NPC, без цен AH.": "[Museum](museum) and Pet Score on Ironman, Stranded and Bingo count only NPC purchases, without AH prices.",
+ "Покупка на аукционе в «Как получить»": "Buying on the Auction House in “How to get”",
+ "«Купить на аукционе» есть и у вещей, чьи лоты сейчас разобраны: с ценой недавних продаж.": "“Buy on the Auction House” also shows for items whose listings are sold out, at the recent sale price.",
+ "У дропа с Master Mode понятнее написано, что нужно: уровень Catacombs и пройденный F7.": "Master Mode drops say more clearly what is needed: a Catacombs level and a completed F7."
 }
