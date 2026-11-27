@@ -1,6 +1,7 @@
 // Общее состояние, обновление профиля и лента изменений
 import { rankFor, hypixelInfo } from './rank.js';
-import { rankOf } from './lib/profile-mode.js';
+import { rankOf, profileMode } from './lib/profile-mode.js';
+import { npcCoinPrice, obtainHint } from './lib/npc-shop.js';
 import { hypixelInfoOf } from './lib/hypixel-player.js';
 import { guildFor } from './guild.js';
 import { statusFor, bingoRawFor } from './live.js';
@@ -15,6 +16,7 @@ import { pickProfile, parseMember, parseGarden } from './parse/profile.js';
 import { analyzeAccessories, analyzeGear } from './parse/gear.js';
 import { advise, diffRoadmaps } from './analysis/roadmap.js';
 import { moneyMethods, setMoneyOwner, marketCtx } from './analysis/money.js';
+import { npcOnlyCtx } from './market/methods.js';
 import { SKILLS, SLAYERS } from '../i18n/ru.js';
 import { pricesReady, priceOf, buyPriceOf, prices } from './prices.js';
 import { magicFind } from './calc/magic-find.js';
@@ -169,15 +171,17 @@ export function analyzeMember(m) {
   let chocolate = null;
   try { chocolate = chocolateAdvice(m.extras?.chocolate); } catch (e) { console.warn('[Chocolate]', e.message); }
   // Magic Find — в куске «Снаряжения» (в /api/state не уходит)
+  // Ironman, Stranded, Bingo: без рынка — цены только NPC, остальное «где добыть»
+  const noMarket = profileMode(m.gameMode).market === false;
   if (gear) {
-    try { gear.mf = magicFind(m, { constants: neu.constants, price: buyPriceOf, name: itemName, upgrades: mfUpgrades() }); } catch (e) { console.warn('[magic find]', e.message); }
+    try { gear.mf = magicFind(m, { constants: neu.constants, price: noMarket ? id => npcCoinPrice(neu.items, id) : buyPriceOf, name: itemName, upgrades: mfUpgrades(), noMarket, obtain: id => obtainHint(neu.items, id) }); } catch (e) { console.warn('[magic find]', e.message); }
   }
   const safe = (name, fn) => { try { return fn(); } catch (e) { console.warn(tx`[${name}]`, e.message); return null; } };
   // «Обзор»: перерыв в игре и ежедневные дела; «Прогресс»: дешёвый SkyBlock XP и сундуки данжей
   const returning = safe('возвращение', () => returningInfo(m));
   const dailies = safe('дейлики', () => dailiesOf(m));
-  const sbxp = safe('SkyBlock XP', () => sbxpPlan(m, { acc, petScore, museumBest: museum?.best || null, museumFreeXp: museum?.canDonateXp || 0 }));
-  const chests = safe('сундуки', () => dungeonChests(marketCtx(), m));
+  const sbxp = safe('SkyBlock XP', () => sbxpPlan(m, { acc, petScore, museumBest: museum?.best || null, museumFreeXp: museum?.canDonateXp || 0, noMarket }));
+  const chests = safe('сундуки', () => dungeonChests(noMarket ? npcOnlyCtx(marketCtx()) : marketCtx(), m));
   return { acc, gear, roadmap, map, plan, summary, power, methods, museum, petScore, chocolate, returning, dailies, sbxp, chests };
 }
 

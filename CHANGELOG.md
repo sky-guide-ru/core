@@ -4,11 +4,20 @@
 
 ## Не выпущено
 
-## 0.2.33
+## 0.2.34
 
 - «Что продать» (`stash/sell.js`, `analyzeSell`): вещи из инвентаря, рюкзаков, Ender Chest и мешков — где выгоднее продать (Bazaar, AH или NPC), «сразу» и «подождав», после налога (`ahNet`, `BAZAAR_TAX`); лишние копии снаряжения; нужное плану — в `keep`; без рынка — только NPC и `noNpc`.
 - «На что потратить» (`stash/craft.js`, `analyzeCraft`): вещи из плана, на которые уже есть часть ресурсов по рецепту, и чего не хватает.
 - Новость «Что продать из своих запасов».
+
+## 0.2.33
+
+- Ещё варианты для профилей без рынка (Ironman, Stranded, Bingo):
+  - `buildObtainGuide(id, { noMarket })`: без Bazaar, аукциона и Dark Auction, в дереве ингредиентов — только NPC и добыча;
+  - `sbxpPlan(m, { noMarket })`: Magical Power, Pet Score и Museum без цены за XP;
+  - `magicFind(m, { noMarket, obtain })`: шаги без цены NPC остаются с подсказкой «где добыть»;
+  - `state.analyzeMember`: Magic Find по ценам NPC, сундуки данжей — по ценам продажи NPC (`npcOnlyCtx`).
+- Переводы en для новости и текстов 0.2.32.
 
 ## 0.2.32
 
