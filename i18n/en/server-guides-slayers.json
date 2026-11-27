@@ -77,5 +77,7 @@
  "Что надеть: твои вещи под каждый тир": "What to wear: your items for each tier",
  "Подобрано из твоих сетов в Wardrobe, наборов снаряжения, питомцев и оружия ближнего боя. Если твой сохранённый набор почти не хуже — показан он. Расчёт примерный: без зелий, лечения и большинства сетовых бонусов, поэтому тир, где у тебя уже есть победы, — «уже проходишь».": "Picked from your Wardrobe sets, equipment sets, pets and melee weapons. If your saved set is almost as good, it's shown instead. The estimate is rough: no potions, healing or most set bonuses, so a tier where you already have wins counts as \"already clearing\".",
  "Оценка": "Rating",
- "Что подтянуть": "What to improve"
+ "Что подтянуть": "What to improve",
+ "Не нужна: есть пара сильнее.": "Not needed: you have a stronger pair.",
+ "T{0} уже пройден.": "T{0} already cleared."
 }

@@ -16,8 +16,8 @@ const lackText = l => (l?.length ? l.map(x => LACK_SHORT[x]).join(' и ') : '');
 /** Какой набор показать для тира: тиры ниже фарма — тем же набором; сохранённый набор, если он почти не хуже */
 function pickKit(plan, t) {
   const farm = plan.farm;
-  const src = farm && t.verdict === 'proven' && t.tier < farm.tier && farm.best ? farm : t;
-  const b = src.best || t.hypo?.best;
+  const src = farm && t.verdict === 'proven' && t.tier < farm.tier && (farm.best || (!t.best && farm.hypo?.best)) ? farm : t;
+  const b = src.best || src.hypo?.best;
   const sv = src.best ? src.saved?.[0] : null;
   const useSaved = sv?.loadout?.name && b && sv.f.ttk <= b.f.ttk * 1.25 && sv.verdict === b.verdict;
   return { c: useSaved ? sv : b, saved: useSaved ? sv.loadout.name : null };
@@ -72,12 +72,17 @@ function kitSections(plan, key, ctx) {
 /** Blaze: путь к кинжалам — что, с какого уровня, из чего крафт и сколько стоит */
 function daggerSection(m, ctx) {
   const lvl = m.slayers?.blaze?.level || 0;
+  const top = maxKilledTier(m.slayers?.blaze);
+  // Пара не нужна, если есть пара сильнее или её тир уже пройден
+  const stronger = i => DAGGER_PAIRS.slice(i + 1).some(q => q.ids.every(id => ctx.has(id)));
   return { kind: 'steps', title: 'Кинжалы по тирам', note: 'С T2 урон проходит только кинжалами с нужной Attunement, поэтому нужна пара: одна закрывает Ashen и Auric, другая — Spirit и Crystal.',
     items: DAGGER_PAIRS.map((p, i) => {
       const own = p.ids.filter(id => ctx.has(id)).length;
       const cost = p.ids.reduce((n, id) => n + (ctx.price(id) || 0), 0);
-      return { title: tx`T${i + 2}: ${p.names} — с Blaze ${p.level}`, items: p.ids, done: own === 2, current: own < 2 && lvl >= p.level,
-        text: [tx`Крафт: ${p.craft}.`, tx`${cost ? tx`На Auction House ~${fmtCoins(cost)} за пару. ` : ''}${own === 2 ? 'Обе уже есть.' : own ? 'Одна уже есть.' : lvl < p.level ? tx`Откроется на ${p.level} уровне, сейчас ${lvl}.` : 'Уже можно брать.'}`] };
+      const skip = own < 2 && (stronger(i) || top >= i + 2);
+      const state = own === 2 ? 'Обе уже есть.' : skip ? (stronger(i) ? 'Не нужна: есть пара сильнее.' : tx`T${i + 2} уже пройден.`) : own ? 'Одна уже есть.' : lvl < p.level ? tx`Откроется на ${p.level} уровне, сейчас ${lvl}.` : 'Уже можно брать.';
+      return { title: tx`T${i + 2}: ${p.names} — с Blaze ${p.level}`, items: p.ids, done: own === 2 || skip, current: own < 2 && !skip && lvl >= p.level,
+        text: [tx`Крафт: ${p.craft}.`, tx`${cost && !skip ? tx`На Auction House ~${fmtCoins(cost)} за пару. ` : ''}${state}`] };
     }) };
 }
 

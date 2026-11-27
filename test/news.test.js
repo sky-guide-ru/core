@@ -9,6 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { WEB_SRC, skipNoWeb } from './_web.js';
+import { GUIDES as GUIDE_LIST } from '../src/guides/index.js';
 const GUIDES = path.dirname(fileURLToPath(new URL('../src/guides/index.js', import.meta.url)));
 const clientSrc = () => {
   const out = [];
@@ -63,8 +64,10 @@ test('ссылки в новостях ведут на существующий 
   const app = fs.readFileSync(path.join(WEB_SRC, 'App.jsx'), 'utf8');
   const pages = new Set([...app.slice(app.indexOf('const PAGES')).matchAll(/\{ id: '([a-z-]+)'/g)].map(m => m[1]));
   const guides = new Set(fs.readdirSync(GUIDES).filter(f => f.endsWith('.js'))
-    .flatMap(f => [...fs.readFileSync(path.join(GUIDES, f), 'utf8').matchAll(/export default \{\s*id: '([a-z-]+)'/g)].map(m => m[1])));
-  const src = clientSrc();
+    .flatMap(f => [...fs.readFileSync(path.join(GUIDES, f), 'utf8').matchAll(/export default \{\s*id: '([a-z-]+)'/g)].map(m => m[1]))
+    .concat(GUIDE_LIST.map(g => g.id))); // гайды слееров собираются кодом
+  // Блоки гайдов (секции с news: '…') приходят с сервера, поэтому ищем и в core/src/guides
+  const src = clientSrc() + fs.readdirSync(GUIDES).filter(f => f.endsWith('.js')).map(f => fs.readFileSync(path.join(GUIDES, f), 'utf8')).join('\n');
   const links = newsLinks(NEWS);
   assert.ok(links.length > 0);
   for (const l of links) {

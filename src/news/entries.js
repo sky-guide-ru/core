@@ -14,6 +14,13 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-blazetiers',
+    date: '2026-11-27',
+    kind: 'fix',
+    title: 'Гайд Blaze верно оценивает младшие тиры',
+    items: ['Исправлена ошибка: в [гайде Blaze](guides/slayer-blaze#wear) тир ниже пройденного иногда считался непосильным.'],
+  },
+  {
     id: '2026-11-27-heads',
     date: '2026-11-27',
     kind: 'fix',

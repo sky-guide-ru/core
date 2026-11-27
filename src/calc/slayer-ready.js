@@ -60,14 +60,19 @@ export function slayerPlan(member, key, kit, bossXp) {
   });
   // Модель без зелий, сетовых бонусов и лечения занижает силу игрока. Поэтому тир, где уже есть победы, — «проходишь»,
   // а следующий оцениваем относительно него: во сколько раз дольше бой и во сколько раз быстрее умираешь.
-  const proven = [...raw].reverse().find(t => t.kills >= PROVEN_KILLS && t.best) || null;
+  // Победы засчитываются, даже если оружия для тира не видно (кинжалы в закрытом API, продал и т. п.):
+  // тогда опорой для сравнения служит расчёт с парой кинжалов этого тира.
+  const proven = [...raw].reverse().find(t => t.kills >= PROVEN_KILLS) || null;
+  const provenBest = proven && (proven.best || proven.hypo?.best);
   const relative = best => {
-    const kT = best.f.ttk / Math.max(proven.best.f.ttk, 1);
-    const kS = best.f.survive / Math.max(proven.best.f.survive, 0.1);
+    if (!provenBest) return { ratio: null, verdict: best.verdict };
+    const kT = best.f.ttk / Math.max(provenBest.f.ttk, 1);
+    const kS = best.f.survive / Math.max(provenBest.f.survive, 0.1);
     return { ratio: { ttk: kT, survive: kS, vs: proven.tier }, verdict: kT <= 2 && kS >= 0.7 ? 'easy' : kT <= 5 && kS >= 0.35 ? 'ok' : kT <= 12 && kS >= 0.15 ? 'hard' : 'no' };
   };
   const tiers = raw.map(t => {
     let verdict = t.model, ratio = null;
+    // Ниже пройденного тира — тоже «проходишь»: босс слабее, а оружие старшего тира (кинжалы Blaze) подходит и здесь
     if (t.kills >= PROVEN_KILLS || (proven && t.tier < proven.tier && t.open)) verdict = 'proven';
     else if (t.model !== 'no-weapon' && proven && t.tier > proven.tier && t.best) ({ ratio, verdict } = relative(t.best));
     if (t.hypo) {
