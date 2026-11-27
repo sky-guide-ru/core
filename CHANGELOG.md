@@ -4,6 +4,10 @@
 
 ## Не выпущено
 
+## 0.2.4
+
+- `peekGuild(uuid)`: гильдия из кэша без запроса (рейтинг берёт её сразу, как только сайт узнал гильдию).
+
 ## 0.2.3
 
 - Гильдия игрока: `guild.js` (`guildFor`, кэш на час по uuid, на диске `data/guild-cache.json`), запрос `getGuild` — `/guild?player=`. В профиле `member.guild`: `{ name, tag, tagColor, rank, joined, members, level }`.

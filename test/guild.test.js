@@ -45,3 +45,13 @@ test('гильдия: игрок без гильдии тоже хранится
   t += 5 * 60_000; await g.guildFor(U); assert.equal(calls, 2);
   t += 6 * 60_000; await g.guildFor(U); assert.equal(calls, 3);
 });
+
+test('гильдия: peekGuild отдаёт известное без запроса', async () => {
+  let calls = 0;
+  const g = createGuilds({ now: () => 0, fetcher: async uuid => { calls++; return uuid === U ? RESP : { guild: null }; } });
+  assert.equal(g.peekGuild(U), undefined);
+  await g.guildFor(U); await g.guildFor('f'.repeat(32));
+  assert.equal(g.peekGuild(U).name, 'Skyblock Kings');
+  assert.equal(g.peekGuild('f'.repeat(32)), null);
+  assert.equal(calls, 2);
+});
