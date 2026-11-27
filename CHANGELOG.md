@@ -4,6 +4,10 @@
 
 ## Не выпущено
 
+## 0.2.14
+
+- Новость «Роль Verified в Discord» и перевод страницы /discord (привязка Discord к нику, api) для /en/.
+
 ## 0.2.13
 
 - `calendar/announce.js`: `dueAnnouncements(now)` — какие объявления событий пора отправить в Discord (Jacob и Dark Auction за 5 минут, большие события года и Fishing Festival за 10, открытие выборов, новый мэр с министром, Fire Sales). Только по уже загруженным выборам и Fire Sales, без своих запросов к Hypixel.
