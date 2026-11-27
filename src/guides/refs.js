@@ -228,7 +228,7 @@ function creatureData(name, ctx) {
   return {
     kind: 'mob', title: name,
     text: tx`Sea Creature: клюёт вместо рыбы. Где: ${where}.${c.lvl ? tx` Открывается на Fishing ${c.lvl}.` : ''}${c.cap ? tx` Bestiary: ${c.cap.toLocaleString('ru-RU')} убийств до максимума.` : ''}`,
-    how: [c.zone === 'lava' || c.zone === 'hollows' ? 'Возьми удочку для лавы и рыбачь в указанном месте.' : 'Рыбачь в указанном месте; Sea Creature Chance повышает шанс.', 'Когда клюнет — убей существо: опыт и дроп идут только за убийство.'],
+    how: [/лава/i.test(c.where) ? 'Возьми удочку для лавы и рыбачь в указанном месте.' : 'Рыбачь в указанном месте; Sea Creature Chance повышает шанс.', 'Когда клюнет — убей существо: опыт и дроп идут только за убийство.'],
     items: mob ? dropsOf(mob).slice(0, 8) : [],
   };
 }

@@ -4,6 +4,11 @@
 
 ## Не выпущено
 
+## 0.2.17
+
+- Рыбалка после апдейтов 2025: Sea Emperor заменён на The Loch Emperor (Moonglade Marsh), добавлены существа Galatea, Torrhus Canyon, Lotus Atoll, новых Хотспотов и Mithril Grubber; Nutcracker — Fishing 28.
+- Советы по рыбалке и Foraging без устаревшего: опыт по уровням вместо «лучше всего лава» для всех, Sloth и топоры Galatea вместо Monkey, HotF через задания Hina и Whispers; Thunder Fragment вместо Thunder Shards в тексте.
+
 ## 0.2.16
 
 - Новость «Бот Sky Guide в Discord» и её перевод для /en/.

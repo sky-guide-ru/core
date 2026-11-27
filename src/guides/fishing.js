@@ -116,7 +116,7 @@ export default {
       const thunder = nextLavaArmor.set === 'THUNDER';
       next.push({
         title: tx`Собери ${nextLavaArmor.name} (${nextLavaArmor.owned}/4)`,
-        why: thunder ? tx`Fishing ${lvl} уже открывает Thunder: лови его в лаве Crimson Isle, Thunder Shards идут на крафт сета (+4% SCC за часть против 3% у лавовых частей).` : nextLavaArmor.note || '',
+        why: thunder ? tx`Fishing ${lvl} уже открывает Thunder: лови его в лаве Crimson Isle, Thunder Fragment идёт на крафт сета (+4% SCC за часть против 3% у лавовых частей).` : nextLavaArmor.note || '',
         priority: 80,
       });
     }
@@ -134,7 +134,7 @@ export default {
     }
     if (lvl < 45) {
       const u = unlockNext[0];
-      next.push({ title: `Качай Fishing до 45`, why: tx`Сейчас ${lvl}. ${u ? tx`Следующее существо: ${u.name} на ${u.lvl}. ` : ''}На 45 открываются Lord Jawbus и Magma Lord Armor. Лучший опыт на твоём уровне — лава Crimson Isle.`, priority: 60 });
+      next.push({ title: `Качай Fishing до 45`, why: tx`Сейчас ${lvl}. ${u ? tx`Следующее существо: ${u.name} на ${u.lvl}. ` : ''}На 45 открываются Lord Jawbus и Magma Lord Armor. ${lvl >= 27 ? 'Основной опыт — лава Crimson Isle.' : 'До 27 — вода: Backwater Bayou, Moonglade Marsh на Galatea и Хотспоты; с 27 — лава Crimson Isle.'}`, priority: 60 });
     } else if (lvl < sk.maxLevel) {
       next.push({ title: tx`Качай Fishing до ${sk.maxLevel}`, why: 'Уровни Fishing дают здоровье и Treasure Chance, а также опыт SkyBlock.', priority: 30 });
     }
@@ -170,9 +170,9 @@ export default {
       items: [
         st(0, 10, '1–10: вода, первые существа', 'Любая вода у Fisherman’s Hut в Hub или в Backwater Bayou. Challenging Rod с 5 уровня, Backwater Armor с 5.', ['CHALLENGE_ROD', 'BACKWATER_CHESTPLATE']),
         st(10, 20, '10–20: Rod of Champions и Sponge/Salmon', 'Sea Witch, Sea Archer, Rider of the Deep, Catfish. Rod of Champions с 15, Salmon Armor с 13, Sponge Armor с 17. Fishing Festival: акулы с 5 уровня.', ['CHAMP_ROD', 'SPONGE_CHESTPLATE']),
-        st(20, 27, '20–27: Rod of the Sea, Shark Scale, Spooky', 'Sea Emperor на 20, Diver’s Armor, Rod of Legends → Rod of the Sea (24). Shark Scale Armor (24) из чешуи Great White Shark. На Spooky Festival: Phantom Fisher (21), Grim Reaper (26).', ['ROD_OF_THE_SEA', 'SHARK_SCALE_CHESTPLATE']),
+        st(20, 27, '20–27: Rod of the Sea, Shark Scale, Spooky', 'The Loch Emperor на 20 (Moonglade Marsh, Galatea), Diver’s Armor, Rod of Legends → Rod of the Sea (24). Shark Scale Armor (24) из чешуи Great White Shark. На Spooky Festival: Phantom Fisher (21), Grim Reaper (26).', ['ROD_OF_THE_SEA', 'SHARK_SCALE_CHESTPLATE']),
         st(27, 36, '27–36: лава Crimson Isle', 'Magma Rod (27) → Inferno Rod (30) → Hellfire Rod (35). Броню собираешь по частям с лавовых существ: Slug Boots, Moogma Leggings, Flaming Chestplate, Taurus Helmet. Параллельно Trophy Fish у Odger.', ['MAGMA_ROD', 'INFERNO_ROD', 'HELLFIRE_ROD']),
-        st(36, 45, '36–45: Thunder и Thunder Armor', 'Thunder ловится после награды Novice Trophy Fisher. Из Thunder Shards — Thunder Armor (36). Цель — 45 и награда Adept, чтобы открыть Lord Jawbus.', ['THUNDER_CHESTPLATE', 'THUNDER_SHARDS']),
+        st(36, 45, '36–45: Thunder и Thunder Armor', 'Thunder ловится после награды Novice Trophy Fisher. Из Thunder Fragment — Thunder Armor (36). Цель — 45 и награда Adept, чтобы открыть Lord Jawbus.', ['THUNDER_CHESTPLATE', 'THUNDER_SHARDS']),
         st(45, 50, '45–50: Lord Jawbus и Magma Lord', 'Magma Lord Armor (45) из Magma Lord Fragment. Radioactive Vial — самый дорогой дроп. Дальше бестиарий и Expert/Master Trophy Fisher.', ['MAGMA_LORD_CHESTPLATE', 'MAGMA_LORD_FRAGMENT']),
       ],
     });
@@ -260,7 +260,7 @@ export default {
     }));
     sections.push({
       kind: 'table', title: 'Sea Creatures и бестиарий', columns: ['Зона', 'Существо', 'Fishing', 'Где и когда', 'Убито / макс. бестиарий'],
-      note: 'Уровни — по вики; «—» только у Nutcracker, его вики не описывает. Убийства — из бестиария профиля.',
+      note: 'Уровни — по вики; «—» — требование пока нигде не описано (новые существа). Убийства — из бестиария профиля.',
       rows: zoneRows,
     });
 
@@ -288,7 +288,7 @@ export default {
       rows: dropRows,
     });
     const moneyText = [
-      'Лава Crimson Isle (твой уровень): Thunder → Thunder Shards, Lord Jawbus → Magma Lord Fragment и редкий Radioactive Vial. Двойной крючок (Titan Line, Double Hook Chance) удваивает дроп.',
+      'Лава Crimson Isle (с Fishing 36 и 45): Thunder → Thunder Fragment, Lord Jawbus → Magma Lord Fragment и редкий Radioactive Vial. Двойной крючок (Titan Line, Double Hook Chance) удваивает дроп.',
       tx`Trophy Fishing: трофеи разделывают у Odger на Magmafish.${filletValue ? tx` Все твои пойманные трофеи по сегодняшней цене Magmafish стоили бы около ${fmtCoins(filletValue)} (если бы их разделали).` : ''}`,
       'Spooky Festival: дропы Phantom Fisher и Grim Reaper; Fishing Festival: зубы и плавники акул, особенно Great White Shark Tooth.',
       ...methods.map(x => tx`${x.title}: ${x.coinsPerHour ? tx`около ${fmtCoins(x.coinsPerHour)} в час` : 'доход зависит от удачи'} (${x.sourceText})${x.ready ? '' : tx`; не хватает: ${(x.missing || []).join(', ')}`}.`),

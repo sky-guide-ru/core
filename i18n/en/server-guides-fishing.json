@@ -113,5 +113,13 @@
  "Коллекции рыбалки": "Fishing collections",
  "Коллекция": "Collection",
  "Собрано": "Collected",
- "Fishing {0}/{1} · трофеи: видов {2}/18, алмаз {3}/18 · удочка для лавы: {4}": "Fishing {0}/{1} · trophies: species {2}/18, diamond {3}/18 · lava rod: {4}"
+ "Fishing {0}/{1} · трофеи: видов {2}/18, алмаз {3}/18 · удочка для лавы: {4}": "Fishing {0}/{1} · trophies: species {2}/18, diamond {3}/18 · lava rod: {4}",
+ "Fishing {0} уже открывает Thunder: лови его в лаве Crimson Isle, Thunder Fragment идёт на крафт сета (+4% SCC за часть против 3% у лавовых частей).": "Fishing {0} already unlocks Thunder: catch it in Crimson Isle lava, Thunder Fragment goes into crafting the set (+4% SCC per piece vs 3% for the lava pieces).",
+ "Сейчас {0}. {1}На 45 открываются Lord Jawbus и Magma Lord Armor. {2}": "Now {0}. {1}At 45 Lord Jawbus and Magma Lord Armor unlock. {2}",
+ "Основной опыт — лава Crimson Isle.": "Main XP source: Crimson Isle lava.",
+ "До 27 — вода: Backwater Bayou, Moonglade Marsh на Galatea и Хотспоты; с 27 — лава Crimson Isle.": "Up to 27: water (Backwater Bayou, Moonglade Marsh on Galatea and Hotspots); from 27: Crimson Isle lava.",
+ "The Loch Emperor на 20 (Moonglade Marsh, Galatea), Diver’s Armor, Rod of Legends → Rod of the Sea (24). Shark Scale Armor (24) из чешуи Great White Shark. На Spooky Festival: Phantom Fisher (21), Grim Reaper (26).": "The Loch Emperor at 20 (Moonglade Marsh, Galatea), Diver’s Armor, Rod of Legends → Rod of the Sea (24). Shark Scale Armor (24) from Great White Shark scales. During the Spooky Festival: Phantom Fisher (21), Grim Reaper (26).",
+ "Thunder ловится после награды Novice Trophy Fisher. Из Thunder Fragment — Thunder Armor (36). Цель — 45 и награда Adept, чтобы открыть Lord Jawbus.": "Thunder can be caught after the Novice Trophy Fisher reward. Thunder Fragment crafts Thunder Armor (36). Aim for 45 and the Adept reward to unlock Lord Jawbus.",
+ "Уровни — по вики; «—» — требование пока нигде не описано (новые существа). Убийства — из бестиария профиля.": "Levels are from the wiki; \"—\" means the requirement isn't documented anywhere yet (new creatures). Kills come from your profile's bestiary.",
+ "Лава Crimson Isle (с Fishing 36 и 45): Thunder → Thunder Fragment, Lord Jawbus → Magma Lord Fragment и редкий Radioactive Vial. Двойной крючок (Titan Line, Double Hook Chance) удваивает дроп.": "Crimson Isle lava (Fishing 36 and 45): Thunder → Thunder Fragment, Lord Jawbus → Magma Lord Fragment and the rare Radioactive Vial. Double hooks (Titan Line, Double Hook Chance) double the drops."
 }

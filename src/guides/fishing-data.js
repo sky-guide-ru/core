@@ -2,7 +2,9 @@ import { tx } from '../../i18n/msg.js';
 // Справочные данные гайда по рыбалке.
 // Удочки, броня, детали удочек и наживки: id, требования и описания сверены с репозиторием NEU (items/*.json, ноябрь 2026).
 // Sea Creatures: список и ключи бестиария из NEU constants/bestiary.json. Требования Fishing сверены 23.11.2026
-// по страницам существ на fandom-вики; lvl = null только у Nutcracker (на вики его страницы нет).
+// по fandom-вики (страницы существ и «Sea Creatures/List»). 27.11.2026 сверено с NEU (предметы *_SC, bestiary) и SkyHanni-REPO
+// (SeaCreatures.json): Sea Emperor из обычной воды убран — теперь это The Loch Emperor в Moonglade Marsh; добавлены Galatea,
+// Torrhus Canyon, Lotus Atoll, новые существа Хотспотов и Mithril Grubber. lvl = null — требование пока нигде не описано.
 // Trophy Fish: условия поимки из описаний предметов NEU (*_BRONZE.json), разделка у Odger — fandom «Odger» и SkyHanni (у NEU для Lavahorse ошибка).
 
 /** Удочки для воды и лавы по порядку улучшения. lvl — требование Fishing из описания предмета. */
@@ -44,7 +46,7 @@ export const ARMOR = [
   { set: 'SHARK_SCALE', name: 'Shark Scale Armor', lvl: 24, kind: 'water', note: 'из чешуи Great White Shark (Fishing Festival)' },
   { set: 'LAVA_MIX', name: 'Slug Boots + Moogma Leggings + Flaming Chestplate + Taurus Helmet', lvl: 27, kind: 'lava',
     ids: ['SLUG_BOOTS', 'MOOGMA_LEGGINGS', 'FLAMING_CHESTPLATE', 'TAURUS_HELMET'], note: 'по частям с Magma Slug (27), Moogma (28), Lava Flame (33), Taurus (35)' },
-  { set: 'THUNDER', name: 'Thunder Armor', lvl: 36, kind: 'lava', note: 'крафт из Thunder Shards (с Thunder)' },
+  { set: 'THUNDER', name: 'Thunder Armor', lvl: 36, kind: 'lava', note: 'крафт из Thunder Fragment (с Thunder)' },
   { set: 'MAGMA_LORD', name: 'Magma Lord Armor', lvl: 45, kind: 'lava', note: 'крафт из Magma Lord Fragment (с Lord Jawbus)' },
 ];
 export const PIECES = ['HELMET', 'CHESTPLATE', 'LEGGINGS', 'BOOTS'];
@@ -76,7 +78,6 @@ export const CREATURES = [
   { name: 'Guardian Defender', zone: 'water', lvl: 17, where: 'любая вода', keys: ['guardian_defender_45'], cap: 500 },
   { name: 'Deep Sea Protector', zone: 'water', lvl: 18, where: 'любая вода', keys: ['deep_sea_protector_60'], cap: 500 },
   { name: 'Water Hydra', zone: 'water', lvl: 19, where: 'любая вода', keys: ['water_hydra_100'], cap: 250 },
-  { name: 'Sea Emperor', zone: 'water', lvl: 20, where: 'любая вода (Whale/Light/Dark Bait повышают шанс)', keys: [], cap: null },
   { name: 'Agarimoo', zone: 'water', lvl: 15, where: 'вода рядом с Chumcap Bucket', keys: ['agarimoo_35'], cap: 750 },
   { name: 'Oasis Rabbit', zone: 'water', lvl: 10, where: 'Oasis в Mushroom Desert', keys: ['oasis_rabbit_10'], cap: 300 },
   { name: 'Oasis Sheep', zone: 'water', lvl: 10, where: 'Oasis в Mushroom Desert', keys: ['oasis_sheep_10'], cap: 300 },
@@ -90,6 +91,29 @@ export const CREATURES = [
   { name: 'Snapping Turtle', zone: 'hotspot', lvl: 10, where: 'водные Хотспоты', keys: ['snapping_turtle_30'], cap: 750 },
   { name: 'Blue Ringed Octopus', zone: 'hotspot', lvl: 35, where: 'водные Хотспоты', keys: ['blue_ringed_octopus_275'], cap: 250 },
   { name: 'Wiki Tiki', zone: 'hotspot', lvl: 40, where: 'водные Хотспоты (мифическое)', keys: ['wiki_tiki_400'], cap: 50 },
+  { name: 'Manta Ray', zone: 'hotspot', lvl: null, where: 'водные Хотспоты', keys: ['manta_ray_124'], cap: 500 },
+  { name: 'Mithril Grubber', zone: 'hollows', lvl: null, where: 'вода в Abandoned Quarry (Dwarven Mines)', keys: ['small_mithril_grubber_15', 'medium_mithril_grubber_15', 'large_mithril_grubber_15', 'bloated_mithril_grubber_15'], cap: 300 },
+  // Galatea: Moonglade Marsh (с патча Foraging 2025 Emperor ловится только здесь, Emperor's Skull — с него)
+  { name: 'Bogged', zone: 'galatea', lvl: 5, where: 'вода Moonglade Marsh (Galatea)', keys: ['bogged_10'], cap: 1000 },
+  { name: 'Wetwing', zone: 'galatea', lvl: 7, where: 'вода Moonglade Marsh (Galatea)', keys: ['wetwing_chicken_18'], cap: 1000 },
+  { name: 'Tadgang', zone: 'galatea', lvl: 9, where: 'вода Moonglade Marsh (Galatea)', keys: ['tadgang_frog_8', 'tadgang_frog_10'], cap: 750 },
+  { name: 'Ent', zone: 'galatea', lvl: 12, where: 'вода Moonglade Marsh (Galatea)', keys: ['ent_14'], cap: 500 },
+  { name: 'Stridersurfer', zone: 'galatea', lvl: 17, where: 'лава Moonglade Marsh (Galatea)', keys: ['strider_20', 'strider_21'], cap: 750 },
+  { name: 'The Loch Emperor', zone: 'galatea', lvl: 20, where: 'вода Moonglade Marsh (Galatea); бывший Sea Emperor', keys: ['skeleton_emperor_150', 'guardian_emperor_150'], cap: 250 },
+  { name: 'Nessie', zone: 'galatea', lvl: 25, where: 'вода Moonglade Marsh (Galatea, мифическое)', keys: ['nessie_302'], cap: 50 },
+  // Torrhus Canyon и Lotus Atoll: требования Fishing вики ещё не описывает
+  { name: 'Haggard', zone: 'torrhus', lvl: null, where: 'Torrhus Canyon', keys: ['haggard_44'], cap: 1000 },
+  { name: 'Brineling', zone: 'torrhus', lvl: null, where: 'Torrhus Canyon', keys: ['brineling_58'], cap: 1000 },
+  { name: 'Sprawl', zone: 'torrhus', lvl: null, where: 'Torrhus Canyon', keys: ['sprawl_71'], cap: 750 },
+  { name: 'Torrid', zone: 'torrhus', lvl: null, where: 'Torrhus Canyon', keys: ['torrid_85'], cap: 500 },
+  { name: 'Silkbreeze', zone: 'torrhus', lvl: null, where: 'Torrhus Canyon', keys: ['silkbreeze_105'], cap: 250 },
+  { name: 'Giant Isopod', zone: 'torrhus', lvl: null, where: 'Torrhus Canyon (мифическое)', keys: ['giant_isopod_186'], cap: 50 },
+  { name: 'Atoll Croaker', zone: 'atoll', lvl: null, where: 'Lotus Atoll', keys: ['atoll_croaker_45'], cap: 1000 },
+  { name: 'Lotus Guardian', zone: 'atoll', lvl: null, where: 'Lotus Atoll', keys: ['lotus_guardian_55'], cap: 1000 },
+  { name: 'gorF', zone: 'atoll', lvl: null, where: 'Lotus Atoll', keys: ['gorf_65'], cap: 750 },
+  { name: 'Drowned Captain', zone: 'atoll', lvl: null, where: 'Lotus Atoll', keys: ['drowned_captain_74'], cap: 500 },
+  { name: 'Puddle Jumper', zone: 'atoll', lvl: null, where: 'Lotus Atoll', keys: ['puddle_jumper_85'], cap: 250 },
+  { name: 'Frog Prince', zone: 'atoll', lvl: null, where: 'Lotus Atoll (мифическое)', keys: ['frog_prince_132'], cap: 50 },
   // Backwater Bayou
   { name: 'Trash Gobbler', zone: 'bayou', lvl: 5, where: 'Backwater Bayou', keys: ['trash_gobbler_8'], cap: 1000 },
   { name: 'Dumpster Diver', zone: 'bayou', lvl: 5, where: 'Backwater Bayou', keys: ['dumpster_diver_15'], cap: 1000 },
@@ -110,6 +134,8 @@ export const CREATURES = [
   { name: 'Plhlegblast', zone: 'lava', lvl: 36, where: 'Plhlegblast Pool в Crimson Isle', keys: ['pond_squid_300'], cap: 7 },
   { name: 'Fried Chicken', zone: 'lava', lvl: 14, where: 'лавовые Хотспоты', keys: ['fried_chicken_30'], cap: 1000 },
   { name: 'Fireproof Witch', zone: 'lava', lvl: 16, where: 'лавовые Хотспоты', keys: ['fireproof_witch_75'], cap: 750 },
+  { name: 'Volcanic Snail', zone: 'lava', lvl: null, where: 'лавовые Хотспоты', keys: ['volcanic_snail_90'], cap: 1000 },
+  { name: 'Magma Pillar', zone: 'lava', lvl: null, where: 'лавовые Хотспоты', keys: ['magma_pillar_220'], cap: 500 },
   { name: 'Fiery Scuttler', zone: 'lava', lvl: 37, where: 'лавовые Хотспоты', keys: ['fiery_scuttler_475'], cap: 250 },
   { name: 'Ragnarok', zone: 'lava', lvl: 47, where: 'лавовые Хотспоты (мифическое)', keys: ['ragnarok_666'], cap: 50 },
   // События
@@ -125,13 +151,14 @@ export const CREATURES = [
   { name: 'Frozen Steve', zone: 'winter', lvl: 5, where: "Jerry's Workshop", keys: ['frozen_steve_7'], cap: 1000 },
   { name: 'Frosty', zone: 'winter', lvl: 6, where: "Jerry's Workshop", keys: ['frosty_the_snowman_13'], cap: 1000 },
   { name: 'Grinch', zone: 'winter', lvl: 13, where: "Jerry's Workshop", keys: ['grinch_21'], cap: 750 },
-  { name: 'Nutcracker', zone: 'winter', lvl: null, where: "Jerry's Workshop", keys: ['nutcracker_50'], cap: 500 },
+  { name: 'Nutcracker', zone: 'winter', lvl: 28, where: "Jerry's Workshop", keys: ['nutcracker_50'], cap: 500 },
   { name: 'Yeti', zone: 'winter', lvl: 25, where: "Jerry's Workshop", keys: ['yeti_175'], cap: 250 },
   { name: 'Reindrake', zone: 'winter', lvl: 35, where: "Jerry's Workshop", keys: ['reindrake_100'], cap: 50 },
 ];
 
 export const ZONES = {
-  water: 'Вода', hollows: 'Crystal Hollows', hotspot: 'Хотспоты', bayou: 'Backwater Bayou', lava: 'Лава (Crimson Isle)',
+  water: 'Вода', hollows: 'Crystal Hollows и Dwarven Mines', hotspot: 'Хотспоты', bayou: 'Backwater Bayou', galatea: 'Galatea',
+  torrhus: 'Torrhus Canyon', atoll: 'Lotus Atoll', lava: 'Лава (Crimson Isle)',
   spooky: 'Spooky Festival', festival: 'Fishing Festival', winter: "Jerry's Workshop",
 };
 

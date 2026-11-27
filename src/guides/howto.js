@@ -39,7 +39,7 @@ export const HOWTO = {
   ],
   fishing: [
     step('Собери удочку', 'Лучшая открытая тебе удочка — в таблице «Удочки». Детали (леска, крючок, грузило) ставит Roddy в Backwater Bayou (/warp bayou): ПКМ по нему, положи удочку и деталь.', ['TITAN_LINE', 'HOTSPOT_HOOK']),
-    step('Выбери место', 'Сейчас лучший опыт — лава Crimson Isle (/warp nether). Лавовые Хотспоты (пятна с частицами) дают свои бонусы и существ.'),
+    step('Выбери место', 'До Fishing 27 — вода: Backwater Bayou, Moonglade Marsh на Galatea и Хотспоты. С 27 — лава Crimson Isle (/warp nether). Лавовые Хотспоты (пятна с частицами) дают свои бонусы и существ.'),
     step('Наживка и питомец', 'Положи наживку в Fishing Bag, надень питомца рыбалки (Flying Fish, Ammonite) и броню с Sea Creature Chance.'),
     step('Лови и убивай существ', 'Sea Creature надо убить — опыт и дроп даются за убийство. Thunder и Lord Jawbus сильные: зови друзей или бери хорошее оружие.'),
     step('Сдавай трофеи Odger', 'Trophy Fish неси Odger на вершине Blazing Volcano: он засчитает виды, выдаст награды Trophy Fisher и разделает лишнее на Magmafish.'),
