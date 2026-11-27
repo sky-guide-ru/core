@@ -63,6 +63,7 @@ test('magicFind: источники, советы по цене за 1 MF, по�
   assert.equal(by.cinderbat, 1.5);
   assert.equal(r.total, 59.5);
   assert.equal(r.cap, MF_CAP);
+  assert.equal(r.goal, 20 + 56 + 13 + 1.5 + 25 + 5 + 15.5);
   assert.match(r.sources.find(s => s.key === 'looting').label, /Looting VI на Terminator$/);
   // Дешевле за 1 MF — выше; бесплатные уровни — в конце
   assert.deepEqual(r.next.map(n => n.key), ['cinderbat', 'ANGUISH_ARTIFACT', 'looting', 'slayer']);

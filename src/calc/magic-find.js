@@ -10,6 +10,9 @@ import { activeAccessories } from './stats.js';
 //  - NEU-REPO (лор предметов 26.11.2026): Anguish, Pulse Ring, книги Looting I–VII, осколки Cinderbat и Fortune, Divine Gift;
 //  - NEU constants/bonuses.json (pet_rewards) — MF от Pet Score; на форуме максимум +13, порогов не публиковали.
 
+/** Значок слеера: его типичный дроп */
+const SLAYER_ICON = { zombie: 'REVENANT_FLESH', spider: 'TARANTULA_WEB', wolf: 'WOLF_TOOTH', enderman: 'NULL_SPHERE', blaze: 'DERELICT_ASHE', vampire: 'COVEN_SEAL' };
+
 /** Потолок стата после реворка (было 900) */
 export const MF_CAP = 500;
 
@@ -52,11 +55,11 @@ export function cinderbatLevel(shards) {
 /** Постоянные источники, которых нет в API Hypixel: игрок проверяет их сам */
 export const HIDDEN = [
   { key: 'divine_gift', id: 'DIVINE_GIFT', mf: 5, label: 'Divine Gift', note: 'по +1 за каждый съеденный, до 5' },
-  { key: 'account', mf: 5, label: 'Magic Find в Account Upgrades', note: 'улучшение в Community Shop' },
+  { key: 'account', icon: 'NETHER_STAR', mf: 5, label: 'Magic Find в Account Upgrades', note: 'улучшение в Community Shop' },
   { key: 'necron_ladder', id: 'NECRONS_LADDER', mf: 1, label: "Necron's Ladder", note: 'один раз использовать' },
   { key: 'dianas_bookshelf', id: 'DIANAS_BOOKSHELF', mf: 1, label: "Diana's Bookshelf", note: 'один раз использовать' },
   { key: 'bucket_of_dye', id: 'BUCKET_OF_DYE', mf: 1, label: 'Bucket of Dye', note: 'один раз использовать' },
-  { key: 'beacon', mf: 2.5, label: 'Private Island Beacon', note: '+0.5 за уровень, до V' },
+  { key: 'beacon', icon: 'BEACON', mf: 2.5, label: 'Private Island Beacon', note: '+0.5 за уровень, до V' },
 ];
 
 /** Аксессуары с MF для любых мобов: линейка и MF каждой ступени (лор NEU и игры). Pulse Ring после реворка MF в лоре не даёт */
@@ -139,8 +142,8 @@ export function magicFind(member, o = {}) {
 
   // Combat
   const combat = member.skills?.combat?.level || 0;
-  push('combat', ru`Combat ${combat}`, combatMf(combat));
-  if (combat < 60) next.push({ key: 'combat', label: ru`Combat ${combat + 1}`, mf: combatNext(combat), cost: 0, how: 'уровень скилла' });
+  push('combat', ru`Combat ${combat}`, combatMf(combat), { icon: 'DIAMOND_SWORD' });
+  if (combat < 60) next.push({ key: 'combat', icon: 'DIAMOND_SWORD', label: ru`Combat ${combat + 1}`, mf: combatNext(combat), cost: 0, how: 'уровень скилла' });
 
   // Slayers
   let slayer = 0;
@@ -148,23 +151,23 @@ export function magicFind(member, o = {}) {
   for (const [k, s] of Object.entries(member.slayers || {})) {
     const lv = s?.level || 0, max = k === 'vampire' ? 5 : 9;
     slayer += slayerMf(k, lv);
-    if (lv > 0 && lv < max) slayerNext.push({ name: s.name || k, lv, mf: slayerMf(k, lv + 1) - slayerMf(k, lv) });
+    if (lv > 0 && lv < max) slayerNext.push({ key: k, name: s.name || k, lv, mf: slayerMf(k, lv + 1) - slayerMf(k, lv) });
   }
-  push('slayers', 'Slayers', slayer, { note: 'по +1 за уровень, на 9-м +2' });
+  push('slayers', 'Slayers', slayer, { icon: 'REVENANT_FLESH', note: 'по +1 за уровень, на 9-м +2' });
   // Ближе всего — слеер с самым высоким уровнем ниже максимума
   slayerNext.sort((a, b) => b.lv - a.lv);
-  if (slayerNext[0]) next.push({ key: 'slayer', label: ru`${slayerNext[0].name} ${slayerNext[0].lv + 1}`, mf: slayerNext[0].mf, cost: 0, how: 'уровень Slayer' });
+  if (slayerNext[0]) next.push({ key: 'slayer', icon: SLAYER_ICON[slayerNext[0].key] || 'REVENANT_FLESH', label: ru`${slayerNext[0].name} ${slayerNext[0].lv + 1}`, mf: slayerNext[0].mf, cost: 0, how: 'уровень Slayer' });
 
   // Pet Score
   const ps = member.extras?.leveling?.petScore || 0;
-  push('pet_score', ru`Pet Score ${ps}`, petScoreMf(ps, c.bonuses?.pet_rewards), { sure: false });
+  push('pet_score', ru`Pet Score ${ps}`, petScoreMf(ps, c.bonuses?.pet_rewards), { icon: 'BONE', sure: false });
 
   // Аксессуары с MF для всех мобов
   const acc = activeAccessories(member.inv.talismans || [], o.upgrades || {});
-  let accMf = 0;
+  let accMf = 0, accIcon = null;
   const accNames = [];
-  for (const it of acc) { const v = loreMf(it.lore); if (v) { accMf += v; accNames.push(nameOf(it)); } }
-  push('accessories', 'Аксессуары', accMf, { note: accNames.join(', ') });
+  for (const it of acc) { const v = loreMf(it.lore); if (v) { accMf += v; accNames.push(nameOf(it)); accIcon ||= it.id; } }
+  push('accessories', 'Аксессуары', accMf, { icon: accIcon, note: accNames.join(', ') });
   const have = new Set((member.inv.talismans || []).filter(it => it?.id).map(it => it.id));
   for (const line of ACC_LINES) {
     const at = line.steps.reduce((i, [id], n) => (have.has(id) ? n : i), -1);
@@ -172,37 +175,37 @@ export function magicFind(member, o = {}) {
     if (!nxt) continue;
     const gain = nxt[1] - (at >= 0 ? line.steps[at][1] : 0);
     const cost = price(nxt[0]);
-    if (cost) next.push({ key: nxt[0], id: nxt[0], label: o.name?.(nxt[0]) || line.label, mf: gain, cost, how: at >= 0 ? 'улучшить аксессуар' : 'аксессуар' });
+    if (cost) next.push({ key: nxt[0], id: nxt[0], icon: nxt[0], label: o.name?.(nxt[0]) || line.label, mf: gain, cost, how: at >= 0 ? 'улучшить аксессуар' : 'аксессуар' });
   }
 
   // Looting на оружии (MF только пока оно в руке)
   const items = allItems(member.inv);
   const best = items.filter(it => lootingOf(it) > 0).sort((a, b) => lootingOf(b) - lootingOf(a))[0];
   const lt = best ? lootingOf(best) : 0;
-  if (best) push('looting', ru`Looting ${ROMAN[Math.min(lt, 7)]} на ${nameOf(best)}`, LOOTING_MF[Math.min(lt, 7)], { note: 'пока это оружие в руке' });
+  if (best) push('looting', ru`Looting ${ROMAN[Math.min(lt, 7)]} на ${nameOf(best)}`, LOOTING_MF[Math.min(lt, 7)], { icon: best.id, note: 'пока это оружие в руке' });
   if (lt < 7) {
     const lv = lt >= 6 ? 7 : 6;
     const id = `ENCHANTMENT_LOOTING_NEW_${lv}`;
     const cost = price(id);
-    if (cost) next.push({ key: 'looting', id, label: `Looting ${ROMAN[lv]}`, mf: LOOTING_MF[lv] - LOOTING_MF[lt], cost, how: 'книга на оружие' });
+    if (cost) next.push({ key: 'looting', id, icon: id, label: `Looting ${ROMAN[lv]}`, mf: LOOTING_MF[lv] - LOOTING_MF[lt], cost, how: 'книга на оружие' });
   }
 
   // Cinderbat (атрибут Magic Find)
   const shards = (member.extras?.attributes || []).find(a => a.id === 'magic_find')?.n || 0;
   const cb = cinderbatLevel(shards);
-  push('cinderbat', ru`Cinderbat, уровень ${cb}`, cb * 0.5);
+  push('cinderbat', ru`Cinderbat, уровень ${cb}`, cb * 0.5, { icon: 'SHARD_CINDER_BAT' });
   if (cb < 10) {
     const need = CINDERBAT_STEPS.slice(cb).reduce((s, x) => s + x, 0) - (shards - CINDERBAT_STEPS.slice(0, cb).reduce((s, x) => s + x, 0));
     const p = price('SHARD_CINDER_BAT');
-    if (p) next.push({ key: 'cinderbat', id: 'SHARD_CINDER_BAT', label: ru`Cinderbat до 10 уровня (${need} шт.)`, mf: (10 - cb) * 0.5, cost: p * need, how: 'осколки в Hunting Box' });
+    if (p) next.push({ key: 'cinderbat', id: 'SHARD_CINDER_BAT', icon: 'SHARD_CINDER_BAT', label: ru`Cinderbat до 10 уровня (${need} шт.)`, mf: (10 - cb) * 0.5, cost: p * need, how: 'осколки в Hunting Box' });
   }
 
   // На время: Booster Cookie и зелье Magic Find (God Potion даёт то же зелье IV)
   const ef = member.effects?.active || [];
   const pot = ef.find(e => e.id === 'magic_find');
   const temp = [
-    { key: 'cookie', label: 'Booster Cookie', mf: 10, active: !!member.cookie, id: 'BOOSTER_COOKIE', cost: price('BOOSTER_COOKIE') },
-    { key: 'potion', label: pot ? ru`Зелье Magic Find ${pot.roman}` : 'Зелье Magic Find IV или God Potion', mf: pot ? 2.5 * Math.min(4, pot.level) : 10, active: !!pot },
+    { key: 'cookie', label: 'Booster Cookie', mf: 10, active: !!member.cookie, id: 'BOOSTER_COOKIE', icon: 'BOOSTER_COOKIE', cost: price('BOOSTER_COOKIE') },
+    { key: 'potion', label: pot ? ru`Зелье Magic Find ${pot.roman}` : 'Зелье Magic Find IV или God Potion', mf: pot ? 2.5 * Math.min(4, pot.level) : 10, active: !!pot, icon: 'POTION_MAGIC_FIND;4' },
   ];
 
   // Только против отдельных мобов: вещи игрока с такой строкой в лоре
@@ -213,19 +216,25 @@ export function magicFind(member, o = {}) {
     const on = loreMfOn(it.lore);
     if (!on) continue;
     seen.add(it.id);
-    situational.push({ id: it.id, label: nameOf(it), mf: on.mf, on: on.on });
+    situational.push({ id: it.id, icon: it.id, label: nameOf(it), mf: on.mf, on: on.on });
   }
   situational.sort((a, b) => b.mf - a.mf);
 
-  const hidden = HIDDEN.map(h => ({ ...h, cost: h.id ? price(h.id) : 0 }));
+  const hidden = HIDDEN.map(h => ({ ...h, icon: h.icon || h.id || null, cost: h.id ? price(h.id) : 0 }));
 
   const total = r1(Math.min(MF_CAP, sources.reduce((s, x) => s + x.mf, 0)));
+  // Цель «как у Magical Power»: всё, что даёт MF на любых мобах, собранное до конца (без баффов на время и бонусов на отдельных мобов)
+  const petMax = Math.max(0, ...Object.values(c.bonuses?.pet_rewards || {}).map(v => Number(v?.magic_find) || 0));
+  const slayersMax = ['zombie', 'spider', 'wolf', 'enderman', 'blaze', 'vampire'].reduce((s, k) => s + slayerMf(k, k === 'vampire' ? 5 : 9), 0);
+  const accMax = ACC_LINES.reduce((s, l) => s + l.steps[l.steps.length - 1][1], 0);
+  const hiddenMf = HIDDEN.reduce((s, h) => s + h.mf, 0);
+  const goal = r1(combatMf(60) + slayersMax + (petMax || 13) + accMax + LOOTING_MF[7] + CINDERBAT_STEPS.length * 0.5 + hiddenMf);
   // Дешевле всего за единицу MF — первыми; бесплатные (уровни) — после покупок
   for (const n of next) n.perMf = n.cost && n.mf ? Math.round(n.cost / n.mf) : 0;
   next.sort((a, b) => (a.cost ? 0 : 1) - (b.cost ? 0 : 1) || a.perMf - b.perMf || b.mf - a.mf);
 
   return {
-    total, cap: MF_CAP,
+    total, cap: MF_CAP, goal, hiddenMf: r1(hiddenMf),
     sources, next, temp, hidden, situational: situational.slice(0, 12),
     bestiary: bestiaryTiers(member.bestiaryKills, c.bestiary),
   };

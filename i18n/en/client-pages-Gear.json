@@ -60,5 +60,7 @@
  "{0}: {1} на {2}": "{0}: {1} on {2}",
  "Bestiary: моб на tier 15 даёт +45 Magic Find на нём, на tier 20 — +60, на tier 25 — +75. У тебя tier 15+ у {0} мобов, 20+ у {1}, 25 у {2}.": "Bestiary: a mob at tier 15 gives +45 Magic Find against it, at tier 20 +60, at tier 25 +75. You have tier 15+ on {0} mobs, 20+ on {1}, 25 on {2}.",
  "Ближе всего к tier 15: {0}.": "Closest to tier 15: {0}.",
- "По правилам реворка Magic Find (17.11.2026): потолок 500, Looting даёт MF, пока оружие в руке. Сверх 100% шанса предмет иногда выпадает вдвое.": "Rules of the Magic Find rework (17.11.2026): cap 500, Looting gives MF while the weapon is held. Above 100% chance an item sometimes drops twice."
+ "По правилам реворка Magic Find (17.11.2026): Looting даёт MF, пока оружие в руке. Сверх 100% шанса предмет иногда выпадает вдвое.": "Rules of the Magic Find rework (17.11.2026): Looting gives MF while the weapon is held. Above 100% chance an item sometimes drops twice.",
+ "Цель — всё, что даёт MF на любых мобах. Потолок стата {0}: остальное дают баффы, Bestiary и бонусы на отдельных мобов.": "The goal is everything that gives MF on any mob. The stat cap is {0}: the rest comes from buffs, Bestiary and bonuses on specific mobs.",
+ "действует сейчас": "active now"
 }
