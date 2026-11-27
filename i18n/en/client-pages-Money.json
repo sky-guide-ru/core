@@ -221,5 +221,6 @@
  "Движение цен": "Price movement",
  "⚠️ Профиль {0}: {1}. Флипы скрыты, а доход посчитан по ценам рынка, поэтому реальный ниже.": "⚠️ Profile {0}: {1}. Flips are hidden, and income is calculated from market prices, so the real one is lower.",
  "«За раз» — за одного босса, моба или заход. Редкие дропы (шанс меньше 5%) выделены: это удача, в среднем за долгий срок. Для сундуков учтено, что платный сундук открывают, только если предмет дороже цены открытия.": "\"Per run\" means per boss, mob or run. Rare drops (chance below 5%) are highlighted: that's luck, averaged over a long time. For chests, we assume the paid chest is opened only if the item is worth more than the opening price.",
- "Мои лоты": "My listings"
+ "Мои лоты": "My listings",
+ "⚠️ Профиль {0}: {1}. Флипы скрыты, доход посчитан по ценам продажи NPC.": "⚠️ {0} profile: {1}. Flips are hidden, income is calculated at NPC sell prices."
 }
