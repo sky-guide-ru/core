@@ -158,6 +158,8 @@ export function createPlayers(o) {
   }
 
   async function build(v, { force = false, ttlMs = ttl } = {}) {
+    // Гильдия — параллельно с профилем; новый запрос только пока лимит ключа не на исходе (как у ранга)
+    const guildP = o.guildFor ? o.guildFor(v.player.uuid, { allowFetch: budgetLeft() > 10 }).catch(() => null) : null;
     const { resp, at } = await profilesOf(v.player.uuid, { force, ttlMs });
     const list = resp?.profiles || [];
     v.profiles = list.filter(p => p.members?.[v.player.uuid]).map(p => ({ id: p.profile_id, name: p.cute_name, selected: !!p.selected, mode: p.game_mode || 'normal', members: Math.max(1, coopRoster(p).length) }));
@@ -171,6 +173,7 @@ export function createPlayers(o) {
     const member = await parse.parseMember(profile, v.player.uuid, extra);
     // ранг — лишний запрос: только пока лимит ключа не на исходе
     if (o.rankFor && budgetLeft() > 10) member.rank = await o.rankFor(v.player.uuid).catch(() => null);
+    if (guildP) member.guild = await guildP;
     const analysis = analyze(member);
     const snap = (() => { try { return (o.snapshot || snapshot)(member, analysis.gear); } catch { return null; } })();
     if (snap && v.lastSnap) {

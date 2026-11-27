@@ -30,7 +30,7 @@ export function createKeyUsage({ file = null, clock = () => Date.now(), saveDela
   }
 
   return {
-    /** Запрос ушёл в Hypixel: kind — profiles | garden | museum | player, who — own | others */
+    /** Запрос ушёл в Hypixel: kind — profiles | garden | museum | player | guild, who — own | others */
     count(kind, who = 'others') {
       const d = day();
       d.total++;

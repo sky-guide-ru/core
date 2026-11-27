@@ -131,5 +131,6 @@
  "Занято {0} ГБ из {1} ГБ, свободно {2} ГБ": "Used {0} GB of {1} GB, {2} GB free",
  "Сколько ещё можно записать: данные сайта, графики, ночные копии": "How much more can be written: site data, charts, nightly backups",
  "Свободно на диске": "Free disk space",
- "{0} ГБ": "{0} GB"
+ "{0} ГБ": "{0} GB",
+ "гильдия": "guild"
 }
