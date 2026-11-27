@@ -1,13 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createLiveAdvisor, createMockClient, makeSnapshot, diffSnapshots, shouldCall, buildDigest, costOf, Budget } from '../src/live-advisor/index.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const ADVISOR = path.join(here, '..', 'src', 'advisor');
-const { advise } = await import(path.join(ADVISOR, 'index.js'));
-const { ownercatMember, PRICES } = await import(path.join(here, 'fixtures', 'ownercat.js'));
+const { advise } = await import(pathToFileURL(path.join(ADVISOR, 'index.js')).href);
+const { ownercatMember, PRICES } = await import(pathToFileURL(path.join(here, 'fixtures', 'ownercat.js')).href);
 
 const MIN = 60_000;
 const analyze = (m, prices = PRICES) => advise(m, null, null, { price: id => prices[id] || 0 });

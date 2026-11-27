@@ -1,12 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { summarizeForCompare } from '../src/compare.js';
 import { coopRoster } from '../src/parse/profile.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const { ownercatMember } = await import(path.join(here, 'fixtures', 'ownercat.js'));
+const { ownercatMember } = await import(pathToFileURL(path.join(here, 'fixtures', 'ownercat.js')).href);
 
 test('сравнение: короткая сводка без инвентаря, с нужными полями', () => {
   const m = ownercatMember();
