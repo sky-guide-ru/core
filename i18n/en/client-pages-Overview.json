@@ -36,6 +36,13 @@
  "Bank коопа": "Co-op Bank",
  "кошелёк {0} · личный {1}": "purse {0} · personal {1}",
  "кошелёк {0}": "purse {0}",
+ "Посчитано по данным профиля. Сетовые бонусы брони и мэры в API не видны, поэтому в игре цифры могут быть выше": "Calculated from profile data. Armor set bonuses and mayors aren't visible in the API, so in-game numbers may be higher",
+ "От зелий и Century Cake, которые действуют сейчас": "From potions and Century Cakes active right now",
+ "Действует бессрочно": "Lasts forever",
+ "Время идёт, только пока ты в игре": "Ticks down only while you're in game",
+ "Бафф от Century Cake": "Century Cake buff",
+ "Примерно: без сетовых бонусов брони. Зелёным — прибавка от зелий, которые действуют сейчас. EHP — сколько урона выдержишь с учётом Defense.": "Approximate: without armor set bonuses. Green is the bonus from potions active right now. EHP is how much damage you can take, counting Defense.",
+ "на Hypixel с {0} года": "on Hypixel since {0}",
  "Гильдия": "Guild",
  "уровень {0}": "level {0}"
 }

@@ -4,9 +4,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { config } from '../config.js';
 import { prices } from '../prices.js';
-import { neu } from '../neu.js';
-import { getElection } from '../hypixel.js';
-import { setElection, activePerks } from '../calendar/index.js';
+import { neu, itemName } from '../neu.js';
+import { getElection, getFireSales } from '../hypixel.js';
+import { setElection, setFireSales, activePerks } from '../calendar/index.js';
 import { fmtCoins } from '../../i18n/ru.js';
 import * as mk from '../market/index.js';
 import { displayName, itemCategory } from '../names.js';
@@ -53,6 +53,7 @@ export function addSession(s) {
 export async function refreshMayor() {
   const d = await getElection();
   setElection(d); // календарь событий и советчик (server/calendar)
+  getFireSales().then(r => setFireSales(r, itemName)).catch(() => {}); // Fire Sales в календарь: публичный запрос, лимит ключа не тратит
   // Mythological Ritual бывает и у министра Diana: тогда метод «Diana» в «Заработке» тоже доступен
   const name = d?.mayor?.name || null;
   const ritual = activePerks(d).includes('Mythological Ritual') && !/diana/i.test(name || '');

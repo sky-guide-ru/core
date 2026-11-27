@@ -1,5 +1,7 @@
 // Общее состояние, обновление профиля и лента изменений
-import { rankFor } from './rank.js';
+import { rankFor, hypixelInfo } from './rank.js';
+import { rankOf } from './lib/profile-mode.js';
+import { hypixelInfoOf } from './lib/hypixel-player.js';
 import { guildFor } from './guild.js';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -272,7 +274,8 @@ async function doRefreshProfile() {
     }
     const prevRoadmap = state.analysis?.roadmap;
     state.member = await parseMember(profile, uuid, extra);
-    if (!state.demo) state.member.rank = await rankFor(uuid).catch(() => null);
+    if (!state.demo) { state.member.rank = await rankFor(uuid).catch(() => null); state.member.hypixel = hypixelInfo(uuid); }
+    else { try { const pl = JSON.parse(fs.readFileSync(path.join(config.dataDir, 'fixture-player.json'), 'utf8')).player; state.member.rank = rankOf(pl); state.member.hypixel = hypixelInfoOf(pl); } catch { /* в демо /player может не быть */ } }
     state.member.guild = await guildP;
     const gear = reanalyze();
     const snap = snapshot(state.member, gear);

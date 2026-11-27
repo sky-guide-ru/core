@@ -121,3 +121,4 @@ export const getAuctionPage = page => getJson(`${BASE}/skyblock/auctions?page=${
 export const getItemsResource = () => getJson(`${BASE}/resources/skyblock/items`);
 export const getCollectionsResource = () => getJson(`${BASE}/resources/skyblock/collections`);
 export const getElection = () => getJson(`${BASE}/resources/skyblock/election`);
+export const getFireSales = () => getJson(`${BASE}/skyblock/firesales`);

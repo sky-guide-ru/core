@@ -101,3 +101,18 @@ export function viewCommunity(up = {}) {
     return { key, name: COMMUNITY_RU[key] || title(k), level: v, max: COMMUNITY_MAX[key] || null };
   });
 }
+
+// Вехи питомцев-наград: Rock — за добытую руду, Dolphin — за морских существ (Bronze → Diamond)
+export const PET_MILESTONES = { ores: [2500, 7500, 20000, 100000, 250000], seaCreatures: [250, 1000, 2500, 5000, 10000] };
+const MILESTONE_RANKS = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond'];
+export function viewPetMilestones(pm = {}) {
+  return [['ores', 'Rock', 'ROCK;4'], ['seaCreatures', 'Dolphin', 'DOLPHIN;4']].map(([key, pet, icon]) => {
+    const n = Number(pm[key]) || 0, steps = PET_MILESTONES[key];
+    const done = steps.filter(x => n >= x).length;
+    return { key, pet, icon, n, rank: done ? MILESTONE_RANKS[done - 1] : null, next: steps[done] || null, nextRank: MILESTONE_RANKS[done] || null };
+  }).filter(v => v.n > 0);
+}
+
+export function viewUpgrading(u) {
+  return u ? { ...u, name: COMMUNITY_RU[u.id] || title(u.id), max: COMMUNITY_MAX[u.id] || null } : null;
+}

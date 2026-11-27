@@ -37,3 +37,12 @@ test('сад, кролики, деревья и кооператив: назва
   assert.equal(xv.gardenLevel(171632).level, 15);
   assert.equal(xv.gardenLevel(100).level, 2);
 });
+
+import { viewPetMilestones } from '../src/parse/extras-view.js';
+test('вехи Rock и Dolphin: текущая и до следующей', () => {
+  const [rock, dolphin] = viewPetMilestones({ ores: 883298, seaCreatures: 6677 });
+  assert.equal(rock.rank, 'Diamond');
+  assert.equal(rock.next, null);
+  assert.deepEqual([dolphin.rank, dolphin.nextRank, dolphin.next], ['Platinum', 'Diamond', 10000]);
+  assert.deepEqual(viewPetMilestones({}), []);
+});
