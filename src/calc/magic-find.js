@@ -131,6 +131,8 @@ export function bestiaryTiers(kills, bestiary) {
  * @param {Object} [o.constants]  neu.constants (bonuses, bestiary, misc)
  * @param {(id: string) => number} [o.price]  цена покупки
  * @param {Object} [o.upgrades]  { младший: [старшие] } для линеек аксессуаров
+ * @param {boolean} [o.noMarket]  Ironman, Stranded, Bingo: price — только цена NPC, шаги без цены остаются с подсказкой «где добыть»
+ * @param {(id: string) => ({ text: string }|null)} [o.obtain]  где добыть предмет (lib/npc-shop.js obtainHint)
  */
 export function magicFind(member, o = {}) {
   if (!member?.inv) return null;
@@ -139,6 +141,8 @@ export function magicFind(member, o = {}) {
   const sources = [];
   const push = (key, label, mf, extra = {}) => { if (mf > 0) sources.push({ key, label, mf: r1(mf), ...extra }); };
   const next = [];
+  const noMarket = !!o.noMarket;
+  const where = (id, dflt) => { try { return o.obtain?.(id)?.text || dflt; } catch { return dflt; } };
 
   // Combat
   const combat = member.skills?.combat?.level || 0;
@@ -175,7 +179,7 @@ export function magicFind(member, o = {}) {
     if (!nxt) continue;
     const gain = nxt[1] - (at >= 0 ? line.steps[at][1] : 0);
     const cost = price(nxt[0]);
-    if (cost) next.push({ key: nxt[0], id: nxt[0], icon: nxt[0], label: o.name?.(nxt[0]) || line.label, mf: gain, cost, how: at >= 0 ? 'улучшить аксессуар' : 'аксессуар' });
+    if (cost || noMarket) next.push({ key: nxt[0], id: nxt[0], icon: nxt[0], label: o.name?.(nxt[0]) || line.label, mf: gain, cost, how: noMarket ? where(nxt[0], 'аксессуар') : at >= 0 ? 'улучшить аксессуар' : 'аксессуар' });
   }
 
   // Looting на оружии (MF только пока оно в руке)
@@ -187,7 +191,7 @@ export function magicFind(member, o = {}) {
     const lv = lt >= 6 ? 7 : 6;
     const id = `ENCHANTMENT_LOOTING_NEW_${lv}`;
     const cost = price(id);
-    if (cost) next.push({ key: 'looting', id, icon: id, label: `Looting ${ROMAN[lv]}`, mf: LOOTING_MF[lv] - LOOTING_MF[lt], cost, how: 'книга на оружие' });
+    if (cost || noMarket) next.push({ key: 'looting', id, icon: id, label: `Looting ${ROMAN[lv]}`, mf: LOOTING_MF[lv] - LOOTING_MF[lt], cost, how: noMarket && !cost ? where(id, 'книга на оружие') : 'книга на оружие' });
   }
 
   // Cinderbat (атрибут Magic Find)
@@ -197,7 +201,7 @@ export function magicFind(member, o = {}) {
   if (cb < 10) {
     const need = CINDERBAT_STEPS.slice(cb).reduce((s, x) => s + x, 0) - (shards - CINDERBAT_STEPS.slice(0, cb).reduce((s, x) => s + x, 0));
     const p = price('SHARD_CINDER_BAT');
-    if (p) next.push({ key: 'cinderbat', id: 'SHARD_CINDER_BAT', icon: 'SHARD_CINDER_BAT', label: ru`Cinderbat до 10 уровня (${need} шт.)`, mf: (10 - cb) * 0.5, cost: p * need, how: 'осколки в Hunting Box' });
+    if (p || noMarket) next.push({ key: 'cinderbat', id: 'SHARD_CINDER_BAT', icon: 'SHARD_CINDER_BAT', label: ru`Cinderbat до 10 уровня (${need} шт.)`, mf: (10 - cb) * 0.5, cost: p * need, how: 'осколки в Hunting Box' });
   }
 
   // На время: Booster Cookie и зелье Magic Find (God Potion даёт то же зелье IV)

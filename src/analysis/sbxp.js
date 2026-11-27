@@ -18,7 +18,8 @@ const SKILLS = ['farming', 'mining', 'combat', 'foraging', 'fishing', 'enchantin
 
 /**
  * @param {object} m разобранный участник
- * @param {{ acc?: object, petScore?: object, museumBest?: {id,name,cost,gain,perXp}|null, museumFreeXp?: number }} o
+ * @param {{ acc?: object, petScore?: object, museumBest?: {id,name,cost,gain,perXp}|null, museumFreeXp?: number, noMarket?: boolean }} o
+ *   noMarket — Ironman, Stranded, Bingo: без цен рынка, только что даёт XP и где это добыть
  * @returns {{ level: number, xp: number, toNext: number, rows: Array<{ id, title, have, max, free?: number, perXp?: number|null, cost?: number|null, gain?: number|null, text, href }> }}
  */
 export function sbxpPlan(m, o = {}) {
@@ -35,18 +36,24 @@ export function sbxpPlan(m, o = {}) {
 
   // Magical Power: самый дешёвый аксессуар за 1 MP
   const accBest = (o.acc?.cheapestNext || []).find(r => r.perMp > 0);
-  if (accBest) rows.push({ id: 'mp', title: 'Magical Power', have: Number(m.magicalPower) || 0, max: null, perXp: Math.round(accBest.perMp / SBXP.perMp), cost: Math.round(accBest.price), gain: accBest.gain * SBXP.perMp,
+  if (o.noMarket) rows.push({ id: 'mp', title: 'Magical Power', have: Number(m.magicalPower) || 0, max: null, perXp: null,
+    text: '1 XP за каждый Magical Power: новые аксессуары, что проще добыть, — в плане и в «Аксессуарах».', href: '#/accessories' });
+  else if (accBest) rows.push({ id: 'mp', title: 'Magical Power', have: Number(m.magicalPower) || 0, max: null, perXp: Math.round(accBest.perMp / SBXP.perMp), cost: Math.round(accBest.price), gain: accBest.gain * SBXP.perMp,
     text: ru`1 XP за каждый Magical Power. Дешевле всего: ${accBest.name} (+${accBest.gain} MP).`, href: '#/accessories' });
 
   // Pet Score: 3 XP за очко
   const petBest = (o.petScore?.cheapest || []).find(r => r.perPoint > 0);
-  if (petBest) rows.push({ id: 'pets', title: 'Pet Score', have: (o.petScore.score || 0) * SBXP.perPetScore, max: null, perXp: Math.round(petBest.perPoint / SBXP.perPetScore), cost: Math.round(petBest.cost), gain: petBest.points * SBXP.perPetScore,
+  if (o.noMarket && o.petScore) rows.push({ id: 'pets', title: 'Pet Score', have: (o.petScore.score || 0) * SBXP.perPetScore, max: null, perXp: null,
+    text: '3 XP за очко Pet Score: каждый новый тип питомца и питомец максимального уровня.', href: '#/pets' });
+  else if (petBest) rows.push({ id: 'pets', title: 'Pet Score', have: (o.petScore.score || 0) * SBXP.perPetScore, max: null, perXp: Math.round(petBest.perPoint / SBXP.perPetScore), cost: Math.round(petBest.cost), gain: petBest.points * SBXP.perPetScore,
     text: ru`3 XP за очко Pet Score. Дешевле всего: ${petBest.name || petBest.id} (+${petBest.points}).`, href: '#/pets' });
 
   // Museum: то, что уже лежит у игрока, — бесплатно; дальше самое дешёвое за XP
-  const mb = o.museumBest;
+  const mb = o.noMarket ? null : o.museumBest;
   if (o.museumFreeXp > 0 || mb) rows.push({ id: 'museum', title: 'Museum', have: null, max: null, free: o.museumFreeXp || 0, perXp: o.museumFreeXp > 0 ? 0 : mb?.perXp ?? null, cost: mb?.cost ?? null, gain: mb?.gain ?? null,
     text: o.museumFreeXp > 0 ? ru`Пожертвовать то, что уже есть: +${o.museumFreeXp} XP бесплатно.` : ru`Дешевле всего за XP: ${mb.name || mb.id} (+${mb.gain} XP).`, href: '#/museum' });
+  else if (o.noMarket) rows.push({ id: 'museum', title: 'Museum', have: null, max: null, perXp: null,
+    text: 'Каждый новый предмет в музее навсегда даёт SkyBlock XP: смотри, чего не хватает, в «Музее».', href: '#/museum' });
 
   // Minions: уникальные крафты; тиры XI и XII дают 12 и 24 XP
   const crafted = [...new Set([...(m.minions || []), ...(m.coop?.minions || [])])];

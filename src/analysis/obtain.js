@@ -8,6 +8,7 @@
 //   buy(id) → { price, market: 'bazaar'|'ah', count?, order? } | null — цена покупки сейчас,
 //   member?: Member             — профиль выбранного игрока (проверка требований),
 //   collections?: Map           — пороги коллекций (market/requirements.js collectionsByName),
+//   noMarket?: boolean          — профиль без рынка (Ironman, Stranded, Bingo): без Bazaar, аукциона и Dark Auction,
 // }
 
 import fs from 'node:fs';
@@ -445,6 +446,9 @@ const sumTotal = parts => parts.every(p => p.total != null) ? parts.reduce((s, p
  * @param {object} ctx см. шапку файла
  */
 export function buildObtainGuide(id, ctx) {
+  // Ironman, Stranded, Bingo (ctx.noMarket): нет Bazaar, аукциона и Dark Auction — только NPC, крафт, Forge, дроп.
+  // Покупку на рынке убираем и из способов, и из дерева ингредиентов: что NPC не продаёт, добывается самому
+  if (ctx.noMarket) ctx = { ...ctx, buy: () => null };
   const { items } = ctx;
   const idx = indexNeu(items);
   const it = items.get(id);
@@ -482,7 +486,7 @@ export function buildObtainGuide(id, ctx) {
   }
 
   // 1б. Dark Auction: лотов и цен в API нет — только то, что предмет там бывает, и минимальная ставка
-  const da = darkAuctionOf(id);
+  const da = ctx.noMarket ? null : darkAuctionOf(id);
   if (da) {
     methods.push({
       kind: 'dark-auction', title: da.darker ? 'Dark Auction (только при мэре Scorpius)' : 'Выиграть на Dark Auction', total: null, minBid: da.minBid,

@@ -249,5 +249,10 @@
  "[Аксессуары](accessories) профиля с закрытым доступом к инвентарю сообщают об этом, а не строят план с нуля.": "[Accessories](accessories) on a profile with inventory access turned off say so instead of planning from scratch.",
  "Над таким профилем появляется подсказка, где в настройках игры открыть доступ.": "Such profiles show a hint on where to turn inventory access back on in the game settings.",
  "Уникальные крафты миньонов сходятся с игрой": "Unique minion crafts now match the game",
- "Исправлена ошибка в расчёте: в [Миньонах](minions) не засчитывались крафты бывших участников коопа.": "Fixed a calculation error: [Minions](minions) did not count crafts by former co-op members."
+ "Исправлена ошибка в расчёте: в [Миньонах](minions) не засчитывались крафты бывших участников коопа.": "Fixed a calculation error: [Minions](minions) did not count crafts by former co-op members.",
+ "План для Ironman: что добыть": "Ironman plan: what to obtain",
+ "В [плане](roadmap) профиля Ironman, Stranded или Bingo вместо покупок на рынке — где добыть или у какого NPC купить.": "In the [plan](roadmap) of an Ironman, Stranded or Bingo profile, market purchases become where to obtain or which NPC to buy from.",
+ "Аксессуары идут по порядку: сначала то, что продаёт NPC, потом крафт, потом дроп.": "Accessories come in order: first what an NPC sells, then crafts, then drops.",
+ "Доход в [Заработке](money) для таких профилей считается по ценам продажи NPC.": "Income in [Money making](money) for these profiles is calculated at NPC sell prices.",
+ "«Как получить», SkyBlock XP и Magic Find для таких профилей обходятся без Bazaar и аукциона.": "«How to get», SkyBlock XP and Magic Find work without the Bazaar and Auction House for these profiles."
 }

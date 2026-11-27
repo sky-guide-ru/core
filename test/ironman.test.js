@@ -91,3 +91,33 @@ test('Рынок только NPC: покупка у NPC за монеты, пр
   assert.equal(sellValue(ctx, 'WHEAT').net, 6);
   assert.equal(sellValue(ctx, 'RARE_THING'), null);
 });
+
+import { buildObtainGuide } from '../src/analysis/obtain.js';
+import { sbxpPlan } from '../src/analysis/sbxp.js';
+import { magicFind } from '../src/calc/magic-find.js';
+
+test('«Как получить» без рынка: нет Bazaar и аукциона, есть NPC и крафт', () => {
+  const buy = () => ({ price: 1000, market: 'ah' });
+  const normal = buildObtainGuide('ZOMBIE_TALISMAN', { items: ITEMS, constants: {}, buy });
+  assert.ok(normal.methods.some(m => m.kind === 'market'));
+  const iron = buildObtainGuide('ZOMBIE_TALISMAN', { items: ITEMS, constants: {}, buy, noMarket: true });
+  assert.ok(!iron.methods.some(m => m.kind === 'market'));
+  assert.ok(iron.methods.some(m => m.kind === 'npc'));
+  assert.ok(buildObtainGuide('FARMING_TALISMAN', { items: ITEMS, constants: {}, buy, noMarket: true }).methods.some(m => m.kind === 'craft'));
+});
+
+test('SkyBlock XP без рынка: без цен за XP', () => {
+  const m = { sbLevel: 100, magicalPower: 500, fairySouls: { exchanges: 40, unspent: 0 }, skills: {} };
+  const o = { acc: { cheapestNext: [{ name: 'Talisman', gain: 3, price: 30000, perMp: 10000 }] }, petScore: { score: 50, cheapest: [{ id: 'BEE;0', name: 'Bee', points: 1, cost: 6000, perPoint: 6000 }] }, museumBest: { id: 'X', name: 'X', cost: 5e5, gain: 5, perXp: 1e5 } };
+  const p = sbxpPlan(m, { ...o, noMarket: true });
+  for (const r of p.rows) { assert.equal(r.cost ?? null, null, r.id); assert.ok(!(r.perXp > 0), r.id); }
+  assert.ok(['mp', 'pets', 'museum'].every(id => p.rows.some(r => r.id === id)));
+});
+
+test('Magic Find без рынка: аксессуары и Looting с подсказкой «где добыть»', () => {
+  const m = { inv: { talismans: [], inventory: [] }, skills: { combat: { level: 30 } }, slayers: {}, extras: {}, effects: {}, cookie: false };
+  const r = magicFind(m, { price: () => 0, noMarket: true, obtain: id => ({ text: `где ${id}` }) });
+  assert.ok(r.next.some(n => n.key === 'looting' && /^где ENCHANTMENT_LOOTING/.test(n.how)));
+  assert.ok(r.next.some(n => n.how?.startsWith('где ') && n.key !== 'looting'), 'аксессуары с MF');
+  assert.equal(magicFind(m, { price: () => 0 }).next.filter(n => n.key === 'looting').length, 0, 'обычный профиль без цены — как раньше');
+});
