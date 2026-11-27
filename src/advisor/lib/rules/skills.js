@@ -6,8 +6,8 @@ import { tx } from '../../../../i18n/msg.js';
 
 const SKILL_HOWTO = {
   combat: ['Slayers T4–T5 и Master Mode дают больше всего опыта боя', 'Мини-боссы Crimson Isle и Kuudra', 'Зелье опыта боя и питомец с бонусом к Combat XP'],
-  foraging: ['Galatea: рубка новых пород деревьев одновременно качает Foraging и Heart of the Forest', 'Топор с Efficiency и питомец Monkey', 'Foraging-зелье и Booster Cookie (+25% опыта скиллов)'],
-  fishing: ['Лавовая рыбалка в Crimson Isle (Magma Lord/Thunder) — лучший опыт на твоём уровне', 'Sea Creatures во время Spooky Festival и Fishing Festival', 'Trophy Fishing параллельно даёт трофеи'],
+  foraging: ['Galatea: рубка новых пород деревьев одновременно качает Foraging и Heart of the Forest', 'Топоры Galatea (Fig Axe → Figstone Splitter → Helix Chopper) и питомец Sloth', 'Foraging-зелье и Booster Cookie (+25% опыта скиллов)'],
+  fishing: ['До 27 — вода (Backwater Bayou, Moonglade Marsh на Galatea, Хотспоты), с 27 — лава Crimson Isle', 'Sea Creatures во время Spooky Festival и Fishing Festival', 'Trophy Fishing параллельно даёт трофеи'],
   enchanting: ['Experimentation Table: Superpairs и Chronomatron каждый день', 'Зачарование на столе с максимальным Bookshelf Power'],
   alchemy: ['Варка зелий с усилителями (Enchanted Sugar Cane, Enchanted Blaze Rod)', 'Ингредиенты дешевле купить на Bazaar, чем добывать'],
   taming: ['Опыт Taming идёт с любого опыта скиллов через активного питомца', 'Сначала подними кап до 60 (шаг в «Питомцах»)'],
@@ -108,7 +108,7 @@ export function foragingRules(ctx, add) {
       id: 'hotf', cat: 'Foraging и Galatea', priority: lvl < 5 ? 64 : 46, effort: 'долго',
       title: tx`Heart of the Forest ${lvl} → ${max}`,
       why: ru`HotF — дерево перков для Galatea: скорость и удача рубки, новые способности. Сейчас уровень ${lvl}${f ? tx`, Foraging ${f.level}` : ''}. Прокачка идёт параллельно со скиллом.`,
-      how: ['Galatea → задания (commissions) и рубка новых пород', 'Вкладывай очки HotF в скорость и Foraging Fortune в первую очередь'],
+      how: ['Задания Hina в Moonglade Marsh дают опыт HotF', 'Рубка Fig, Mangrove и Helix и Tree Gifts дают Forest и Desert Whispers на перки HotF', 'Вкладывай Whispers в Sweep и Foraging Fortune в первую очередь'],
       payoff: 'Быстрее Foraging и доход с древесины Galatea',
       link: 'foraging',
     });
