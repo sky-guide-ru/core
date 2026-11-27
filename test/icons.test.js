@@ -50,3 +50,24 @@ test('блоки без своей картинки предмета берут 
   assert.equal(blockAlt('crafter'), 'crafter_north');
   assert.equal(blockAlt('diamond'), null);
 });
+
+test('аватарка: лицо и второй слой из скина, старый скин 64×32 без сплошной «шапки»', async () => {
+  const { PNG } = await import('pngjs');
+  const { headFromSkin } = await import('../src/icons.js');
+  const skin = (h, hatAlpha) => {
+    const p = new PNG({ width: 64, height: h });
+    for (let y = 8; y < 16; y++) for (let x = 8; x < 16; x++) p.data.set([200, 150, 100, 255], (y * 64 + x) * 4); // лицо
+    for (let y = 0; y < 16; y++) for (let x = 32; x < 64; x++) p.data.set([0, 0, 0, hatAlpha], (y * 64 + x) * 4); // второй слой
+    p.data.set([255, 0, 0, 255], (8 * 64 + 40) * 4); // одна красная точка второго слоя — левый верхний угол лица
+    return PNG.sync.write(p);
+  };
+  const px = (buf, x, y) => { const p = PNG.sync.read(buf); return [...p.data.slice((y * p.width + x) * 4, (y * p.width + x) * 4 + 4)]; };
+  const modern = headFromSkin(skin(64, 0), 64);
+  assert.equal(PNG.sync.read(modern).width, 64);
+  assert.deepEqual(px(modern, 0, 0), [255, 0, 0, 255]); // второй слой поверх лица
+  assert.deepEqual(px(modern, 40, 40), [200, 150, 100, 255]);
+  // 64×32 со сплошным чёрным вторым слоем: игра его не рисует — видно лицо, а не чёрный квадрат
+  const legacy = headFromSkin(skin(32, 255), 32);
+  assert.deepEqual(px(legacy, 20, 20), [200, 150, 100, 255]);
+  assert.equal(headFromSkin(PNG.sync.write(new PNG({ width: 16, height: 16 }))), null);
+});
