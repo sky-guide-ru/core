@@ -157,7 +157,7 @@ export function accessoryRules(ctx, add) {
     add({
       id: 'mp-tuning', cat: 'Быстрые победы', priority: 78, effort: 'минуты',
       title: ru`Распредели Tuning Points: использовано ${spent} из ~${points}`,
-      why: 'Каждые 10 MP и каждый аксессуар с Accessory Enrichment дают 1 очко настройки (Tuning) — бесплатные статы. Нераспределённые очки ничего не дают.',
+      why: 'Каждые 10 MP дают 1 очко настройки (Tuning) — бесплатные статы. Нераспределённые очки ничего не дают.',
       how: ['Accessory Bag → Accessory Bag Thaumaturgy → Stats Tuning', 'Для данжей и боя обычно вкладывают в Crit Damage и Strength'],
       calc: tuningCalc(ctx, points - spent),
     });
@@ -176,7 +176,7 @@ export function accessoryRules(ctx, add) {
     add({
       id: 'mp-power-switch', cat: 'Аксессуары и Magical Power', priority: 66, effort: 'минуты',
       title: ru`Смени Power на ${prettyId(bp.power)}: удар мечом примерно +${pct(bp.gain)}`,
-      why: ru`Сейчас выбрана ${prettyId(m.selectedPower)}. При твоих ${fmtNum(mp)} MP сила ${prettyId(bp.power)} даёт больше урона в ближнем бою. Если играешь магом или тебе важнее защита, оставь как есть.`,
+      why: ru`Сейчас выбрана ${prettyId(m.selectedPower)}. При твоих ${fmtNum(mp)} MP сила ${prettyId(bp.power)} даёт больше урона в ближнем бою.${(() => { const cc = Math.round((ctx.power?.world?.crit_chance || 0) + (bp.delta.crit_chance || 0)); return bp.delta.crit_chance < 0 && cc < 100 ? ru` Crit Chance упадёт примерно до ${Math.max(0, cc)}% — это уже учтено в расчёте, но критов станет меньше.` : ''; })()} Если играешь магом или тебе важнее защита, оставь как есть.`,
       how: ['Accessory Bag → Accessory Bag Thaumaturgy → выбери Power', 'Смена бесплатная, вернуть можно в любой момент'],
       calc: ru`Примерно ${statLine(bp.delta)} по сравнению с ${prettyId(m.selectedPower)}`,
       link: 'accessories',
@@ -341,7 +341,7 @@ export function collectionRules(ctx, add) {
     id: 'collections-near', cat: 'Коллекции', priority: 32, effort: 'часы',
     title: ru`Коллекции, близкие к следующему тиру: ${top.length}`,
     why: ru`Не на максимуме ${rows.length} коллекций. Тиры коллекций открывают рецепты и дают SkyBlock XP; эти ближе всего к следующему тиру.`,
-    how: top.map(r => ru`${ctx.name(r.id)}: тир ${r.tier}/${r.max}, осталось ${fmtNum(r.need)}${r.cost ? ru` (на Bazaar ~${fmtCoins(r.cost)}, но покупка не засчитывается — нужно добыть самому)` : ''}`),
+    how: top.map(r => ru`${ctx.name(r.id)}: до тира ${r.tier} из ${r.max} осталось ${fmtNum(r.need)}${r.cost ? ru` (на Bazaar ~${fmtCoins(r.cost)}, но покупка не засчитывается — нужно добыть самому)` : ''}`),
     link: 'collections',
   });
 }

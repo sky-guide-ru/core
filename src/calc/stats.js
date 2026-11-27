@@ -222,9 +222,10 @@ export function petStatBoost(pet) {
 
 /** Очки Tuning: 1 за каждые 10 Magical Power и 1 за каждый аксессуар с Accessory Enrichment (меню Stats Tuning) */
 export function tuningPoints(member) {
+  // 1 очко на каждые 10 MP. Accessory Enrichment даёт только свой стат, очков Tuning не добавляет
+  // (игроки с полностью распределённым Tuning: потрачено ровно MP/10)
   const mp = member?.magicalPower || 0;
-  const enriched = (member?.inv?.talismans || []).filter(it => it?.id && (it.enrichment || (it.upgrades || []).some(u => u.kind === 'enrichment'))).length;
-  return Math.floor(mp / 10) + enriched;
+  return Math.floor(mp / 10);
 }
 
 // ---------- Бонусы аксессуаров, которых нет в строках статов ----------

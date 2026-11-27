@@ -14,6 +14,17 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-advice',
+    date: '2026-11-27',
+    kind: 'fix',
+    title: 'Советы плана стали точнее',
+    items: [
+      'Совет сменить Power в [плане](roadmap) учитывает, сколько Crit Chance пропадёт.',
+      'Очки Tuning считаются только от Magical Power: одно на каждые 10 MP.',
+      'После Fermento Armor план ведёт к Helianthus Armor, а для Farming советует Mooshroom Cow.',
+    ],
+  },
+  {
     id: '2026-11-27-discord',
     date: '2026-11-27',
     kind: 'new',

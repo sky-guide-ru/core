@@ -125,5 +125,6 @@
  "Сейчас мэр Aatrox: перк Slayer XP Buff даёт +25% опыта слееров": "Mayor Aatrox now: the Slayer XP Buff perk gives +25% Slayer XP",
  " T{0} по твоим статам {1}, а опыта за босса больше.": " T{0} at your stats is {1}, and gives more XP per boss.",
  "Осталось {0} опыта слеера{1}.{2}{3}{4}": "{0} Slayer XP left{1}.{2}{3}{4}",
- ", квесты ~{0}": ", quests ~{0}"
+ ", квесты ~{0}": ", quests ~{0}",
+ "Kuudra: фарми {0}": "Kuudra: farm {0}"
 }

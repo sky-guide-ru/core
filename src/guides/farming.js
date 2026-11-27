@@ -28,8 +28,8 @@ const PEONY = ['LOTUS_NECKLACE', 'LOTUS_CLOAK', 'LOTUS_BELT', 'LOTUS_BRACELET'];
 const PESTHUNTER = ['PESTHUNTERS_NECKLACE', 'PESTHUNTERS_CLOAK', 'PESTHUNTERS_BELT', 'PESTHUNTERS_GLOVES'];
 const VACUUMS = ['SKYMART_VACUUM', 'SKYMART_TURBO_VACUUM', 'SKYMART_HYPER_VACUUM', 'INFINI_VACUUM', 'INFINI_VACUUM_HOOVERIUS'];
 const PETS = [
-  ['ELEPHANT', 'Farming Fortune от защиты и скорости: основной питомец для большинства культур'],
-  ['MOOSHROOM_COW', 'Farming Fortune от силы и грибы при фарме: лучший для грибов и с высоким Strength'],
+  ['MOOSHROOM_COW', 'Farming Fortune от Strength и грибы при фарме: основной питомец для культур на Garden'],
+  ['ELEPHANT', 'Farming Fortune от защиты и скорости: слабее Mooshroom Cow, запасной вариант'],
   ['HEDGEHOG', 'Больше урона по Pests и Farming Fortune за тиры бестиария Pests'],
   ['SLUG', 'Bonus Pest Chance и Fortune на участке со Sprayonator'],
   ['RABBIT', 'Farming Wisdom и ускорение фермерских миньонов'],

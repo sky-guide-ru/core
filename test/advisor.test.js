@@ -63,7 +63,7 @@ test('лестницы: цель — самый высокий тир с вып�
   assert.match(s.get('gear-ender-slayer-weapon').title, /Atomsplit Katana/);
   assert.match(s.get('gear-dungeon-archer-weapon').title, /Juju Shortbow .* → Terminator/);
   assert.match(s.get('gear-kuudra-armor').title, /(→|начни с) Hot /, 'броня Kuudra под открытый тир');
-  assert.ok(!s.has('gear-farming-armor'), 'Fermento уже есть');
+  assert.match(s.get('gear-farming-armor').title, /Fermento Armor → Helianthus Armor/, 'после Fermento — Helianthus');
   assert.ok(!s.has('gear-mining-drill'), "Divan's Drill уже есть");
 });
 
@@ -162,7 +162,7 @@ test('diffRoadmaps и collectionTiersFromResources', () => {
   const tiers = collectionTiersFromResources({ collections: { FARMING: { items: { WHEAT: { tiers: [{ tier: 2, amountRequired: 100 }, { tier: 1, amountRequired: 50 }] } } } } });
   assert.deepEqual(tiers, { WHEAT: [50, 100] });
   const s = byId(buildRoadmap(ownercatMember(), ACC, GEAR, { collectionTiers: { LOG: [100, 50_000, 100_000] } }));
-  assert.match(s.get('collections-near').how[0], /тир 2\/3/);
+  assert.match(s.get('collections-near').how[0], /до тира 2 из 3/);
 });
 
 test('в советах нет сырых id: питомцы и миньоны названы по-человечески', () => {

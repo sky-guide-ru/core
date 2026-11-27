@@ -175,6 +175,9 @@ test('лучший меч: сравниваются только мечи, лу�
 test('прирост удара от Strength и Crit Damage', () => {
   near(hitGain({ strength: 100, crit_damage: 100 }, { strength: 100 }), 0.5);
   assert.equal(hitGain({ strength: 0, crit_damage: 0 }, {}), 0);
+  // Потеря Crit Chance учитывается: без критов прибавка Strength/Crit Damage не спасает
+  near(hitGain({ strength: 100, crit_damage: 100, crit_chance: 100 }, { strength: 100, crit_damage: 100, crit_chance: -100 }), -0.25);
+  near(hitGain({ strength: 100, crit_damage: 100, crit_chance: 150 }, { crit_damage: 100, crit_chance: -50 }), 0.5);
 });
 
 test('прибавка статов силы от роста MP', () => {
@@ -254,9 +257,9 @@ test('Voidgloom Seraph 7: +9 Intelligence (в NEU меньше, сверено �
   assert.equal(slayerTable(neuTable, 'zombie'), neuTable);
 });
 
-test('очки Tuning: 1 за 10 MP и 1 за аксессуар с Accessory Enrichment', () => {
+test('очки Tuning: 1 за 10 MP, Accessory Enrichment очков не даёт', () => {
   assert.equal(tuningPoints({ magicalPower: 1059 }), 105);
   const inv = { talismans: [{ id: 'A', enrichment: 'intelligence' }, { id: 'B', upgrades: [{ kind: 'enrichment' }] }, { id: 'C' }] };
-  assert.equal(tuningPoints({ magicalPower: 1059, inv }), 107);
+  assert.equal(tuningPoints({ magicalPower: 1059, inv }), 105);
   assert.equal(tuningPoints(null), 0);
 });
