@@ -35,5 +35,15 @@
  "Гайд: {0} →": "Guide: {0} →",
  "Нравится / Не хочу{0}": "Like / Don't want{0}",
  "Нажми категорию: ♥ поднимает её шаги выше, ✕ убирает их из плана, третье нажатие возвращает как было. Ironman и Bingo план учитывает сам.": "Tap a category: ♥ moves its steps up, ✕ removes them from the plan, a third tap resets it. Ironman and Bingo are already taken into account.",
- "сбросить": "reset"
+ "сбросить": "reset",
+ "Бюджет: {0}": "Budget: {0}",
+ "например, 70m или 1.5b": "e.g. 70m or 1.5b",
+ "Бюджет в монетах": "Budget in coins",
+ "сколько есть: {0}": "what you have: {0}",
+ "На {0}: {1} {2} на {3}, останется {4}.": "For {0}: {1} {2} for {3}, {4} left.",
+ "покупки": "purchases",
+ "покупок": "purchases",
+ "На {0} пока ничего не хватает.": "Nothing fits into {0} yet.",
+ "Не понял сумму: напиши число, можно с k, m или b.": "Couldn't read the amount: type a number, k, m or b are fine.",
+ "Что даст": "What it gives"
 }
