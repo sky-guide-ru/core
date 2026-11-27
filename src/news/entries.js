@@ -29,7 +29,7 @@ export const NEWS = [
     title: "Рекорды данжей и Jacob's Contest",
     items: [
       'У каждого этажа Catacombs на [Прогрессе](skills) видны лучшая оценка и самое быстрое S+.',
-      "В карточке [Garden](skills#jacob) — медали Jacob's Contest за всё время и лучшая медаль по каждой культуре.",
+      "В карточке Garden на [Прогрессе](skills) — медали Jacob's Contest за всё время и лучшая медаль по каждой культуре.",
     ],
   },
   {
