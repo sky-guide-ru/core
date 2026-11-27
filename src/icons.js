@@ -6,6 +6,7 @@ import { packTexture, forgetPackTexture, packVanillaTexture, clientJarTexture, f
 import { config } from './config.js';
 import { normalizeId } from './items-ru/index.js';
 import { PNG } from 'pngjs';
+import { getJson } from './http.js';
 
 // raw.githubusercontent.com бывает недоступен (у части провайдеров), поэтому есть зеркало jsDelivr
 const ASSET_HOSTS = [
@@ -372,22 +373,94 @@ async function renderOne(id, scope = 'all') {
   return buf;
 }
 
-// Аватарка игрока (голова из скина). Раньше браузер грузил её прямо с mc-heads.net — тогда IP посетителя уходил
-// стороннему иностранному сервису. Теперь картинку берёт сервер и кэширует на 6 часов, браузер обращается только к нам.
+// Аватарка игрока (голова из скина). Сервер рисует её сам из настоящего скина Mojang и кэширует на 6 часов,
+// браузер обращается только к нам. Раньше картинку отдавал mc-heads.net, а он под нагрузкой иногда присылал
+// голову Стива вместо настоящей — и она держалась в кэше. Теперь mc-heads — только запасной путь, и его ответ
+// хранится 10 минут.
 const AVATAR_TTL = 6 * 3600e3;
+const AVATAR_FALLBACK_TTL = 10 * 60e3;
 const AVATAR_SIZES = [16, 24, 32, 48, 64, 96, 128];
 const avatarMiss = new Map();
+const skinHashes = new Map(); // uuid → { hash, at }
+
+/** Голова спереди из PNG скина: лицо (8,8) и второй слой (40,8), увеличенные без сглаживания до size×size */
+export function headFromSkin(buf, size = 64) {
+  const png = PNG.sync.read(buf);
+  if (png.width !== 64 || (png.height !== 64 && png.height !== 32)) return null;
+  const at = (x, y) => (y * png.width + x) * 4;
+  // Старые скины 64×32: если второй слой головы целиком непрозрачный, игра его не рисует (иначе он закрывал бы лицо)
+  let hat = true;
+  if (png.height === 32) {
+    hat = false;
+    for (let y = 0; y < 16 && !hat; y++) for (let x = 32; x < 64; x++) if (png.data[at(x, y) + 3] < 128) { hat = true; break; }
+  }
+  const s = Math.max(8, Math.round(size / 8) * 8);
+  const out = new PNG({ width: s, height: s });
+  const k = s / 8;
+  for (let y = 0; y < s; y++) for (let x = 0; x < s; x++) {
+    const fx = Math.floor(x / k), fy = Math.floor(y / k);
+    const f = at(8 + fx, 8 + fy), h = at(40 + fx, 8 + fy), o = (y * s + x) * 4;
+    // Лицо в игре всегда непрозрачное (прозрачные пиксели становятся своим цветом без прозрачности)
+    let r = png.data[f], g = png.data[f + 1], b = png.data[f + 2];
+    const a = hat ? png.data[h + 3] / 255 : 0;
+    if (a > 0) {
+      r = Math.round(png.data[h] * a + r * (1 - a));
+      g = Math.round(png.data[h + 1] * a + g * (1 - a));
+      b = Math.round(png.data[h + 2] * a + b * (1 - a));
+    }
+    out.data[o] = r; out.data[o + 1] = g; out.data[o + 2] = b; out.data[o + 3] = 255;
+  }
+  return PNG.sync.write(out);
+}
+
+// Хэш текстуры скина по uuid (sessionserver Mojang); null — у игрока стандартный скин или Mojang не ответил
+async function skinHashOf(uuid) {
+  const hit = skinHashes.get(uuid);
+  if (hit && Date.now() - hit.at < AVATAR_TTL) return hit.hash;
+  const prof = await getJson(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`, { timeout: 5000, retries: 1 });
+  const raw = prof?.properties?.find(p => p.name === 'textures')?.value;
+  const url = raw ? JSON.parse(Buffer.from(raw, 'base64').toString('utf8')).textures?.SKIN?.url : null;
+  const hash = url ? url.split('/').pop() : null;
+  skinHashes.set(uuid, { hash, at: Date.now() });
+  return hash;
+}
+
+async function ownAvatar(id, size) {
+  let uuid = /^[a-f0-9]{32}$/i.test(id) ? id.toLowerCase() : null;
+  if (!uuid) {
+    const d = await getJson(`https://api.mojang.com/users/profiles/minecraft/${encodeURIComponent(id)}`, { timeout: 5000, retries: 1 });
+    uuid = String(d?.id || '').toLowerCase();
+    if (!/^[a-f0-9]{32}$/.test(uuid)) return null;
+  }
+  const hash = await skinHashOf(uuid);
+  const skin = hash ? await getSkin(hash) : null;
+  return skin ? headFromSkin(skin, size) : null;
+}
+
 export async function getAvatar(who, size = 64) {
   const id = String(who || '').replace(/-/g, '');
   if (!/^[A-Za-z0-9_]{1,16}$/.test(id) && !/^[a-f0-9]{32}$/i.test(id)) return null;
   const want = Number(size) || 64;
   const s = AVATAR_SIZES.find(x => x >= want) || 128;
-  const file = path.join(cacheDir(), `avatar_${id.toLowerCase()}_${s}.png`);
+  const name = `head_${id.toLowerCase()}_${s}.png`;
+  const file = path.join(cacheDir(), name);
   try { if (Date.now() - fs.statSync(file).mtimeMs < AVATAR_TTL) return fs.readFileSync(file); } catch { /* нет в кэше */ }
   const key = `${id.toLowerCase()}_${s}`;
-  if (Date.now() - (avatarMiss.get(key) || 0) < 10 * 60e3) return readPng(file); // недавно не вышло — отдаём старую, если есть
-  const fresh = await fetchTo(path.basename(file), `https://mc-heads.net/avatar/${encodeURIComponent(id)}/${s}`);
-  if (fresh) return fresh;
+  if (Date.now() - (avatarMiss.get(key) || 0) < AVATAR_FALLBACK_TTL) return readPng(file); // недавно не вышло — отдаём старую, если есть
+  const own = await ownAvatar(id, s).catch(() => null);
+  if (own) {
+    fs.mkdirSync(cacheDir(), { recursive: true });
+    fs.writeFileSync(file, own);
+    return own;
+  }
+  // Mojang не ответил или скин стандартный — голову рисует mc-heads (он знает стандартные скины Steve/Alex).
+  // Такой ответ живёт в кэше 10 минут, а не 6 часов: вдруг это была заглушка
+  const fresh = await fetchTo(name, `https://mc-heads.net/avatar/${encodeURIComponent(id)}/${s}`);
+  if (fresh) {
+    const old = new Date(Date.now() - AVATAR_TTL + AVATAR_FALLBACK_TTL);
+    try { fs.utimesSync(file, old, old); } catch { /* не страшно */ }
+    return fresh;
+  }
   avatarMiss.set(key, Date.now());
   return readPng(file);
 }
