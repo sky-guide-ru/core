@@ -99,5 +99,8 @@
  "Раздел про силы Maxwell и Stats Tuning появится позже.": "A section on Maxwell powers and Stats Tuning is coming later.",
  "Все шаги в бюджете: {0}": "All steps within budget: {0}",
  "Свернуть": "Collapse",
- "Показать ещё {0}": "Show {0} more"
+ "Показать ещё {0}": "Show {0} more",
+ "Аксессуары не видны": "Accessories are hidden",
+ "У игрока выключен Inventory API, поэтому содержимое Accessory Bag неизвестно и план покупок не строится. Включить: SkyBlock Menu → Settings → API Settings → Inventory API, затем подождать пару минут.": "This player has the Inventory API turned off, so the Accessory Bag contents are unknown and no shopping plan is built. To turn it on: SkyBlock Menu → Settings → API Settings → Inventory API, then wait a couple of minutes.",
+ "Наибольший Magical Power за всё время — {0}, сейчас он может быть меньше.": "Highest Magical Power ever — {0}; the current value may be lower."
 }

@@ -180,7 +180,9 @@ async function inventories(m) {
     sacksBag: bags.sacks_bag || [],
     sacks: inv.sacks_counts || {},
     rift: await riftInv(m.rift?.inventory),
-    apiDisabled: !m.inventory,
+    // Inventory API выключен: Hypixel всё равно присылает inventory, но только с Sack of Sacks
+    // (bag_contents.sacks_bag), без инвентаря, брони, эндерсундука и Accessory Bag
+    apiDisabled: !m.inventory || !(inv.inv_contents || inv.inv_armor || inv.ender_chest_contents || inv.bag_contents?.talisman_bag),
   };
   // Старое поле, если вдруг вернётся; иначе гардероб = все части из наборов брони (по 4 в ряд)
   // Надетый набор в гардеробе пустой: показываем его на своём месте с надетой бронёй (иначе столбцы начинаются со «Слот 2»)
