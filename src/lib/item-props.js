@@ -48,3 +48,13 @@ export function obtainmentOf(id, nameOf = null) {
 }
 
 export const _meta = meta; // для тестов
+
+/**
+ * Можно ли продать или передать именно этот экземпляр (предмет из инвентаря, normalizeItem):
+ * сданный в Museum и одолженный обратно (donated_museum) и Soulbound / Co-op Soulbound — нельзя.
+ * В networth такие вещи остаются, но советовать их продать нельзя.
+ */
+export function canSellCopy(it) {
+  if (!it || it.museum) return false;
+  return !(it.lore || []).some(l => /^\*?\s*(Co-op )?Soulbound\s*\*?$/i.test(String(l).replace(/§./g, '').trim()));
+}
