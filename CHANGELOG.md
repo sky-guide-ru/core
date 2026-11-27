@@ -4,7 +4,7 @@
 
 ## Не выпущено
 
-## 0.2.20
+## 0.2.22
 
 - «С возвращением»: метки активности профиля (parse/activity.js) вместо пустого last_save, перерыв 30+ дней и что нового (analysis/returning.js).
 - «Дела на сегодня»: Experiments, квесты Crimson Isle, Matriarch, Garden Visitors по меткам API, сброс в полночь по Нью-Йорку (analysis/dailies.js).
@@ -12,6 +12,12 @@
 - Сундуки данжей по открытым этажам: Bedrock/Obsidian, Dungeon Chest Key, Kismet Feather (dungeonChests в market/methods/combat.js).
 - «Как получить»: запасы из Sacks в дереве крафта (have/need/rest, fromStock).
 - analyzeMember отдаёт returning, dailies, sbxp, chests; новости и переводы.
+
+## 0.2.21
+
+- `roadmap/cart.js`: план покупок с правками игрока — убрать шаг, добавить свою вещь (`applyCartOp`), подсчёт с вычетом того, что уже есть (`buildCart`, `ownedCount`), хранение у владельца (`getCart`/`setCart`, data/roadmap-cart.json). Купленное уходит само.
+- `advise().summary.perHour` — лучший активный заработок в час (`bestPerHour`), для «когда хватит» в плане покупок.
+- Новость «План покупок можно править» и перевод для /en/.
 
 ## 0.2.18
 

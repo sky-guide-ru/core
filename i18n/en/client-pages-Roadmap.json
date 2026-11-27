@@ -45,5 +45,22 @@
  "покупок": "purchases",
  "На {0} пока ничего не хватает.": "Nothing fits into {0} yet.",
  "Не понял сумму: напиши число, можно с k, m или b.": "Couldn't read the amount: type a number, k, m or b are fine.",
- "Что даст": "What it gives"
+ "Что даст": "What it gives",
+ "Добавить свою вещь: название предмета": "Add your own item: item name",
+ "Добавить вещь в план покупок": "Add an item to the shopping plan",
+ "+ в план": "+ to plan",
+ "шт. {0}": "pcs {0}",
+ "{0}Считаю план покупок…": "{0}Building the shopping plan…",
+ "Открыть предмет: цена и где взять": "Open item: price and where to get it",
+ "своё": "custom",
+ "есть {0}": "have {0}",
+ "Убрать из плана": "Remove from plan",
+ "Не покупать: убрать из плана покупок": "Skip: remove from the shopping plan",
+ "В плане покупок пусто.": "The shopping plan is empty.",
+ "Список собирается сам из шагов плана с ценой.{0}{1}": "The list builds itself from plan steps that cost coins.{0}{1}",
+ "Ненужное можно убрать, своё — добавить здесь или кнопкой «+ В план покупок» в карточке предмета. Что уже лежит у тебя, вычитается, а купленное уходит само.{0}": "Remove what you don't need, add your own items here or with the “+ To shopping plan” button on any item card. Items you already have are subtracted, and bought items drop off on their own.{0}",
+ " Правки видно только в этом браузере.": " Changes are visible only in this browser.",
+ "Это чужой план: править его может только сам игрок.": "This is someone else's plan: only the player can edit it.",
+ "✔ Куплено: {0}": "✔ Bought: {0}",
+ "Убрано из плана покупок ({0})": "Removed from the shopping plan ({0})"
 }

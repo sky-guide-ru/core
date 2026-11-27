@@ -236,5 +236,9 @@
  "Карточка Dungeons подсказывает, какие сундуки открывать и стоят ли Dungeon Chest Key и Kismet Feather.": "The Dungeons card shows which chests to open and whether a Dungeon Chest Key and Kismet Feather pay off.",
  "План под свои интересы": "A plan that fits your interests",
  "Категории [плана](roadmap#interests) можно отметить «Нравится» или «Не хочу»: шаги поднимутся выше или уйдут.": "[Plan](roadmap#interests) categories can be marked \"Like\" or \"Don't want\": their steps move up or leave.",
- "В «Как получить» у ингредиентов крафта видно, сколько уже лежит в Sacks и сколько докупить.": "In \"How to get\", craft ingredients show how many are already in your Sacks and how many to buy."
+ "В «Как получить» у ингредиентов крафта видно, сколько уже лежит в Sacks и сколько докупить.": "In \"How to get\", craft ingredients show how many are already in your Sacks and how many to buy.",
+ "План покупок можно править": "The shopping plan is editable",
+ "Лишнее из [плана покупок](roadmap/plan) убирается крестиком, своя вещь добавляется поиском.": "Remove anything from the [shopping plan](roadmap/plan#cart) with the cross and add your own items via search.",
+ "Кнопка «+ В план покупок» есть в карточке любого предмета.": "Every item card has a “+ To shopping plan” button.",
+ "Что уже лежит в запасах, вычитается из цены, а купленное уходит из списка само.": "Items already in storage are subtracted from the price, and bought items drop off the list on their own."
 }

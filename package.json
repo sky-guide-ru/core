@@ -1,6 +1,6 @@
 {
   "name": "@sky-guide/core",
-  "version": "0.2.20",
+  "version": "0.2.22",
   "license": "AGPL-3.0-only",
   "type": "module",
   "engines": {
