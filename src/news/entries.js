@@ -24,16 +24,6 @@ export const NEWS = [
     ],
   },
   {
-    id: '2026-11-27-verified',
-    date: '2026-11-27',
-    kind: 'new',
-    title: 'Роль Verified в Discord',
-    items: [
-      'Ник из Minecraft привязывается к Discord на sky-guide.ru/discord, а в Discord Sky Guide выдаётся роль Verified.',
-      'Для проверки свой Discord указывается в Hypixel: профиль → Social Media → Discord.',
-    ],
-  },
-  {
     id: '2026-11-27-weapons',
     date: '2026-11-27',
     kind: 'better',
