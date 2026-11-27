@@ -145,10 +145,11 @@ export function mobContext(mobId, name, member) {
   if (DUNGEON_BOSS[mobId]) {
     const f = DUNGEON_BOSS[mobId];
     const floor = isMaster ? tx`M${f}` : tx`F${f}`;
-    const out = { how: tx`Босс этажа ${floor} в Catacombs. Предмет лежит в сундуках награды после победы над боссом (чем выше оценка рана, тем лучше сундуки).`, guide: 'dungeons' };
+    const out = { how: tx`Босс этажа ${floor} в Catacombs${isMaster ? ' (Master Mode — усложнённые этажи)' : ''}. Предмет лежит в сундуках награды после победы над боссом (чем выше оценка рана, тем лучше сундуки).`, guide: 'dungeons' };
     const d = member?.dungeons;
     if (isMaster) {
-      out.req = tx`Catacombs ${MASTER_REQ[f]} и победа на ${f === 1 ? 'F7' : tx`M${f - 1}`}`;
+      // Master Mode открывается после F7, каждый следующий M — после предыдущего; плюс уровень Catacombs
+      out.req = tx`Catacombs ${MASTER_REQ[f]} и пройденный ${f === 1 ? 'F7 — без него Master Mode закрыт' : tx`M${f - 1}`}`;
       if (d) {
         const lvl = d.catacombs?.level || 0;
         const prev = f === 1 ? Number(d.floors?.['7'] || 0) : Number(d.masterFloors?.[String(f - 1)] || 0);
@@ -470,12 +471,14 @@ export function buildObtainGuide(id, ctx) {
       });
     } else {
       methods.push({
-        kind: 'market', market: 'ah', title: 'Купить на аукционе', total: mk.price, quote: quoteOfBuy(mk),
+        kind: 'market', market: 'ah', title: 'Купить на аукционе', total: mk.price, quote: quoteOfBuy(mk), ...(mk.noLots ? { noLots: true } : {}),
         steps: [
           { text: 'Открой аукцион: команда /ah (нужен Booster Cookie) или Auction Master в Hub.' },
-          { text: tx`Найди «${name}» и выбери лот с пометкой BIN (Buy It Now) — самый дешёвый сейчас ${fmtCoins(mk.price)}${mk.count ? tx`, всего лотов: ${mk.count}` : ''}.` },
+          mk.noLots
+            ? { text: tx`Сейчас BIN-лотов с «${name}» нет, но вещь продаётся: за неделю ${fmtNum(mk.sold7 || 0)} шт., в среднем по ${fmtCoins(mk.price)}. Загляни позже — новые лоты появляются регулярно.` }
+            : { text: tx`Найди «${name}» и выбери лот с пометкой BIN (Buy It Now) — самый дешёвый сейчас ${fmtCoins(mk.price)}${mk.count ? tx`, всего лотов: ${mk.count}` : ''}.` },
           { text: 'Проверь в описании лота зачарования, реформу и звёзды: дешёвый лот часто «голый».' },
-          ...(mk.sell ? [{ text: mk.sellFrom === 'sales'
+          ...(mk.sell && !mk.noLots ? [{ text: mk.sellFrom === 'sales'
             ? tx`Продать: такие лоты недавно уходили в среднем за ${fmtCoins(mk.sell)}, после комиссий аукциона ~${fmtCoins(mk.sellNet)}.`
             : mk.sellFrom === 'cap'
               ? tx`Продать: дороже самого дешёвого лота (${fmtCoins(mk.sell)}) не уйдёт, после комиссий аукциона ~${fmtCoins(mk.sellNet)}. Дорогие продажи — это копии с улучшениями.`
@@ -591,7 +594,7 @@ export function buildObtainGuide(id, ctx) {
     const per = pct != null && d.amount ? (d.amount.min + d.amount.max) / 2 * pct / 100 : null;
     if (per && mk?.price) {
       const what = boss ? 'один ран' : slayer ? 'один босс' : 'одно убийство';
-      steps.push({ text: tx`В среднем ${what} даёт ~${fmtNum(per >= 10 ? Math.round(per) : Math.round(per * 100) / 100)} шт. — это ~${fmtCoins(per * mk.price)} монет по цене ${mk.market === 'bazaar' ? 'Bazaar' : 'аукциона'}.${per < 1 ? tx` Купить 1 шт. сейчас стоит ${fmtCoins(mk.price)}.` : ''}` });
+      steps.push({ text: tx`В среднем ${what} даёт ~${fmtNum(per >= 10 ? Math.round(per) : Math.round(per * 100) / 100)} шт. — это ~${fmtCoins(per * mk.price)} монет по цене ${mk.market === 'bazaar' ? 'Bazaar' : 'аукциона'}.${per < 1 ? (mk.noLots ? tx` На аукционе 1 шт. уходит в среднем за ${fmtCoins(mk.price)}.` : tx` Купить 1 шт. сейчас стоит ${fmtCoins(mk.price)}.`) : ''}` });
     }
     if (pct != null && pct < 5 && !DUNGEON_BOSS[d.mob]) steps.push({ text: 'Редкий дроп: Magic Find (питомцы, броня, зелья) повышает шанс.' });
     methods.push({ kind: 'drop', title: tx`Выбить с ${d.name}`, chance: d.chance, amount: d.amount || null, amountRu: amountRu(d.amount) || null, perRun: per, mob: d.mob, guide: c.guide, island: d.panorama, steps });
@@ -635,6 +638,8 @@ export function buildObtainGuide(id, ctx) {
 
 /** Две цены способа «купить на рынке» для строки способа: купить, продать и откуда цена продажи */
 function quoteOfBuy(mk) {
+  // лотов нет: цена покупки и есть цена недавних продаж — второй раз её не показываем
+  if (mk.noLots) return { market: mk.market, buy: mk.price, sell: 0, sellNet: 0, sellFrom: null, lots: 0, sold7: mk.sold7 || 0, noLots: true };
   return { market: mk.market, buy: mk.price, sell: mk.sell || 0, sellNet: mk.sellNet || 0, sellFrom: mk.sellFrom || null, lots: mk.count || 0, sold7: mk.sold7 || 0 };
 }
 
