@@ -10,6 +10,11 @@
 - Шаги дропа с Master Mode: «Catacombs 24 и пройденный F7 — без него Master Mode закрыт».
 - Новость «Покупка на аукционе в „Как получить“».
 
+## 0.2.41
+
+- Словарь подсказок: COMMON-аксессуары из одного слова (Runebook) — ссылки; знаки ™ ® © не мешают (`InfiniPot™`, `InfiniVacuum™ Hooverius`: словарь хранит имя без знака, `findPhrases` пропускает знак между словами).
+- Питомцы в шагах плана (`pets-missing`, кап Taming, `pets-level`, Pet Item) пишутся «X Pet» (`petName` в `advisor/lib/util.js`), чтобы ссылка вела на питомца, а не на моба.
+
 ## 0.2.40
 
 - Bingo: `bingoGoalsLeft(resp, event)` в `lib/live-status.js` (цели ивента с `lore`), `member.bingoGoals` у профиля Bingo, шаг плана `bingo-goals` (`bingoRules`).

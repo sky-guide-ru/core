@@ -1,12 +1,9 @@
 // Pet Score и шоколадная фабрика в общем плане. Подробности — на страницах «Питомцы» и «Прогресс».
 import { petScoreSummary, RARITIES } from '../../../analysis/pet-score.js';
 import { chocolateAdvice } from '../../../analysis/chocolate.js';
-import { fmtCoins } from '../util.js';
+import { fmtCoins, petName } from '../util.js';
 import { ru } from '../../../../i18n/msg.js';
 import { tx } from '../../../../i18n/msg.js';
-
-// «Wolf Pet», а не «Wolf»: одним словом это имя моба, и ссылка открыла бы его, а не питомца
-const petName = n => (/ Pet$/.test(n) ? n : tx`${n} Pet`);
 
 export function petScoreRules(ctx, add) {
   const m = ctx.m;

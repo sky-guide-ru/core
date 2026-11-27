@@ -112,7 +112,7 @@ test('«Без дела лежит» не предлагает продать р
   const tc = steps.find(s => s.id === 'pets-taming-cap');
   // Кап Taming — только список George: Rock там нет, сданные Slug и Bal не повторяем
   const need = tc.how.filter(l => l.startsWith('Нужен:')).join('\n');
-  assert.ok(/Jellyfish \(Epic или выше\), ~30/.test(need) && !/Rock|Slug|Bal\b/.test(need), need);
+  assert.ok(/Jellyfish Pet \(Epic или выше\), ~30/.test(need) && !/Rock|Slug|Bal\b/.test(need), need);
 });
 
 import { craftFlips } from '../src/market/flips.js';

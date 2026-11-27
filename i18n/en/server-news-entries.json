@@ -269,7 +269,11 @@
  "В [плане](roadmap) у Ironman, Stranded и Bingo вместо «Плана покупок» — «План добычи».": "Ironman, Stranded and Bingo get a «Farming plan» instead of the «Shopping plan» in the [plan](roadmap).",
  "У каждой вещи видно, где её взять: NPC с островом и координатами, крафт или моб с шансом.": "Each item shows where to get it: an NPC with island and coordinates, a recipe, or a mob with drop chance.",
  "Для крафта показано, сколько материалов уже есть и чего не хватает.": "Crafts show how many materials are already there and what is missing.",
+ "Аксессуары вроде Runebook и InfiniPot™ в шаге про Magical Power открывают карточку.": "Accessories like Runebook and InfiniPot™ in the Magical Power step open their card.",
  "План для Bingo и Stranded": "Plan for Bingo and Stranded",
  "У Bingo первым шагом [плана](roadmap) идут невыполненные цели нынешнего ивента с условиями.": "On Bingo, the first step of the [plan](roadmap) lists the current event's unfinished goals with their conditions.",
- "У Stranded в плане нет Dungeons, Kuudra, Crimson Isle, Rift, HOTM и HOTF: туда с острова не попасть.": "On Stranded, the plan has no Dungeons, Kuudra, Crimson Isle, Rift, HOTM or HOTF: they can't be reached from the island."
+ "У Stranded в плане нет Dungeons, Kuudra, Crimson Isle, Rift, HOTM и HOTF: туда с острова не попасть.": "On Stranded, the plan has no Dungeons, Kuudra, Crimson Isle, Rift, HOTM or HOTF: they can't be reached from the island.",
+ "Покупка на аукционе в «Как получить»": "Buying on the Auction House in “How to get”",
+ "«Купить на аукционе» есть и у вещей, чьи лоты сейчас разобраны: с ценой недавних продаж.": "“Buy on the Auction House” also shows for items whose listings are sold out, at the recent sale price.",
+ "У дропа с Master Mode понятнее написано, что нужно: уровень Catacombs и пройденный F7.": "Master Mode drops say more clearly what is needed: a Catacombs level and a completed F7."
 }
