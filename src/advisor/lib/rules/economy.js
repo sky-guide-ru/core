@@ -7,6 +7,7 @@ import { mpGainStats, hitGain } from '../../../calc/power.js';
 import { powerStats, POWERS, tuningPoints } from '../../../calc/stats.js';
 import { ru } from '../../../../i18n/msg.js';
 import { tx } from '../../../../i18n/msg.js';
+import { canSellCopy } from '../../../lib/item-props.js';
 
 const pct = x => tx`${(Math.round(x * 1000) / 10).toString().replace('.', ',')}%`;
 const statLine = d => [['strength', 'Strength'], ['crit_damage', 'Crit Damage'], ['crit_chance', 'Crit Chance'], ['health', 'Health'], ['defense', 'Defense'], ['intelligence', 'Intelligence']]
@@ -412,7 +413,8 @@ export function moneyRules(ctx, add) {
   }
   const isGear = id => gearIds.has(id) || gearPrefixes.some(p => id.startsWith(p));
   const sellable = (ctx.gear?.topItems || [])
-    .filter(i => /Backpack|Рюкзак|Ender Chest|Эндер|Vault|Хранилище/.test(i.where || '') && i.value > 5_000_000 && !isGear(i.id || ''))
+    // сданное в Museum (одолженное обратно) и Soulbound продать нельзя — не советуем
+    .filter(i => /Backpack|Рюкзак|Ender Chest|Эндер|Vault|Хранилище/.test(i.where || '') && i.value > 5_000_000 && !isGear(i.id || '') && canSellCopy(i))
     .slice(0, 8);
   if (sellable.length) {
     add({

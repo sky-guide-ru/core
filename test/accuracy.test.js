@@ -99,6 +99,9 @@ test('«Без дела лежит» не предлагает продать р
     { id: 'TERMINATOR', name: 'Terminator', where: 'Рюкзак 1', value: 1e9 },
     { id: 'POWER_WITHER_CHESTPLATE', name: 'Necron Chestplate', where: 'Эндер-сундук', value: 90e6 },
     { id: 'OLD_DRAGON_HELMET', name: 'Old Dragon Helmet', where: 'Рюкзак 2', value: 8e6 },
+    // сдан в Museum и одолжен обратно — продать нельзя
+    { id: 'THEORETICAL_HOE_SUNFLOWER_3', name: 'Blessed Eclipse Sickle Mk. III', where: 'Рюкзак 5', value: 114e6, museum: true },
+    { id: 'SOME_DROP', name: 'Some Drop', where: 'Рюкзак 3', value: 20e6, lore: ['', '* Co-op Soulbound *', 'EPIC'] },
   ] };
   const m = ownercatMember();
   m.tamingCap = 52; m.tamingSacrificedTypes = ['SLUG', 'BAL'];

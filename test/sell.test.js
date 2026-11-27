@@ -15,7 +15,7 @@ const member = (mode = { market: true }) => ({
   inv: {
     inventory: [sword(), { id: 'HAMSTER_WHEEL', count: 18, lore: [] }],
     enderChest: [sword(), { id: 'DIVAN_FRAGMENT', count: 6, lore: [] }, { id: 'ENCHANTED_BOOK', count: 1, lore: [], enchants: { sharpness: 6 } }],
-    backpacks: { 4: [sword({ stars: 5 })] },
+    backpacks: { 4: [sword({ stars: 5 })], 5: [{ id: 'ENCHANTED_BOOK', count: 1, lore: [], enchants: { sharpness: 6 }, museum: true }] },
     armor: [], equipment: [], wardrobe: [], talismans: [],
     sacks: { ENCHANTED_MITHRIL: 3151, 'INK_SACK:3': 10 },
   },
@@ -38,7 +38,9 @@ test('что продать: где выгоднее, сразу и подожд
   const dag = r.items.find(x => x.id === 'LIVID_DAGGER');
   assert.equal(dag.count, 1); assert.equal(dag.wait.how, 'ah'); assert.equal(dag.extra, 1);
   assert.equal(r.items.find(x => x.id === 'HAMSTER_WHEEL').wait.how, 'npc');
-  assert.ok(r.items.find(x => x.id === 'ENCHANTMENT_SHARPNESS_6'), 'книга с одним чаром — по цене Bazaar');
+  const book = r.items.find(x => x.id === 'ENCHANTMENT_SHARPNESS_6');
+  assert.ok(book, 'книга с одним чаром — по цене Bazaar');
+  assert.equal(book.count, 1, 'сданное в Museum не продаётся');
   assert.ok(!r.items.find(x => x.id === 'INK_SACK-3'), 'мелочь дешевле 50 тыс. не показываем');
   assert.ok(!r.items.find(x => x.id === 'DIVAN_FRAGMENT'));
   assert.match(r.keep.find(x => x.id === 'DIVAN_FRAGMENT').why, /Divan's Drill/);

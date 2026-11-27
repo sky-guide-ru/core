@@ -3,6 +3,7 @@
 // Не советуем продавать то, что нужно для шагов плана и «Плана покупок», и единственную копию снаряжения.
 // Чистая функция: цены и словари приходят в o, без express и без глобальных цен.
 import { isGuiItem } from '../lib/gui-items.js';
+import { canSellCopy } from '../lib/item-props.js';
 import { neuId, marketId, recipeParts } from './index.js';
 import { ru } from '../../i18n/msg.js';
 
@@ -26,7 +27,6 @@ export function ahNet(p) {
 const GEAR = /\b(SWORD|LONGSWORD|BOW|WAND|DAGGER|STAFF|GAUNTLET|HELMET|CHESTPLATE|LEGGINGS|BOOTS|ACCESSORY|NECKLACE|CLOAK|BELT|GLOVES|BRACELET|PICKAXE|DRILL|AXE|HOE|SHOVEL|FISHING ROD|FISHING WEAPON|DEPLOYABLE|CHISEL)\b/;
 const strip = s => String(s || '').replace(/§[0-9a-fk-or]/gi, '');
 const isGear = it => GEAR.test(strip((it.lore || []).at(-1)));
-const soulbound = it => (it.lore || []).some(l => /Soulbound/i.test(strip(l)));
 // Upgrades повышают цену лота, но насколько — гадать не будем: такие вещи не советуем
 const upgraded = it => it.recomb || (it.stars || 0) > 0 || (it.hpb || 0) > 0 || !!it.gems || Object.keys(it.enchants || {}).length > 0 && it.id !== 'ENCHANTED_BOOK';
 
@@ -84,7 +84,7 @@ export function analyzeSell(member, o = {}) {
   };
   for (const pl of places(inv)) {
     for (const it of pl.list || []) {
-      if (!it?.id || isGuiItem(it) || it.pet || it.museum || soulbound(it)) continue;
+      if (!it?.id || isGuiItem(it) || it.pet || !canSellCopy(it)) continue; // сданное в Museum и Soulbound не продать
       const id = tradeId(it);
       if (!id) continue;
       if (isGear(it)) {
