@@ -46,7 +46,7 @@ export function normalizeItem(raw) {
     gems: ea.gems || null,
     attributes: ea.attributes || null,
     enrichment: ea.talisman_enrichment || null, // Accessory Enrichment: +1 очко Tuning
-    upgrades: pet ? [] : upgradeParts(ea),
+    upgrades: pet ? [] : upgradeParts(ea.new_year_cake_bag_data ? { ...ea, cakeYears: cakeYears(ea.new_year_cake_bag_data) } : ea),
     uuid: ea.uuid || null,
     museum: !!ea.donated_museum, // пожертвован в музей (Co-op Soulbound): у игрока на руках — значит одолжен из музея
     pet,
@@ -54,6 +54,15 @@ export function normalizeItem(raw) {
     skin: skinHash(raw.tag.SkullOwner),
     glint: !!(raw.tag.ench && raw.tag.ench.length) || Object.keys(ea.enchantments || {}).length > 0,
   };
+}
+
+// New Year Cake Bag: внутри предмета лежит ещё один NBT (gzip) со списком тортов — нужны их годы
+function cakeYears(data) {
+  try {
+    const bytes = Array.isArray(data) ? Buffer.from(data.map(b => b & 255)) : Buffer.from(String(data), 'base64');
+    const list = nbt.simplify(nbt.parseUncompressed(gunzipSync(bytes))).i || [];
+    return list.map(c => c?.tag?.ExtraAttributes?.new_years_cake).filter(y => y != null);
+  } catch { return []; }
 }
 
 function skinHash(owner) {

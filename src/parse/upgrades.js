@@ -4,6 +4,16 @@ import { tx } from '../../i18n/msg.js';
 // Коэффициенты близки к принятым в SkyHelper-Networth (SkyCrypt): часть стоимости улучшения теряется при продаже.
 
 const GEM_SLOTS = new Set(['COMBAT', 'OFFENSIVE', 'DEFENSIVE', 'UNIVERSAL', 'MINING', 'CHISEL']);
+const NO_SILEX = new Set(['PROMISING_SPADE', 'PROMISING_AXE']);
+const TURBO = [['TURBO_GOURD', 6, true], ['ENCHANTED_TURBO_GOURD', 7, true]];
+/** Зачарование → [предмет, с какого уровня, «один раз на предмет»] */
+const ENCH_UPGRADES = {
+  SCAVENGER: [['GOLDEN_BOUNTY', 6]], PESTERMINATOR: [['PESTHUNTING_GUIDE', 6]], LUCK_OF_THE_SEA: [['GOLD_BOTTLE_CAP', 7]],
+  PISCARY: [['TROUBLED_BUBBLE', 7]], FRAIL: [['SEVERED_PINCER', 7]], SPIKED_HOOK: [['OCTOPUS_TENDRIL', 7]], CHARM: [['CHAIN_END_TIMES', 6]],
+  SMITE: [['SEVERED_HAND', 7]], ENDER_SLAYER: [['ENDSTONE_IDOL', 7]], BANE_OF_ARTHROPODS: [['ENSNARED_SNAIL', 7]], VENOMOUS: [['FATEFUL_STINGER', 7]],
+  THORNS: [['PRICKLY_CREEPER', 4]], SCUBA: [['VIBRANT_CORAL', 6]], FOREST_PLEDGE: [['WATER_HYACINTH', 6]], KARMA: [['FORESTS_FAVOR', 6]], STEALTH: [['DISTANT_ECHO', 6]],
+  ...Object.fromEntries(['WHEAT', 'CARROT', 'POTATO', 'PUMPKIN', 'MELON', 'MUSHROOMS', 'COCOA', 'CACTI', 'CANE', 'WARTS', 'SUNFLOWER', 'MOONFLOWER', 'ROSE'].map(c => [tx`TURBO_${c}`, TURBO])),
+};
 const MASTER_STARS = ['FIRST_MASTER_STAR', 'SECOND_MASTER_STAR', 'THIRD_MASTER_STAR', 'FOURTH_MASTER_STAR', 'FIFTH_MASTER_STAR'];
 
 /** Простые счётчики: поле ExtraAttributes → id предмета, коэффициент. «!» в конце поля — флаг (одна штука) */
@@ -68,6 +78,27 @@ export function upgradeParts(ea = {}) {
   if (ea.talisman_enrichment) add('ACCESSORY_ENRICHMENT', 1, 0.5, 'enrichment');
   if (ea.dye_item) add(ea.dye_item, 1, 0.9, 'dye');
   if (ea.skin && !ea.petInfo) add(ea.skin, 1, 0.9, 'skin');
+
+  // Правила ниже — как в SkyHelper-Networth (MIT): улучшения, которые раньше в оценку не шли
+  // Части удочки (line / hook / sinker)
+  for (const k of ['line', 'hook', 'sinker']) add(ea[k]?.part, 1, 1, 'rod');
+  // Overclocker 3000 и Thunder in a Bottle в Pulse Ring (одна бутылка — 50 000 заряда, максимум 5 млн)
+  add('OVERCLOCKER_3000', Number(ea.levelable_overclocks) || 0, 0.9, 'upgrade');
+  if (ea.id === 'PULSE_RING') add('THUNDER_IN_A_BOTTLE', Math.floor(Math.min(Number(ea.thunder_charge) || 0, 5_000_000) / 50_000), 0.8, 'upgrade');
+  // Торты в New Year Cake Bag (годы достаёт nbt.js из new_year_cake_bag_data)
+  for (const y of ea.cakeYears || []) add(tx`NEW_YEAR_CAKE_${y}`, 1, 1, 'cake');
+  // Efficiency выше V — это Sil Ex; уровни зачарований сверх книги — предметы-улучшения
+  const ench = ea.enchantments || {};
+  const eff = Number(ench.efficiency || 0);
+  if (eff >= 6 && !NO_SILEX.has(ea.id)) add('SIL_EX', eff - (ea.id === 'STONK_PICKAXE' ? 6 : 5), 0.75, 'silex');
+  const once = new Set();
+  for (const [name, lvl] of Object.entries(ench)) {
+    for (const [item, tier, perItem] of ENCH_UPGRADES[name.toUpperCase()] || []) {
+      if (lvl < tier || (perItem && once.has(item))) continue;
+      if (perItem) once.add(item);
+      add(item, 1, 0.8, 'enchup');
+    }
+  }
 
   return out;
 }
