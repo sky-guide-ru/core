@@ -28,6 +28,8 @@ const fire = { sales: [] };
 export function setFireSales(raw, nameOf = id => id) {
   if (raw && Array.isArray(raw.sales)) fire.sales = raw.sales.filter(s => s?.item_id && Number(s.end) > Number(s.start)).map(s => ({ ...s, name: nameOf(s.item_id) || s.item_id }));
 }
+/** Fire Sales, как их отдал Hypixel (с названием предмета): [{ item_id, name, start, end, amount, price }] */
+export const fireSalesList = () => fire.sales;
 export function fireSaleEvents(now = Date.now()) {
   return fire.sales.filter(s => Number(s.end) > now).map(s => {
     const name = s.name || s.item_id;
