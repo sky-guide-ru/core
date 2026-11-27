@@ -7,6 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { config } from '../config.js';
 import { pruneHidden } from './hidden.js';
+import { ownedCount as ownedCountAll } from '../lib/owned.js';
 
 const FILE = () => path.join(config.dataDir, 'roadmap-cart.json');
 const STEP_ID = /^[A-Za-z0-9_:.\-]{1,100}$/;
@@ -42,18 +43,9 @@ export function normCart(raw) {
   return out;
 }
 
-/** Сколько штук предмета у игрока: инвентарь, сундуки, рюкзаки, Wardrobe, Accessory Bag и мешки. */
+/** Сколько штук предмета у игрока: инвентарь, сундуки, рюкзаки, Wardrobe, Accessory Bag и мешки (общий источник — lib/owned.js). */
 export function ownedCount(inv, id) {
-  if (!inv || !id) return 0;
-  let n = 0;
-  const count = list => { for (const it of Array.isArray(list) ? list : []) if (it?.id === id) n += it.count || 1; };
-  for (const [k, v] of Object.entries(inv)) {
-    if (k === 'sacks') continue;
-    if (k === 'backpacks') { for (const list of Object.values(v || {})) count(list); continue; }
-    count(v);
-  }
-  n += Number(inv.sacks?.[id]) || 0;
-  return n;
+  return inv && id ? ownedCountAll(inv, id) : 0;
 }
 
 /**

@@ -29,10 +29,11 @@
  "продают за": "sells for",
  "продать": "sell",
  "ставка от {0}": "bids from {0}",
- "Уже лежит в Sacks": "Already in your Sacks",
  "есть {0} · нужно ещё {1}": "have {0} · need {1} more",
  "есть {0} ✓": "have {0} ✓",
  "Без запасов: {0}": "Without stock: {0}",
- "Из своих Sacks: −{0}{1}": "From your Sacks: −{0}{1}",
- ", докупить на {0}": ", buy the rest for {0}"
+ ", докупить на {0}": ", buy the rest for {0}",
+ "У тебя: {0}": "You have: {0}",
+ "✔ есть{0}": "✔ have{0}",
+ "Из своих запасов: −{0}{1}": "From what you own: −{0}{1}"
 }

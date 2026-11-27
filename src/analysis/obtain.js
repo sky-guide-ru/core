@@ -18,6 +18,7 @@ import { englishName } from '../names.js';
 import { SLAYER_COST, SLAYER_INFO, MASTER_REQ } from '../guides/combat/data.js';
 import { tx } from '../../i18n/msg.js';
 import { darkAuctionOf } from './dark-auction.js';
+import { ownedPool, takeOwned } from '../lib/owned.js';
 
 const strip = s => String(s || '').replace(/§./g, '').trim();
 const SLOTS = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
@@ -250,9 +251,9 @@ export function costTree(id, count, ctx, depth = 0, seen = new Set(), budget = {
   const name = englishName(id, items);
   const node = { id, name, count, unit: null, total: null, via: 'none', viaRu: '' };
   budget.n++;
-  // «есть X / нужно Y»: сколько уже лежит в Sacks (ctx.stock — общий запас на всё дерево способа)
-  let have = 0;
-  if (ctx.stock?.get(id) > 0) { have = Math.min(count, ctx.stock.get(id)); ctx.stock.set(id, ctx.stock.get(id) - have); }
+  // «есть X / нужно Y»: сколько уже есть у игрока — инвентарь, рюкзаки, эндер-сундук, гардероб, мешки, питомцы
+  // (ctx.stock — общий запас на всё дерево способа, lib/owned.js ownedPool)
+  const { have, where } = takeOwned(ctx.stock, id, count);
   const need = count - have;
   const cur = currencyOf(id);
   if (cur) {
@@ -304,16 +305,15 @@ export function costTree(id, count, ctx, depth = 0, seen = new Set(), budget = {
     else if (idx.forge.get(id)) Object.assign(node, { via: 'forge', viaRu: 'Forge в Dwarven Mines' });
     else Object.assign(node, { viaRu: 'нет цены и рецепта — смотри карточку предмета' });
   }
-  if (have > 0) { node.have = have; node.need = need; }
+  if (have > 0) { node.have = have; node.need = need; node.from = where.map(([p, n]) => (where.length > 1 || n < have ? tx`${p} ×${n}` : p)).join(' · '); }
   // сколько докупить на эту строку с учётом запасов (для крафта — по ингредиентам)
   if (have > 0 || (node.children || []).some(c => c.rest != null)) node.rest = Math.round(restCost(node));
   return node;
 }
 
-/** Запасы игрока для одного способа: каждый ингредиент из Sacks берётся один раз на всё дерево. */
+/** Запасы игрока для одного способа: каждая вещь (из любого хранилища, мешков и питомцев) берётся один раз на всё дерево. */
 export function stockPool(member) {
-  const s = member?.inv?.sacks;
-  return s && typeof s === 'object' ? new Map(Object.entries(s).map(([k, v]) => [k, Number(v) || 0]).filter(([, v]) => v > 0)) : null;
+  return ownedPool(member);
 }
 
 /** Сколько ещё докупить с учётом запасов: покрытое запасом — 0, крафт — по ингредиентам, остальное — по цене за штуку. */
@@ -434,7 +434,8 @@ function goSteps(place) {
 }
 
 function costParts(cost, ctx, times = 1) {
-  return cost.map(c => costTree(c.id, c.count * times, ctx, 1));
+  const c2 = { ...ctx, stock: stockPool(ctx.member) };
+  return cost.map(c => costTree(c.id, c.count * times, c2, 1));
 }
 const sumTotal = parts => parts.every(p => p.total != null) ? parts.reduce((s, p) => s + p.total, 0) : null;
 
@@ -499,7 +500,7 @@ export function buildObtainGuide(id, ctx) {
     const parts = costParts(o.cost, ctx);
     const total = sumTotal(parts);
     methods.push({
-      kind: 'npc', title: tx`Купить у NPC ${place.name}`, total, place,
+      kind: 'npc', title: tx`Купить у NPC ${place.name}`, total, fromStock: stockSaving(parts) || undefined, place,
       steps: [
         ...goSteps(place),
         { text: tx`Открой его магазин (ПКМ) и купи «${name}»${o.count > 1 ? tx` (${o.count} шт. за раз)` : ''} за ${costLine(o.cost, items)}.`, items: parts },
@@ -538,10 +539,13 @@ export function buildObtainGuide(id, ctx) {
     const parts = costParts([{ id: 'SKYBLOCK_COIN', count: r.coins }, ...r.items], ctx);
     const prev = items.get(r.input);
     const prevBuy = ctx.buy(r.input);
+    const pet = { ...costTree(r.input, 1, { ...ctx, stock: stockPool(ctx.member) }, 1, new Set([id])), name: prev?.name || r.input };
+    if (!prevBuy && !pet.have) Object.assign(pet, { via: 'none', viaRu: '' });
+    const all = [pet, ...parts];
     methods.push({
-      kind: 'kat', title: 'Повысить редкость питомца у Kat', total: sumTotal(parts) != null ? sumTotal(parts) + (prevBuy?.price || 0) : null, place,
+      kind: 'kat', title: 'Повысить редкость питомца у Kat', total: sumTotal(parts) != null ? sumTotal(parts) + (prevBuy?.price || 0) : null, fromStock: stockSaving(all) || undefined, place,
       steps: [
-        { text: tx`Нужен питомец редкостью ниже: ${prev?.name || r.input}${prevBuy?.price ? tx` (на аукционе от ${fmtCoins(prevBuy.price)})` : ''}.`, items: [{ id: r.input, name: prev?.name || r.input, count: 1, unit: prevBuy?.price || null, total: prevBuy?.price || null, via: prevBuy ? 'ah' : 'none', viaRu: prevBuy ? 'аукцион' : '' }] },
+        { text: tx`Нужен питомец редкостью ниже: ${prev?.name || r.input}${prevBuy?.price && !pet.have ? tx` (на аукционе от ${fmtCoins(prevBuy.price)})` : ''}.`, items: [pet] },
         ...goSteps(place),
         { text: tx`Отдай питомца и заплати ${costLine([{ id: 'SKYBLOCK_COIN', count: r.coins }, ...r.items], items)}.`, items: parts },
         { text: tx`Жди ${fmtDuration(r.time)} (можно ускорить у Kat за Flower).` },
@@ -614,8 +618,10 @@ export function buildObtainGuide(id, ctx) {
   }
 
   // самый дешёвый способ из тех, где есть цена
+  // с учётом того, что уже есть у игрока: докупить меньше — выгоднее
   const priced = methods.filter(m => m.total != null && m.total > 0 && m.kind !== 'trade');
-  const cheapest = priced.sort((a, b) => a.total - b.total)[0] || null;
+  const left = m => m.total - (m.fromStock || 0);
+  const cheapest = priced.sort((a, b) => left(a) - left(b))[0] || null;
   if (cheapest) cheapest.best = true;
 
   // «~594 тыс..» — сокращение суммы уже кончается точкой
