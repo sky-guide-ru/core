@@ -229,7 +229,7 @@
  "Меч против слеера в [плане](roadmap) не обязателен, если уже есть Juju Shortbow или Terminator.": "A sword against a slayer in the [plan](roadmap) is optional if you already have a Juju Shortbow or Terminator.",
  "Для Berserk в плане есть путь мечей для данжей: Livid Dagger, Giant's Sword, Dark Claymore.": "Berserk players get a Dungeons sword path in the plan: Livid Dagger, Giant's Sword, Dark Claymore.",
  "План покупок можно править": "The shopping plan is editable",
- "Лишнее из [плана покупок](roadmap/plan#cart) убирается крестиком, своя вещь добавляется поиском.": "Remove anything from the [shopping plan](roadmap/plan#cart) with the cross and add your own items via search.",
+ "Лишнее из [плана покупок](roadmap/plan) убирается крестиком, своя вещь добавляется поиском.": "Remove anything from the [shopping plan](roadmap/plan#cart) with the cross and add your own items via search.",
  "Кнопка «+ В план покупок» есть в карточке любого предмета.": "Every item card has a “+ To shopping plan” button.",
  "Что уже лежит в запасах, вычитается из цены, а купленное уходит из списка само.": "Items already in storage are subtracted from the price, and bought items drop off the list on their own."
 }
