@@ -19,7 +19,7 @@ export const NEWS = [
     kind: 'new',
     title: 'Magic Find по новым правилам',
     items: [
-      'Блок Magic Find в [Снаряжении](gear#mf): все источники MF и сколько осталось до потолка 500.',
+      'Блок Magic Find в [Снаряжении](gear): все источники MF и сколько осталось до потолка 500.',
       'Что взять дальше — по цене за 1 MF: осколки Cinderbat, Looting VII, Anguish.',
       'Расчёт по правилам реворка 17.11.2026: MF от Combat, Slayers и Looting, Bestiary.',
     ],
