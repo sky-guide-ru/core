@@ -1,5 +1,6 @@
 // Мэр, министр, выборы и календарь событий SkyBlock.
 //   setElection(raw)        — ответ /v2/resources/skyblock/election (обновляется в money.js → refreshMayor)
+//   setFireSales(raw)       — ответ /v2/skyblock/firesales (там же, раз в 20 минут; ключ не нужен)
 //   calendarView(now, year) — всё для страницы «События»: мэр, выборы, что идёт, что скоро, сетка года
 //   calendarBrief(now)      — коротко для советчика (что идёт сейчас и что скоро)
 //   GET /api/calendar?year= — маршрут
@@ -18,6 +19,24 @@ export function setElection(raw, at = Date.now()) {
   if (raw && (raw.mayor || raw.current)) { state.raw = raw; state.at = at; }
 }
 export const electionRaw = () => state.raw;
+
+// Fire Sales: косметика за SkyBlock Gems в магазине (Community Center). { sales: [{ item_id, start, end, amount, price }] }
+const fire = { sales: [] };
+// nameOf — название предмета по id (из базы NEU; сам календарь её не грузит: он входит в публичный вход для браузера)
+export function setFireSales(raw, nameOf = id => id) {
+  if (raw && Array.isArray(raw.sales)) fire.sales = raw.sales.filter(s => s?.item_id && Number(s.end) > Number(s.start)).map(s => ({ ...s, name: nameOf(s.item_id) || s.item_id }));
+}
+export function fireSaleEvents(now = Date.now()) {
+  return fire.sales.filter(s => Number(s.end) > now).map(s => {
+    const name = s.name || s.item_id;
+    return {
+      id: tx`firesale-${s.item_id}`, name: tx`Fire Sale: ${name}`, icon: s.item_id, color: '#ff7a45', tier: 'big',
+      start: Number(s.start), end: Number(s.end),
+      what: tx`${Number(s.amount) || 0} шт. по ${Number(s.price) || 0} SkyBlock Gems`,
+      tip: 'Ограниченная косметика за SkyBlock Gems: покупается в Community Center (Elizabeth → Fire Sales), пока не кончатся штуки.',
+    };
+  });
+}
 
 function ministerView(raw) {
   const mi = raw?.mayor?.minister;
@@ -51,6 +70,7 @@ function allEvents(now) {
   if (state.raw?.mayor) ev.push(...perkEvents(activePerks(), termEnd - YEAR, termEnd));
   for (let i = 0; i < 2; i++) { const mm = (month + i) % 12, yy = year + Math.floor((month + i) / 12); ev.push(...cultIn(yy, mm)); }
   ev.push(...hourlyNext(now, 3));
+  ev.push(...fireSaleEvents(now));
   const w = electionWindow(now);
   ev.push({ id: 'term', name: 'Смена мэра', icon: 'PAPER', color: '#c3a6ff', tier: 'big', start: termEnd, end: termEnd + DAY,
     what: 'Итоги выборов: новый мэр и министр.', tip: 'Победитель выборов становится мэром на год SkyBlock, второй по голосам — министром с одним перком.' });

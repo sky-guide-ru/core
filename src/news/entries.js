@@ -14,6 +14,45 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-firesale',
+    date: '2026-11-27',
+    kind: 'new',
+    title: 'Fire Sales в «Событиях»',
+    items: [
+      'В [Событиях](events) видны Fire Sales: какая косметика, сколько штук и цена в SkyBlock Gems.',
+    ],
+  },
+  {
+    id: '2026-11-27-records',
+    date: '2026-11-27',
+    kind: 'better',
+    title: "Рекорды данжей и Jacob's Contest",
+    items: [
+      'У каждого этажа Catacombs на [Прогрессе](skills) видны лучшая оценка и самое быстрое S+.',
+      "В карточке [Garden](skills#jacob) — медали Jacob's Contest за всё время и лучшая медаль по каждой культуре.",
+    ],
+  },
+  {
+    id: '2026-11-27-hypixel',
+    date: '2026-11-27',
+    kind: 'new',
+    title: 'Профиль Hypixel рядом с ником',
+    items: [
+      'На [главной](overview) под ником видны Network Level, Achievement Points и год прихода на Hypixel.',
+      'В «Рекордах и статистике» на [Прогрессе](skills) — SkyBlock-достижения, вехи Rock и Dolphin и кто чаще всего убивает.',
+    ],
+  },
+  {
+    id: '2026-11-27-potions',
+    date: '2026-11-27',
+    kind: 'new',
+    title: 'Зелья и баффы в статах',
+    items: [
+      'В блоке [Что делать прямо сейчас](overview#now) видны действующие зелья, Century Cake и сколько им осталось.',
+      'Прибавка от зелий к Strength, Crit Damage и Defense подсвечена зелёным рядом с цифрой.',
+    ],
+  },
+  {
     id: '2026-11-27-networth',
     date: '2026-11-27',
     kind: 'better',

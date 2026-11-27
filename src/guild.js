@@ -88,15 +88,8 @@ export function createGuilds({ fetcher = getGuild, now = () => Date.now(), file 
     return c.promise;
   }
 
-  /** Что уже известно без запроса: гильдия, null (игрок без гильдии) или undefined (ещё не спрашивали) */
-  function peekGuild(uuid) {
-    const c = cache.get(String(uuid || '').replace(/-/g, '').toLowerCase());
-    return c && (c.ok || c.guild) ? c.guild : undefined;
-  }
-
-  return { guildFor, peekGuild, _cache: cache };
+  return { guildFor, _cache: cache };
 }
 
 const shared = createGuilds({ file: process.env.NODE_TEST_CONTEXT ? null : path.join(config.dataDir, 'guild-cache.json') });
 export const guildFor = shared.guildFor;
-export const peekGuild = shared.peekGuild;

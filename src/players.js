@@ -8,6 +8,7 @@ import { analyzeMember, snapshot, diffFeed } from './state.js';
 import { swapLayout } from './items-ru/lib/search.js';
 import { pushSnapshot } from './history.js';
 import { tx } from '../i18n/msg.js';
+import { hypixelInfo } from './rank.js';
 
 const MIN = 60_000;
 
@@ -173,6 +174,7 @@ export function createPlayers(o) {
     const member = await parse.parseMember(profile, v.player.uuid, extra);
     // ранг — лишний запрос: только пока лимит ключа не на исходе
     if (o.rankFor && budgetLeft() > 10) member.rank = await o.rankFor(v.player.uuid).catch(() => null);
+    member.hypixel = (o.hypixelInfo || hypixelInfo)(v.player.uuid); // из того же ответа /player, без запроса
     if (guildP) member.guild = await guildP;
     const analysis = analyze(member);
     const snap = (() => { try { return (o.snapshot || snapshot)(member, analysis.gear); } catch { return null; } })();

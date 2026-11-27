@@ -17,5 +17,7 @@
  "{0}, ещё {1}": "{0}, {1} more",
  "Идёт сейчас: {0}.": "Happening now: {0}.",
  "{0} через {1}": "{0} in {1}",
- "Скоро: {0}.": "Soon: {0}."
+ "Скоро: {0}.": "Soon: {0}.",
+ "{0} шт. по {1} SkyBlock Gems": "{0} pcs for {1} SkyBlock Gems",
+ "Ограниченная косметика за SkyBlock Gems: покупается в Community Center (Elizabeth → Fire Sales), пока не кончатся штуки.": "Limited cosmetics for SkyBlock Gems: buy them in the Community Center (Elizabeth → Fire Sales) until they sell out."
 }

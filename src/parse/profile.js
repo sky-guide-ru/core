@@ -7,10 +7,29 @@ import { SKILLS, SLAYERS, CLASSES } from '../../i18n/ru.js';
 import { parseFishing } from './fishing.js';
 import * as xv from './extras-view.js';
 import { tx } from '../../i18n/msg.js';
+import { parseEffects } from '../lib/effects.js';
 
 // Есть ли в объекте хоть одно непустое значение (пустые {} Hypixel создаёт для всех зон Рифта сразу)
 const hasTruthy = v => v && typeof v === 'object' ? Object.values(v).some(hasTruthy) : !!v;
 const g = (o, path, d = undefined) => path.split('.').reduce((a, k) => (a == null ? a : a[k]), o) ?? d;
+
+// История Jacob's Contest: ключ «год:месяц_день:КУЛЬТУРА» → { collected, claimed_medal, claimed_position, claimed_participants }.
+// Медали тут — заработанные за всё время (medals_inv — только неистраченные).
+const MEDALS = ['diamond', 'platinum', 'gold', 'silver', 'bronze'];
+export function contestStats(contests = {}) {
+  const list = Object.entries(contests || {}).filter(([, c]) => c && typeof c === 'object');
+  const medals = Object.fromEntries(MEDALS.map(k => [k, 0]));
+  let best = null;
+  for (const [key, c] of list) {
+    if (MEDALS.includes(c.claimed_medal)) medals[c.claimed_medal]++;
+    const pos = Number(c.claimed_position), n = Number(c.claimed_participants);
+    if (pos >= 0 && n > 0) {
+      const top = (pos + 1) / n;
+      if (!best || top < best.top) best = { crop: key.split(':')[2] || null, place: pos + 1, of: n, top };
+    }
+  }
+  return { total: list.length, claimed: list.filter(([, c]) => c.claimed_rewards).length, medals, best };
+}
 
 // Abiphone: контакты в телефоне (active_contacts) и NPC, с которыми уже было общение (ключи contact_data).
 export function parseAbiphone(m) {
@@ -287,6 +306,11 @@ export async function parseMember(profile, uuid, extra = {}) {
     fastestS: cata.fastest_time_s || {},
     fastestSPlus: cata.fastest_time_s_plus || {},
     masterFastestSPlus: master.fastest_time_s_plus || {},
+    // Рекорды этажей: лучший счёт (300+ — S+), самый большой урон по классам
+    bestScore: cata.best_score || {},
+    masterBestScore: master.best_score || {},
+    mostDamage: Object.fromEntries(Object.keys(CLASSES).map(k => [k, Math.max(Number(g(cata, tx`most_damage_${k}.best`, 0)) || 0, Number(g(master, tx`most_damage_${k}.best`, 0)) || 0)]).filter(([, v]) => v > 0)),
+    watcherKills: g(cata, 'watcher_kills.total', 0),
     secrets: d.secrets || g(m, 'player_stats.dungeons.secrets', 0) || 0,
   };
 
@@ -398,6 +422,15 @@ export async function parseMember(profile, uuid, extra = {}) {
     dungeonClass: g(m, 'dungeons.selected_dungeon_class', null),
     communityUpgrades: (g(profile, 'community_upgrades.upgrade_states', [])).reduce((o, u) => ({ ...o, [u.upgrade]: Math.max(o[u.upgrade] || 0, u.tier || 0) }), {}),
     firstJoin: g(m, 'profile.first_join', null),
+    // Кто чаще всего убивает (player_stats.deaths: причина → раз, плюс total)
+    deathCauses: Object.entries(ps.deaths || {}).filter(([k, v]) => k !== 'total' && Number(v) > 0).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([id, n]) => ({ id, n: Number(n) })),
+    // Вехи питомцев Rock (руда) и Dolphin (морские существа): player_stats.pets.milestone
+    petMilestones: { ores: Number(g(ps, 'pets.milestone.ores_mined', 0)) || 0, seaCreatures: Number(g(ps, 'pets.milestone.sea_creatures_killed', 0)) || 0 },
+    // Улучшение кооператива, которое сейчас строится (Elizabeth → Community Shop); null — ничего не строится
+    communityUpgrading: (() => {
+      const u = g(profile, 'community_upgrades.currently_upgrading', null);
+      return u && typeof u === 'object' && u.upgrade ? { id: String(u.upgrade).toLowerCase(), tier: Number(u.new_tier ?? u.tier) || null, startedAt: Number(u.start_ms ?? u.started_ms) || null } : null;
+    })(),
   };
 
   // Готовый к показу вид: названия вместо ID, иконки, максимумы (страница «Прогресс»)
@@ -412,6 +445,8 @@ export async function parseMember(profile, uuid, extra = {}) {
       visitors: xv.viewVisitors(gd.activeVisitors),
       treeGifts: xv.viewTreeGifts(extras.treeGifts),
       community: xv.viewCommunity(extras.communityUpgrades),
+      upgrading: xv.viewUpgrading(extras.communityUpgrading),
+      petMilestones: xv.viewPetMilestones(extras.petMilestones),
       gardenLevel: gd.experience != null ? xv.gardenLevel(Number(gd.experience) || 0) : null,
       max: { timeTower: xv.TIME_TOWER_MAX, plots: xv.GARDEN_PLOTS },
     };
@@ -437,6 +472,8 @@ export async function parseMember(profile, uuid, extra = {}) {
       by: String(t?.initiator_name || '').replace(/§./g, '').trim(),
     })),
     cookie: (g(m, 'profile.cookie_buff_active', false)),
+    // Зелья (active/paused/disabled) и торты Century Cake — блок «Зелья и баффы» и прибавка к статам на главной
+    effects: parseEffects(m.player_data || {}),
     essence: Object.fromEntries(Object.entries(g(m, 'currencies.essence', {})).map(([k, v]) => [k, v.current || 0])),
     fairySouls: { collected: g(m, 'fairy_soul.total_collected', 0), exchanges: g(m, 'fairy_soul.fairy_exchanges', 0), unspent: g(m, 'fairy_soul.unspent_souls', 0) },
     abiphone: parseAbiphone(m),
@@ -469,6 +506,7 @@ export async function parseMember(profile, uuid, extra = {}) {
       perks: g(m, 'jacobs_contest.perks', {}),
       uniqueBrackets: g(m, 'jacobs_contest.unique_brackets', {}),
       personalBests: g(m, 'jacobs_contest.personal_bests', {}),
+      contests: contestStats(g(m, 'jacobs_contest.contests', {})),
     },
     rift: {
       motes: g(m, 'currencies.motes_purse', 0),

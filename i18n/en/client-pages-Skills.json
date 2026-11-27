@@ -25,5 +25,10 @@
  "не пройдено · гайд →": "not completed · guide →",
  "{0} не сдано": "{0} not donated",
  "план до алмаза →": "plan to diamond →",
- "{0}Загружаю остальной прогресс…": "{0}Loading the rest of the progress…"
+ "{0}Загружаю остальной прогресс…": "{0}Loading the rest of the progress…",
+ "Лучший счёт {0}{1}": "Best score {0}{1}",
+ ", самый быстрый S+ за {0}": ", fastest S+ in {0}",
+ ", самый быстрый S за {0}": ", fastest S in {0}",
+ "Watcher убит {0} раз": "Watcher killed {0} times",
+ "рекорд урона за {0}: {1}": "{0} damage record: {1}"
 }
