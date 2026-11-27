@@ -43,3 +43,17 @@ export function chocolateRules(ctx, add) {
     link: 'skills',
   });
 }
+
+// Профиль Bingo: цели нынешнего ивента — главное, ради чего этот профиль (member.bingoGoals из lib/live-status.js)
+export function bingoRules(ctx, add) {
+  if (ctx.mode?.id !== 'bingo') return;
+  const left = ctx.m.bingoGoals;
+  if (!left?.length) return;
+  add({
+    id: 'bingo-goals', cat: 'Bingo', priority: 95, effort: 'до конца ивента',
+    title: ru`Bingo: осталось целей — ${left.length}`,
+    why: 'Профиль Bingo живёт до конца ивента, за каждую цель — Bingo Points.',
+    how: left.slice(0, 12).map(g => (g.lore ? tx`${g.name}: ${g.lore}` : g.name)),
+    link: 'progress',
+  });
+}

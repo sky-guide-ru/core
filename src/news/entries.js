@@ -14,6 +14,16 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-bingo',
+    date: '2026-11-27',
+    kind: 'better',
+    title: 'План для Bingo и Stranded',
+    items: [
+      'У Bingo первым шагом [плана](roadmap) идут невыполненные цели нынешнего ивента с условиями.',
+      'У Stranded в плане нет Dungeons, Kuudra, Crimson Isle, Rift, HOTM и HOTF: туда с острова не попасть.',
+    ],
+  },
+  {
     id: '2026-11-27-farmplan',
     date: '2026-11-27',
     kind: 'new',

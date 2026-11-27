@@ -4,10 +4,16 @@
 
 ## Не выпущено
 
-## 0.2.40
+## 0.2.41
 
 - Словарь подсказок: COMMON-аксессуары из одного слова (Runebook) — ссылки; знаки ™ ® © не мешают (`InfiniPot™`, `InfiniVacuum™ Hooverius`: словарь хранит имя без знака, `findPhrases` пропускает знак между словами).
 - Питомцы в шагах плана (`pets-missing`, кап Taming, `pets-level`, Pet Item) пишутся «X Pet» (`petName` в `advisor/lib/util.js`), чтобы ссылка вела на питомца, а не на моба.
+
+## 0.2.40
+
+- Bingo: `bingoGoalsLeft(resp, event)` в `lib/live-status.js` (цели ивента с `lore`), `member.bingoGoals` у профиля Bingo, шаг плана `bingo-goals` (`bingoRules`).
+- Stranded (`island`): шаги про Dungeons, Kuudra, Crimson Isle, Rift, HOTM, HOTF и их снаряжение убираются из плана (`STRANDED_AWAY`).
+- Новость «План для Bingo и Stranded».
 
 ## 0.2.39
 

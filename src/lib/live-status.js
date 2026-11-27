@@ -30,8 +30,21 @@ export function bingoEventOf(raw) {
   if (!raw || raw.id == null) return null;
   return {
     id: Number(raw.id), name: String(raw.name || ''), start: ms(raw.start), end: ms(raw.end), modifier: raw.modifier || null,
-    goals: (Array.isArray(raw.goals) ? raw.goals : []).filter(g => g?.id).map(g => ({ id: String(g.id), name: String(g.name || g.id) })),
+    goals: (Array.isArray(raw.goals) ? raw.goals : []).filter(g => g?.id).map(g => ({ id: String(g.id), name: String(g.name || g.id), lore: strip(g.lore).slice(0, 200) })),
   };
+}
+
+const strip = v => String(v || '').replace(/§./g, '').replace(/\s+/g, ' ').trim();
+
+/**
+ * Цели нынешнего Bingo, которые игрок ещё не выполнил: [{ id, name, lore }].
+ * null — ивент не идёт (нет данных или уже закончился). Игрок мог ещё ни одной цели не взять — тогда все.
+ */
+export function bingoGoalsLeft(resp, event, now = Date.now()) {
+  if (!event?.goals?.length || !(event.end > now)) return null;
+  const mine = (Array.isArray(resp?.events) ? resp.events : []).find(e => e && Number(e.key) === event.id);
+  const done = new Set((mine?.completed_goals || []).map(String));
+  return event.goals.filter(g => !done.has(g.id)).map(g => ({ id: g.id, name: g.name, lore: g.lore || '' }));
 }
 
 /**
