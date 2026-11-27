@@ -5,5 +5,8 @@
  "+{0} опыта слеера: {1}": "+{0} slayer XP: {1}",
  "Новый уровень SkyBlock: {0}!": "New SkyBlock level: {0}!",
  "{0}{1} монет": "{0}{1} coins",
- "У игрока нет профилей SkyBlock": "The player has no SkyBlock profiles"
+ "У игрока нет профилей SkyBlock": "The player has no SkyBlock profiles",
+ "возвращение": "returning",
+ "дейлики": "dailies",
+ "сундуки": "chests"
 }

@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { parseBazaar } from '../src/market/bazaar.js';
 import { dropIncome, chestValue } from '../src/market/drop-income.js';
-import { COMBAT_METHODS, COMBAT_DETAILS, LOOT, slayerTiers, slayerTierOpen, floorOpen, floorValue, kuudraValue, kuudraKeyCost } from '../src/market/methods/combat.js';
+import { COMBAT_METHODS, COMBAT_DETAILS, LOOT, slayerTiers, slayerTierOpen, floorOpen, floorValue, kuudraValue, kuudraKeyCost, dungeonChests } from '../src/market/methods/combat.js';
 import { moneyMethods } from '../src/market/methods.js';
 import { createSoldStore, recordSale } from '../src/market/auctions.js';
 
@@ -118,4 +118,16 @@ test('без цен боевые методы не выдумывают дохо
   const ctx = ctxWith();
   const m = { slayers: { zombie: lvl(9) }, skills: { combat: lvl(50) } };
   for (const x of moneyMethods(m, ctx, {}).filter(r => COMBAT_METHODS.some(c => c.id === r.id))) assert.equal(x.coinsPerHour, null, x.id);
+});
+
+test('сундуки данжей: открытые этажи, ключ и Kismet', () => {
+  const ctx = ctxWith({ RECOMBOBULATOR_3000: [9e6, 8.8e6, 50_000], DUNGEON_CHEST_KEY: [600_000, 550_000, 50_000], KISMET_FEATHER: [2e6, 1.9e6, 50_000] }, { NECRON_HANDLE: 400e6 }, { NECRON_HANDLE: [380e6, 6] });
+  const r = dungeonChests(ctx, { dungeons: { catacombs: lvl(22), floors: { 1: 3, 6: 2, 7: 1 }, masterFloors: {} } });
+  assert.ok(r && r.key === 600_000 && r.kismet === 2e6);
+  const f7 = r.floors.find(f => f.floor === 'F7');
+  assert.equal(f7.main, 'Bedrock');
+  assert.ok(f7.ev > 0 && f7.worth.some(w => w.id === 'NECRON_HANDLE'));
+  assert.equal(f7.kismetWorth, f7.ev > 2e6);
+  assert.ok(!r.floors.some(f => f.floor[0] === 'M'));
+  assert.equal(dungeonChests(ctx, { dungeons: { catacombs: lvl(0), floors: {}, masterFloors: {} } }).floors[0].floor, 'F1');
 });

@@ -6,6 +6,7 @@ import { decodeItems } from '../nbt.js';
 import { SKILLS, SLAYERS, CLASSES } from '../../i18n/ru.js';
 import { parseFishing } from './fishing.js';
 import * as xv from './extras-view.js';
+import { activityTimes, compactActivity } from './activity.js';
 import { tx } from '../../i18n/msg.js';
 import { parseEffects } from '../lib/effects.js';
 
@@ -541,6 +542,17 @@ export async function parseMember(profile, uuid, extra = {}) {
     extras,
     inv,
     lastSave: g(m, 'profile.last_save', null) || profile.last_save || null,
+    // Метки активности (по убыванию) для «С возвращением»: last_save в API пустой
+    activity: compactActivity(activityTimes(m, { bank: coopRoster(profile).length <= 1 ? (g(profile, 'banking.transactions', []) || []).map(t => ({ at: t?.timestamp })) : [] })),
+    // Сырые поля ежедневных дел для «Дела на сегодня» (analysis/dailies.js)
+    daily: {
+      experiments: ['pairings', 'simon', 'numbers'].map(k => Number(g(m, tx`experimentation.${k}.last_claimed`, 0)) || 0),
+      quests: Object.entries(g(nether, 'quests.quest_data', {}) || {}).filter(([k, q]) => k !== 'quest_list' && q && typeof q === 'object').map(([id, q]) => ({ id, status: q.status || null, at: Number(q.completed_at) || 0 })),
+      questList: (g(nether, 'quests.quest_data.quest_list', []) || []).length,
+      questsReset: Number(g(nether, 'quests.last_reset', 0)) || 0,
+      matriarch: Number(g(nether, 'matriarch.last_attempt', 0)) || 0,
+      visitors: (extra.garden?.activeVisitors || []).length,
+    },
   };
 }
 

@@ -250,6 +250,10 @@ export function costTree(id, count, ctx, depth = 0, seen = new Set(), budget = {
   const name = englishName(id, items);
   const node = { id, name, count, unit: null, total: null, via: 'none', viaRu: '' };
   budget.n++;
+  // «есть X / нужно Y»: сколько уже лежит в Sacks (ctx.stock — общий запас на всё дерево способа)
+  let have = 0;
+  if (ctx.stock?.get(id) > 0) { have = Math.min(count, ctx.stock.get(id)); ctx.stock.set(id, ctx.stock.get(id) - have); }
+  const need = count - have;
   const cur = currencyOf(id);
   if (cur) {
     if (cur.coins) Object.assign(node, { name: 'Монеты', unit: 1, total: count, via: 'coins', viaRu: 'монеты' });
@@ -268,11 +272,15 @@ export function costTree(id, count, ctx, depth = 0, seen = new Set(), budget = {
   let craft = null;
   if (recipe && depth < 3 && !seen.has(id) && budget.n < 160) {
     const s2 = new Set(seen).add(id);
-    const times = Math.ceil(count / (recipe.count || 1));
+    // ингредиенты — только на то, чего не хватает (если всё есть в запасах, считаем цену за штуку на 1 крафт)
+    const times = Math.max(1, Math.ceil((need || 0) / (recipe.count || 1)));
+    const keepStock = ctx.stock;
+    if (!need) ctx.stock = null; // всё есть — запасы на ингредиенты не тратим
     const children = recipe.inputs.map(c => costTree(c.id, c.count * times, ctx, depth + 1, s2, budget));
     const priced = children.every(c => c.total != null);
     const sum = children.reduce((s, c) => s + (c.total || 0), 0);
-    craft = { via: 'craft', unit: priced ? sum / (times * (recipe.count || 1)) : null, viaRu: 'крафт', children, partial: !priced, crafttext: fixCrafttext(recipe.crafttext, name, ctx.collections) };
+    ctx.stock = keepStock;
+    craft = { via: 'craft', unit: priced ? sum / (times * (recipe.count || 1)) : null, viaRu: 'крафт', children: need ? children : null, partial: !priced, crafttext: fixCrafttext(recipe.crafttext, name, ctx.collections) };
   }
   const priced = opts.filter(o => o.unit != null).sort((a, b) => a.unit - b.unit);
   let best = priced[0] || null;
@@ -296,7 +304,32 @@ export function costTree(id, count, ctx, depth = 0, seen = new Set(), budget = {
     else if (idx.forge.get(id)) Object.assign(node, { via: 'forge', viaRu: 'Forge в Dwarven Mines' });
     else Object.assign(node, { viaRu: 'нет цены и рецепта — смотри карточку предмета' });
   }
+  if (have > 0) { node.have = have; node.need = need; }
+  // сколько докупить на эту строку с учётом запасов (для крафта — по ингредиентам)
+  if (have > 0 || (node.children || []).some(c => c.rest != null)) node.rest = Math.round(restCost(node));
   return node;
+}
+
+/** Запасы игрока для одного способа: каждый ингредиент из Sacks берётся один раз на всё дерево. */
+export function stockPool(member) {
+  const s = member?.inv?.sacks;
+  return s && typeof s === 'object' ? new Map(Object.entries(s).map(([k, v]) => [k, Number(v) || 0]).filter(([, v]) => v > 0)) : null;
+}
+
+/** Сколько ещё докупить с учётом запасов: покрытое запасом — 0, крафт — по ингредиентам, остальное — по цене за штуку. */
+export function restCost(n) {
+  if (!n || n.via === 'coins') return n?.total || 0;
+  const need = n.need ?? n.count;
+  if (!need) return 0;
+  if (n.via === 'craft' && n.children) return n.children.reduce((s, c) => s + restCost(c), 0);
+  return n.unit != null ? n.unit * need : 0;
+}
+
+/** Сколько монет экономят свои запасы на этом способе (0 — запасы не пригодились). */
+export function stockSaving(tree) {
+  const all = sumTotal(tree);
+  if (all == null || !tree.some(function has(n) { return n.have > 0 || (n.children || []).some(has); })) return 0;
+  return Math.max(0, Math.round(all - tree.reduce((s, n) => s + restCost(n), 0)));
 }
 
 function bestDrop(id, idx) {
@@ -477,25 +510,26 @@ export function buildObtainGuide(id, ctx) {
   // 3. Крафт
   for (const r of (idx.craft.get(id) || []).slice(0, 2)) {
     const req = reqStatus(fixCrafttext(r.crafttext, name, ctx.collections), r.slayerReq, ctx);
-    const tree = r.inputs.map(c => costTree(c.id, c.count, ctx, 1, new Set([id])));
+    const tctx = { ...ctx, stock: stockPool(ctx.member) };
+    const tree = r.inputs.map(c => costTree(c.id, c.count, tctx, 1, new Set([id])));
     const total = sumTotal(tree);
     const steps = [];
     if (req) steps.push({ text: tx`Открой рецепт: ${req.text}.`, req });
     steps.push({ text: 'Собери ингредиенты (у каждого указано, где выгоднее взять):', tree });
     steps.push({ text: tx`Скрафти в меню крафта SkyBlock (SkyBlock Menu → Crafting Table) или на верстаке${r.count > 1 ? tx` — выйдет ${r.count} шт.` : ''}.` });
-    methods.push({ kind: 'craft', title: 'Скрафтить', total: total != null ? total / (r.count || 1) : null, req, steps, grid: r.grid, ...(req?.guide ? { guide: req.guide } : {}) });
+    methods.push({ kind: 'craft', title: 'Скрафтить', total: total != null ? total / (r.count || 1) : null, fromStock: Math.round(stockSaving(tree) / (r.count || 1)) || undefined, req, steps, grid: r.grid, ...(req?.guide ? { guide: req.guide } : {}) });
   }
 
   // 4. Forge
   for (const r of (idx.forge.get(id) || []).slice(0, 2)) {
-    const tree = r.inputs.map(c => costTree(c.id, c.count, ctx, 1, new Set([id])));
+    const tree = r.inputs.map(c => costTree(c.id, c.count, { ...ctx, stock: stockPool(ctx.member) }, 1, new Set([id])));
     const req = reqStatus(r.crafttext, null, ctx);
     const steps = [];
     if (req) steps.push({ text: tx`Нужно: ${req.text}.`, req });
     steps.push({ text: 'Собери ингредиенты:', tree });
     steps.push({ text: 'Иди в The Forge в Dwarven Mines — телепорт /warp forge.' });
     steps.push({ text: tx`Положи всё в свободный слот Forge и жди ${fmtDuration(r.duration)}. Перк Quick Forge в Heart of the Mountain сокращает время.` });
-    methods.push({ kind: 'forge', title: 'Выковать в Forge', total: sumTotal(tree), req, steps, duration: r.duration });
+    methods.push({ kind: 'forge', title: 'Выковать в Forge', total: sumTotal(tree), fromStock: stockSaving(tree) || undefined, req, steps, duration: r.duration });
   }
 
   // 5. Улучшение питомца у Kat

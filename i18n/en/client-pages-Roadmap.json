@@ -32,5 +32,8 @@
  "Скрытые шаги ({0}){1}": "Hidden steps ({0}){1}",
  " · только в этом браузере": " · only in this browser",
  "вернуть": "restore",
- "Гайд: {0} →": "Guide: {0} →"
+ "Гайд: {0} →": "Guide: {0} →",
+ "Нравится / Не хочу{0}": "Like / Don't want{0}",
+ "Нажми категорию: ♥ поднимает её шаги выше, ✕ убирает их из плана, третье нажатие возвращает как было. Ironman и Bingo план учитывает сам.": "Tap a category: ♥ moves its steps up, ✕ removes them from the plan, a third tap resets it. Ironman and Bingo are already taken into account.",
+ "сбросить": "reset"
 }

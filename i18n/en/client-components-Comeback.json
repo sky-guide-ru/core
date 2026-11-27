@@ -1,0 +1,14 @@
+{
+ "Скрыть до следующего перерыва": "Hide until the next break",
+ "Последняя активность в профиле: {0}. Ниже то, что изменилось и с чего начать.": "Last activity on the profile: {0}. Below is what changed and where to start.",
+ "Перерыв с {0} по {1}. Ниже то, что изменилось и с чего начать.": "Break from {0} to {1}. Below is what changed and where to start.",
+ "С чего начать": "Where to start",
+ "План пуст: всё основное уже сделано.": "The plan is empty: all the main things are done.",
+ "Чего ещё нет в профиле": "Not on your profile yet",
+ "Патчноуты за перерыв": "Patch notes during the break",
+ "Свежих патчноутов не нашлось. Все — в разделе {0}.": "No recent patch notes found. All of them are in {0}.",
+ "Дела на сегодня": "Today's tasks",
+ "{0}/{1} · новый день в {2}": "{0}/{1} · new day at {2}",
+ "{0} Снова в {1}.": "{0} Available again at {1}.",
+ "Отметки ставятся сами по данным профиля, он обновляется раз в несколько минут.": "Ticks are set automatically from profile data, which updates every few minutes."
+}
