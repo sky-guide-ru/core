@@ -14,6 +14,17 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-online',
+    date: '2026-11-27',
+    kind: 'new',
+    title: 'Онлайн, Bingo и патчноуты SkyBlock',
+    items: [
+      'На [главной](overview) рядом с ником видно, что игрок сейчас в игре и на каком острове.',
+      'Bingo Points и цели текущего Bingo — в «Рекордах» на [Прогрессе](skills).',
+      'Свежие патчноуты SkyBlock с форума Hypixel — сверху в [Новостях](news).',
+    ],
+  },
+  {
     id: '2026-11-27-firesale',
     date: '2026-11-27',
     kind: 'new',

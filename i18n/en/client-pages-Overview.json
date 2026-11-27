@@ -44,5 +44,8 @@
  "Примерно: без сетовых бонусов брони. Зелёным — прибавка от зелий, которые действуют сейчас. EHP — сколько урона выдержишь с учётом Defense.": "Approximate: without armor set bonuses. Green is the bonus from potions active right now. EHP is how much damage you can take, counting Defense.",
  "на Hypixel с {0} года": "on Hypixel since {0}",
  "Гильдия": "Guild",
- "уровень {0}": "level {0}"
+ "уровень {0}": "level {0}",
+ "Hypixel показывает это, только если игрок не скрыл статус в настройках": "Hypixel shows this only if the player hasn't hidden their status in settings",
+ "в игре: {0}": "in game: {0}",
+ "в игре": "in game"
 }

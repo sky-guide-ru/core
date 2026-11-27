@@ -9,6 +9,7 @@ import { swapLayout } from './items-ru/lib/search.js';
 import { pushSnapshot } from './history.js';
 import { tx } from '../i18n/msg.js';
 import { hypixelInfo } from './rank.js';
+import { bingoOf } from './lib/live-status.js';
 
 const MIN = 60_000;
 
@@ -161,6 +162,8 @@ export function createPlayers(o) {
   async function build(v, { force = false, ttlMs = ttl } = {}) {
     // Гильдия — параллельно с профилем; новый запрос только пока лимит ключа не на исходе (как у ранга)
     const guildP = o.guildFor ? o.guildFor(v.player.uuid, { allowFetch: budgetLeft() > 10 }).catch(() => null) : null;
+    // Онлайн и остров (/status, кэш 2 минуты) — тоже лишний запрос: только пока лимит не на исходе
+    const statusP = o.statusFor && budgetLeft() > 10 ? o.statusFor(v.player.uuid).catch(() => null) : null;
     const { resp, at } = await profilesOf(v.player.uuid, { force, ttlMs });
     const list = resp?.profiles || [];
     v.profiles = list.filter(p => p.members?.[v.player.uuid]).map(p => ({ id: p.profile_id, name: p.cute_name, selected: !!p.selected, mode: p.game_mode || 'normal', members: Math.max(1, coopRoster(p).length) }));
@@ -176,6 +179,9 @@ export function createPlayers(o) {
     if (o.rankFor && budgetLeft() > 10) member.rank = await o.rankFor(v.player.uuid).catch(() => null);
     member.hypixel = (o.hypixelInfo || hypixelInfo)(v.player.uuid); // из того же ответа /player, без запроса
     if (guildP) member.guild = await guildP;
+    if (statusP) member.online = await statusP;
+    // Bingo — лишний запрос: только у кого есть Bingo-профиль и пока лимит ключа не на исходе (кэш 6 часов)
+    if (o.bingoFor && v.profiles.some(p => p.mode === 'bingo') && budgetLeft() > 10) member.bingo = (o.bingoOf || bingoOf)(await o.bingoFor(v.player.uuid).catch(() => null), o.bingoEvent?.() || null);
     const analysis = analyze(member);
     const snap = (() => { try { return (o.snapshot || snapshot)(member, analysis.gear); } catch { return null; } })();
     if (snap && v.lastSnap) {
