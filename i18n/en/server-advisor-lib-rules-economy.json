@@ -82,5 +82,8 @@
  " — ~{0}/ч{1}": " — ~{0}/h{1}",
  "Без дела лежит ~{0}": "~{0} is sitting idle",
  "Эти предметы лежат в рюкзаках и сундуках и не входят в твоё основное снаряжение. Если не пользуешься ими, продай и вложи в шаги выше.": "These items are in backpacks and chests and aren't part of your main gear. If you don't use them, sell them and invest in the steps above.",
- "Каждые 10 MP и каждый аксессуар с Accessory Enrichment дают 1 очко настройки (Tuning) — бесплатные статы. Нераспределённые очки ничего не дают.": "Every 10 MP and every accessory with Accessory Enrichment give 1 Tuning point — free stats. Unspent points give nothing."
+ "Каждые 10 MP и каждый аксессуар с Accessory Enrichment дают 1 очко настройки (Tuning) — бесплатные статы. Нераспределённые очки ничего не дают.": "Every 10 MP and every accessory with Accessory Enrichment give 1 Tuning point — free stats. Unspent points give nothing.",
+ "Сейчас выбрана {0}. При твоих {1} MP сила {2} даёт больше урона в ближнем бою.{3} Если играешь магом или тебе важнее защита, оставь как есть.": "You have {0} selected. At your {1} MP, {2} gives more melee damage.{3} If you play mage or care more about defense, keep it as is.",
+ " Crit Chance упадёт примерно до {0}% — это уже учтено в расчёте, но критов станет меньше.": " Crit Chance will drop to about {0}%: this is already counted in the estimate, but you will crit less often.",
+ "{0}: до тира {1} из {2} осталось {3}{4}": "{0}: {3} left to tier {1} of {2}{4}"
 }

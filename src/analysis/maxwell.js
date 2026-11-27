@@ -50,7 +50,7 @@ export function maxwellAnalysis(member) {
   } else if (cur) tips.push(tx`${cur.power} — одна из лучших сил для стиля «${ROLE[role].label}». Менять не нужно.`);
   if (!cur && selected && STARTER_POWERS.map(s => s.toLowerCase()).includes(selected)) tips.push(tx`Сейчас стоит стартовая сила (${selected[0].toUpperCase() + selected.slice(1)}). Силы из Power Stone заметно сильнее: см. таблицу.`);
 
-  // Tuning: 1 очко на 10 MP и 1 за каждый аксессуар с Accessory Enrichment
+  // Tuning: 1 очко на 10 MP
   const slot = member.tuning?.slot_0 || {};
   const points = tuningPoints({ ...member, magicalPower: mp });
   const dist = Object.entries(slot).filter(([, v]) => typeof v === 'number' && v > 0)

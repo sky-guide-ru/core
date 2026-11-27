@@ -27,8 +27,9 @@ function relevant(ctx, l) {
     case 'dungeon-mage-weapon':
       return cata >= 15 && (!cls || l.classes.includes(cls));
     case 'dungeon-armor': return cata >= 15;
-    case 'ender-slayer-weapon':
-    case 'ender-slayer-armor': return (m.slayers?.enderman?.level || 0) >= 1;
+    case 'ender-slayer-weapon': return (m.slayers?.enderman?.level || 0) >= 1;
+    // Final Destination — броня для прокачки Voidgloom; на максимальном 9 уровне её уже не советуем
+    case 'ender-slayer-armor': { const lv = m.slayers?.enderman?.level || 0; return lv >= 1 && lv < 9; }
     case 'zombie-slayer-weapon': return (m.slayers?.zombie?.level || 0) >= 3;
     // До 2 уровня кинжалы ещё нельзя взять в руки: путь к ним описывает шаг «Начни Inferno Demonlord»
     case 'blaze-slayer-weapon': return (m.slayers?.blaze?.level || 0) >= 2;

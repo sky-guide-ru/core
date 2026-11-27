@@ -282,7 +282,7 @@ export function crimsonRules(ctx, add) {
 
   add({
     id: 'kuudra', cat: 'Crimson Isle и Kuudra', priority: total < 20 ? 74 : 55, effort: 'часы',
-    title: total < 20 ? ru`Kuudra: всего ${total} ${plural(total, 'заход', 'захода', 'заходов')}, фарми ${farmTier.name}` : ru`Kuudra: переходи на ${farmTier.name}`,
+    title: total < 20 ? ru`Kuudra: всего ${total} ${plural(total, 'заход', 'захода', 'заходов')}, фарми ${farmTier.name}` : ((k[farmTier.key] || 0) >= 10 ? ru`Kuudra: фарми ${farmTier.name}` : ru`Kuudra: переходи на ${farmTier.name}`),
     why: ru`Репутация фракции ${fmtNum(rep)}: открыты ${unlocked.map(t => t.name).join(', ')}.${nextLocked ? ru` Для ${nextLocked.name} нужно ${fmtNum(nextLocked.rep)} репутации.` : ''} Kuudra — стабильный заработок: броня, атрибуты, Kuudra Teeth и эссенция Crimson, а ещё основа для улучшения брони Kuudra.`,
     how: [
       'Платный сундук открывается Kuudra Key своего тира (крафт за монеты и материалы; ещё падает с мини-боссов, а за Nether Star его продаёт Emissary) — сверяй его цену с ценой лута',

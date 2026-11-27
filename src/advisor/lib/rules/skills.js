@@ -49,7 +49,7 @@ export function quickRules(ctx, add) {
     add({
       id: 'cookie', cat: 'Быстрые победы', priority: 92, effort: 'минуты',
       title: 'Активируй Booster Cookie',
-      why: '+25 к Wisdom всех скиллов (≈+25% опыта), +10 Magic Find, Bits для магазина Elizabeth, монеты не теряются при смерти, /ah и /bazaar откуда угодно.',
+      why: '+25 к Wisdom всех скиллов (≈+25% опыта), +15 Magic Find, Bits для магазина Elizabeth, монеты не теряются при смерти, /ah и /bazaar откуда угодно.',
       how: [ru`Купи Booster Cookie на Bazaar${ctx.price('BOOSTER_COOKIE') ? ru` (сейчас ~${fmtCoins(ctx.price('BOOSTER_COOKIE'))})` : ''} и съешь`],
       items: ['BOOSTER_COOKIE'],
       cost: ctx.price('BOOSTER_COOKIE') || undefined,
@@ -148,7 +148,8 @@ export function miningRules(ctx, add) {
   }
 }
 
-const CROP_RU = { WHEAT: 'Пшеница', CARROT_ITEM: 'Морковь', POTATO_ITEM: 'Картофель', PUMPKIN: 'Тыква', MELON: 'Арбуз', SUGAR_CANE: 'Сахарный тростник', CACTUS: 'Кактус', 'INK_SACK:3': 'Какао-бобы', NETHER_STALK: 'Адский нарост', MUSHROOM_COLLECTION: 'Грибы', DOUBLE_PLANT: 'Подсолнух', MOONFLOWER: 'Лунный цветок', WILD_ROSE: 'Дикая роза' };
+// Культуры — как в игре, по-английски (правило сайта про игровые термины)
+const CROP_RU = { WHEAT: 'Wheat', CARROT_ITEM: 'Carrot', POTATO_ITEM: 'Potato', PUMPKIN: 'Pumpkin', MELON: 'Melon', SUGAR_CANE: 'Sugar Cane', CACTUS: 'Cactus', 'INK_SACK:3': 'Cocoa Beans', NETHER_STALK: 'Nether Wart', MUSHROOM_COLLECTION: 'Mushroom', DOUBLE_PLANT: 'Sunflower', MOONFLOWER: 'Moonflower', WILD_ROSE: 'Wild Rose' };
 const CROP_KEY = { CARROT: 'CARROT_ITEM', POTATO: 'POTATO_ITEM', COCOA_BEANS: 'INK_SACK:3', NETHER_WART: 'NETHER_STALK', MUSHROOM: 'MUSHROOM_COLLECTION', SUNFLOWER: 'DOUBLE_PLANT' };
 
 export function gardenRules(ctx, add) {

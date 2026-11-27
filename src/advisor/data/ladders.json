@@ -407,7 +407,12 @@
     {
      "set": "FERMENTO",
      "name": "Fermento Armor",
-     "note": "лучший сет Farming Fortune"
+     "note": "улучшение Squash"
+    },
+    {
+     "set": "HELIANTHUS",
+     "name": "Helianthus Armor",
+     "note": "улучшение Fermento: лучший сет Farming Fortune"
     }
    ]
   },

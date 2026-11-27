@@ -38,6 +38,14 @@ export function bestMelee(member, base, combatLevel) {
 /** Во сколько раз вырастет удар от прибавки Strength и Crit Damage (удар ∝ (1 + Str/100) × (1 + CD/100)) */
 export function hitGain(base, delta) {
   const s = base.strength || 0, c = base.crit_damage || 0;
+  // Прибавка меняет Crit Chance (например, смена Power: Fortuitous даёт много Crit Chance, Bloody — ни капли) —
+  // считаем средний удар: крит срабатывает с шансом min(Crit Chance, 100%). Иначе потерю критов не видно
+  if (delta.crit_chance) {
+    const cc0 = base.crit_chance || 0, cc1 = cc0 + delta.crit_chance;
+    const avg = (str, cd, cc) => (1 + str / 100) * (1 + Math.min(Math.max(cc, 0), 100) / 100 * Math.max(cd, 0) / 100);
+    const b = avg(s, c, cc0);
+    return b > 0 ? avg(s + (delta.strength || 0), c + (delta.crit_damage || 0), cc1) / b - 1 : 0;
+  }
   const before = (1 + s / 100) * (1 + c / 100);
   const after = (1 + (s + (delta.strength || 0)) / 100) * (1 + (c + (delta.crit_damage || 0)) / 100);
   return before > 0 ? after / before - 1 : 0;

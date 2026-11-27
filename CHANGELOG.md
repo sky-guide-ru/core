@@ -4,6 +4,13 @@
 
 ## Не выпущено
 
+## 0.2.10
+
+- Советчик: `hitGain` учитывает Crit Chance, если прибавка его меняет (смена Power Fortuitous → Bloody больше не даёт +139%); в шаге — предупреждение о падении Crit Chance.
+- `tuningPoints` = MP / 10: Accessory Enrichment очков Tuning не даёт (ложный шаг «распредели Tuning» у игроков со всем распределённым).
+- Booster Cookie: +15 Magic Find (было +10). Kuudra: «фарми Infernal», а не «переходи на Infernal» при сотнях заходов. Коллекции: «до тира N из M осталось …» вместо двусмысленного «тир 10/10».
+- Культуры в Crop Upgrades по-английски. Лестница фермерской брони: + Helianthus. Ключевой питомец Farming — Mooshroom Cow вместо Elephant. Final Destination Armor не советуется при Enderman 9.
+
 ## 0.2.9
 
 - Новость о Discord-сервере Sky Guide (с переводом).
