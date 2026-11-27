@@ -33,7 +33,7 @@
     "prismarine-nbt": "^2.7.0"
   },
   "devDependencies": {
-    "adm-zip": "^0.5.16",
+    "adm-zip": "^0.6.1",
     "rolldown": "^1.2.19"
   },
   "peerDependencies": {
