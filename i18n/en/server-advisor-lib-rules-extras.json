@@ -2,5 +2,8 @@
  "Pet Score даёт Magic Find навсегда (сейчас +{0}). До следующего порога не хватает {1}. Каждый тип питомца считается один раз по высшей редкости, ещё +1 за питомца максимального уровня.": "Pet Score gives permanent Magic Find (now +{0}). {1} missing to the next threshold. Each pet type counts once at its highest rarity, plus +1 for a max-level pet.",
  "Докачай {0} (Lvl {1} → {2}): +1 очко бесплатно": "Level {0} (Lvl {1} → {2}): +1 point for free",
  "Купить: {0}{1} — ~{2}, +{3}": "Buy: {0}{1} — ~{2}, +{3}",
- "Chocolate копится сам: в Chocolate Shop он меняется на полезные предметы и открывает кроликов, а кролики усиливают фабрику.": "Chocolate accumulates by itself: in the Chocolate Shop it's exchanged for useful items and unlocks rabbits, and rabbits boost the factory."
+ "Chocolate копится сам: в Chocolate Shop он меняется на полезные предметы и открывает кроликов, а кролики усиливают фабрику.": "Chocolate accumulates by itself: in the Chocolate Shop it's exchanged for useful items and unlocks rabbits, and rabbits boost the factory.",
+ "до конца ивента": "until the event ends",
+ "Bingo: осталось целей — {0}": "Bingo: goals left — {0}",
+ "Профиль Bingo живёт до конца ивента, за каждую цель — Bingo Points.": "A Bingo profile lasts until the event ends, and each goal gives Bingo Points."
 }

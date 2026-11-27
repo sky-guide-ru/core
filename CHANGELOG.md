@@ -4,6 +4,12 @@
 
 ## Не выпущено
 
+## 0.2.40
+
+- Bingo: `bingoGoalsLeft(resp, event)` в `lib/live-status.js` (цели ивента с `lore`), `member.bingoGoals` у профиля Bingo, шаг плана `bingo-goals` (`bingoRules`).
+- Stranded (`island`): шаги про Dungeons, Kuudra, Crimson Isle, Rift, HOTM, HOTF и их снаряжение убираются из плана (`STRANDED_AWAY`).
+- Новость «План для Bingo и Stranded».
+
 ## 0.2.39
 
 - «План добычи» (`roadmap/farm.js`, `buildFarmPlan`, `farmSource`): для профилей без рынка — шаги плана по важности, у каждой вещи где взять (NPC с островом, ценой и координатами, крафт с материалами «есть / нужно», Forge, дроп с мобом, островом и шансом). Правки игрока — в той же корзине, что «План покупок» (`farmSkipKey`).

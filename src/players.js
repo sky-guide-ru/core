@@ -9,7 +9,7 @@ import { swapLayout } from './items-ru/lib/search.js';
 import { pushSnapshot } from './history.js';
 import { tx } from '../i18n/msg.js';
 import { hypixelInfo } from './rank.js';
-import { bingoOf } from './lib/live-status.js';
+import { bingoOf, bingoGoalsLeft } from './lib/live-status.js';
 
 const MIN = 60_000;
 
@@ -181,7 +181,11 @@ export function createPlayers(o) {
     if (guildP) member.guild = await guildP;
     if (statusP) member.online = await statusP;
     // Bingo — лишний запрос: только у кого есть Bingo-профиль и пока лимит ключа не на исходе (кэш 6 часов)
-    if (o.bingoFor && v.profiles.some(p => p.mode === 'bingo') && budgetLeft() > 10) member.bingo = (o.bingoOf || bingoOf)(await o.bingoFor(v.player.uuid).catch(() => null), o.bingoEvent?.() || null);
+    if (o.bingoFor && v.profiles.some(p => p.mode === 'bingo') && budgetLeft() > 10) {
+      const raw = await o.bingoFor(v.player.uuid).catch(() => null);
+      member.bingo = (o.bingoOf || bingoOf)(raw, o.bingoEvent?.() || null);
+      if (member.gameMode === 'bingo') member.bingoGoals = bingoGoalsLeft(raw, o.bingoEvent?.() || null);
+    }
     const analysis = analyze(member);
     const snap = (() => { try { return (o.snapshot || snapshot)(member, analysis.gear); } catch { return null; } })();
     if (snap && v.lastSnap) {

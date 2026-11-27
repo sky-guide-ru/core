@@ -6,7 +6,7 @@ import { ladderRules, upgradeRules, equipmentRules } from './lib/rules/gear.js';
 import { accessoryRules, petRules, minionRules, collectionRules, moneyRules, purchasePlan, bestPerHour } from './lib/rules/economy.js';
 import { quickRules, skillRules, foragingRules, miningRules, gardenRules, riftRules } from './lib/rules/skills.js';
 import { museumRules } from './lib/rules/museum.js';
-import { petScoreRules, chocolateRules } from './lib/rules/extras.js';
+import { petScoreRules, chocolateRules, bingoRules } from './lib/rules/extras.js';
 import { buildMap } from './lib/map.js';
 import { ru } from '../../i18n/msg.js';
 import { tx } from '../../i18n/msg.js';
@@ -14,6 +14,8 @@ import { tx } from '../../i18n/msg.js';
 // Шаги, которые без рынка не имеют смысла: продать лишнее на аукционе
 const MARKET_STEPS = new Set(['money-idle']);
 const QUICK = 'Быстрые победы';
+// Stranded: игрок заперт на Private Island и в Garden — без Dungeons, Kuudra, Crimson Isle, Rift, Dwarven Mines (HOTM) и Galatea (HOTF)
+const STRANDED_AWAY = /^(dungeon-|skill-catacombs|gear-dungeon|kuudra|gear-kuudra|crimson-|rift-|mp-rift-prism|hotm|hotf|slayer-(blaze|vampire)$|gear-blaze-slayer)/;
 
 // Шаг плана → гайд сайта (id гайда и блок, к которому прокрутить). Первое совпадение по началу id шага.
 const GUIDE_LINKS = [
@@ -67,7 +69,7 @@ export function guideFor(stepId) {
 export const RULES = [
   quickRules, accessoryRules, equipmentRules, upgradeRules, ladderRules,
   dungeonRules, slayerRules, crimsonRules, petRules, skillRules, foragingRules,
-  miningRules, gardenRules, riftRules, minionRules, collectionRules, moneyRules, museumRules, petScoreRules, chocolateRules,
+  miningRules, gardenRules, riftRules, minionRules, collectionRules, moneyRules, museumRules, petScoreRules, chocolateRules, bingoRules,
 ];
 
 function run(ctx) {
@@ -114,6 +116,9 @@ function run(ctx) {
         if (npcCost > 0) s.cost = npcCost; else delete s.cost;
       }
     }
+  }
+  if (ctx.mode?.id === 'island') {
+    for (let i = steps.length - 1; i >= 0; i--) if (STRANDED_AWAY.test(steps[i].id)) steps.splice(i, 1);
   }
   // Поправка на доступность: шаг, на который надо копить, не может быть «главным сейчас» —
   // сначала то, что делается уже сегодня (скиллы, слееры, дешёвые покупки). Половина всех денег — тоже заметно ниже.
