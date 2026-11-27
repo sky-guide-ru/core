@@ -537,6 +537,8 @@ export async function parseMember(profile, uuid, extra = {}) {
     },
     fishing: parseFishing(m),
     bestiaryMilestone: g(m, 'bestiary.milestone.last_claimed_milestone', 0),
+    // Убийства по мобам — для уровней Bestiary в блоке Magic Find. В /api/state не уходят (lightMember)
+    bestiaryKills: g(m, 'bestiary.kills', {}),
     museum: await parseMuseum(extra),
     extras,
     inv,

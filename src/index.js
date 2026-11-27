@@ -13,6 +13,7 @@
 // ── Бой и снаряжение ─────────────────────────────────────────
 export * as damage from './calc/damage.js';           // урон, DPS, EHP
 export * as stats from './calc/stats.js';             // лист статов: предметы, питомцы, Accessory Bag, Tuning
+export * as magicFind from './calc/magic-find.js';     // Magic Find после реворка 0.27.3: источники и что взять дальше
 export * as kit from './calc/kit.js';                 // «что надеть»: сеты, оружие, бой с боссом
 export * as kitDetail from './calc/kit-detail.js';    // подробности вещи и подсказки по улучшению
 export * as power from './calc/power.js';             // боевая сила, Magical Power, готовность к Master Mode

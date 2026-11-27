@@ -48,5 +48,19 @@
  "Оценка состояния": "Networth estimate",
  "Из них косметика (скины и краски)": "Of which cosmetics (skins and dyes)",
  "У редких скинов почти нет продаж, поэтому эта часть оценки самая приблизительная.": "Rare skins barely ever sell, so this part of the estimate is the roughest.",
- "Рыночная оценка по самым дешёвым лотам аукциона и Bazaar: база предмета плюс зачарования, гемы и открытые слоты, звёзды, свитки, рекомб и книги. Вещи без рынка — по цене крафта. Скины без продаж не оцениваются, поэтому у SkyCrypt цифра бывает выше.": "Market estimate from the cheapest Auction House BINs and Bazaar: the item itself plus enchants, gems and unlocked slots, stars, scrolls, recomb and books. Items with no market are valued at their crafting cost. Skins with no sales are not valued, so SkyCrypt may show a higher number."
+ "Рыночная оценка по самым дешёвым лотам аукциона и Bazaar: база предмета плюс зачарования, гемы и открытые слоты, звёзды, свитки, рекомб и книги. Вещи без рынка — по цене крафта. Скины без продаж не оцениваются, поэтому у SkyCrypt цифра бывает выше.": "Market estimate from the cheapest Auction House BINs and Bazaar: the item itself plus enchants, gems and unlocked slots, stars, scrolls, recomb and books. Items with no market are valued at their crafting cost. Skins with no sales are not valued, so SkyCrypt may show a higher number.",
+ "Примерно": "Approximate",
+ "Что взять дальше": "What to get next",
+ "{0} за 1 MF": "{0} per 1 MF",
+ "На время охоты за дропом": "For drop hunting sessions",
+ "Действует сейчас": "Active now",
+ "Ещё: что не видно в профиле и MF на отдельных мобов": "More: what the profile doesn't show and MF on specific mobs",
+ "Не видно в профиле — проверь в игре": "Not visible in the profile: check in game",
+ "Только на отдельных мобов": "Only on specific mobs",
+ "{0}: {1} на {2}": "{0}: {1} on {2}",
+ "Bestiary: моб на tier 15 даёт +45 Magic Find на нём, на tier 20 — +60, на tier 25 — +75. У тебя tier 15+ у {0} мобов, 20+ у {1}, 25 у {2}.": "Bestiary: a mob at tier 15 gives +45 Magic Find against it, at tier 20 +60, at tier 25 +75. You have tier 15+ on {0} mobs, 20+ on {1}, 25 on {2}.",
+ "Ближе всего к tier 15: {0}.": "Closest to tier 15: {0}.",
+ "По правилам реворка Magic Find (17.11.2026): Looting даёт MF, пока оружие в руке. Сверх 100% шанса предмет иногда выпадает вдвое.": "Rules of the Magic Find rework (17.11.2026): Looting gives MF while the weapon is held. Above 100% chance an item sometimes drops twice.",
+ "Цель — всё, что даёт MF на любых мобах. Потолок стата {0}: остальное дают баффы, Bestiary и бонусы на отдельных мобов.": "The goal is everything that gives MF on any mob. The stat cap is {0}: the rest comes from buffs, Bestiary and bonuses on specific mobs.",
+ "действует сейчас": "active now"
 }
