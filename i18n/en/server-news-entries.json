@@ -217,5 +217,9 @@
  "Зелёная точка у ника в [Рейтинге](top) — игрок сейчас в игре.": "A green dot next to the name in [Leaderboard](top) means the player is in game right now.",
  "У Sky Guide есть Discord": "Sky Guide is on Discord",
  "Вопросы, идеи и сообщения об ошибках — в Discord Sky Guide: discord.gg/hHgJJFCGQe.": "Questions, ideas and bug reports go to the Sky Guide Discord: discord.gg/hHgJJFCGQe.",
- "Приглашение всегда есть внизу сайта, в колонке «Связь».": "The invite is always at the bottom of the site, in the Contact column."
+ "Приглашение всегда есть внизу сайта, в колонке «Связь».": "The invite is always at the bottom of the site, in the Contact column.",
+ "Советы плана стали точнее": "Plan advice is more accurate",
+ "Совет сменить Power в [плане](roadmap) учитывает, сколько Crit Chance пропадёт.": "The Power switch tip in the [plan](roadmap) now accounts for the Crit Chance you lose.",
+ "Очки Tuning считаются только от Magical Power: одно на каждые 10 MP.": "Tuning points come only from Magical Power: one per 10 MP.",
+ "После Fermento Armor план ведёт к Helianthus Armor, а для Farming советует Mooshroom Cow.": "After Fermento Armor the plan leads to Helianthus Armor, and for Farming it suggests Mooshroom Cow."
 }
