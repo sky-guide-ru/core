@@ -162,7 +162,7 @@ export function ladderRules(ctx, add) {
       title: best >= 0 ? tx`${l.titleRu}: ${have} → ${next.name}` : ru`${l.titleRu}: начни с ${next.name}`,
       why: tx`${capFirst(next.note)}.${req.ok ? '' : ru` Сначала ${req.text}.`}${cost ? ru` Цена сейчас ~${fmtCoins(cost)}.` : ''}`,
       how: [
-        cost ? ru`Купить: ${next.name} — ~${fmtCoins(cost)} (Bazaar или аукцион)` : ru`Получить: ${next.name}`,
+        cost ? ru`Купить: ${next.name} — ~${fmtCoins(cost)} на Auction House` : ru`Получить: ${next.name}`,
         ...(l.kind === 'kuudra-armor' ? ['Следующий тир можно получить и престижем: часть с 10 звёздами улучшается у кузнеца (Blacksmith) за эссенцию Crimson, Kuudra Teeth и монеты — часто дешевле, чем покупать готовый сет'] : []),
         ...(best >= 0 ? [ru`Старое снаряжение (${tierLabel(l, best).name}) можно продать, когда перейдёшь на новое`] : []),
       ],

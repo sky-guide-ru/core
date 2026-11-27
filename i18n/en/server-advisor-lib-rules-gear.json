@@ -32,5 +32,6 @@
  "Заполни пустые слоты экипировки: {0} из 4": "Fill the empty equipment slots: {0} of 4",
  "Ожерелье, плащ, пояс и перчатки дают статы так же, как броня. Пустой слот — потерянные характеристики.": "Necklace, cloak, belt and gloves give stats just like armor. An empty slot means lost stats.",
  "Ранний вариант: экипировка из Rift и Dojo (Black Belt), Crimson Isle — Molten-экипировка из Kuudra": "Early option: equipment from the Rift and the Dojo (Black Belt); on the Crimson Isle — Molten equipment from Kuudra",
- "Для данжей стандарт — Molten-сет или его улучшения с атрибутами": "For dungeons the standard is the Molten set or its upgrades with attributes"
+ "Для данжей стандарт — Molten-сет или его улучшения с атрибутами": "For dungeons the standard is the Molten set or its upgrades with attributes",
+ "Купить: {0} — ~{1} на Auction House": "Buy: {0}, ~{1} on the Auction House"
 }
