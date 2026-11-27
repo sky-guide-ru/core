@@ -17,5 +17,8 @@
  "Дешёвый SkyBlock XP: {0} {1} для музея за {2} (+{3} XP)": "Cheap SkyBlock XP: {0} {1} for the museum for {2} (+{3} XP)",
  "Самые выгодные по XP за монету предметы, которых нет в твоём музее. Каждый пожертвованный предмет навсегда добавляет SkyBlock XP.": "The best XP-per-coin items missing from your museum. Each donated item permanently adds SkyBlock XP.",
  "Можно оценить музей: Museum Appraisal Service открыт": "The museum can be appraised: the Museum Appraisal Service is unlocked",
- "Открывается на вехе 3. Разовая услуга (10 млн): Madame Goldsworth оценивает стоимость музея, и она появляется в профиле и в рейтингах. На прогресс не влияет — только если хочешь видеть оценку.": "Unlocks at milestone 3. A one-time service (10M): Madame Goldsworth appraises the museum's value, and it appears in the profile and leaderboards. Doesn't affect progress — only if you want to see the appraisal."
+ "Открывается на вехе 3. Разовая услуга (10 млн): Madame Goldsworth оценивает стоимость музея, и она появляется в профиле и в рейтингах. На прогресс не влияет — только если хочешь видеть оценку.": "Unlocks at milestone 3. A one-time service (10M): Madame Goldsworth appraises the museum's value, and it appears in the profile and leaderboards. Doesn't affect progress — only if you want to see the appraisal.",
+ "Веха музея {0}: не хватает {1} XP": "Museum milestone {0}: {1} XP short",
+ "SkyBlock XP: {0} {1} для музея (+{2} XP)": "SkyBlock XP: {0} {1} for the Museum (+{2} XP)",
+ "Простые предметы, которых нет в твоём музее. Каждый пожертвованный предмет навсегда добавляет SkyBlock XP.": "Simple items missing from your Museum. Every donated item adds SkyBlock XP forever."
 }

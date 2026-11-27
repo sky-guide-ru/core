@@ -35,5 +35,7 @@
  "Для данжей стандарт — Molten-сет или его улучшения с атрибутами": "For dungeons the standard is the Molten set or its upgrades with attributes",
  "Купить: {0} — ~{1} на Auction House": "Buy: {0}, ~{1} on the Auction House",
  "пройди M{0}": "complete M{0}",
- "У тебя есть {0}: лук — свой стиль игры. Если ходишь на этого босса с луком, меч можно не брать; он нужен для ближнего боя": "You have {0}: a bow is its own playstyle. If you fight this boss with a bow, you can skip the sword; it is for melee"
+ "У тебя есть {0}: лук — свой стиль игры. Если ходишь на этого босса с луком, меч можно не брать; он нужен для ближнего боя": "You have {0}: a bow is its own playstyle. If you fight this boss with a bow, you can skip the sword; it is for melee",
+ "Купить у NPC {0}: {1}": "Buy from NPC {0}: {1}",
+ "Старое снаряжение ({0}) можно продать NPC, когда перейдёшь на новое": "Old gear ({0}) can be sold to an NPC once you switch to the new one"
 }

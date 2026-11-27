@@ -85,5 +85,17 @@
  "Каждые 10 MP и каждый аксессуар с Accessory Enrichment дают 1 очко настройки (Tuning) — бесплатные статы. Нераспределённые очки ничего не дают.": "Every 10 MP and every accessory with Accessory Enrichment give 1 Tuning point — free stats. Unspent points give nothing.",
  "Сейчас выбрана {0}. При твоих {1} MP сила {2} даёт больше урона в ближнем бою.{3} Если играешь магом или тебе важнее защита, оставь как есть.": "You have {0} selected. At your {1} MP, {2} gives more melee damage.{3} If you play mage or care more about defense, keep it as is.",
  " Crit Chance упадёт примерно до {0}% — это уже учтено в расчёте, но критов станет меньше.": " Crit Chance will drop to about {0}%: this is already counted in the estimate, but you will crit less often.",
- "{0}: до тира {1} из {2} осталось {3}{4}": "{0}: {3} left to tier {1} of {2}{4}"
+ "{0}: до тира {1} из {2} осталось {3}{4}": "{0}: {3} left to tier {1} of {2}{4}",
+ "добыть самому": "obtain it yourself",
+ "Добудь {0} {1}: +{2} MP": "Obtain {0} {1}: +{2} MP",
+ "аксессуара": "accessories",
+ "аксессуаров": "accessories",
+ "Сейчас {0} MP{1}. В {2} аксессуары не купить на рынке, поэтому сначала те, что продаёт NPC или легко скрафтить.": "Now {0} MP{1}. In {2} accessories can't be bought on the market, so first the ones an NPC sells or that are easy to craft.",
+ ", апгрейд из {0}": ", upgrade from {0}",
+ "Recombobulator 3000 поднимает редкость на ступень. В {0} его не купить{1}. Сначала добывай новые аксессуары, рекомб — когда они закончатся.": "Recombobulator 3000 raises rarity by one tier. In {0} it can't be bought{1}. Obtain new accessories first, recombobulate when they run out.",
+ "Rift Prism: +11 MP навсегда": "Rift Prism: +11 MP forever",
+ "После употребления даёт +11 Magical Power навсегда и бесплатный вход в Rift.": "Once consumed it gives +11 Magical Power forever and free entry to the Rift.",
+ "; где взять: {0}": "; where to get: {0}",
+ "Своего рабочего питомца не отдавай: добудь или скрафти отдельного": "Don't give away your working pet: obtain or craft a separate one",
+ "Засчитывается каждый новый тир каждого типа; низкие тиры самые дешёвые — материалы копят сами миньоны и мешки Sacks": "Every new tier of every type counts; low tiers are cheapest — minions and Sacks collect the materials for you"
 }

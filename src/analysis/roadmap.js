@@ -6,6 +6,7 @@ import { neu, itemName } from '../neu.js';
 import { moneyMethods } from './money.js';
 import * as advisor from '../advisor/index.js';
 import { activePerks } from '../calendar/index.js';
+import { obtainHint } from '../lib/npc-shop.js';
 
 let collectionTiers = null;
 /** Ядро может один раз передать пороги коллекций из /v2/resources/skyblock/collections. */
@@ -21,6 +22,8 @@ function opts(member) {
     constants: neu.constants,
     moneyMethods: methods,
     collectionTiers,
+    // Ironman, Stranded, Bingo: где добыть или у какого NPC купить
+    obtain: id => obtainHint(neu.items, id),
     // Перки мэра и министра сейчас (Aatrox и т. п.)
     mayorPerks: (() => { try { return activePerks(); } catch { return []; } })(),
   };

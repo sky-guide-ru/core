@@ -47,8 +47,8 @@ export function museumRules(ctx, add) {
   if (plan && !plan.free && plan.reached && plan.coins > 0) {
     const buy = plan.steps.filter(s => !s.free);
     add({
-      id: 'museum-milestone', cat: 'Музей', priority: plan.coins <= Math.max(1_000_000, (ctx.liquid || 0) * 0.02) ? 52 : 38, effort: 'монеты',
-      title: ru`Веха музея ${plan.target}: не хватает ${mu.milestone.toNext} XP — дешевле всего за ${fmtCoins(plan.coins)}`,
+      id: 'museum-milestone', cat: 'Музей', priority: plan.coins <= Math.max(1_000_000, (ctx.liquid || 0) * 0.02) ? 52 : 38, effort: ctx.market ? 'монеты' : 'нужно добыть',
+      title: ctx.market ? ru`Веха музея ${plan.target}: не хватает ${mu.milestone.toNext} XP — дешевле всего за ${fmtCoins(plan.coins)}` : ru`Веха музея ${plan.target}: не хватает ${mu.milestone.toNext} XP`,
       why: ru`Вехи идут каждые 100 SkyBlock XP музея и дают +1% к множителю Bits, +2% к процентам банка и свои награды${mu.milestone.rewardsNext?.length ? ru` (следующая: ${mu.milestone.rewardsNext.join(', ')})` : ''}. Сейчас у тебя ${fmtNum(mu.xp)} XP музея, веха ${mu.milestone.n} из ${mu.milestone.max}.`,
       how: [...buy.slice(0, 8).map(s => ru`Купить: ${nm(s.id)} — ~${fmtCoins(s.cost)} (+${s.gain} XP)`), 'Потом пожертвуй их в музее (Hub → Museum).'],
       items: buy.slice(0, 8).map(s => s.items?.length > 1 ? s.items.find(i => /CHESTPLATE/.test(i)) || s.items[0] : s.id),
@@ -63,8 +63,9 @@ export function museumRules(ctx, add) {
     const gain = cheap.reduce((s, x) => s + x.gain, 0);
     add({
       // Дешёвый относительно денег игрока — почти бесплатный SkyBlock XP за минуты
-      id: 'museum-cheap', cat: 'Музей', priority: sum <= Math.max(1_000_000, (ctx.liquid || 0) * 0.01) ? 66 : 34, effort: 'минуты, нужны монеты',
-      title: ru`Дешёвый SkyBlock XP: ${cheap.length} ${plural(cheap.length, 'предмет', 'предмета', 'предметов')} для музея за ${fmtCoins(sum)} (+${gain} XP)`,
+      id: 'museum-cheap', cat: 'Музей', priority: sum <= Math.max(1_000_000, (ctx.liquid || 0) * 0.01) ? 66 : 34, effort: ctx.market ? 'минуты, нужны монеты' : 'нужно добыть',
+      title: ctx.market ? ru`Дешёвый SkyBlock XP: ${cheap.length} ${plural(cheap.length, 'предмет', 'предмета', 'предметов')} для музея за ${fmtCoins(sum)} (+${gain} XP)` : ru`SkyBlock XP: ${cheap.length} ${plural(cheap.length, 'предмет', 'предмета', 'предметов')} для музея (+${gain} XP)`,
+      ...(ctx.market ? {} : { why: 'Простые предметы, которых нет в твоём музее. Каждый пожертвованный предмет навсегда добавляет SkyBlock XP.' }),
       why: 'Самые выгодные по XP за монету предметы, которых нет в твоём музее. Каждый пожертвованный предмет навсегда добавляет SkyBlock XP.',
       how: cheap.map(x => ru`Купить: ${nm(x.id)} — ~${fmtCoins(x.cost)} (+${x.gain} XP)`),
       items: cheap.map(x => x.set ? x.items.find(i => /CHESTPLATE/.test(i)) || x.items[0] : x.id),

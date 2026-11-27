@@ -16,6 +16,11 @@ const SKILL_HOWTO = {
   farming: ['Garden: культура с максимальной Farming Fortune', 'Контесты Jacob за медали и опыт'],
   hunting: ['Охота и ловушки на животных (Galatea, Backwater Bayou)'],
 };
+// Без рынка (Ironman, Stranded, Bingo) — свои советы там, где обычный совет «купи на Bazaar»
+const SKILL_HOWTO_NO_MARKET = {
+  alchemy: ['Варка зелий с усилителями (Enchanted Sugar Cane, Enchanted Blaze Rod)', 'Ингредиенты копи заранее: миньоны сахарного тростника и Blaze'],
+  carpentry: ['Крафт на верстаке: массовый крафт из своих материалов (миньоны, мешки Sacks)'],
+};
 // Приоритет скилла в общей прогрессии (на этапе позднего мидгейма)
 const SKILL_WEIGHT = { combat: 1.3, foraging: 1.1, fishing: 1.0, taming: 1.2, alchemy: 0.8, carpentry: 0.7, enchanting: 0.9, mining: 0.9, farming: 0.8, hunting: 0.6 };
 const GARDEN_PLOTS = 24;
@@ -49,8 +54,9 @@ export function quickRules(ctx, add) {
     add({
       id: 'cookie', cat: 'Быстрые победы', priority: 92, effort: 'минуты',
       title: 'Активируй Booster Cookie',
-      why: '+25 к Wisdom всех скиллов (≈+25% опыта), +10 Magic Find, Bits для магазина Elizabeth, монеты не теряются при смерти, /ah и /bazaar откуда угодно.',
-      how: [ru`Купи Booster Cookie на Bazaar${ctx.price('BOOSTER_COOKIE') ? ru` (сейчас ~${fmtCoins(ctx.price('BOOSTER_COOKIE'))})` : ''} и съешь`],
+      why: ctx.market ? '+25 к Wisdom всех скиллов (≈+25% опыта), +10 Magic Find, Bits для магазина Elizabeth, монеты не теряются при смерти, /ah и /bazaar откуда угодно.'
+        : '+25 к Wisdom всех скиллов (≈+25% опыта), +10 Magic Find, Bits для магазина Elizabeth, монеты не теряются при смерти.',
+      how: !ctx.market ? ['Купи Booster Cookie в Community Shop у Elizabeth (Hub) за SkyBlock Gems и съешь'] : [ru`Купи Booster Cookie на Bazaar${ctx.price('BOOSTER_COOKIE') ? ru` (сейчас ~${fmtCoins(ctx.price('BOOSTER_COOKIE'))})` : ''} и съешь`],
       items: ['BOOSTER_COOKIE'],
       cost: ctx.price('BOOSTER_COOKIE') || undefined,
     });
@@ -71,7 +77,7 @@ export function skillRules(ctx, add) {
       id: tx`skill-${key}`, cat: 'Skills', priority: Math.round(Math.min(74, (24 + gap * 0.8) * w + lag * 1.4)), effort: gap > 10 ? 'долго' : 'часы',
       title: tx`${s.name} ${s.level} → ${s.maxLevel}`,
       why: ru`Осталось ${gap} ${plural(gap, 'уровень', 'уровня', 'уровней')}, до ${s.level + 1} — ${fmtNum(left)} опыта. Каждый уровень даёт статы и SkyBlock XP; Skill Average сейчас ${(m.skillAverage || 0).toFixed(1)}.${lag >= 10 ? ' Этот скилл сильно отстаёт от остальных: первые уровни идут быстро и стоят только времени, а не монет.' : ''}`,
-      how: SKILL_HOWTO[key] || [],
+      how: (!ctx.market && SKILL_HOWTO_NO_MARKET[key]) || SKILL_HOWTO[key] || [],
       link: 'skills',
     });
   }

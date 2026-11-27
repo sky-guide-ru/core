@@ -15,5 +15,7 @@
  "Сейчас выгоднее купить готовый {0} (~{1}) и продать свой (~{2}): выходит ~{3} против ~{4} за улучшение": "Right now it's cheaper to buy a ready {0} (~{1}) and sell yours (~{2}): that's ~{3} versus ~{4} for upgrading",
  "Для сравнения: купить готовый {0} ~{1}{2}{3}": "For comparison: buying a ready {0} ~{1}{2}{3}",
  ", минус продажа своего ~{0} = ~{1}": ", minus selling yours ~{0} = ~{1}",
- "; улучшать свой — ~{0}": "; upgrading yours — ~{0}"
+ "; улучшать свой — ~{0}": "; upgrading yours — ~{0}",
+ "{0}: части нет — нужна из сундуков Kuudra ({1})": "{0}: piece missing — get it from Kuudra chests ({1})",
+ "Где брать: эссенция Crimson и Kuudra Teeth гарантированно падают из сундуков Kuudra (на высоких тирах больше)": "Where to get: Crimson Essence and Kuudra Teeth always drop from Kuudra chests (more on higher tiers)"
 }

@@ -90,14 +90,15 @@ export function kuudraUpgradePlan(ctx, own, target) {
   const buyCost = SLOTS.reduce((s, sl) => s + ctx.price(tx`${KUUDRA_PREFIX[target]}${fam}_${sl}`), 0);
   const resale = pieces.filter(p => !p.missing).reduce((s, p) => s + ctx.price(p.id), 0);
   const buyNet = buyCost ? Math.max(0, buyCost - resale) : 0;
-  const cheaper = !unpriced && buyNet && buyNet < upgradeCost * 0.9 ? 'buy' : 'upgrade';
+  // Без рынка (Ironman, Stranded, Bingo) готовый сет не купить: только улучшать свой
+  const cheaper = ctx.market !== false && !unpriced && buyNet && buyNet < upgradeCost * 0.9 ? 'buy' : 'upgrade';
 
   const n = x => Math.round(x).toLocaleString('ru-RU');
   const targetName = kuudraSetName(fam, target);
   const lines = [];
-  lines.push(ru`Всего на улучшение: ${n(totals.essence)} эссенции Crimson, ${n(totals.teeth)} Kuudra Teeth${totals.pearls ? tx`, ${n(totals.pearls)} Heavy Pearl` : ''} и ${fmtCoins(totals.coins)} монет${upgradeCost && !unpriced ? ru` — по ценам Bazaar ~${fmtCoins(upgradeCost)}` : ''}${totals.buyMissing ? ru` (с докупкой недостающих частей ~${fmtCoins(totals.buyMissing)})` : ''}`);
+  lines.push(ru`Всего на улучшение: ${n(totals.essence)} эссенции Crimson, ${n(totals.teeth)} Kuudra Teeth${totals.pearls ? tx`, ${n(totals.pearls)} Heavy Pearl` : ''} и ${fmtCoins(totals.coins)} монет${upgradeCost && !unpriced && ctx.market !== false ? ru` — по ценам Bazaar ~${fmtCoins(upgradeCost)}` : ''}${totals.buyMissing ? ru` (с докупкой недостающих частей ~${fmtCoins(totals.buyMissing)})` : ''}`);
   for (const p of pieces) {
-    if (p.missing) { lines.push(ru`${SLOT_RU[p.slot]}: части нет — купить ${targetName}${p.price ? tx` ~${fmtCoins(p.price)}` : ''}`); continue; }
+    if (p.missing) { lines.push(ctx.market === false ? ru`${SLOT_RU[p.slot]}: части нет — нужна из сундуков Kuudra (${targetName})` : ru`${SLOT_RU[p.slot]}: части нет — купить ${targetName}${p.price ? tx` ~${fmtCoins(p.price)}` : ''}`); continue; }
     const parts = p.steps.map(s => {
       const starTxt = s.starsFrom < 10 ? ru`звёзды ${s.starsFrom}→10 (${n(s.stars.essence)} эссенции${s.stars.pearls ? tx`, ${s.stars.pearls} Heavy Pearl` : ''})` : 'звёзды уже 10';
       return ru`${KUUDRA_TIER_RU[s.tier]}: ${starTxt}, затем престиж → ${KUUDRA_TIER_RU[s.tier + 1]} (${n(s.prestige.essence)} эссенции, ${s.prestige.teeth} зубов, ${fmtCoins(s.prestige.coins)})`;
@@ -106,12 +107,13 @@ export function kuudraUpgradePlan(ctx, own, target) {
     lines.push(tx`${SLOT_RU[p.slot]} (${p.stars}★): ${parts.join('; ')}${attrs.length ? ru` · атрибуты: ${attrs.map(([k, v]) => tx`${k} ${v}`).join(', ')}` : ''}`);
   }
   lines.push('Как: звёзды и престиж ставятся в меню улучшения предмета у кузнеца (Blacksmith). Престиж доступен, когда на части 10 звёзд; после него звёзды обнуляются, поэтому качай по одному тиру');
-  lines.push(ru`Где брать: эссенция Crimson и Kuudra Teeth гарантированно падают из сундуков Kuudra (на высоких тирах больше) и продаются на Bazaar${totals.pearls ? '; Heavy Pearl — Bazaar' : ''}`);
+  lines.push(ctx.market === false ? 'Где брать: эссенция Crimson и Kuudra Teeth гарантированно падают из сундуков Kuudra (на высоких тирах больше)'
+    : ru`Где брать: эссенция Crimson и Kuudra Teeth гарантированно падают из сундуков Kuudra (на высоких тирах больше) и продаются на Bazaar${totals.pearls ? '; Heavy Pearl — Bazaar' : ''}`);
   const combat = ctx.m.skills?.combat?.level || 0;
   const runs = ctx.m.crimson?.kuudra?.[KUUDRA_RUN[target]] || 0;
   const wear = [combat < WEAR_COMBAT[target] && ru`Combat ${WEAR_COMBAT[target]} (у тебя ${combat})`, !runs && ru`пройти Kuudra ${KUUDRA_TIER_RU[target]}`].filter(Boolean);
   if (wear.length) lines.push(ru`Чтобы надеть ${targetName}, нужно: ${wear.join(' и ')}. Улучшать можно заранее`);
-  if (buyCost) {
+  if (buyCost && ctx.market !== false) {
     lines.push(cheaper === 'buy'
       ? ru`Сейчас выгоднее купить готовый ${targetName} (~${fmtCoins(buyCost)}) и продать свой (~${fmtCoins(resale)}): выходит ~${fmtCoins(buyNet)} против ~${fmtCoins(upgradeCost)} за улучшение`
       : ru`Для сравнения: купить готовый ${targetName} ~${fmtCoins(buyCost)}${resale ? ru`, минус продажа своего ~${fmtCoins(resale)} = ~${fmtCoins(buyNet)}` : ''}${unpriced ? '' : ru`; улучшать свой — ~${fmtCoins(upgradeCost)}`}`);
