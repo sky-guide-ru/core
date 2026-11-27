@@ -2,6 +2,7 @@
 import { rankFor, hypixelInfo } from './rank.js';
 import { rankOf } from './lib/profile-mode.js';
 import { hypixelInfoOf } from './lib/hypixel-player.js';
+import { guildFor } from './guild.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { EventEmitter } from 'node:events';
@@ -233,6 +234,8 @@ async function doRefreshProfile() {
     }
     if (!state.player) state.player = await resolveUuid(config.player);
     const uuid = state.player.uuid;
+    // Гильдия — параллельно с профилем: из кэша (час) сразу, иначе один запрос, который не задерживает профиль
+    const guildP = state.demo ? Promise.resolve(null) : guildFor(uuid).catch(() => null);
     setMoneyOwner(uuid); // личные настройки «Заработка» (Fortune, Forge, сессии) — только для своего профиля
     // Первый запуск после перезапуска сайта: свежий (до 10 минут) ответ с диска вместо запросов в Hypixel
     let disk = !useFixture && !state.raw ? ownerDisk.get('owner', 10 * 60_000) : null, staleErr = null;
@@ -273,6 +276,7 @@ async function doRefreshProfile() {
     state.member = await parseMember(profile, uuid, extra);
     if (!state.demo) { state.member.rank = await rankFor(uuid).catch(() => null); state.member.hypixel = hypixelInfo(uuid); }
     else { try { const pl = JSON.parse(fs.readFileSync(path.join(config.dataDir, 'fixture-player.json'), 'utf8')).player; state.member.rank = rankOf(pl); state.member.hypixel = hypixelInfoOf(pl); } catch { /* в демо /player может не быть */ } }
+    state.member.guild = await guildP;
     const gear = reanalyze();
     const snap = snapshot(state.member, gear);
     const prev = lastSnap || state.history[state.history.length - 1];

@@ -42,5 +42,7 @@
  "Время идёт, только пока ты в игре": "Ticks down only while you're in game",
  "Бафф от Century Cake": "Century Cake buff",
  "Примерно: без сетовых бонусов брони. Зелёным — прибавка от зелий, которые действуют сейчас. EHP — сколько урона выдержишь с учётом Defense.": "Approximate: without armor set bonuses. Green is the bonus from potions active right now. EHP is how much damage you can take, counting Defense.",
- "на Hypixel с {0} года": "on Hypixel since {0}"
+ "на Hypixel с {0} года": "on Hypixel since {0}",
+ "Гильдия": "Guild",
+ "уровень {0}": "level {0}"
 }
