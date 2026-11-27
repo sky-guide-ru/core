@@ -3,7 +3,7 @@
 import { makeCtx, clamp, fmtCoins } from './lib/util.js';
 import { dungeonRules, slayerRules, crimsonRules } from './lib/rules/combat.js';
 import { ladderRules, upgradeRules, equipmentRules } from './lib/rules/gear.js';
-import { accessoryRules, petRules, minionRules, collectionRules, moneyRules, purchasePlan } from './lib/rules/economy.js';
+import { accessoryRules, petRules, minionRules, collectionRules, moneyRules, purchasePlan, bestPerHour } from './lib/rules/economy.js';
 import { quickRules, skillRules, foragingRules, miningRules, gardenRules, riftRules } from './lib/rules/skills.js';
 import { museumRules } from './lib/rules/museum.js';
 import { petScoreRules, chocolateRules } from './lib/rules/extras.js';
@@ -154,6 +154,7 @@ export function advise(member, acc, gear, opts = {}) {
       headline: top[0] ? ru`Главное сейчас: ${top[0].title}` : 'Всё основное сделано',
       top: top.map(s => ({ id: s.id, title: s.title, cat: s.cat })),
       liquid: ctx.liquid,
+      perHour: bestPerHour(ctx),
       hasPrices: ctx.hasPrices,
       quickWins: roadmap.filter(s => s.cat === 'Быстрые победы').length,
       mapProgress: map.overall.progress,

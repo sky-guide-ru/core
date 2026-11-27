@@ -1,7 +1,7 @@
 {
-  "Бот Sky Guide в Discord": "Sky Guide bot in Discord",
-  "Команды /профиль, /цена и /дальше: профиль игрока, цены Bazaar и Auction House и шаги плана.": "Commands /profile, /price and /next: player profile, Bazaar and Auction House prices and plan steps.",
-  "Ник, привязанный на sky-guide.ru/discord, в /профиль и /дальше можно не писать.": "With a nickname linked at sky-guide.ru/discord, /profile and /next work without typing it.",
+ "Бот Sky Guide в Discord": "Sky Guide bot in Discord",
+ "Команды /профиль, /цена и /дальше: профиль игрока, цены Bazaar и Auction House и шаги плана.": "Commands /profile, /price and /next: player profile, Bazaar and Auction House prices and plan steps.",
+ "Ник, привязанный на sky-guide.ru/discord, в /профиль и /дальше можно не писать.": "With a nickname linked at sky-guide.ru/discord, /profile and /next work without typing it.",
  "План считает силу персонажа": "The plan calculates character power",
  "В блоке [Что делать прямо сейчас](overview#now) видны Health, Defense, EHP, Strength, Crit Damage и удар лучшим мечом.": "The [What to do right now](overview#now) block shows Health, Defense, EHP, Strength, Crit Damage and your best sword hit.",
  "Шаги про Magical Power, Tuning и Power показывают, на сколько процентов вырастет удар.": "Magical Power, Tuning and Power steps show by how many percent your hit will grow.",
@@ -227,5 +227,9 @@
  "После Fermento Armor план ведёт к Helianthus Armor, а для Farming советует Mooshroom Cow.": "After Fermento Armor the plan leads to Helianthus Armor, and for Farming it suggests Mooshroom Cow.",
  "Лук и меч — разные пути": "Bow and sword are separate paths",
  "Меч против слеера в [плане](roadmap) не обязателен, если уже есть Juju Shortbow или Terminator.": "A sword against a slayer in the [plan](roadmap) is optional if you already have a Juju Shortbow or Terminator.",
- "Для Berserk в плане есть путь мечей для данжей: Livid Dagger, Giant's Sword, Dark Claymore.": "Berserk players get a Dungeons sword path in the plan: Livid Dagger, Giant's Sword, Dark Claymore."
+ "Для Berserk в плане есть путь мечей для данжей: Livid Dagger, Giant's Sword, Dark Claymore.": "Berserk players get a Dungeons sword path in the plan: Livid Dagger, Giant's Sword, Dark Claymore.",
+ "План покупок можно править": "The shopping plan is editable",
+ "Лишнее из [плана покупок](roadmap/plan#cart) убирается крестиком, своя вещь добавляется поиском.": "Remove anything from the [shopping plan](roadmap/plan#cart) with the cross and add your own items via search.",
+ "Кнопка «+ В план покупок» есть в карточке любого предмета.": "Every item card has a “+ To shopping plan” button.",
+ "Что уже лежит в запасах, вычитается из цены, а купленное уходит из списка само.": "Items already in storage are subtracted from the price, and bought items drop off the list on their own."
 }
