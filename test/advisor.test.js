@@ -61,6 +61,8 @@ test('Master Mode не советуется без F7, обмен фей — п�
 test('лестницы: цель — самый высокий тир с выполненными требованиями', () => {
   const s = byId(buildRoadmap(ownercatMember(), ACC, GEAR, { price }));
   assert.match(s.get('gear-ender-slayer-weapon').title, /Atomsplit Katana/);
+  // Лук и ближний бой — разные стили: при Juju меч против слеера не обязателен, а кинжалы Blaze — обязательны
+  assert.match(s.get('gear-zombie-slayer-weapon').how.at(-1), /лук — свой стиль игры/);
   assert.match(s.get('gear-dungeon-archer-weapon').title, /Juju Shortbow .* → Terminator/);
   assert.match(s.get('gear-kuudra-armor').title, /(→|начни с) Hot /, 'броня Kuudra под открытый тир');
   assert.match(s.get('gear-farming-armor').title, /Fermento Armor → Helianthus Armor/, 'после Fermento — Helianthus');

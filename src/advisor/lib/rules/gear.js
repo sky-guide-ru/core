@@ -26,6 +26,7 @@ function relevant(ctx, l) {
     case 'dungeon-archer-weapon':
     case 'dungeon-mage-weapon':
       return cata >= 15 && (!cls || l.classes.includes(cls));
+    case 'dungeon-melee-weapon': return cata >= 15 && l.classes.includes(cls);
     case 'dungeon-armor': return cata >= 15;
     case 'ender-slayer-weapon': return (m.slayers?.enderman?.level || 0) >= 1;
     // Final Destination — броня для прокачки Voidgloom; на максимальном 9 уровне её уже не советуем
@@ -66,6 +67,10 @@ export function reqMet(ctx, req) {
     const done = Number(m.dungeons?.floors?.[String(req.floor)] || 0) > 0;
     const best = Object.entries(m.dungeons?.floors || {}).filter(([, n]) => Number(n) > 0).map(([f]) => Number(f)).filter(Number.isFinite);
     return done ? { ok: true } : { ok: false, text: ru`пройди F${req.floor} (${best.length ? ru`у тебя пройден F${Math.max(...best)}` : 'этажи ещё не пройдены'})` };
+  }
+  if (req.masterFloor != null) {
+    const done = Number(m.dungeons?.masterFloors?.[String(req.masterFloor)] || 0) > 0;
+    return done ? { ok: true } : { ok: false, text: ru`пройди M${req.masterFloor}` };
   }
   if (req.hotm) {
     const lvl = m.mining?.hotm?.level || 0;
@@ -113,7 +118,18 @@ export function ladderState(ctx, l) {
   return { best, tierPrice, tierOwned };
 }
 
+/** Лучший лук игрока из лестницы лучника: { idx, name } или null. Лук — отдельный стиль игры, не замена мечу */
+function ownedBow(ctx) {
+  const l = LADDERS.ladders.find(x => x.style === 'bow');
+  if (!l) return null;
+  const { best } = ladderState(ctx, l);
+  if (best < 0) return null;
+  const id = (l.tiers[best].ids || []).find(x => ctx.owned.has(x));
+  return { idx: best, name: id ? ctx.name(id) : l.tiers[best].name, top: best >= 1 };
+}
+
 export function ladderRules(ctx, add) {
+  const bow = ownedBow(ctx);
   for (const l of LADDERS.ladders) {
     if (!relevant(ctx, l)) continue;
     const { best, tierPrice } = ladderState(ctx, l);
@@ -157,14 +173,18 @@ export function ladderRules(ctx, add) {
     // Самые важные ветки для текущего этапа среднего профиля — данжи и Kuudra
     const base = ({ 'Dungeons': 70, 'Crimson Isle и Kuudra': 62, 'Slayers': 46, 'Mining': 36, 'Garden': 34, 'Fishing': 30 }[l.cat] ?? 40) - (best < 0 && l.kind !== 'kuudra-armor' && l.cat !== 'Dungeons' ? 6 : 0);
     const items = next.ids || (next.set ? SLOTS.map(s => tx`${next.set}_${s}`) : l.families ? SLOTS.map(s => tx`${next.prefix}${l.families[0]}_${s}`) : []);
+    // Меч против слеера при сильном луке (Juju, Terminator): лук и ближний бой — разные стили, меч не обязателен.
+    // Кинжалы Inferno Demonlord исключение: без нужной Attunement урон по щиту босса режется на 99%
+    const bowAlt = l.style === 'melee' && l.cat === 'Slayers' && l.id !== 'blaze-slayer-weapon' && bow?.top;
     add({
-      id: tx`gear-${l.id}`, cat: l.cat, priority: base + (req.ok ? 8 : -12), effort: cost ? 'монеты' : 'часы',
+      id: tx`gear-${l.id}`, cat: l.cat, priority: base + (req.ok ? 8 : -12) - (bowAlt ? 15 : 0), effort: cost ? 'монеты' : 'часы',
       title: best >= 0 ? tx`${l.titleRu}: ${have} → ${next.name}` : ru`${l.titleRu}: начни с ${next.name}`,
       why: tx`${capFirst(next.note)}.${req.ok ? '' : ru` Сначала ${req.text}.`}${cost ? ru` Цена сейчас ~${fmtCoins(cost)}.` : ''}`,
       how: [
         cost ? ru`Купить: ${next.name} — ~${fmtCoins(cost)} на Auction House` : ru`Получить: ${next.name}`,
         ...(l.kind === 'kuudra-armor' ? ['Следующий тир можно получить и престижем: часть с 10 звёздами улучшается у кузнеца (Blacksmith) за эссенцию Crimson, Kuudra Teeth и монеты — часто дешевле, чем покупать готовый сет'] : []),
         ...(best >= 0 ? [ru`Старое снаряжение (${tierLabel(l, best).name}) можно продать, когда перейдёшь на новое`] : []),
+        ...(bowAlt ? [ru`У тебя есть ${bow.name}: лук — свой стиль игры. Если ходишь на этого босса с луком, меч можно не брать; он нужен для ближнего боя`] : []),
       ],
       items,
       cost: cost || undefined,

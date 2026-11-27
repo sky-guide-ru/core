@@ -221,5 +221,8 @@
  "Советы плана стали точнее": "Plan advice is more accurate",
  "Совет сменить Power в [плане](roadmap) учитывает, сколько Crit Chance пропадёт.": "The Power switch tip in the [plan](roadmap) now accounts for the Crit Chance you lose.",
  "Очки Tuning считаются только от Magical Power: одно на каждые 10 MP.": "Tuning points come only from Magical Power: one per 10 MP.",
- "После Fermento Armor план ведёт к Helianthus Armor, а для Farming советует Mooshroom Cow.": "After Fermento Armor the plan leads to Helianthus Armor, and for Farming it suggests Mooshroom Cow."
+ "После Fermento Armor план ведёт к Helianthus Armor, а для Farming советует Mooshroom Cow.": "After Fermento Armor the plan leads to Helianthus Armor, and for Farming it suggests Mooshroom Cow.",
+ "Лук и меч — разные пути": "Bow and sword are separate paths",
+ "Меч против слеера в [плане](roadmap) не обязателен, если уже есть Juju Shortbow или Terminator.": "A sword against a slayer in the [plan](roadmap) is optional if you already have a Juju Shortbow or Terminator.",
+ "Для Berserk в плане есть путь мечей для данжей: Livid Dagger, Giant's Sword, Dark Claymore.": "Berserk players get a Dungeons sword path in the plan: Livid Dagger, Giant's Sword, Dark Claymore."
 }
