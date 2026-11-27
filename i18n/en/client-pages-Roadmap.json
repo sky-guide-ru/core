@@ -62,5 +62,20 @@
  " Правки видно только в этом браузере.": " Changes are visible only in this browser.",
  "Это чужой план: править его может только сам игрок.": "This is someone else's plan: only the player can edit it.",
  "✔ Куплено: {0}": "✔ Bought: {0}",
- "Убрано из плана покупок ({0})": "Removed from the shopping plan ({0})"
+ "Убрано из плана покупок ({0})": "Removed from the shopping plan ({0})",
+ "+ Своя вещь": "+ Your own item",
+ "Сколько штук": "How many",
+ "Столько часов лучшего заработка, чтобы накопить до этой строки": "Hours of the best money making needed to save up to this row",
+ "накопить": "save up",
+ "например, 70m": "e.g. 70m",
+ "сколько есть": "what I have",
+ "Не понял сумму: число, можно с k, m или b.": "Couldn't read the amount: a number, k, m or b allowed.",
+ "Хватает на {0} из {1} · останется {2}": "Covers {0} of {1} · {2} left",
+ "Пока ничего не хватает": "Nothing fits yet",
+ "монеты, что есть сейчас": "coins you have now",
+ "всё вместе: {0}": "all together: {0}",
+ " · есть {0}": " · have {0}",
+ "Нарастающим итогом: {0}": "Running total: {0}",
+ "Список собирается из шагов плана с ценой, купленное уходит само.{0}{1}": "Built from plan steps that cost coins; bought items drop off on their own.{0}{1}",
+ "Своё можно добавить и из карточки предмета.{0}": "You can also add your own from any item card.{0}"
 }
