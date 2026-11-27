@@ -261,6 +261,7 @@
  "Материалы для шагов плана и «Плана покупок» попадают в «Лучше оставить».": "Materials for plan steps and the Shopping plan go to “Better to keep”.",
  "Вещи из Museum не советуют продать": "Museum items are no longer suggested for sale",
  "Предметы, сданные в Museum и одолженные обратно, больше не попадают в «Без дела лежит» в [плане](roadmap).": "Items donated to the Museum and borrowed back no longer show up in “Sitting idle” in the [plan](roadmap).",
+ "Блок «На что потратить» — вещи из плана, которые из своих запасов скрафтить дешевле, чем купить.": "The \"What to spend it on\" block lists plan items that are cheaper to craft from your stash than to buy.",
  "Больше названий открываются нажатием": "More names open on click",
  "Культуры Garden, ресурсы коллекций, гемы, зоны и NPC Рифта в [плане](roadmap) и гайдах открывают подсказку.": "Garden crops, collection resources, gemstones, areas and Rift NPCs in the [plan](roadmap) and guides open a tooltip.",
  "Питомцы в шаге Pet Score ведут на карточку питомца, а не моба с тем же именем.": "Pets in the Pet Score step open the pet card, not the mob with the same name.",

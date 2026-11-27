@@ -80,3 +80,16 @@ test('на что потратить: рецепт из плана, что ес�
   assert.deepEqual([em.need, em.have, em.fromStash], [4, 1, 2]);
   assert.equal(r.items[0].ready, (3 / 4 + 0) / 2);
 });
+
+test('на что потратить с рынком: только если докупить дешевле готовой вещи', async () => {
+  const { analyzeCraft } = await import('../src/stash/craft.js');
+  const items = new Map([
+    ['DRILL', { recipe: { A1: 'ENCHANTED_MITHRIL:4', A2: 'GOLDEN_PLATE:2' } }],
+    ['CHEAP', { recipe: { A1: 'ENCHANTED_MITHRIL:2', A2: 'GOLDEN_PLATE:5' } }],
+  ]);
+  const m = { inv: { inventory: [{ id: 'ENCHANTED_MITHRIL', count: 4 }] } };
+  const buy = id => ({ DRILL: 1_000_000, CHEAP: 100_000, GOLDEN_PLATE: 50_000, ENCHANTED_MITHRIL: 2_500 }[id] || 0);
+  const r = analyzeCraft(m, { items, name: id => id, buy, roadmap: [{ id: 's', title: 'x', items: ['DRILL', 'CHEAP'] }] });
+  assert.deepEqual(r.items.map(x => x.id), ['DRILL'], 'CHEAP: докупить 250 тыс. дороже готовой за 100 тыс.');
+  assert.deepEqual([r.items[0].missCost, r.items[0].saving], [100_000, 900_000]);
+});
