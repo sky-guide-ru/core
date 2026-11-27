@@ -4,6 +4,10 @@
 
 ## Не выпущено
 
+## 0.2.18
+
+- Английский перевод кнопки и карточки Discord на сайте.
+
 ## 0.2.17
 
 - Рыбалка после апдейтов 2025: Sea Emperor заменён на The Loch Emperor (Moonglade Marsh), добавлены существа Galatea, Torrhus Canyon, Lotus Atoll, новых Хотспотов и Mithril Grubber; Nutcracker — Fishing 28.
