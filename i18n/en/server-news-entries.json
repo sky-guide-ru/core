@@ -193,5 +193,10 @@
  "В [Рейтинге](top) рядом с ником стоит тег гильдии.": "The [Leaderboard](top) shows the guild tag next to the name.",
  "Ник из рейтинга убирается по запросу": "Leaderboard names removed on request",
  "Кнопка [Убрать ник из рейтинга](top#remove) открывает форму запроса с уже вписанным ником.": "The [Remove a name from the leaderboard](top#remove) button opens a request form with the name already filled in.",
- "Каждый запрос проверяется вручную: так чужие ники не пропадают из таблицы.": "Every request is checked by hand, so other players' names don't disappear from the table."
+ "Каждый запрос проверяется вручную: так чужие ники не пропадают из таблицы.": "Every request is checked by hand, so other players' names don't disappear from the table.",
+ "Оценка состояния стала точнее": "Networth estimate is more accurate",
+ "Вещи без лотов (T3 Theoretical Hoe и Dicer, мешки) в [оценке состояния](gear) стоят по цене крафта.": "Items with no listings (T3 Theoretical Hoe and Dicer, sacks) count at crafting cost in the [networth estimate](gear).",
+ "В оценку идут открытые слоты гемов Divan и Kuudra-брони, Cake Bag, Silex, части удочки и Thunder в Pulse Ring.": "The estimate now includes unlocked gem slots on Divan and Kuudra armor, Cake Bag, Silex, rod parts and Thunder in Pulse Ring.",
+ "Soul Eater, Inferno и другие «тяжёлые» ultimate на предмете стоят дешевле книги, как при продаже.": "Soul Eater, Inferno and other heavy ultimates on an item count for less than the book, as they do when sold.",
+ "Скины и краски видны отдельной строкой: у редких скинов почти нет продаж.": "Skins and dyes are shown on a separate line: rare skins barely ever sell."
 }

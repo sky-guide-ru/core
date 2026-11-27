@@ -37,7 +37,6 @@
  "Монеты": "Coins",
  "Итого": "Total",
  "{0} Цены ещё загружаются (сайт только что обновился), предметы пока не посчитаны. Через минуту оценка уточнится сама.": "{0} Prices are still loading (the site was just updated), items aren't counted yet. The estimate will refine itself in a minute.",
- "Рыночная оценка по самым дешёвым лотам аукциона и Bazaar: база предмета плюс зачарования, гемы, звёзды, свитки, рекомб и книги. SkyCrypt считает иначе (вложенные улучшения и привязанные предметы по цене крафта), поэтому у него цифра выше.": "Market estimate from the cheapest auction BINs and the Bazaar: the item's base plus enchantments, gems, stars, scrolls, recomb and books. SkyCrypt counts differently (applied upgrades and soulbound items at craft cost), so its number is higher.",
  "{0}Загружаю снаряжение…": "{0}Loading gear…",
  "Надето сейчас": "Equipped now",
  "Оружие": "Weapons",
@@ -46,5 +45,8 @@
  " · дубликатов: {0}": " · duplicates: {0}",
  "Инструменты": "Tools",
  "Хранилища": "Storage",
- "Оценка состояния": "Networth estimate"
+ "Оценка состояния": "Networth estimate",
+ "Из них косметика (скины и краски)": "Of which cosmetics (skins and dyes)",
+ "У редких скинов почти нет продаж, поэтому эта часть оценки самая приблизительная.": "Rare skins barely ever sell, so this part of the estimate is the roughest.",
+ "Рыночная оценка по самым дешёвым лотам аукциона и Bazaar: база предмета плюс зачарования, гемы и открытые слоты, звёзды, свитки, рекомб и книги. Вещи без рынка — по цене крафта. Скины без продаж не оцениваются, поэтому у SkyCrypt цифра бывает выше.": "Market estimate from the cheapest Auction House BINs and Bazaar: the item itself plus enchants, gems and unlocked slots, stars, scrolls, recomb and books. Items with no market are valued at their crafting cost. Skins with no sales are not valued, so SkyCrypt may show a higher number."
 }
