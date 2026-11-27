@@ -30,7 +30,7 @@ export const NEWS = [
     title: 'Профиль Hypixel рядом с ником',
     items: [
       'На [главной](overview) под ником видны Network Level, Achievement Points и год прихода на Hypixel.',
-      'В «Рекордах и статистике» на [Прогрессе](skills) — SkyBlock-достижения сразу по всем профилям.',
+      'В «Рекордах и статистике» на [Прогрессе](skills) — SkyBlock-достижения, вехи Rock и Dolphin и кто чаще всего убивает.',
     ],
   },
   {

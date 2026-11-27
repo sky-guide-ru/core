@@ -422,6 +422,15 @@ export async function parseMember(profile, uuid, extra = {}) {
     dungeonClass: g(m, 'dungeons.selected_dungeon_class', null),
     communityUpgrades: (g(profile, 'community_upgrades.upgrade_states', [])).reduce((o, u) => ({ ...o, [u.upgrade]: Math.max(o[u.upgrade] || 0, u.tier || 0) }), {}),
     firstJoin: g(m, 'profile.first_join', null),
+    // Кто чаще всего убивает (player_stats.deaths: причина → раз, плюс total)
+    deathCauses: Object.entries(ps.deaths || {}).filter(([k, v]) => k !== 'total' && Number(v) > 0).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([id, n]) => ({ id, n: Number(n) })),
+    // Вехи питомцев Rock (руда) и Dolphin (морские существа): player_stats.pets.milestone
+    petMilestones: { ores: Number(g(ps, 'pets.milestone.ores_mined', 0)) || 0, seaCreatures: Number(g(ps, 'pets.milestone.sea_creatures_killed', 0)) || 0 },
+    // Улучшение кооператива, которое сейчас строится (Elizabeth → Community Shop); null — ничего не строится
+    communityUpgrading: (() => {
+      const u = g(profile, 'community_upgrades.currently_upgrading', null);
+      return u && typeof u === 'object' && u.upgrade ? { id: String(u.upgrade).toLowerCase(), tier: Number(u.new_tier ?? u.tier) || null, startedAt: Number(u.start_ms ?? u.started_ms) || null } : null;
+    })(),
   };
 
   // Готовый к показу вид: названия вместо ID, иконки, максимумы (страница «Прогресс»)
@@ -436,6 +445,8 @@ export async function parseMember(profile, uuid, extra = {}) {
       visitors: xv.viewVisitors(gd.activeVisitors),
       treeGifts: xv.viewTreeGifts(extras.treeGifts),
       community: xv.viewCommunity(extras.communityUpgrades),
+      upgrading: xv.viewUpgrading(extras.communityUpgrading),
+      petMilestones: xv.viewPetMilestones(extras.petMilestones),
       gardenLevel: gd.experience != null ? xv.gardenLevel(Number(gd.experience) || 0) : null,
       max: { timeTower: xv.TIME_TOWER_MAX, plots: xv.GARDEN_PLOTS },
     };
