@@ -49,5 +49,10 @@ test('analyzeAccessories: шаги плана и tier', () => {
     // порядок — по цене за 1 MP, Enrichment (без MP) в конце
     assert.equal(acc.steps.at(-1).kind, 'enrich');
     assert.equal(acc.enrichPrice, 4e6);
+    assert.equal(by.SPEED_RING.sellable, true);
+    // Speed Ring сдан в Museum и одолжен обратно: продать нельзя — доплата за Artifact полная, «можно продать» не пишем
+    const mu = analyzeAccessories({ inv: { talismans: [{ id: 'SPEED_RING', name: 'Speed Ring', rarity: 'UNCOMMON', recomb: false, museum: true }] } });
+    assert.equal(mu.list[0].sellable, false);
+    assert.equal(mu.steps.find(s => s.kind === 'tier').cost, 3e6);
   } finally { neu.items = old.items; neu.constants = old.constants; prices.bin = old.bin; prices.bazaar = old.bz; }
 });

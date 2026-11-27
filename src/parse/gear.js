@@ -6,6 +6,7 @@ import { craftValue } from './craft-value.js';
 import { PET_TIERS } from '../nbt.js';
 import { buildUpgrades, nextUpgrade, NO_RECOMB } from '../lib/acc-upgrades.js';
 import { tx } from '../../i18n/msg.js';
+import { canSellCopy } from '../lib/item-props.js';
 import { statOf, howOf, reqOf, tierOf, accSteps } from './acc-meta.js';
 
 export const MP_BY_RARITY = { COMMON: 3, UNCOMMON: 5, RARE: 8, EPIC: 12, LEGENDARY: 16, MYTHIC: 22, DIVINE: 22, SPECIAL: 3, 'VERY SPECIAL': 5 };
@@ -61,6 +62,7 @@ export function analyzeAccessories(member) {
     list.push({
       id: it.id, name: it.name, rarity: it.rarity, recomb: it.recomb, reforge: it.reforge,
       enrichment: it.enrichment || it.attributes?.enrichment || null, mp: gain, active, value: priceOf(it.id),
+      sellable: canSellCopy(it), // сданный в Museum (одолжен обратно) или Soulbound — «можно продать» не пишем
       next: next ? { id: next, name: itemName(next), rarity: neu.items.get(next)?.rarity || null } : null,
       canRecomb: active && !it.recomb && recombable.includes(it.rarity) && !NO_RECOMB.has(it.id),
       canEnrich: enrichable.includes(it.rarity),
@@ -85,7 +87,8 @@ export function analyzeAccessories(member) {
     if (gain <= 0) continue;
     const price = priceOf(acc.id);
     // апгрейд обычно крафтится из младшей версии или её можно продать — считаем доплату
-    const lowerValue = lower ? priceOf(lower) : 0;
+    // (младшую из Museum или Soulbound не продать — тогда полная цена)
+    const lowerValue = lower && canSellCopy(owned.get(lower)) ? priceOf(lower) : 0;
     const net = price ? Math.max(price - lowerValue, price * 0.1) : 0;
     recs.push({
       id: acc.id, name: acc.name, rarity: acc.rarity, gain, price: net || price, fullPrice: price,

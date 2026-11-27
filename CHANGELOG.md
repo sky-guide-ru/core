@@ -4,6 +4,10 @@
 
 ## Не выпущено
 
+## 0.2.36
+
+- `canSellCopy` и в аксессуарах: у своих аксессуаров флаг `sellable`; доплата за следующую версию (шаг `tier`, `upgradeFrom`, `acc_upgrade` в `planItemUpgrades`) без вычета младшей версии из Museum или Soulbound.
+
 ## 0.2.35
 
 - `lib/item-props.js`: `canSellCopy(it)` — экземпляр, сданный в Museum (одолженный обратно), и Soulbound / Co-op Soulbound продать нельзя. «Без дела лежит» (`money-idle`) и «Что продать» такие вещи не советуют.
