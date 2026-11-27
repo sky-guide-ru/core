@@ -121,3 +121,30 @@ test('Magic Find без рынка: аксессуары и Looting с подс�
   assert.ok(r.next.some(n => n.how?.startsWith('где ') && n.key !== 'looting'), 'аксессуары с MF');
   assert.equal(magicFind(m, { price: () => 0 }).next.filter(n => n.key === 'looting').length, 0, 'обычный профиль без цены — как раньше');
 });
+
+import { bingoGoalsLeft, bingoEventOf } from '../src/lib/live-status.js';
+
+test('Bingo: невыполненные цели ивента — первым шагом плана', () => {
+  const ev = bingoEventOf({ id: 42, name: 'November', start: 1000, end: Date.now() + 86400000, goals: [
+    { id: 'a', name: 'Farmer', lore: '§7Reach §aFarming XV§7.' }, { id: 'b', name: 'Fisher', lore: '§7Catch a Squid.' }, { id: 'c', name: 'Miner' }] });
+  const left = bingoGoalsLeft({ events: [{ key: 42, points: 3, completed_goals: ['b'] }] }, ev);
+  assert.deepEqual(left.map(g => g.id), ['a', 'c']);
+  assert.equal(left[0].lore, 'Reach Farming XV.');
+  assert.equal(bingoGoalsLeft(null, ev).length, 3, 'ещё ни одной цели — все');
+  assert.equal(bingoGoalsLeft(null, { ...ev, end: 1 }), null, 'ивент закончился');
+  const m = { ...ownercatMember(), gameMode: 'bingo', cookie: false, bingoGoals: left };
+  const steps = buildRoadmap(m, ACC, GEAR, { price, obtain });
+  const s = byId(steps).get('bingo-goals');
+  assert.match(s.title, /осталось целей — 2/);
+  assert.match(s.how[0], /^Farmer: Reach Farming XV\.$/);
+  assert.ok(!byId(buildRoadmap({ ...m, gameMode: 'ironman' }, ACC, GEAR, { price, obtain })).has('bingo-goals'), 'не Bingo — без шага');
+});
+
+test('Stranded: нет шагов про острова, куда не попасть', () => {
+  const away = /^(dungeon-|kuudra|crimson-|rift-|hotm|hotf)/;
+  const normal = buildRoadmap({ ...ownercatMember(), cookie: false }, ACC, GEAR, { price, obtain });
+  assert.ok(normal.some(s => away.test(s.id)), 'у обычного профиля такие шаги есть — проверка не пустая');
+  const stranded = buildRoadmap({ ...ownercatMember(), gameMode: 'island', cookie: false }, ACC, GEAR, { price, obtain });
+  assert.deepEqual(stranded.filter(s => away.test(s.id)).map(s => s.id), []);
+  assert.ok(stranded.length > 0);
+});

@@ -5,7 +5,7 @@ import { npcCoinPrice, obtainHint } from './lib/npc-shop.js';
 import { hypixelInfoOf } from './lib/hypixel-player.js';
 import { guildFor } from './guild.js';
 import { statusFor, bingoRawFor } from './live.js';
-import { statusOf, bingoOf } from './lib/live-status.js';
+import { statusOf, bingoOf, bingoGoalsLeft } from './lib/live-status.js';
 import { bingoEvent } from './calendar/index.js';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -312,7 +312,10 @@ async function doRefreshProfile() {
     state.member.guild = await guildP;
     const demoFile = f => { try { return JSON.parse(fs.readFileSync(path.join(config.dataDir, f), 'utf8')); } catch { return null; } };
     state.member.online = state.demo ? statusOf(demoFile('fixture-status.json')) : await statusP;
-    state.member.bingo = bingoOf(state.demo ? demoFile('fixture-bingo.json') : await bingoP, bingoEvent());
+    const bingoRaw = state.demo ? demoFile('fixture-bingo.json') : await bingoP;
+    state.member.bingo = bingoOf(bingoRaw, bingoEvent());
+    // Профиль Bingo: невыполненные цели ивента идут в план (advisor bingoRules)
+    if (state.member.gameMode === 'bingo') state.member.bingoGoals = bingoGoalsLeft(bingoRaw, bingoEvent());
     const gear = reanalyze();
     const snap = snapshot(state.member, gear);
     const prev = lastSnap || state.history[state.history.length - 1];
