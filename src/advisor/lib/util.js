@@ -72,6 +72,9 @@ export function makeCtx(member, acc, gear, opts = {}) {
 }
 
 /** HYPERION → Hyperion, ENDER_DRAGON;4 → Ender Dragon */
+/** «Wolf Pet», а не «Wolf»: одним словом это часто имя моба, и ссылка в тексте открыла бы его, а не питомца. */
+export const petName = n => (/ Pet$/.test(n) ? n : `${n} Pet`);
+
 export function prettyId(id) {
   if (!id) return '';
   return String(id).split(';')[0].toLowerCase().split('_').map(w => w ? w[0].toUpperCase() + w.slice(1) : w).join(' ');
