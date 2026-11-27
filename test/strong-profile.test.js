@@ -80,3 +80,12 @@ test('миньоны в коопе: слоты по общим уникальн�
   assert.ok(s, 'шаг есть');
   assert.match(s.why, new RegExp(`Уникальных крафтов: ${all.length} `));
 });
+
+test('«Где XP дешевле»: Collections — теми же числами, что раздел «Коллекции»', async () => {
+  const { sbxpPlan } = await import('../src/analysis/sbxp.js');
+  const m = ownercatMember();
+  const rows = sbxpPlan(m, { collections: { tiers: 793, sbXpMax: 3172 } });
+  const c = rows.find(r => r.id === 'collections');
+  assert.equal(c.have, 3172);
+  assert.equal(c.max, 3172);
+});

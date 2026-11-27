@@ -18,7 +18,7 @@ const SKILLS = ['farming', 'mining', 'combat', 'foraging', 'fishing', 'enchantin
 
 /**
  * @param {object} m разобранный участник
- * @param {{ acc?: object, petScore?: object, museumBest?: {id,name,cost,gain,perXp}|null, museumFreeXp?: number, noMarket?: boolean }} o
+ * @param {{ acc?: object, petScore?: object, museumBest?: {id,name,cost,gain,perXp}|null, museumFreeXp?: number, noMarket?: boolean, collections?: {tiers:number, sbXpMax:number}|null }} o
  *   noMarket — Ironman, Stranded, Bingo: без цен рынка, только что даёт XP и где это добыть
  * @returns {{ level: number, xp: number, toNext: number, rows: Array<{ id, title, have, max, free?: number, perXp?: number|null, cost?: number|null, gain?: number|null, text, href }> }}
  */
@@ -62,8 +62,10 @@ export function sbxpPlan(m, o = {}) {
     text: 'Каждый новый крафт миньона даёт XP, больше всего — тиры XI (12 XP) и XII (24 XP).', href: '#/minions' });
 
   // Collections: 4 XP за тир
-  const tiers = (m.unlockedCollTiers || []).length;
-  if (tiers) rows.push({ id: 'collections', title: 'Collections', have: Math.min(tiers * SBXP.perCollectionTier, SBXP.collectionsMax), max: SBXP.collectionsMax, perXp: null,
+  // С разбором коллекций (o.collections) — те же числа, что в разделе «Коллекции»; без него — по открытым тирам
+  const tiers = o.collections?.tiers ?? (m.unlockedCollTiers || []).length;
+  const collMax = o.collections?.sbXpMax || SBXP.collectionsMax;
+  if (tiers) rows.push({ id: 'collections', title: 'Collections', have: Math.min(tiers * SBXP.perCollectionTier, collMax), max: collMax, perXp: null,
     text: '4 XP за каждый новый тир коллекции.', href: '#/collections' });
 
   // Skills: XP за уровни

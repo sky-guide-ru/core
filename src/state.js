@@ -31,6 +31,7 @@ import { dungeonChests } from './market/methods/combat.js';
 import { listByCategory } from './items-ru/index.js';
 import { neu, itemName } from './neu.js';
 import { museumSummary } from './museum/index.js';
+import { analyzeCollections } from './collections/index.js';
 import { pushSnapshot, compactHistory } from './history.js';
 import { createDiskCache } from './lib/disk-cache.js';
 import { tx, messageOf, remember } from '../i18n/msg.js';
@@ -182,7 +183,9 @@ export function analyzeMember(m) {
   // «Обзор»: перерыв в игре и ежедневные дела; «Прогресс»: дешёвый SkyBlock XP и сундуки данжей
   const returning = safe('возвращение', () => returningInfo(m));
   const dailies = safe('дейлики', () => dailiesOf(m));
-  const sbxp = safe('SkyBlock XP', () => sbxpPlan(m, { acc, petScore, museumBest: museum?.best || null, museumFreeXp: museum?.canDonateXp || 0, noMarket }));
+  // Коллекции — тем же расчётом, что раздел «Коллекции» (кооп, максимум из справочника Hypixel)
+  const colls = safe('коллекции', () => analyzeCollections(m));
+  const sbxp = safe('SkyBlock XP', () => sbxpPlan(m, { acc, petScore, museumBest: museum?.best || null, museumFreeXp: museum?.canDonateXp || 0, noMarket, collections: colls?.status === 'ok' ? colls : null }));
   const chests = safe('сундуки', () => dungeonChests(noMarket ? npcOnlyCtx(marketCtx()) : marketCtx(), m));
   return { acc, gear, roadmap, map, plan, summary, power, methods, museum, petScore, chocolate, returning, dailies, sbxp, chests };
 }
