@@ -78,12 +78,26 @@ test('coopShared: складывает коллекции и крафты, пр�
   const p = { members: {
     a: { collection: { WHEAT: 10 }, player_data: { crafted_generators: ['WHEAT_1', 'WHEAT_2'] } },
     b: { collection: { WHEAT: 5, CACTUS: 3 }, player_data: { crafted_generators: ['WHEAT_1', 'SNOW_1'] } },
-    c: { profile: { deletion_notice: { timestamp: 1 } }, collection: { WHEAT: 999 } },
+    c: { profile: { deletion_notice: { timestamp: 1 } }, collection: { WHEAT: 999 }, player_data: { crafted_generators: ['CLAY_1'] } },
+    d: { profile: { coop_invitation: { confirmed: false } }, player_data: { crafted_generators: ['SAND_1'] } },
   } };
   const s = coopShared(p, 'a');
   assert.deepEqual(s.collections, { WHEAT: 15, CACTUS: 3 });
-  assert.deepEqual(s.minions.sort(), ['SNOW_1', 'WHEAT_1', 'WHEAT_2']);
+  // Крафты ушедшего (c) засчитаны, как в игре; не принявшего приглашение (d) — нет
+  assert.deepEqual(s.minions.sort(), ['CLAY_1', 'SNOW_1', 'WHEAT_1', 'WHEAT_2']);
   assert.equal(s.members.length, 2);
+});
+
+test('coopShared: остался один, но крафты ушедших засчитаны', () => {
+  const p = { members: {
+    a: { collection: { WHEAT: 10 }, player_data: { crafted_generators: ['CLAY_12'] } },
+    b: { profile: { deletion_notice: { timestamp: 1 } }, player_data: { crafted_generators: ['CLAY_1', 'CLAY_2'] } },
+  } };
+  const s = coopShared(p, 'a');
+  assert.equal(s.collections, null);
+  assert.equal(s.members.length, 1);
+  assert.deepEqual(s.minions.sort(), ['CLAY_1', 'CLAY_12', 'CLAY_2']);
+  assert.equal(coopShared({ members: { a: p.members.a, b: { profile: { deletion_notice: {} } } } }, 'a'), null);
 });
 
 test('миньоны: слоты с Community Shop, пропуски тиров, замки, дешёвые крафты, доход', () => {

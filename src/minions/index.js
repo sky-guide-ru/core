@@ -175,7 +175,7 @@ export function analyzeMinions(m, o = {}) {
   const profit = types.filter(t => t.perDay).sort((a, b) => b.perDay - a.perDay).map(t => t.type);
   return {
     unique, ownUnique, totalPossible,
-    coop: m?.coop ? { members: m.coop.members.length } : null,
+    coop: m?.coop?.members?.length > 1 ? { members: m.coop.members.length } : null,
     slots: sl.slots, community, communityMax: COMMUNITY_SLOTS_MAX, totalSlots: sl.slots + community,
     nextAt: sl.nextAt, left: sl.left, maxSlots: SLOT_STEPS[SLOT_STEPS.length - 1][1],
     ladder: SLOT_STEPS.map(([need, s]) => ({ need, slots: s, done: unique >= need })),
