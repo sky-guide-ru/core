@@ -75,5 +75,9 @@
  "Сезон": "Season",
  "Каждый новый сезон шар «отвечает» случайной фразой, и от неё зависит бонус до конца сезона.": "Each new season the ball \"answers\" with a random phrase, and it decides the bonus until the season ends.",
  "✔ В плане покупок («Что делать» → «План покупок»)": "✔ In the shopping plan (“What to do” → “Shopping plan”)",
- "+ В план покупок": "+ To shopping plan"
+ "+ В план покупок": "+ To shopping plan",
+ "В плане добычи": "In farming plan",
+ "+ В план добычи": "+ Add to farming plan",
+ "✔ {0} («Что делать» → «{1}»)": "✔ {0} («What to do» → «{1}»)",
+ "В плане покупок": "In shopping plan"
 }
