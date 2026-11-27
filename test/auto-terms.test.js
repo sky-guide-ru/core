@@ -8,6 +8,13 @@ const items = new Map(Object.entries({
   'SHARPNESS;5': { id: 'SHARPNESS;5', name: 'Enchanted Book', rarity: 'UNCOMMON', lore: ['§8Combinable in Anvil', '', '§9Sharpness V', '§7Increases melee damage'], recipes: [] },
   'SHARPNESS;6': { id: 'SHARPNESS;6', name: 'Enchanted Book', rarity: 'RARE', lore: ['', '§9Sharpness VI'], recipes: [] },
   'WOLF;4': { id: 'WOLF;4', name: '[Lvl {LVL}] Wolf', rarity: 'LEGENDARY', lore: [], recipes: [] },
+  WOLF_MONSTER: { id: 'WOLF_MONSTER', name: 'Wolf (Monster)', lore: [], recipes: [] },
+  'MEGALODON;4': { id: 'MEGALODON;4', name: '[Lvl {LVL}] Megalodon', rarity: 'LEGENDARY', lore: [], recipes: [] },
+  WHEAT: { id: 'WHEAT', name: 'Wheat', rarity: 'COMMON', lore: [], recipes: [] },
+  MELON: { id: 'MELON', name: 'Melon Slice', rarity: 'COMMON', lore: [], recipes: [] },
+  KAT_NPC: { id: 'KAT_NPC', name: 'Kat (NPC)', lore: [], recipes: [] },
+  MADDOX_THE_SLAYER_NPC: { id: 'MADDOX_THE_SLAYER_NPC', name: 'Maddox the Slayer (NPC)', lore: [], recipes: [] },
+  REED_RIFT_NPC: { id: 'REED_RIFT_NPC', name: 'Reed (Rift NPC)', lore: [], recipes: [] },
   ENCHANTED_CARROT: { id: 'ENCHANTED_CARROT', name: 'Enchanted Carrot', rarity: 'UNCOMMON', lore: [], recipes: [] },
 }));
 const constants = {
@@ -37,7 +44,7 @@ test('автотермины: скиллы из NEU, reforges со статам�
 
 test('обычные слова не путаются с терминами', () => {
   const lex = lexicon(items, constants);
-  assert.deepEqual(findPhrases('Wolf бегает быстро. Fast and fine. Rich Light Pure.', lex).map(h => h.phrase), []);
+  assert.deepEqual(findPhrases('Fast and fine. Rich Light Pure.', lex).map(h => h.phrase), []);
   const all = lexiconPhrases(items, constants);
   assert.ok(!all['гости'] && !all['существа'], 'русские слова гайдов, которые значат обычное, не идут в общий словарь');
   assert.equal(all.Dungeons, 't:menu.dungeons');
@@ -47,4 +54,21 @@ test('refsData отдаёт подсказки по ref и пропускает 
   const d = refsData(['t:menu.dungeons', 'i:SHARPNESS;5', 'i:NOPE', 't:nope', 'x:bad'], { items, constants });
   assert.deepEqual(Object.keys(d).sort(), ['i:SHARPNESS;5', 't:menu.dungeons']);
   assert.ok(d['t:menu.dungeons'].how.length >= 2);
+});
+
+test('питомцы, ресурсы коллекций, NPC, зоны и меню Garden получают ссылки', () => {
+  const lex = lexicon(items, constants);
+  const ref = p => findPhrases(p, lex)[0]?.ref;
+  assert.equal(ref('Megalodon'), 'i:MEGALODON;4', 'питомец из одного слова без своего моба — ссылка на питомца');
+  assert.equal(ref('Wolf'), 'm:WOLF_MONSTER', 'просто «Wolf» — моб');
+  assert.equal(ref('Wolf Pet'), 'i:WOLF;4');
+  assert.equal(ref('Wheat'), 'i:WHEAT', 'ресурс коллекции из одного слова');
+  assert.equal(ref('Melon'), 'i:MELON', 'культуру игра зовёт «Melon», а предмет — «Melon Slice»');
+  assert.equal(ref('Kat'), 'n:KAT_NPC', 'NPC из трёх букв');
+  assert.equal(ref('Maddox'), 'n:MADDOX_THE_SLAYER_NPC', '«Maddox the Slayer» — и по имени');
+  assert.equal(ref('Reed'), 'n:REED_RIFT_NPC', 'NPC Рифта');
+  assert.equal(ref('Desk'), 't:garden_desk');
+  assert.equal(ref('Wyld Woods'), 't:zone.rift.wyld_woods');
+  assert.equal(ref('Jade'), 't:gem.Jade');
+  assert.equal(ref('Mages'), 't:factions');
 });

@@ -5,6 +5,9 @@ import { fmtCoins } from '../util.js';
 import { ru } from '../../../../i18n/msg.js';
 import { tx } from '../../../../i18n/msg.js';
 
+// «Wolf Pet», а не «Wolf»: одним словом это имя моба, и ссылка открыла бы его, а не питомца
+const petName = n => (/ Pet$/.test(n) ? n : tx`${n} Pet`);
+
 export function petScoreRules(ctx, add) {
   const m = ctx.m;
   if (!m.pets?.length) return;
@@ -20,8 +23,8 @@ export function petScoreRules(ctx, add) {
     title: tx`Pet Score ${ps.score} → ${ps.next.need}: +1 ✯ Magic Find`,
     why: ru`Pet Score даёт Magic Find навсегда (сейчас +${ps.mf}). До следующего порога не хватает ${ps.next.left}. Каждый тип питомца считается один раз по высшей редкости, ещё +1 за питомца максимального уровня.`,
     how: [
-      ...near.slice(0, 3).map(p => ru`Докачай ${p.name} (Lvl ${p.level} → ${p.maxLevel}): +1 очко бесплатно`),
-      ...picks.map(o => ru`Купить: ${o.name}${o.tier ? tx` (${o.tier[0]}${o.tier.slice(1).toLowerCase()})` : ''} — ~${fmtCoins(o.cost)}, +${o.points}`),
+      ...near.slice(0, 3).map(p => ru`Докачай ${petName(p.name)} (Lvl ${p.level} → ${p.maxLevel}): +1 очко бесплатно`),
+      ...picks.map(o => ru`Купить: ${petName(o.name)}${o.tier ? tx` (${o.tier[0]}${o.tier.slice(1).toLowerCase()})` : ''} — ~${fmtCoins(o.cost)}, +${o.points}`),
     ],
     items: picks.map(o => o.id),
     cost: picks.length ? ps.plan.cost : undefined,

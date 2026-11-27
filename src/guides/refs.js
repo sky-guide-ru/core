@@ -13,11 +13,12 @@ import { indexNeu, islandRu, nearestWarp, costLine, reqRu } from '../analysis/ob
 import { GLOSSARY } from './glossary.js';
 import { CREATURES } from './fishing-data.js';
 import { buildTerms } from './terms.js';
+import COLLECTIONS from '../collections/data/resource.json' with { type: 'json' };
 import { tx } from '../../i18n/msg.js';
 
 const strip = s => String(s || '').replace(/§./g, '').trim();
 const normQ = s => s.replace(/[’`]/g, '\'');
-const ENTITY = { NPC: 'n', Monster: 'm', 'Sea Creature': 'm', Boss: 'm', Miniboss: 'm', Creature: 'm', Mayor: 'n' };
+const ENTITY = { NPC: 'n', 'Rift NPC': 'n', Monster: 'm', 'Sea Creature': 'm', Boss: 'm', Miniboss: 'm', Creature: 'm', Mayor: 'n' };
 const RARITY_RANK = { COMMON: 0, UNCOMMON: 1, RARE: 2, EPIC: 3, LEGENDARY: 4, MYTHIC: 5 };
 // Слова, которые совпадают с названием предмета, но в тексте почти всегда значат другое
 export const STOP = new Set(['Speed', 'Strength', 'Defense', 'Health', 'Intelligence', 'Ferocity', 'Magic Find', 'Mining', 'Fishing', 'Farming', 'Foraging', 'Combat',
@@ -28,9 +29,9 @@ export const STOP = new Set(['Speed', 'Strength', 'Defense', 'Health', 'Intellig
   'Mining Speed', 'Mining Fortune', 'Axe Toss', 'Damage Boost', 'Deep Waters', 'Hunters Luck', 'Luck of the Forest', 'Multi Drop', 'Fuel Cap', 'Cost Reduction',
   'Organic Matter Cap', 'Absorb', 'Dominus', 'Hydra Strike', 'Arcane Energy', 'Night', 'Dark', 'Light', 'Water', 'Lava', 'Ice', 'Fire', 'Shadow', 'Red', 'Blue',
   'Golden', 'Green', 'Purple', 'Pink', 'Black', 'White', 'Super', 'Max', 'Rod', 'Fish', 'Mask', 'Ring', 'Talisman', 'Artifact', 'Bow', 'Sword', 'Pickaxe', 'Drill',
-  'Stone', 'Wood', 'Dirt', 'Sand', 'Snow', 'Clay', 'Coal', 'Iron', 'Gravel', 'Wheat', 'Carrot', 'Potato', 'Pumpkin', 'Melon', 'Cactus', 'Bones', 'Bone', 'String',
+  'Stone', 'Wood', 'Dirt', 'Sand', 'Snow', 'Clay', 'Coal', 'Iron', 'Gravel', 'Bones', 'Bone', 'String',
   'Feather', 'Leather', 'Apple', 'Book', 'Paper', 'Map', 'Compass', 'Clock', 'Arrow', 'Egg', 'Flower', 'Rose', 'Sponge', 'Mole', 'Rabbit', 'Ocelot', 'Monkey',
-  'Tiger', 'Elephant', 'Squid', 'Bal', 'Frog', 'Sloth', 'Slug', 'Hedgehog', 'Jerry', 'Pet', 'Hub', 'Forge', 'Storm', 'Necron', 'Goldor', 'Maxor', 'Livid',
+  'Tiger', 'Elephant', 'Squid', 'Bal', 'Frog', 'Sloth', 'Slug', 'Jerry', 'Pet', 'Hub', 'Forge', 'Storm', 'Necron', 'Goldor', 'Maxor', 'Livid',
   'Thorn', 'Bonzo', 'Scarf', 'Sadan', 'Thunder', 'Kuudra', 'Montezuma', 'Bacte', 'Wizard', 'Enigma', 'Elise', 'Tel Kar', 'Leech Supreme',
 ]);
 // …но в ячейке, которая сама ссылается на предмет, это слово всё равно станет ссылкой на него (см. клиент).
@@ -77,8 +78,13 @@ function entryOf(items, constants) {
     const ent = /^(.*?)\s*\(([^)]+)\)$/.exec(name);
     if (ent && ENTITY[ent[2]]) {
       const kind = ENTITY[ent[2]];
+      const rift = ent[2] === 'Rift NPC' ? 0.01 : 0; // тёзка из Рифта уступает основному NPC (Maddox, Barry)
       const hasDrops = (it.recipes || []).some(r => r.type === 'drops');
-      if ((!STOP.has(ent[1]) || kind === 'n') && ent[1].length >= 4) set(ent[1], `${kind}:${it.id}`, kind === 'n' ? 2 : hasDrops ? 2.1 : 2.6);
+      // NPC — от трёх букв (Kat, Roy); «Maddox the Slayer» находится и по «Maddox»
+      if ((!STOP.has(ent[1]) || kind === 'n') && ent[1].length >= (kind === 'n' ? 3 : 4)) set(ent[1], `${kind}:${it.id}`, kind === 'n' ? 2 + rift : hasDrops ? 2.1 : 2.6);
+      const short = kind === 'n' && /^(\S{4,}) the \S/.exec(ent[1]);
+      if (short && !STOP.has(short[1])) set(short[1], `${kind}:${it.id}`, 2.05 + rift);
+      if (NPC_ALIAS[ent[1]]) set(NPC_ALIAS[ent[1]], `${kind}:${it.id}`, 2.05);
       continue;
     }
     if (/^Enchanted Book$|^\d+$|Skin$|^\[/.test(name) && !/^\[Lvl/.test(name)) continue;
@@ -107,9 +113,17 @@ function entryOf(items, constants) {
     const armor = /^(.+?) (Chestplate|Tunic|Shirt)$/.exec(name);
     if (armor) set(`${armor[1]} Armor`, `i:${it.id}`, 1.2 + it.id.length / 1000);
   }
-  // Питомцы из одного слова (Wolf, Tarantula, Enderman…) в тексте почти всегда значат моба или слеер — их ссылки дают только ячейки
+  // Ресурсы коллекций (Wheat, Melon, Sunflower, Emerald…) — ссылки, даже если это COMMON из одного слова:
+  // их называют советы плана, Garden, миньоны и коллекции. Неоднозначные слова (Coal, Iron, Diamond…) держит STOP.
+  for (const name of COLLECTION_NAMES) {
+    const id = COLLECTION_ITEM[name.id] || name.id.replace(':', '-');
+    if (items.has(id) && !STOP.has(name.name)) set(name.name, `i:${id}`, 1.05);
+  }
+  for (const [name, id] of Object.entries({ ...COLLECTION_ALIAS, ...FAMILY_ALIAS })) if (items.has(id)) set(name, `i:${id}`, 1.05);
+  // Питомцы: «Wolf Pet» — всегда питомец. Просто «Wolf», «Chicken», «Enderman» — это моб, если он есть в NEU
+  // (такое имя уже занято мобом); питомцы без своего моба (Megalodon, Griffin, Hedgehog) подсвечиваются и одним словом.
   for (const [name, p] of petBest) {
-    if (!STOP.has(name) && /\s/.test(name)) set(name, `i:${p.id}`, 1.3);
+    if (!STOP.has(name) && (/\s/.test(name) || !lex.has(normQ(name)))) set(name, `i:${p.id}`, 1.3);
     set(`${name} Pet`, `i:${p.id}`, 1.3); // «Wolf Pet», «Ender Dragon Pet»
   }
   for (const [name, b] of enchBest) if (!STOP.has(name) && !ENCH_BARE_SKIP.has(name)) set(name, `i:${b.id}`, 1.1);
@@ -120,6 +134,16 @@ function entryOf(items, constants) {
   for (const c of CREATURES) set(c.name, `c:${c.name}`, 0.9);
   return lex;
 }
+
+// Ресурсы всех коллекций игры: { id, name }. У грибов в NEU своя «коллекционная» запись — карточку берём у Red Mushroom.
+const COLLECTION_NAMES = Object.values(COLLECTIONS.collections || {}).flatMap(c => Object.entries(c.items || {}).map(([id, v]) => ({ id, name: v.name })));
+const COLLECTION_ITEM = { MUSHROOM_COLLECTION: 'RED_MUSHROOM' };
+// Короткие имена, которыми культуры называет сама игра (Crop Upgrades, Jacob's Contest, Crop Milestones)
+const COLLECTION_ALIAS = { Melon: 'MELON', Cocoa: 'INK_SACK-3' };
+// NPC, которых в тексте зовут коротко
+const NPC_ALIAS = { 'Ubik Von Neumann': 'Ubik' };
+// Семейства снаряжения, которые текст называет одним словом: ссылка ведёт на первую ступень
+const FAMILY_ALIAS = { 'Fishing Net': 'BASIC_FISHING_NET', Lasso: 'ABYSMAL_LASSO', 'Black Hole': 'SMALL_POCKET_BLACK_HOLE', 'Hunter Armor': 'BRONZE_HUNTER_CHESTPLATE' };
 
 const lexCache = new WeakMap();
 export function lexicon(items, constants = {}) {
