@@ -40,6 +40,6 @@ export function returningInfo(m, now = Date.now()) {
   const br = breakOf(m?.activity, now);
   if (!br) return null;
   const fresh = NEW_THINGS.filter(x => { try { return x.when(m); } catch { return false; } }).map(({ id, title, text, href }) => ({ id, title, text, href }));
-  const title = br.state === 'away' ? ru`В SkyBlock не заходили ${br.days} дн.` : ru`С возвращением после ${br.days} дн. перерыва`;
+  const title = br.state === 'away' ? ru`Активности в SkyBlock не видно ${br.days} дн.` : ru`С возвращением после ${br.days} дн. перерыва`;
   return { ...br, title, fresh };
 }

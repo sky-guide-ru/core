@@ -107,7 +107,7 @@ export const VIDEOS = {
     { id: '8mxfJJ6RKwA', label: 'Что брать в магазинах эссенций', channel: 'AcaciaDragon', lang: 'en', title: 'Essence shop guide for Hypixel Skyblock' },
   ],
   collectibles: [
-    { id: 'paw1rnwE5yc', label: 'Все феи-души (227) по местам', channel: 'AggeronTV', lang: 'en', title: '[UPDATED] All 227/227 Fairy Souls Locations | Hypixel Skyblock | Gain Over 500 Health' },
+    { id: 'paw1rnwE5yc', label: 'Феи-души по местам (227 из 289, без новых островов)', channel: 'AggeronTV', lang: 'en', title: '[UPDATED] All 227/227 Fairy Souls Locations | Hypixel Skyblock | Gain Over 500 Health' },
   ],
   diana: [
     { id: 'wmHOgxUjIOk', label: 'Гайд по событию Diana', channel: 'Import', lang: 'en', year: 2025, title: 'The Ultimate Diana Guide 2025 | Hypixel Skyblock' },

@@ -32,6 +32,7 @@ export function sourceOf(url) {
 // Ошибка без секретов: ключи в адресах и заголовках не должны попасть на страницу
 export const clean = s => String(s || '').replace(/(key|api[-_]?key|token)=[^&\s"]+/gi, '$1=***').replace(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi, '***').replace(/sk-ant-[\w-]+/g, '***').slice(0, 160);
 
+const FILE_HOSTS = new Set(['neu', 'cdn.jsdelivr.net']);
 const ORDER = ['hypixel-key', 'hypixel-bazaar', 'hypixel-ah', 'hypixel-res', 'neu', 'coflnet', 'wiki', 'claude', 'mojang', 'skins'];
 
 export function createApiStats({ clock = () => Date.now() } = {}) {
@@ -49,7 +50,8 @@ export function createApiStats({ clock = () => Date.now() } = {}) {
     const now = clock();
     s.lastMs = Math.round(ms);
     s.avgMs = s.avgMs == null ? s.lastMs : Math.round(s.avgMs * 0.8 + ms * 0.2);
-    const ok = !error && status > 0 && status < 400;
+    // 404 у файловых хостов (GitHub, jsDelivr) — сервер ответил, просто такого файла нет: иконки ищутся перебором путей
+    const ok = (!error && status > 0 && status < 400) || (status === 404 && FILE_HOSTS.has(src.id));
     if (ok) { s.ok++; s.lastOkAt = now; } else { s.errors++; s.lastErrAt = now; s.lastError = clean(error || `HTTP ${status}`); }
     if (src.id === 'hypixel-key') {
       const n = k => { const v = headers?.get?.(k); return v == null || v === '' ? null : Number(v); };
