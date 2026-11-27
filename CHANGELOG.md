@@ -4,6 +4,15 @@
 
 ## Не выпущено
 
+## 0.2.33
+
+- Ещё варианты для профилей без рынка (Ironman, Stranded, Bingo):
+  - `buildObtainGuide(id, { noMarket })`: без Bazaar, аукциона и Dark Auction, в дереве ингредиентов — только NPC и добыча;
+  - `sbxpPlan(m, { noMarket })`: Magical Power, Pet Score и Museum без цены за XP;
+  - `magicFind(m, { noMarket, obtain })`: шаги без цены NPC остаются с подсказкой «где добыть»;
+  - `state.analyzeMember`: Magic Find по ценам NPC, сундуки данжей — по ценам продажи NPC (`npcOnlyCtx`).
+- Переводы en для новости и текстов 0.2.32.
+
 ## 0.2.32
 
 - Варианты для профилей без рынка (Ironman, Stranded, Bingo), обычный профиль не меняется:
