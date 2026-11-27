@@ -4,6 +4,16 @@
 
 ## Не выпущено
 
+## 0.2.37
+
+- Словарь подсказок (`guides/refs.js`, `guides/terms.js`, `glossary.js`) полнее:
+  - ресурсы всех коллекций (`collections/data/resource.json`) — ссылки, даже COMMON из одного слова: Wheat, Melon, Mushroom, Sunflower, Moonflower, Emerald…; культуры убраны из `STOP`;
+  - питомец из одного слова — ссылка на питомца, если в NEU нет моба с тем же именем (Megalodon, Griffin, Hedgehog, Tarantula); Pet Score в плане пишет «Wolf Pet»;
+  - NPC Рифта (`(Rift NPC)`), NPC от трёх букв (Kat), «Maddox the Slayer» и по «Maddox»;
+  - зоны Рифта (`rift/data.js`) и зоны Galatea, Dwarven Mines; гемы (Ruby… Peridot); Desk, SkyMart, Plots, фракции, Fallen Star, Fusion Machine, SkyBlock Menu; Fig/Mangrove/Helix/Hunter Fortune;
+  - семейства снаряжения одним словом: Lasso, Fishing Net, Black Hole, Hunter Armor.
+- Новость «Больше названий открываются нажатием», переводы en.
+
 ## 0.2.36
 
 - `canSellCopy` и в аксессуарах: у своих аксессуаров флаг `sellable`; доплата за следующую версию (шаг `tier`, `upgradeFrom`, `acc_upgrade` в `planItemUpgrades`) без вычета младшей версии из Museum или Soulbound.

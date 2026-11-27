@@ -300,5 +300,14 @@
  "Башня волшебника в Хабе: вход в Рифт.": "The wizard's tower in the Hub: the Rift entrance.",
  "Замок вампиров в Рифте: Vampire Slayer.": "The vampire castle in the Rift: Vampire Slayer.",
  "Домик рыбака у озера в Хабе: Fishing Merchant продаёт наживку и Angler Armor.": "The fisherman's hut by the Hub lake: the Fishing Merchant sells bait and Angler Armor.",
- "Особый лавовый пруд на Crimson Isle (за водопадом Blazing Volcano), где ловится Plhlegblast.": "A special lava pond on Crimson Isle (behind the Blazing Volcano waterfall) where Plhlegblast is caught."
+ "Особый лавовый пруд на Crimson Isle (за водопадом Blazing Volcano), где ловится Plhlegblast.": "A special lava pond on Crimson Isle (behind the Blazing Volcano waterfall) where Plhlegblast is caught.",
+ "Фракции Crimson Isle": "Crimson Isle factions",
+ "На Crimson Isle две фракции: Mages (город Scarleton) и Barbarians (Dragontail). Выбираешь одну; её квесты и магазин дают репутацию, броню и доступ к Kuudra.": "Crimson Isle has two factions: Mages (Scarleton) and Barbarians (Dragontail). You pick one; its quests and shop give reputation, armor and access to Kuudra.",
+ "Упавшая звезда в Dwarven Mines: появляется время от времени, её добывают вместе с другими игроками ради Starfall и Mithril Powder.": "A fallen star in the Dwarven Mines: it appears from time to time and players mine it together for Starfall and Mithril Powder.",
+ "Машина в Tangleburg (Galatea): из двух шардов делает новый. Так получают шарды, которые не ловятся охотой.": "A machine in Tangleburg (Galatea): turns two shards into a new one. This is how you get shards that can't be caught by hunting.",
+ "Главное меню игры: звезда Nether Star в последнем слоте инвентаря или команда /sbmenu. Отсюда открываются скиллы, коллекции, Settings и прочие разделы.": "The main game menu: the Nether Star in the last inventory slot or the /sbmenu command. Skills, collections, Settings and other sections open from here.",
+ "Стол в Barn в Garden: главное меню Garden. Отсюда открываются Crop Upgrades, участки (Plots), Garden Level, Crop Milestones и Composter.": "The desk in the Barn on the Garden: the main Garden menu. Crop Upgrades, Plots, Garden Level, Crop Milestones and the Composter open from here.",
+ "/warp garden, подойди к столу в Barn и нажми ПКМ.": "/warp garden, walk up to the desk in the Barn and right-click it.",
+ "Магазин в Garden за Copper: инструменты фермера, улучшения и предметы для Garden.": "The Garden shop for Copper: farming tools, upgrades and Garden items.",
+ "Участки Garden вокруг Barn: всего 24. Открываются за Compost в Desk → Configure Plots; на каждом можно растить свою культуру.": "Garden plots around the Barn: 24 in total. Unlocked with Compost in Desk → Configure Plots; each can grow its own crop."
 }

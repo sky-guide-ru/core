@@ -13,6 +13,7 @@
 import { STAT_NAMES } from '../items-ru/lib/terms.js';
 import { MAYORS, PERK_RU } from '../calendar/mayors.js';
 import { tx } from '../../i18n/msg.js';
+import { AREAS as RIFT_AREAS } from '../rift/data.js';
 
 const SKILL_RU = {
   farming: 'Навык фермерства: растёт за урожай. После 50 кап поднимается до 60 у Anita за медали Jacob\'s Contest.',
@@ -86,6 +87,10 @@ const STAT_RU = {
   'Mining Speed Boost': 'Способность кирки: на время сильно ускоряет добычу.',
   'Combat Wisdom': 'Больше опыта Combat.',
   'Soulflow': 'Топливо для Soulflow Engine и щитов в Rift.',
+  'Fig Fortune': 'Больше брёвен Fig Log с каждого дерева Fig (Galatea).',
+  'Mangrove Fortune': 'Больше брёвен Mangrove Log с каждого дерева Mangrove (Galatea).',
+  'Helix Fortune': 'Больше добычи с деревьев Helix в Torrhus Canyon.',
+  'Hunter Fortune': 'Больше шардов при охоте (Hunting).',
 };
 // Не термины: служебные слова лора и слишком общие слова
 const STAT_SKIP = new Set(['Damage', 'Mana Cost', 'Cooldown', 'Fuel', 'Gemstones', 'Pull', 'Fear', 'Speed Cap', 'Max Storage', 'Time Between Actions',
@@ -155,7 +160,7 @@ const MENUS = {
     text: 'Стол экспериментов на твоём острове: мини-игры раз в день дают Enchanting XP и книги.' },
   hex: { names: ['The Hex', 'Hex'], kind: 'mech', title: 'The Hex', text: 'Меню в Dungeon Hub и на столе зачарования: Hot Potato Book, гемы, Recombobulator, книги и Reforge в одном месте.' },
   maxwell: { names: ['Maxwell', 'Thaumaturgy', 'Tuning'], kind: 'mech', title: 'Maxwell', text: 'Меню Accessory Bag: выбор Power (набор статов от Magical Power) и Tuning — распределение очков в статы.' },
-  chocolate_factory: { names: ['Chocolate Factory', 'Hoppity'], kind: 'mech', title: 'Chocolate Factory', text: 'Шоколадная фабрика (/cf): кликер с Rabbits; Hoppity\'s Hunt — охота за яйцами раз в год.' },
+  chocolate_factory: { names: ['Chocolate Factory', 'Hoppity', 'Hoppity\'s Hunt', 'Hoppity’s Hunt'], kind: 'mech', title: 'Chocolate Factory', text: 'Шоколадная фабрика (/cf): кликер с Rabbits; Hoppity\'s Hunt — охота за яйцами раз в год.' },
   abiphone: { names: ['Abiphone'], kind: 'mech', title: 'Abiphone', text: 'Телефон: звонки NPC (Maddox, Kat, торговцы) из любого места. Контакты открываются квестами.' },
   private_island: { names: ['Private Island'], kind: 'place', title: 'Private Island', warp: 'home', text: 'Твой остров: миньоны, сундуки, Experimentation Table. /warp home.' },
   skill_average: { names: ['Skill Average', 'Skill Avg'], kind: 'mech', title: 'Skill Average', text: 'Средний уровень скиллов (без Runecrafting и Social). Нужен для некоторых мест и предметов.' },
@@ -165,6 +170,26 @@ const MENUS = {
   stars: { names: ['Dungeon Stars', 'звёзды', 'звёзд', 'Звёзды'], kind: 'mech', title: 'Звёзды предмета', text: 'Улучшение предметов данжей за Essence: каждая звезда +10% статов в данже. 5 звёзд обычные, дальше Master Stars.' },
   attribute_shards: { names: ['Attribute Shards', 'Attribute Shard', 'Attributes'], kind: 'mech', title: 'Attributes', text: 'Атрибуты на снаряжении Kuudra и Crimson Isle. Повышаются слиянием и шардами.' },
 };
+
+// Зоны внутри островов: игра называет их на табло, советы и гайды — в тексте. Зоны Рифта берутся из rift/data.js.
+const ZONES = [
+  ['Tangleburg', 'Galatea', 'Городок на Galatea: Hunting, Fusion Machine и NPC охоты.'],
+  ['Murkwater Depths', 'Galatea', 'Подводная зона Galatea: ловушки для водных шардов.'],
+  ['Murkwater Loch', 'Galatea', 'Озеро на Galatea.'],
+  ['Tomb Floodway', 'Galatea', 'Затопленная часть гробницы на Galatea: рыбалка ради шардов.'],
+  ['Wyrmgrove Tomb', 'Galatea', 'Гробница на Galatea.'],
+  ['Royal Mines', 'Dwarven Mines', 'Зона Dwarven Mines с рудой Mithril и Titanium.'],
+  ['Dwarven Base Camp', 'Glacite Tunnels', 'Лагерь у входа в Glacite Tunnels (/warp basecamp).'],
+  ['Khazad-dûm', 'Crystal Hollows', 'Логово босса Bal в Magma Fields (Crystal Hollows).'],
+];
+
+// Гемы: стат и где добывать. Ссылки на Rough и Flawless — для цены
+const GEMS = [
+  ['Ruby', 'Health', 'Crystal Hollows'], ['Amber', 'Mining Speed', 'Crystal Hollows (Goblin Holdout)'], ['Sapphire', 'Intelligence', 'Crystal Hollows (Precursor Remnants)'],
+  ['Jade', 'Mining Fortune', 'Crystal Hollows (Mithril Deposits)'], ['Amethyst', 'Defense', 'Crystal Hollows (Jungle)'], ['Topaz', 'Pristine', 'Crystal Hollows (Magma Fields)'],
+  ['Jasper', 'Strength', 'Crystal Hollows (Fairy Grotto)'], ['Opal', 'True Defense', 'Crimson Isle и Glacite Tunnels'], ['Onyx', 'Crit Damage', 'Glacite Tunnels'],
+  ['Aquamarine', 'Sea Creature Chance', 'Glacite Tunnels'], ['Citrine', 'Foraging Fortune', 'Glacite Tunnels'], ['Peridot', 'Farming Fortune', 'Glacite Tunnels'],
+];
 
 // Перки мэров из двух и больше слов идут в подсказки (Mining Fiesta, Pathfinder одним словом — нет)
 const PERK_OK = n => /\s/.test(n) && n.length >= 8;
@@ -214,6 +239,21 @@ export function buildTerms(constants = {}) {
     const warp = (constants.islands?.island_warps || []).find(w => w.mode === k)?.warp || (k === 'hub' ? 'hub' : null);
     const names = [name, /^The /.test(name) ? name.slice(4) : null].filter(n => n && !taken.has(n));
     add(tx`isle.${k}`, { names, kind: 'place', title: name, text: tx`Остров SkyBlock${k === 'dynamic' ? ': твой личный остров' : ''}.`, warp: warp || undefined });
+  }
+
+  // Зоны: Рифт (из rift/data.js) и таблица выше. Имя, уже занятое другим термином, пропускаем
+  const takenZ = new Set([...m.values()].flatMap(e => e.names));
+  for (const a of RIFT_AREAS) {
+    if (!a.name || takenZ.has(a.name)) continue;
+    add(tx`zone.rift.${a.id}`, { names: [a.name], kind: 'place', title: a.name, text: tx`Зона Рифта. ${a.about || ''}`.trim() });
+  }
+  for (const [name, isle, text] of ZONES) if (!takenZ.has(name)) add(tx`zone.${name}`, { names: [name], kind: 'place', title: name, text: tx`Зона: ${isle}. ${text}` });
+
+  // Гемы
+  for (const [g, stat, where] of GEMS) {
+    add(tx`gem.${g}`, { names: [g, tx`${g} Gemstone`, tx`${g} Gemstones`], kind: 'gem', title: tx`${g} Gemstone`,
+      text: tx`Гем: в слоте снаряжения даёт ${stat}. Где добывать: ${where}. Ступени: Rough → Flawed → Fine → Flawless → Perfect.`,
+      items: [tx`ROUGH_${g.toUpperCase()}_GEM`, tx`FLAWLESS_${g.toUpperCase()}_GEM`] });
   }
 
   // Слееры
