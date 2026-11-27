@@ -111,6 +111,8 @@ function run(ctx) {
       if (s.needsSaving && /минут/.test(s.effort)) s.effort = 'нужно накопить';
     }
     s.priority = Math.round(clamp(s.priority, 0, 100));
+    // Категория без перевода: по ней сайт помнит «Нравится / Не хочу» одинаково на русской и английской версии
+    s.catKey = s.cat;
     // Русские/игровые названия предметов шага — для подсказки при наведении на иконку (а не BURNING_CRIMSON_BOOTS)
     if (s.items?.length) s.itemNames = Object.fromEntries(s.items.map(id => [id, ctx.name(id)]));
     if (!s.guide) { const g = guideFor(s.id); if (g) s.guide = g; }

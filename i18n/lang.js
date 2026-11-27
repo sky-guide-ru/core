@@ -64,7 +64,7 @@ const escText = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g
 const escAttr = s => escText(s).replace(/"/g, '&quot;');
 
 /** Ключи JSON, которые не переводим: по ним сайт ищет данные или это ввод игрока */
-const SKIP_KEYS = new Set(['nameRu', 'aliases', 'search', 'q', 'id', 'key', 'raw', 'nick', 'name_ru', 'loreRu', 'msg']);
+const SKIP_KEYS = new Set(['nameRu', 'aliases', 'search', 'q', 'id', 'key', 'raw', 'nick', 'name_ru', 'loreRu', 'msg', 'catKey']);
 
 /** Перевести дерево JSON на английский (ключи из SKIP_KEYS не трогаем) */
 export const translateDeep = v => getTranslator().deep(v, SKIP_KEYS, { budgetMs: 1500, onOver: () => warnSlow('разбор профиля') });
