@@ -4,6 +4,11 @@
 
 ## Не выпущено
 
+## 0.2.42
+
+- Museum и Pet Score без рынка (Ironman, Stranded, Bingo): цены NPC за монеты (`npcCoinPrice`) вместо AH. `museumPage(m, { items })` и `analyzeMember` ставят `npcOnly: true`; у Pet Score нет варианта «питомец максимального уровня» с AH.
+- Новость «План для Bingo и Stranded»: пункт про Museum и Pet Score.
+
 ## 0.2.41
 
 - Словарь подсказок: COMMON-аксессуары из одного слова (Runebook) — ссылки; знаки ™ ® © не мешают (`InfiniPot™`, `InfiniVacuum™ Hooverius`: словарь хранит имя без знака, `findPhrases` пропускает знак между словами).

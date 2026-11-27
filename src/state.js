@@ -156,10 +156,13 @@ export function analyzeMember(m) {
   const gear = analyzeGear(m);
   const { roadmap, map, plan, summary, power } = advise(m, acc, gear);
   const methods = moneyMethods(m, { networth: gear?.networth?.total });
+  // Ironman, Stranded, Bingo: покупать можно только у NPC за монеты — Museum и Pet Score считают по ценам NPC, а не AH
+  const noMarket = profileMode(m.gameMode).market === false;
+  const npcPrice = id => npcCoinPrice(neu.items, id);
   let museum = null;
-  try { museum = museumSummary(m, { constants: neu.constants, price: priceOf, name: itemName }); } catch (e) { console.warn('[музей]', e.message); }
+  try { museum = museumSummary(m, { constants: neu.constants, price: noMarket ? npcPrice : priceOf, name: itemName }); if (museum && noMarket) museum.npcOnly = true; } catch (e) { console.warn('[музей]', e.message); }
   let petScore = null;
-  try { petScore = petScoreSummary(m, { petIds: allPetIds(), price: priceOf, maxedPrice: id => { const b = prices.bin.get(id); return b?.max || 0; }, name: itemName }); } catch (e) { console.warn('[pet score]', e.message); }
+  try { petScore = petScoreSummary(m, { petIds: allPetIds(), price: noMarket ? npcPrice : priceOf, maxedPrice: noMarket ? () => 0 : id => { const b = prices.bin.get(id); return b?.max || 0; }, name: itemName }); if (petScore && noMarket) petScore.npcOnly = true; } catch (e) { console.warn('[pet score]', e.message); }
   // Подсказки по тексту карточки «Кап Taming»
   if (petScore?.taming?.text) {
     try {
@@ -172,7 +175,6 @@ export function analyzeMember(m) {
   try { chocolate = chocolateAdvice(m.extras?.chocolate); } catch (e) { console.warn('[Chocolate]', e.message); }
   // Magic Find — в куске «Снаряжения» (в /api/state не уходит)
   // Ironman, Stranded, Bingo: без рынка — цены только NPC, остальное «где добыть»
-  const noMarket = profileMode(m.gameMode).market === false;
   if (gear) {
     try { gear.mf = magicFind(m, { constants: neu.constants, price: noMarket ? id => npcCoinPrice(neu.items, id) : buyPriceOf, name: itemName, upgrades: mfUpgrades(), noMarket, obtain: id => obtainHint(neu.items, id) }); } catch (e) { console.warn('[magic find]', e.message); }
   }

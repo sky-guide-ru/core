@@ -82,5 +82,12 @@
  "Вехи музея: {0} из {1}": "Museum milestones: {0} of {1}",
  "Веха {0}: {1} XP{2}": "Milestone {0}: {1} XP{2}",
  "Что есть в музее": "What's in the museum",
- "{0} записей · {1} XP": "{0} entries · {1} XP"
+ "{0} записей · {1} XP": "{0} entries · {1} XP",
+ "У NPC не хватает предметов до вехи, остальное добывается самому:": "NPCs don't sell enough items for the milestone, the rest has to be obtained yourself:",
+ "Всё, что продают NPC за монеты, уже в музее. Остальное добывается самому: оно в каталоге ниже.": "Everything NPCs sell for coins is already in the museum. The rest has to be obtained yourself: it's in the catalog below.",
+ " · у NPC не купить": " · not sold by NPCs",
+ "у NPC не купить": "not sold by NPCs",
+ "Ещё {0} {1} {2} (их добывают сами): они в каталоге ниже.": "{0} more {1} {2} (players obtain them themselves): they're in the catalog below.",
+ "у NPC за монеты": "by NPCs for coins",
+ "на рынке": "on the market"
 }

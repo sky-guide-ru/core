@@ -24,5 +24,8 @@
  "Кап Taming": "Taming cap",
  "Уже сдано: {0}": "Already donated: {0}",
  "Осталось отдать George": "Left to give to George",
- "есть": "owned"
+ "есть": "owned",
+ "Купить у NPC до {0}": "Buy from NPCs up to {0}",
+ " (у NPC не хватает вариантов)": " (NPCs don't have enough options)",
+ "NPC за монеты таких питомцев не продают: новые типы и редкости добываются самому.": "NPCs don't sell these pets for coins: new types and rarities have to be obtained yourself."
 }

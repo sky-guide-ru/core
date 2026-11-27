@@ -4,6 +4,9 @@
 import { analyzeMuseum, museumItemStatus, setName, setIcon } from './analyze.js';
 import { museumCatalog, CATEGORIES, MILESTONE_REWARDS, OTHER_REWARDS, MILESTONE_XP, MILESTONES } from './catalog.js';
 
+import { profileMode } from '../lib/profile-mode.js';
+import { npcCoinPrice } from '../lib/npc-shop.js';
+
 export { analyzeMuseum, museumItemStatus, museumCatalog, setName, setIcon, CATEGORIES };
 
 /** Короткая сводка для /api/state (Обзор, шапка, «Сравнение»): без длинных списков. */
@@ -18,8 +21,12 @@ export function museumSummary(m, o) {
   };
 }
 
+// Ironman, Stranded, Bingo: купить можно только у NPC за монеты — цены NPC вместо AH (нужна база NEU в o.items)
+const npcOnlyOpts = (m, o) => (o?.items && profileMode(m?.gameMode).market === false ? { ...o, price: id => npcCoinPrice(o.items, id), npcOnly: true } : o);
+
 /** Полный ответ для страницы «Музей». */
 export function museumPage(m, o) {
+  o = npcOnlyOpts(m, o);
   const a = analyzeMuseum(m, { ...o, full: true });
   const cat = museumCatalog(o.constants);
   const name = id => o.name?.(id) || id;
@@ -28,6 +35,6 @@ export function museumPage(m, o) {
   for (const e of cat.entries.values()) entryInfo[e.id] = e.set ? { name: setName(e.set, name), icon: setIcon(e.set) } : { name: name(e.id), icon: e.id };
   const milestones = [];
   for (let i = 1; i <= MILESTONES; i++) milestones.push({ n: i, xp: i * MILESTONE_XP, done: a.milestone.n >= i, rewards: MILESTONE_REWARDS[i] || null });
-  return { ...a, entryInfo, milestones, otherRewards: OTHER_REWARDS };
+  return { ...a, entryInfo, milestones, otherRewards: OTHER_REWARDS, npcOnly: !!o.npcOnly };
 }
 
