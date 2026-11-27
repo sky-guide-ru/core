@@ -1,4 +1,7 @@
 {
+  "Бот Sky Guide в Discord": "Sky Guide bot in Discord",
+  "Команды /профиль, /цена и /дальше: профиль игрока, цены Bazaar и Auction House и шаги плана.": "Commands /profile, /price and /next: player profile, Bazaar and Auction House prices and plan steps.",
+  "Ник, привязанный на sky-guide.ru/discord, в /профиль и /дальше можно не писать.": "With a nickname linked at sky-guide.ru/discord, /profile and /next work without typing it.",
  "План считает силу персонажа": "The plan calculates character power",
  "В блоке [Что делать прямо сейчас](overview#now) видны Health, Defense, EHP, Strength, Crit Damage и удар лучшим мечом.": "The [What to do right now](overview#now) block shows Health, Defense, EHP, Strength, Crit Damage and your best sword hit.",
  "Шаги про Magical Power, Tuning и Power показывают, на сколько процентов вырастет удар.": "Magical Power, Tuning and Power steps show by how many percent your hit will grow.",

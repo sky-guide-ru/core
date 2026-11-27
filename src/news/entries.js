@@ -14,6 +14,16 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-bot',
+    date: '2026-11-27',
+    kind: 'new',
+    title: 'Бот Sky Guide в Discord',
+    items: [
+      'Команды /профиль, /цена и /дальше: профиль игрока, цены Bazaar и Auction House и шаги плана.',
+      'Ник, привязанный на sky-guide.ru/discord, в /профиль и /дальше можно не писать.',
+    ],
+  },
+  {
     id: '2026-11-27-verified',
     date: '2026-11-27',
     kind: 'new',
