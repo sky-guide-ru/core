@@ -7,7 +7,7 @@
 //   node scripts/simulate.js --minutes 480 --out ./test-run
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createLiveAdvisor, createMockClient } from '../index.js';
 import { fmtCoins, fmtTime } from '../lib/util.js';
 import { tx } from '../../../i18n/msg.js';
@@ -21,10 +21,10 @@ const MINUTES = Number(val('--minutes', 240));
 const OUT = path.resolve(val('--out', path.join(here, '..', 'test-run')));
 const ADVISOR = path.resolve(val('--advisor', path.join(here, '..', '..', 'advisor')));
 
-const { advise } = await import(path.join(ADVISOR, 'index.js'));
+const { advise } = await import(pathToFileURL(path.join(ADVISOR, 'index.js')).href);
 // фикстура профиля: в папке модулей лежит у advisor, в репозитории трекера — в server/test/fixtures
 const FIXTURE = val('--fixture', [path.join(ADVISOR, 'test', 'fixtures', 'ownercat.js'), path.join(here, '..', '..', '..', 'test', 'fixtures', 'ownercat.js')].find(f => fs.existsSync(f)));
-const { ownercatMember, PRICES } = await import(FIXTURE);
+const { ownercatMember, PRICES } = await import(pathToFileURL(path.resolve(FIXTURE)).href);
 
 // ---------- симулированный мир ----------
 let now = Date.UTC(2026, 10, 22, 14, 0); // 19:00 по Екатеринбургу

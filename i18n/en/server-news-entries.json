@@ -190,5 +190,8 @@
  "В подвале сайта есть «Связь»: почта и форма «Сообщить об ошибке».": "The site footer has a Contact column: email and the “Report a problem” form.",
  "Гильдия игрока в профиле": "Player guild in the profile",
  "В карточке игрока на [Обзоре](overview#guild) видна гильдия: тег, роль, с какого дня в ней и её уровень.": "The player card on the [Overview](overview#guild) shows the guild: tag, role, join date and guild level.",
- "В [Рейтинге](top) рядом с ником стоит тег гильдии.": "The [Leaderboard](top) shows the guild tag next to the name."
+ "В [Рейтинге](top) рядом с ником стоит тег гильдии.": "The [Leaderboard](top) shows the guild tag next to the name.",
+ "Ник из рейтинга убирается по запросу": "Leaderboard names removed on request",
+ "Кнопка [Убрать ник из рейтинга](top#remove) открывает форму запроса с уже вписанным ником.": "The [Remove a name from the leaderboard](top#remove) button opens a request form with the name already filled in.",
+ "Каждый запрос проверяется вручную: так чужие ники не пропадают из таблицы.": "Every request is checked by hand, so other players' names don't disappear from the table."
 }
