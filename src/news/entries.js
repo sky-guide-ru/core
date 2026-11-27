@@ -14,6 +14,16 @@
 
 export const NEWS = [
   {
+    id: '2026-11-27-discord',
+    date: '2026-11-27',
+    kind: 'new',
+    title: 'У Sky Guide есть Discord',
+    items: [
+      'Вопросы, идеи и сообщения об ошибках — в Discord Sky Guide: discord.gg/hHgJJFCGQe.',
+      'Приглашение всегда есть внизу сайта, в колонке «Связь».',
+    ],
+  },
+  {
     id: '2026-11-27-online',
     date: '2026-11-27',
     kind: 'new',
