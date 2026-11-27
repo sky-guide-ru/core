@@ -76,5 +76,8 @@
  "{0}: рецепта на верстаке нет": "{0}: no crafting table recipe",
  " · есть": " · owned",
  "Часть материалов сейчас нельзя купить на рынке": "Some materials can't be bought on the market right now",
- "часть не продаётся": "some not for sale"
+ "часть не продаётся": "some not for sale",
+ "{0}засчитан": "{0}counted",
+ "{0}пропущен: скрафти ради слота": "{0}skipped: craft it for a slot",
+ "{0}ещё нет": "{0}not yet"
 }
