@@ -187,5 +187,8 @@
  "Перебитые ставки на чужие аукционы стоят первыми.": "Outbid bids on other auctions come first.",
  "Живая лента на всю карточку": "Live feed fills its card",
  "[Живая лента](overview#feed) занимает карточку целиком и листается, без пустого места внизу.": "The [Live feed](overview#feed) fills the whole card and scrolls, with no empty space below.",
- "В подвале сайта есть «Связь»: почта и форма «Сообщить об ошибке».": "The site footer has a Contact column: email and the “Report a problem” form."
+ "В подвале сайта есть «Связь»: почта и форма «Сообщить об ошибке».": "The site footer has a Contact column: email and the “Report a problem” form.",
+ "Гильдия игрока в профиле": "Player guild in the profile",
+ "В карточке игрока на [Обзоре](overview#guild) видна гильдия: тег, роль, с какого дня в ней и её уровень.": "The player card on the [Overview](overview#guild) shows the guild: tag, role, join date and guild level.",
+ "В [Рейтинге](top) рядом с ником стоит тег гильдии.": "The [Leaderboard](top) shows the guild tag next to the name."
 }

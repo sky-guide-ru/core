@@ -9,7 +9,7 @@ const NIGHTO = { uuid: 'c'.repeat(32), name: 'Nightowl' };
 const prof = (id, name, members, selected = false) => ({ profile_id: id, cute_name: name, selected, members: Object.fromEntries(members.map(u => [u, { profile: { last_save: 1 } }])) });
 const ZUCCHINI = prof('m1', 'Zucchini', [OWNER.uuid, NIGHTO.uuid], true);
 
-function setup({ budgetUsed = 0, ttlMs = 180_000, failNighto = false } = {}) {
+function setup({ budgetUsed = 0, ttlMs = 180_000, failNighto = false, guildFor } = {}) {
   let now = 1_000_000;
   const calls = { profiles: [], garden: 0, museum: 0, mojang: 0, session: 0 };
   const owner = { player: OWNER, member: { profileName: 'Zucchini', profileId: 'm1' }, raw: { resp: { profiles: [ZUCCHINI, prof('o2', 'Kiwi', [OWNER.uuid])] }, at: now, profileId: 'm1', garden: { level: 15 }, museum: { members: { [OWNER.uuid]: { value: 1 }, [NIGHTO.uuid]: { value: 2 } } } } };
@@ -17,6 +17,7 @@ function setup({ budgetUsed = 0, ttlMs = 180_000, failNighto = false } = {}) {
     owner: () => owner,
     clock: () => now,
     ttlMs,
+    guildFor,
     api: {
       resolveUuid: async n => { calls.mojang++; const p = [FRND, NIGHTO].find(x => x.name.toLowerCase() === n.toLowerCase()); if (!p) { const e = new Error('nf'); e.status = 404; throw e; } return p; },
       resolveName: async uuid => { calls.session++; const p = [OWNER, FRND, NIGHTO].find(x => x.uuid === uuid); if (!p) { const e = new Error('nf'); e.status = 404; throw e; } return p; },
@@ -106,6 +107,17 @@ test('лимит API: при исчерпанном запасе новый иг
   await s.players.get({ player: 'Friend4ik', profile: 'Pomegranate' });
   const busy = setup({ budgetUsed: 400 });
   await assert.rejects(busy.players.get({ player: 'Friend4ik', profile: '' }), /частоту запросов/);
+});
+
+test('гильдия: в профиле друга, новый запрос только при запасе лимита больше 10', async () => {
+  const asked = [];
+  const guildFor = async (uuid, { allowFetch }) => { asked.push(allowFetch); return { name: 'Skyblock Kings', tag: 'SBK' }; };
+  const v = await setup({ guildFor }).players.get({ player: 'Friend4ik', profile: 'Pomegranate' });
+  assert.equal(v.member.guild.tag, 'SBK');
+  assert.deepEqual(asked, [true]);
+  asked.length = 0;
+  await setup({ guildFor, budgetUsed: 160 }).players.get({ player: 'Friend4ik', profile: 'Pomegranate' }).catch(() => {});
+  assert.deepEqual(asked, [false]);
 });
 
 test('неизвестный ник и мусор в нике — понятная ошибка', async () => {
