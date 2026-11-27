@@ -31,5 +31,11 @@
  "Отправить": "Send",
  "Отмена": "Cancel",
  "Нашёл ошибку, кривой перевод или есть идея — напиши": "Found a bug, a bad translation or have an idea? Write to us",
- "{0}Сообщить об ошибке": "{0}Report a problem"
+ "{0}Сообщить об ошибке": "{0}Report a problem",
+ "Убрать ник из рейтинга: владелец сайта проверит запрос и уберёт": "Remove a name from the leaderboard: the site owner will check the request and remove it",
+ "Запрос отправлен ✓": "Request sent ✓",
+ "Владелец сайта проверит его и уберёт ник из рейтинга. ": "The site owner will check it and remove the name from the leaderboard. ",
+ "Владелец сайта его увидит и поправит. ": "The site owner will see it and fix it. ",
+ "Какой ник убрать": "Which name to remove",
+ "Комментарий (необязательно)": "Comment (optional)"
 }
