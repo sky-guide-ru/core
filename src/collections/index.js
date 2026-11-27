@@ -144,7 +144,7 @@ export function analyzeCollections(m, o = {}) {
   const tiersMax = all.reduce((s, e) => s + e.max, 0);
   return {
     status: apiOff ? 'off' : 'ok',
-    coop: m?.coop ? { members: m.coop.members.length, hidden: m.coop.members.filter(x => !x.collectionsApi).length } : null,
+    coop: m?.coop?.members?.length > 1 ? { members: m.coop.members.length, hidden: m.coop.members.filter(x => !x.collectionsApi).length } : null,
     total: all.length, maxed: all.filter(e => e.maxed).length, tiers, tiersMax,
     // Каждый тир коллекции даёт +4 SkyBlock XP
     sbXp: tiers * 4, sbXpMax: tiersMax * 4,

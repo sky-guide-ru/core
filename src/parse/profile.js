@@ -240,21 +240,29 @@ export function coopRoster(profile) {
   return sums.map(([id, n]) => ({ uuid: id, share: total > 0 ? Math.round(n / total * 1000) / 1000 : null }));
 }
 
-/** Общие для кооператива коллекции и крафты миньонов. null — профиль одиночный. */
+/**
+ * Общие для кооператива коллекции и крафты миньонов. null — профиль одиночный.
+ * Уникальные крафты миньонов, как в игре (и у SkyCrypt / SkyHelper), — объединение crafted_generators всех,
+ * кто когда-либо был в коопе: ушедшие остаются в members с deletion_notice, и их крафты профиль не теряет.
+ * Коллекции и список участников — только по нынешним участникам.
+ */
 export function coopShared(profile, uuid) {
   const members = Object.entries(profile?.members || {});
   if (members.length < 2) return null;
   const collections = {}, minions = new Set(), list = [];
   for (const [id, mm] of members) {
-    // Ушедшие из коопа остаются в members с deletion_notice / coop_invitation без принятия
-    if (mm?.profile?.deletion_notice || (mm?.profile?.coop_invitation && !mm.profile.coop_invitation.confirmed)) continue;
+    // Приглашённый, но не принявший приглашение, в коопе не был
+    if (mm?.profile?.coop_invitation && !mm.profile.coop_invitation.confirmed) continue;
+    for (const s of mm?.player_data?.crafted_generators || []) minions.add(s);
+    if (mm?.profile?.deletion_notice) continue; // ушёл из коопа
     const col = mm?.collection;
     for (const [k, v] of Object.entries(col || {})) collections[k] = (collections[k] || 0) + (Number(v) || 0);
-    for (const s of mm?.player_data?.crafted_generators || []) minions.add(s);
     list.push({ uuid: id, self: id === uuid, collectionsApi: !!col, minions: (mm?.player_data?.crafted_generators || []).length });
   }
-  if (list.length < 2) return null;
-  return { members: list, collections, minions: [...minions] };
+  const own = new Set(profile.members?.[uuid]?.player_data?.crafted_generators || []);
+  if (list.length < 2 && minions.size === own.size) return null;
+  // Сейчас один, но крафты ушедших засчитаны: коллекции свои (collections: null), миньоны — общие
+  return { members: list, collections: list.length < 2 ? null : collections, minions: [...minions] };
 }
 
 export async function parseMember(profile, uuid, extra = {}) {
