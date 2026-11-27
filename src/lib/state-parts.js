@@ -80,7 +80,7 @@ export function lightAnalysis(a) {
 /** Лёгкий участник для /api/state: без кусков раздела и без того, что сайт не показывает. */
 export function lightMember(m) {
   if (!m) return m;
-  const { extras, unlockedCollTiers, bankTransactions, ...rest } = m;
+  const { extras, unlockedCollTiers, bankTransactions, bestiaryKills, ...rest } = m;
   rest.hasExtras = !!extras;
   return rest;
 }

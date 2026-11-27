@@ -16,7 +16,9 @@ import { analyzeAccessories, analyzeGear } from './parse/gear.js';
 import { advise, diffRoadmaps } from './analysis/roadmap.js';
 import { moneyMethods, setMoneyOwner, marketCtx } from './analysis/money.js';
 import { SKILLS, SLAYERS } from '../i18n/ru.js';
-import { pricesReady, priceOf, prices } from './prices.js';
+import { pricesReady, priceOf, buyPriceOf, prices } from './prices.js';
+import { magicFind } from './calc/magic-find.js';
+import { buildUpgrades } from './lib/acc-upgrades.js';
 import { petScoreSummary } from './analysis/pet-score.js';
 import { enrichGuide } from './guides/refs.js';
 import { chocolateAdvice } from './analysis/chocolate.js';
@@ -166,6 +168,10 @@ export function analyzeMember(m) {
   }
   let chocolate = null;
   try { chocolate = chocolateAdvice(m.extras?.chocolate); } catch (e) { console.warn('[Chocolate]', e.message); }
+  // Magic Find — в куске «Снаряжения» (в /api/state не уходит)
+  if (gear) {
+    try { gear.mf = magicFind(m, { constants: neu.constants, price: buyPriceOf, name: itemName, upgrades: mfUpgrades() }); } catch (e) { console.warn('[magic find]', e.message); }
+  }
   const safe = (name, fn) => { try { return fn(); } catch (e) { console.warn(tx`[${name}]`, e.message); return null; } };
   // «Обзор»: перерыв в игре и ежедневные дела; «Прогресс»: дешёвый SkyBlock XP и сундуки данжей
   const returning = safe('возвращение', () => returningInfo(m));
@@ -173,6 +179,13 @@ export function analyzeMember(m) {
   const sbxp = safe('SkyBlock XP', () => sbxpPlan(m, { acc, petScore, museumBest: museum?.best || null, museumFreeXp: museum?.canDonateXp || 0 }));
   const chests = safe('сундуки', () => dungeonChests(marketCtx(), m));
   return { acc, gear, roadmap, map, plan, summary, power, methods, museum, petScore, chocolate, returning, dailies, sbxp, chests };
+}
+
+let upMemo = null;
+function mfUpgrades() {
+  const raw = neu.constants.misc?.talisman_upgrades;
+  if (!upMemo || upMemo.raw !== raw) upMemo = { raw, map: raw ? buildUpgrades(raw) : {} };
+  return upMemo.map;
 }
 
 // Все ID питомцев вида TYPE;N: из базы предметов и из аукциона (там бывают новые питомцы раньше базы)
