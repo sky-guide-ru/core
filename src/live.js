@@ -38,6 +38,11 @@ const newsDemo = () => { try { return JSON.parse(fs.readFileSync(path.join(confi
 const news = createCached(() => (config.apiKey ? getSkyblockNews() : Promise.resolve(newsDemo())).then(r => skyblockNewsOf(r)), NEWS_MS);
 
 export const statusFor = uuid => status.get(uuid);
+/** Статус из недавней проверки (не старше maxAge) без нового запроса; null — не проверяли или устарел */
+export function knownStatus(uuid, maxAge = 5 * 60_000, now = Date.now()) {
+  const v = status._cache.get(uuid)?.value;
+  return v && now - (v.at || 0) < maxAge ? v : null;
+}
 /** Сырой ответ /skyblock/bingo; разбор с текущим ивентом — bingoOf(resp, bingoEvent()) */
 export const bingoRawFor = uuid => bingo.get(uuid);
 export const skyblockNews = () => news.peek();
