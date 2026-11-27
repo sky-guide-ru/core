@@ -50,3 +50,8 @@ test('календарь: событие Bingo, пока ивент идёт', (
   assert.equal(e.name, 'Bingo: Test');
   assert.equal(bingoEvents(now + 2 * 86400000).length, 0);
 });
+
+test('knownStatus: только свежий статус, без запроса', async () => {
+  const { knownStatus } = await import('../src/live.js');
+  assert.equal(knownStatus('nobody'), null);
+});

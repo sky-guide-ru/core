@@ -32,5 +32,6 @@
  "Пока пусто: в этой таблице ещё нет ни одного профиля. Открой любой ник через поиск, и он появится здесь.": "Empty so far: there are no profiles in this table yet. Open any name via search and it will appear here.",
  "Игрок": "Player",
  "Стоимость считается по ценам Bazaar и аукциона: предметы, питомцы, мешки, эссенции, монеты и музей. Профили с закрытым API инвентаря в эту таблицу не попадают, их стоимость не узнать.": "Value is calculated from Bazaar and auction prices: items, pets, sacks, essence, coins and the museum. Profiles with a closed inventory API aren't included, their value can't be known.",
- "Убрать ник из рейтинга": "Remove a name from the leaderboard"
+ "Убрать ник из рейтинга": "Remove a name from the leaderboard",
+ "В игре": "In game"
 }
