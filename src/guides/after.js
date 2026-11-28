@@ -27,6 +27,14 @@ export const AFTER = {
     ],
     related: ['crimson', 'slayer-blaze', 'dungeons'],
   },
+  bestiary: {
+    goals: [
+      'Добивай до максимума семейства, которых фармишь: +3 Magic Find за уровень повышает шанс редкого дропа.',
+      'Закрой события: Spooky Festival, Diana и Jerry дают много дешёвых уровней раз в год.',
+      'Каждая 5-я веха даёт Combat XP, после 100-й — по 1 000 000.',
+    ],
+    related: ['slayer-zombie', 'dungeons', 'fishing'],
+  },
   crimson: {
     goals: [
       'Ранг S во всех семи испытаниях Dojo — чёрный пояс.',
@@ -37,7 +45,7 @@ export const AFTER = {
   },
   fishing: {
     goals: [
-      'Добей бестиарий Sea Creatures: каждый уровень даёт Sea Creature Chance к своему виду.',
+      'Добей Bestiary Sea Creatures: уровни дают Magic Find против них и приближают вехи.',
       'Фарми Lord Jawbus и Thunder ради Magma Lord Fragment и Radioactive Vial.',
       'Master Trophy Fisher: алмазный тир у всех 18 видов Trophy Fish.',
     ],

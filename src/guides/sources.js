@@ -25,6 +25,7 @@ const WIKI_EXTRA = {
   'slayer-blaze': ['Slayer', 'Inferno Demonlord'],
   'slayer-vampire': ['Slayer', 'Riftstalker Bloodfiend'],
   kuudra: ['Kuudra', 'Tutorial:Kuudra Guide', 'Kuudra Key'],
+  bestiary: ['Bestiary', 'Bramass Beastslayer'],
   crimson: ['Crimson Isle'],
   rift: ['Rift Dimension'],
   fishing: ['Fishing'],

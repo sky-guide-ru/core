@@ -28,6 +28,7 @@ import diana from './diana.js';
 import hunting from './hunting.js';
 import chocolate from './chocolate.js';
 import enchanting from './enchanting.js';
+import bestiary from './bestiary.js';
 import { tx } from '../../i18n/msg.js';
 
 export const GUIDES = [
@@ -35,6 +36,7 @@ export const GUIDES = [
   dungeons,
   ...slayers,
   kuudra,
+  bestiary,
   crimson,
   rift,
   fishing,
