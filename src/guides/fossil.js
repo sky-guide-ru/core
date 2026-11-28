@@ -44,30 +44,59 @@ export const EXCAVATOR_DROPS = [
   { powder: 1500, w: 250 }, { powder: 2500, w: 125 }, { powder: 3500, w: 100 }, { powder: 5000, w: 40 }, { powder: 8500, w: 20 },
   { id: 'ENCHANTMENT_PALEONTOLOGIST_1', w: 50, n: 1, group: 'other' }, { id: 'FOSSIL_THE_FISH', w: 15, n: 1, group: 'other' },
 ];
-const ROLLS = 11.5;          // 10–14 бросков: 30/25/20/15/10%
+const ROLLS = 11.5;          // сокровищ на поле: 10–14 (30/25/20/15/10%)
+const TILES = 54;            // поле 9×6
 const FOSSIL_CHANCE = 0.1;   // окаменелость в 10% скрапов, все шесть одинаково
 const FOSSIL_NPC = 10_000;   // продажа NPC
+const AVG_CELLS = FOSSILS.reduce((s, f) => s + f.cells.length, 0) / FOSSILS.length;
+// Гем в слоте Chisel: бонус по огранке одинаков для всех типов (вики; Fine Onyx ×3 = +150%, Perfect Citrine ×3 = +300% в лоре у игроков)
+export const CHISEL_GEM_BONUS = { ROUGH: 0.3, FLAWED: 0.4, FINE: 0.5, FLAWLESS: 0.6, PERFECT: 1 };
+// Шанс открыть окаменелость целиком решателем SkyHanni: ≤16 кликов 361/404, ≤17 396/404, 18 — все
+const fossilSolved = c => (c >= 18 ? 1 : c >= 17 ? 0.98 : c >= 16 ? 0.89 : 0.75);
+
+/** Гемы в слотах Chisel → { ONYX, CITRINE, PERIDOT, AQUAMARINE } в долях (1 = +100%). */
+export function chiselGems(item) {
+  const out = { ONYX: 0, CITRINE: 0, PERIDOT: 0, AQUAMARINE: 0 };
+  const g = item?.gems || {};
+  for (const [k, type] of Object.entries(g)) {
+    const slot = /^(.+)_gem$/.exec(k)?.[1];
+    if (!slot || out[type] == null) continue;
+    const q = typeof g[slot] === 'object' ? g[slot]?.quality : g[slot];
+    out[type] += CHISEL_GEM_BONUS[String(q || '').toUpperCase()] || 0;
+  }
+  return out;
+}
 
 /**
  * Средняя выгода одного Suspicious Scrap по ценам продажи.
+ * Сокровища забираются только те, до которых докопался: зарядов мало, поле 9×6. Подсвеченные Citrine берутся
+ * одним кликом, остальные находятся наугад; при окаменелости часть кликов уходит на её клетки.
  * @param {(id: string) => number} price  цена продажи сейчас (0, если нет)
- * @returns {{ groups: Record<string, number>, fossil: number, total: number, powder: number, scrap: number }}
+ * @param {{ charges?: number, gems?: Object }} o  заряды Chisel и гемы (chiselGems)
  */
-export function excavatorValue(price) {
+export function excavatorValue(price, o = {}) {
+  const gems = { ONYX: 0, CITRINE: 0, PERIDOT: 0, AQUAMARINE: 0, ...(o.gems || {}) };
+  const charges = (o.charges || 16) + Math.min(gems.AQUAMARINE, 1);
+  const onField = ROLLS + gems.ONYX;
+  const lit = Math.min(gems.CITRINE, onField);
+  const free = Math.max(0, charges - lit - FOSSIL_CHANCE * AVG_CELLS);
+  const found = Math.min(onField, lit + free * (onField - lit) / (TILES - lit - FOSSIL_CHANCE * AVG_CELLS));
+
   const W = EXCAVATOR_DROPS.reduce((s, d) => s + d.w, 0);
   const groups = { gems: 0, metals: 0, essence: 0, other: 0 };
   let powder = 0;
   for (const d of EXCAVATOR_DROPS) {
-    const k = d.w / W * ROLLS;
+    const k = d.w / W * found;
     if (d.powder) powder += k * d.powder;
-    else groups[d.group] += k * d.n * (price(d.id) || 0);
+    else groups[d.group] += k * d.n * (price(d.id) || 0) * (d.group === 'essence' ? 1 + gems.PERIDOT : 1);
   }
   const fossilAvg = FOSSILS.reduce((s, f) => s + Math.max(price(f.id) || 0, FOSSIL_NPC), 0) / FOSSILS.length;
-  const fossil = FOSSIL_CHANCE * fossilAvg;
+  const fossil = FOSSIL_CHANCE * fossilSolved(charges) * fossilAvg;
   const total = groups.gems + groups.metals + groups.essence + groups.other + fossil;
-  return { groups, fossil, fossilAvg, total, powder, scrap: price('SUSPICIOUS_SCRAP') || 0 };
+  return { groups, fossil, fossilAvg, total, powder, found, onField, charges, scrap: price('SUSPICIOUS_SCRAP') || 0 };
 }
 
+const fmt1 = n => (Math.round(n * 10) / 10).toLocaleString('ru-RU');
 const norm = s => String(s || '').toUpperCase().replace(/_FOSSIL$/, '');
 
 /** Секции блока Fossil Excavator для гайда Mining. */
@@ -79,11 +108,14 @@ export function fossilSections(m, ctx) {
   const essence = Number(m.essence?.FOSSIL || 0);
   const chisel = ladderPos(ctx, CHISELS.map(c => c.id));
   const haveChisel = CHISELS[chisel.best] || null;
-  const v = excavatorValue(id => ctx.price(id));
+  const chiselItem = haveChisel ? (ctx.owned?.get(haveChisel.id) || [])[0] : null;
+  const gems = chiselGems(chiselItem);
+  const price = id => ctx.price(id);
+  const v = excavatorValue(price, { charges: haveChisel?.charges || 16, gems });
+  const best = excavatorValue(price, { charges: 22, gems: { CITRINE: 3 } }); // Perfect Chisel + 3 Perfect Citrine (совет вики)
   const next = [];
   const sections = [];
 
-  const done6 = FOSSILS.filter(f => donated.has(f.key)).length;
   const doneAll = [...FOSSILS, ...NUCLEUS_FOSSILS].filter(f => donated.has(f.key)).length;
 
   sections.push({
@@ -91,7 +123,7 @@ export function fossilSections(m, ctx) {
     items: [
       { title: 'Где', text: 'Dwarven Base Camp → Fossil Research Center. Первый Chisel даёт Dr. Stone при первом разговоре, запасной стоит 5 Fossil Essence у Researcher Beryl.', done: !!haveChisel, items: ['CHISEL'] },
       { title: 'Откуда скрап', text: 'Копание в Glacite Mineshafts (первый с шансом 0,5%, каждый следующий за шахту вдвое реже) и Frozen Corpse. Ещё 100 Fossil Essence у Researcher Beryl.', items: ['SUSPICIOUS_SCRAP'] },
-      { title: 'Игра', text: 'Поле 9×6. Каждый клик по грязи тратит заряд Chisel. Сокровища забираются сразу, а окаменелость засчитывается, только если открыть все её клетки.' },
+      { title: 'Игра', text: 'Поле 9×6 под грязью. Клик открывает одну клетку и тратит заряд Chisel, сокровище под ней забирается сразу. Зарядов 16–22, так что всё поле не открыть, а окаменелость засчитывается, только если открыть все её клетки.' },
       { title: 'Подсказка', text: 'Первая найденная клетка окаменелости пишет «Fossil Excavation Progress» в процентах: по нему видно фигуру (таблица ниже). Дальше кликай только по клеткам, где она может лежать.' },
     ],
   });
@@ -107,14 +139,15 @@ export function fossilSections(m, ctx) {
   });
 
   const pct = n => (v.total ? Math.round(n / v.total * 100) : 0);
-  const gain = v.total - v.scrap;
+  const priced = v.scrap > 0 && v.total > v.fossil;
+  const gain = priced ? v.total - v.scrap : 0;
+  const gemText = Object.entries(gems).filter(([, x]) => x > 0).map(([g, x]) => tx`${g[0] + g.slice(1).toLowerCase()} +${Math.round(x * 100)}%`).join(', ');
   sections.push({
     kind: 'table', title: 'Открыть скрап или продать?',
-    note: v.scrap && v.total
-      ? (gain > 0
-        ? tx`Открывать выгоднее: в среднем +${short(gain)} с каждого скрапа и ещё ~${fmt(Math.round(v.powder / 100) * 100)} Glacite Powder. Лучше всего во время 2x Powder.`
-        : tx`Сейчас продать скрап выгоднее на ${short(-gain)}. Открывай ради Glacite Powder и окаменелостей для Dr. Stone.`)
-      : 'Цены Bazaar ещё не загрузились.',
+    note: !priced ? 'Цены Bazaar ещё не загрузились.'
+      : tx`Сокровища забираются только те, до которых хватило зарядов: с ${haveChisel ? ctx.name(haveChisel.id) : 'Chisel'}${gemText ? tx` (${gemText})` : ''} в среднем ~${fmt1(v.found)} из ~${fmt1(v.onField)}. ${gain > 0
+        ? tx`Открывать выгоднее на ${short(gain)} с каждого скрапа.`
+        : tx`Продать скрап выгоднее: +${short(-gain)} с каждого. Открывать стоит ради окаменелостей: первая каждого вида у Dr. Stone даёт 25 000 Glacite Powder, а из окаменелости в Forge делается питомец.`}`,
     columns: ['Средний доход с одного скрапа', 'Монет'],
     rows: [
       ['Гемы Flawed и Fine (Aquamarine, Peridot, Citrine, Onyx)', tx`${short(v.groups.gems)} · ${pct(v.groups.gems)}%`],
@@ -122,7 +155,8 @@ export function fossilSections(m, ctx) {
       ['Fossil Essence', tx`${short(v.groups.essence)} · ${pct(v.groups.essence)}%`],
       [tx`Окаменелость: 10% × ${short(v.fossilAvg)}`, short(v.fossil)],
       [cell('Итого, если открыть', { tone: gain > 0 ? 'good' : undefined }), cell(short(v.total), { tone: gain > 0 ? 'good' : undefined })],
-      [cell('Продать скрап на Bazaar', { item: 'SUSPICIOUS_SCRAP' }), short(v.scrap)],
+      [cell('Продать скрап на Bazaar', { item: 'SUSPICIOUS_SCRAP', tone: priced && gain <= 0 ? 'good' : undefined }), cell(short(v.scrap), { tone: priced && gain <= 0 ? 'good' : undefined })],
+      ...(priced && (chisel.best < 3 || gems.CITRINE < 3) ? [[cell('Для сравнения: Perfect Chisel и 3 Perfect Citrine', { tone: 'muted' }), cell(tx`${short(best.total)} · ~${fmt1(best.found)} сокровищ`, { tone: 'muted' })]] : []),
     ],
   });
 
@@ -139,17 +173,20 @@ export function fossilSections(m, ctx) {
 
   // Шаги «Что делать»
   if (lvl >= 7 || (m.mining?.mineshafts || 0) > 0) {
-    if (scrapsOwned > 0 && gain > 0) {
-      next.push({ title: tx`Открой ${fmt(scrapsOwned)} Suspicious Scrap в Fossil Excavator`, priority: 46, item: 'SUSPICIOUS_SCRAP',
-        why: tx`В среднем ${short(v.total)} с каждого против ${short(v.scrap)} при продаже. Fossil Research Center в Dwarven Base Camp.` });
+    if (scrapsOwned > 0 && priced) {
+      next.push(gain > 0
+        ? { title: tx`Открой ${fmt(scrapsOwned)} Suspicious Scrap в Fossil Excavator`, priority: 46, item: 'SUSPICIOUS_SCRAP',
+          why: tx`В среднем ${short(v.total)} с каждого против ${short(v.scrap)} при продаже. Fossil Research Center в Dwarven Base Camp.` }
+        : { title: tx`Suspicious Scrap: ${fmt(scrapsOwned)} шт. выгоднее продать`, priority: 40, item: 'SUSPICIOUS_SCRAP',
+          why: tx`На Bazaar ~${short(v.scrap * scrapsOwned)}, а раскопка с твоим Chisel даёт в среднем ${short(v.total)} за штуку. Открывай, только если нужны окаменелости для Dr. Stone или питомцев.` });
     }
-    if (done6 < FOSSILS.length && (scrapsOwned > 0 || donated.size > 0)) {
-      const left = FOSSILS.filter(f => !donated.has(f.key)).map(f => f.name);
-      next.push({ title: tx`Сдай Dr. Stone окаменелости: ${done6} из ${FOSSILS.length}`, priority: 34,
-        why: tx`Не хватает: ${left.join(', ')}. Каждая новая даёт 25 000 Glacite Powder, 25 000 Mining XP и рецепт питомца в Forge.` });
+    const holding = FOSSILS.filter(f => !donated.has(f.key) && hasItem(ctx, f.id));
+    if (holding.length) {
+      next.push({ title: tx`Сдай Dr. Stone: ${holding.map(f => f.name).join(', ')}`, priority: 44,
+        why: 'Каждая новая окаменелость даёт 25 000 Glacite Powder, 25 000 Mining XP, 100 Fossil Essence и рецепт питомца в Forge. Сама окаменелость останется у Dr. Stone.' });
     }
-    if (haveChisel && chisel.best < 1 && lvl >= 8) {
-      next.push({ title: tx`Улучши Chisel до ${ctx.name('REINFORCED_CHISEL')}`, priority: 32, item: 'REINFORCED_CHISEL',
+    if (haveChisel && chisel.best < 1 && lvl >= 8 && scrapsOwned > 0) {
+      next.push({ title: tx`Улучши Chisel до ${ctx.name('REINFORCED_CHISEL')}`, priority: 30, item: 'REINFORCED_CHISEL',
         why: '18 зарядов вместо 16: с ними решатель гарантированно открывает любую окаменелость.' });
     }
   }
