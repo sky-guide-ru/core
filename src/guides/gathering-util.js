@@ -1,6 +1,9 @@
 // Общие помощники гайдов по добыче, Garden, Foraging и миньонам.
 import { getItemRu } from '../items-ru/index.js';
 import { tx, messageOf, remember } from '../../i18n/msg.js';
+import { unitIndex } from '../lib/num-units.js';
+
+const SHORT_UNITS = [[1e3, 'тыс.', 1, 1e4], [1e6, 'млн', 1], [1e9, 'млрд', 2]];
 
 export const M = 1_000_000;
 
@@ -8,10 +11,11 @@ export const fmt = n => Math.round(Number(n) || 0).toLocaleString('ru-RU');
 
 /** 1 234 567 → «1,2 млн», 12 345 → «12,3 тыс.» */
 export function short(n) {
-  const v = Number(n) || 0, a = Math.abs(v);
-  if (a >= 1e9) return tx`${(v / 1e9).toLocaleString('ru-RU', { maximumFractionDigits: 2 })} млрд`;
-  if (a >= 1e6) return tx`${(v / 1e6).toLocaleString('ru-RU', { maximumFractionDigits: 1 })} млн`;
-  if (a >= 1e4) return tx`${(v / 1e3).toLocaleString('ru-RU', { maximumFractionDigits: 1 })} тыс.`;
+  const v = Number(n) || 0;
+  const i = unitIndex(v, SHORT_UNITS);
+  if (i === 2) return tx`${(v / 1e9).toLocaleString('ru-RU', { maximumFractionDigits: 2 })} млрд`;
+  if (i === 1) return tx`${(v / 1e6).toLocaleString('ru-RU', { maximumFractionDigits: 1 })} млн`;
+  if (i === 0) return tx`${(v / 1e3).toLocaleString('ru-RU', { maximumFractionDigits: 1 })} тыс.`;
   return fmt(v);
 }
 

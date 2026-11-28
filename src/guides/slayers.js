@@ -10,7 +10,7 @@ import { activePerks } from '../calendar/index.js';
 import { tx } from '../../i18n/msg.js';
 
 const TONE = { proven: 'good', easy: 'good', ok: 'warn', hard: 'bad', no: 'bad', 'no-weapon': 'bad' };
-const shortNum = n => (n >= 1e6 ? tx`${String(Math.round(n / 1e5) / 10).replace('.', ',')} млн` : n >= 1e3 ? tx`${Math.round(n / 1e3)} тыс.` : String(n));
+const shortNum = n => (n >= 999_500 ? tx`${String(Math.round(n / 1e5) / 10).replace('.', ',')} млн` : n >= 1e3 ? tx`${Math.round(n / 1e3)} тыс.` : String(n));
 
 const LACK_SHORT = { damage: 'урон', survive: 'живучесть' };
 const lackText = l => (l?.length ? l.map(x => LACK_SHORT[x]).join(' и ') : '');

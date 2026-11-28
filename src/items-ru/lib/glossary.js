@@ -4,6 +4,10 @@
 // Политика перевода (как в контракте): имена собственные предметов, боссов, NPC и локаций
 // остаются на английском, как в игре и на аукционе. Переводим характеристики, типы предметов,
 // редкости, служебные фразы лора и ванильные предметы Minecraft (по официальной локализации ru_ru).
+import { unitIndex } from '../../lib/num-units.js';
+
+const COIN_UNITS = [[1e3, 'тыс.', 1], [1e6, 'млн', 2], [1e9, 'млрд', 2]];
+
 
 export const SKILLS = {
   farming: 'Farming', mining: 'Mining', combat: 'Combat', foraging: 'Foraging',
@@ -161,11 +165,10 @@ export function translateStat(name) {
 export function fmtCoins(n) {
   if (n == null || isNaN(n)) return '—';
   const a = Math.abs(n);
-  const f = (v, u) => `${(n / v).toLocaleString('ru-RU', { maximumFractionDigits: v >= 1e6 ? 2 : 1 })} ${u}`;
-  if (a >= 1e9) return f(1e9, 'млрд');
-  if (a >= 1e6) return f(1e6, 'млн');
-  if (a >= 1e3) return f(1e3, 'тыс.');
-  return Math.round(n).toLocaleString('ru-RU');
+  const i = unitIndex(a, COIN_UNITS);
+  if (i < 0) return Math.round(n).toLocaleString('ru-RU');
+  const [v, u, d] = COIN_UNITS[i];
+  return `${(n / v).toLocaleString('ru-RU', { maximumFractionDigits: d })} ${u}`;
 }
 
 /** Длительность в секундах → «3 ч 20 мин», «5 дн.» */

@@ -15,6 +15,9 @@ import { CREATURES } from './fishing-data.js';
 import { buildTerms } from './terms.js';
 import COLLECTIONS from '../collections/data/resource.json' with { type: 'json' };
 import { tx } from '../../i18n/msg.js';
+import { unitIndex } from '../lib/num-units.js';
+
+const REF_UNITS = [[1e3, 'тыс.', 1], [1e6, 'млн', 2], [1e9, 'млрд', 2]];
 
 const strip = s => String(s || '').replace(/§./g, '').trim();
 const normQ = s => s.replace(/[’`]/g, '\'');
@@ -370,9 +373,10 @@ export { RARITY_RANK, shortObtain };
 
 function coinsRu(n) {
   n = Number(n) || 0;
-  if (n >= 1e9) return tx`${+(n / 1e9).toFixed(2)} млрд`.replace('.', ',');
-  if (n >= 1e6) return tx`${+(n / 1e6).toFixed(2)} млн`.replace('.', ',');
-  if (n >= 1e3) return tx`${+(n / 1e3).toFixed(1)} тыс.`.replace('.', ',');
+  const i = unitIndex(n, REF_UNITS);
+  if (i === 2) return tx`${+(n / 1e9).toFixed(2)} млрд`.replace('.', ',');
+  if (i === 1) return tx`${+(n / 1e6).toFixed(2)} млн`.replace('.', ',');
+  if (i === 0) return tx`${+(n / 1e3).toFixed(1)} тыс.`.replace('.', ',');
   return String(n);
 }
 
