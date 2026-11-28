@@ -310,7 +310,7 @@ export function petRules(ctx, add) {
       id: 'pets-level', cat: 'Питомцы', priority: 40, effort: 'часы',
       title: ru`Докачай важных легендарных питомцев до 100: ${lowLeg.length} шт.`,
       why: ru`Питомец даёт полный бонус только на 100 уровне. Сейчас на 100 уровне: ${lvl100} из ${best.size} типов.`,
-      how: lowLeg.slice(0, 8).map(p => ru`${petName(prettyId(p.type))} — ${petLevel(ctx, p)} ур.`).concat(['Качай на основном занятии; второй питомец получает часть опыта через предмет EXP Share']),
+      how: lowLeg.slice(0, 8).map(p => ru`${petName(prettyId(p.type))} — ${petLevel(ctx, p)} ур.`).concat(['Качай на основном занятии; питомец в слоте Exp Share (/pets) получает часть опыта, предмет Exp Share добавляет +15%']),
       link: 'pets',
     });
   }

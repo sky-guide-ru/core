@@ -6,7 +6,6 @@
  "Навык рыбалки: растёт за улов и Sea Creatures. Даёт Health.": "The fishing skill: grows from catches and Sea Creatures. Gives Health.",
  "Навык зачарования: растёт за чары на столе и Experimentation Table. Даёт Intelligence и Ability Damage.": "The enchanting skill: grows from enchanting at a table and the Experimentation Table. Gives Intelligence and Ability Damage.",
  "Навык алхимии: растёт за варку зелий. Даёт Intelligence и делает зелья дольше.": "The alchemy skill: grows from brewing potions. Gives Intelligence and makes potions last longer.",
- "Навык приручения: растёт, когда питомцы получают опыт. Даёт Pet Luck, нужен для высоких уровней питомцев.": "The taming skill: grows when pets gain XP. Gives Pet Luck, needed for high pet levels.",
  "Навык плотничества: растёт за крафт. Даёт Health, проще всего качается крафтом мебели.": "The carpentry skill: grows from crafting. Gives Health; easiest to level by crafting furniture.",
  "Навык рун: растёт за руны и убийства с рунами. Только косметика и немного опыта SkyBlock.": "The runecrafting skill: grows from runes and kills with runes. Only cosmetics and a bit of SkyBlock XP.",
  "Навык общения: растёт, когда гости на твоём острове что-то добывают. Только опыт SkyBlock.": "The social skill: grows when guests on your island gather things. Only SkyBlock XP.",
@@ -172,5 +171,6 @@
  "Crimson Isle и Glacite Tunnels": "Crimson Isle and Glacite Tunnels",
  "Зона Рифта. {0}": "Rift area. {0}",
  "Зона: {0}. {1}": "Area: {0}. {1}",
- "Гем: в слоте снаряжения даёт {0}. Где добывать: {1}. Ступени: Rough → Flawed → Fine → Flawless → Perfect.": "Gemstone: in a gear slot it gives {0}. Where to mine: {1}. Tiers: Rough → Flawed → Fine → Flawless → Perfect."
+ "Гем: в слоте снаряжения даёт {0}. Где добывать: {1}. Ступени: Rough → Flawed → Fine → Flawless → Perfect.": "Gemstone: in a gear slot it gives {0}. Where to mine: {1}. Tiers: Rough → Flawed → Fine → Flawless → Perfect.",
+ "Навык приручения: растёт, когда активный питомец получает опыт. Каждый уровень — +1% опыта питомцам и +1 Pet Luck; Kat требует Taming, чтобы поднимать редкость.": "Taming skill: grows when the active pet gains XP. Each level is +1% pet XP and +1 Pet Luck; Kat requires Taming to upgrade rarity."
 }

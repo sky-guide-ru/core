@@ -36,6 +36,7 @@ const WIKI_EXTRA = {
   museum: ['Museum', 'Museum/Items'],
   collectibles: ['Fairy Souls', 'Abiphones'],
   enchanting: ['Experiments', 'Experimentation Table', 'Enchanting', 'Metaphysical Serum'],
+  taming: ['Taming', 'Pets', 'Pet Items', 'Fann', 'Pet Food', 'Kat', 'George'],
 };
 
 // Проверено 23.11.2026 через oEmbed YouTube: видео открыто, название и канал ниже — как отдаёт YouTube.
