@@ -4,7 +4,7 @@
 // (300 запросов на ключ за 5 минут): чужим профилям достаётся не больше FRIEND_BUDGET из них.
 import * as hypixel from './hypixel.js';
 import { pickProfile, parseMember, parseGarden, coopRoster } from './parse/profile.js';
-import { analyzeMember, snapshot, diffFeed } from './state.js';
+import { analyzeMemberAsync, snapshot, diffFeed } from './state.js';
 import { swapLayout } from './items-ru/lib/search.js';
 import { pushSnapshot } from './history.js';
 import { tx } from '../i18n/msg.js';
@@ -47,7 +47,7 @@ export function fixNick(n) {
 export function createPlayers(o) {
   const api = { ...hypixel, ...(o.api || {}) };
   const parse = { pickProfile, parseMember, parseGarden, ...(o.parse || {}) };
-  const analyze = o.analyze || analyzeMember;
+  const analyze = o.analyze || analyzeMemberAsync;
   const clock = o.clock || (() => Date.now());
   // Чужой профиль обновляется не чаще раза в 10 минут: у ключа разработчика Hypixel есть и суточный лимит,
   // а за один заход посетитель редко ждёт изменений чаще. Свой профиль друга — раз в 3 минуты (ttlMs из index.js)
@@ -186,7 +186,7 @@ export function createPlayers(o) {
       member.bingo = (o.bingoOf || bingoOf)(raw, o.bingoEvent?.() || null);
       if (member.gameMode === 'bingo') member.bingoGoals = bingoGoalsLeft(raw, o.bingoEvent?.() || null);
     }
-    const analysis = analyze(member);
+    const analysis = await analyze(member);
     const snap = (() => { try { return (o.snapshot || snapshot)(member, analysis.gear); } catch { return null; } })();
     if (snap && v.lastSnap) {
       const ev = diffFeed(v.lastSnap, snap);

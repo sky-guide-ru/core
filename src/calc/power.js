@@ -90,11 +90,14 @@ export function masterReadiness(member, floor, snap) {
 }
 
 /** NEU-константы для листа статов из neu.constants */
+// Линейки аксессуаров считаются по справочнику NEU, а он меняется раз в несколько часов: помним по объекту
+let upMemo = null;
+const upgradesOf = raw => (upMemo && upMemo.raw === raw ? upMemo : (upMemo = { raw, map: buildUpgrades(raw) })).map;
 export function neuForCalc(constants = {}) {
   return {
     petnums: constants.petnums || null,
     bonuses: constants.bonuses || null,
-    upgrades: constants.misc?.talisman_upgrades ? buildUpgrades(constants.misc.talisman_upgrades) : {},
+    upgrades: constants.misc?.talisman_upgrades ? upgradesOf(constants.misc.talisman_upgrades) : {},
   };
 }
 

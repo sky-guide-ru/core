@@ -12,9 +12,10 @@ let collectionTiers = null;
 /** Ядро может один раз передать пороги коллекций из /v2/resources/skyblock/collections. */
 export function setCollectionsResource(resp) { collectionTiers = advisor.collectionTiersFromResources(resp); }
 
-function opts(member) {
-  let methods = [];
-  try { methods = moneyMethods(member); } catch {}
+// methods — уже посчитанные способы заработка (analyzeMember считает их с оценкой богатства): второй расчёт
+// без неё занимал до трети разбора профиля и давал плану другой бюджет, чем у раздела «Заработок»
+function opts(member, methods = null) {
+  if (!methods) { methods = []; try { methods = moneyMethods(member); } catch {} }
   return {
     price: priceOf,
     // Цена покупки (Instant Buy): для шагов, где советуем купить на Bazaar (гемы)
@@ -39,8 +40,8 @@ export function buildProgressMap(member, acc, gear) {
   return advisor.buildProgressMap(member, acc, gear, opts(member));
 }
 
-export function advise(member, acc, gear) {
-  return advisor.advise(member, acc, gear, opts(member));
+export function advise(member, acc, gear, methods = null) {
+  return advisor.advise(member, acc, gear, opts(member, methods));
 }
 
 export const diffRoadmaps = advisor.diffRoadmaps;

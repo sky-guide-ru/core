@@ -154,11 +154,44 @@ export function diffFeed(prev, cur) {
   return ev;
 }
 
-/** Полный анализ участника (аксессуары, снаряжение, план, заработок). Чистая функция: годится и для чужих профилей. */
+/**
+ * Полный анализ участника (аксессуары, снаряжение, план, заработок). Чистая функция: годится и для чужих профилей.
+ * Шаги расчёта — генератор: после каждого крупного блока он отдаёт ход (yield). Синхронный analyzeMember проходит их
+ * подряд, а analyzeMemberAsync между блоками пропускает вперёд запросы других посетителей (setImmediate),
+ * и одна остановка сервера на полсекунды превращается в несколько коротких.
+ */
 export function analyzeMember(m) {
+  const it = analyzeSteps(m);
+  let r = it.next();
+  while (!r.done) r = it.next();
+  return r.value;
+}
+
+const yieldNow = () => new Promise(r => setImmediate(r));
+/** То же, что analyzeMember, но не держит сервер: между блоками расчёта отвечает другим запросам. */
+export async function analyzeMemberAsync(m, { onStep } = {}) {
+  const it = analyzeSteps(m);
+  let t = performance.now();
+  let r = it.next();
+  while (!r.done) {
+    if (onStep) { const now = performance.now(); onStep(r.value, now - t); }
+    await yieldNow();
+    t = performance.now();
+    r = it.next();
+  }
+  return r.value;
+}
+
+function* analyzeSteps(m) {
   const acc = analyzeAccessories(m);
+  yield 'аксессуары';
   const gear = analyzeGear(m);
-  const { roadmap, map, plan, summary, power } = advise(m, acc, gear);
+  yield 'снаряжение';
+  let methods = [];
+  try { methods = moneyMethods(m, { networth: gear?.networth?.total }); } catch (e) { console.warn('[заработок]', e.message); }
+  yield 'заработок';
+  const { roadmap, map, plan, summary, power } = advise(m, acc, gear, methods);
+  yield 'план';
   // Гемы в снаряжении: цены покупки на Bazaar, статы игрока (Onyx или Jasper) — как в шаге плана «Гемы»
   if (gear) {
     try {
@@ -169,12 +202,13 @@ export function analyzeMember(m) {
       });
     } catch (e) { console.warn('[гемы]', e.message); }
   }
-  const methods = moneyMethods(m, { networth: gear?.networth?.total });
+  yield 'гемы';
   // Ironman, Stranded, Bingo: покупать можно только у NPC за монеты — Museum и Pet Score считают по ценам NPC, а не AH
   const noMarket = profileMode(m.gameMode).market === false;
   const npcPrice = id => npcCoinPrice(neu.items, id);
   let museum = null;
   try { museum = museumSummary(m, { constants: neu.constants, price: noMarket ? npcPrice : priceOf, name: itemName }); if (museum && noMarket) museum.npcOnly = true; } catch (e) { console.warn('[музей]', e.message); }
+  yield 'музей';
   let petScore = null;
   try { petScore = petScoreSummary(m, { petIds: allPetIds(), price: noMarket ? npcPrice : priceOf, maxedPrice: noMarket ? () => 0 : id => { const b = prices.bin.get(id); return b?.max || 0; }, name: itemName }); if (petScore && noMarket) petScore.npcOnly = true; } catch (e) { console.warn('[pet score]', e.message); }
   // Подсказки по тексту карточки «Кап Taming»
@@ -185,6 +219,7 @@ export function analyzeMember(m) {
       t.refs = enrichGuide({ status: 'ok', sections: [{ kind: 'text', text }] }, { items: neu.items, constants: neu.constants, price: priceOf }).refs;
     } catch (e) { console.warn('[taming refs]', e.message); }
   }
+  yield 'Pet Score';
   let chocolate = null;
   try { chocolate = chocolateAdvice(m.extras?.chocolate); } catch (e) { console.warn('[Chocolate]', e.message); }
   // Magic Find — в куске «Снаряжения» (в /api/state не уходит)
@@ -196,6 +231,7 @@ export function analyzeMember(m) {
   // «Обзор»: перерыв в игре и ежедневные дела; «Прогресс»: дешёвый SkyBlock XP и сундуки данжей
   const returning = safe('возвращение', () => returningInfo(m));
   const dailies = safe('дейлики', () => dailiesOf(m, Date.now(), liveCtx(neu.items, noMarket)));
+  yield 'Magic Find и дела';
   // Коллекции — тем же расчётом, что раздел «Коллекции» (кооп, максимум из справочника Hypixel)
   const colls = safe('коллекции', () => analyzeCollections(m));
   const sbxp = safe('SkyBlock XP', () => sbxpPlan(m, { acc, petScore, museumBest: museum?.best || null, museumFreeXp: museum?.canDonateXp || 0, noMarket, collections: colls?.status === 'ok' ? colls : null }));
@@ -222,21 +258,39 @@ function allPetIds() {
 
 let lastSnap = savedSnap;
 let analyzedAt = 0;
+/** Шаги последнего разбора своего профиля и их время, мс (для панели «Сервер»): [{ step, ms }] */
+export const analyzeTimings = { at: 0, steps: [] };
+let chain = Promise.resolve(), pending = null;
+/**
+ * Пересчитать разбор своего профиля. Расчёт идёт кусками (analyzeMemberAsync) и не держит сервер.
+ * Разборы идут по одному: вызовы, пришедшие, пока разбор ждёт очереди, получают его же результат.
+ * @returns {Promise<Object|undefined>} gear нового разбора
+ */
 export function reanalyze() {
-  const m = state.member;
-  if (!m) return;
-  state.analysis = analyzeMember(m);
-  analyzedAt = Date.now();
-  return state.analysis.gear;
+  if (pending) return pending;
+  const job = chain.then(async () => {
+    pending = null;
+    const m = state.member;
+    if (!m) return undefined;
+    const steps = [];
+    const a = await analyzeMemberAsync(m, { onStep: (step, ms) => steps.push({ step, ms: Math.round(ms) }) });
+    Object.assign(analyzeTimings, { at: Date.now(), steps });
+    // Пока считали, мог прийти новый профиль: тогда его разбор уже стоит в очереди, а этот устарел
+    if (state.member === m) { state.analysis = a; analyzedAt = Date.now(); }
+    return a.gear;
+  });
+  pending = job;
+  chain = job.catch(() => {});
+  return job;
 }
 /**
- * Пересчёт на новые цены, если разбор не свежий. Разбор своего профиля занимает 0,3–0,7 с, и всё это время
- * сервер не отвечает. Раньше раз в минуту он шёл дважды: после обновления профиля и тут же на цены.
- * @returns {boolean} пересчитал ли
+ * Пересчёт на новые цены, если разбор не свежий. Раньше раз в минуту он шёл дважды: после обновления профиля
+ * и тут же на цены.
+ * @returns {Promise<boolean>} пересчитал ли
  */
-export function reanalyzeForPrices(freshMs = 30_000) {
+export async function reanalyzeForPrices(freshMs = 30_000) {
   if (Date.now() - analyzedAt < freshMs) return false;
-  reanalyze();
+  await reanalyze();
   return true;
 }
 
@@ -334,7 +388,7 @@ async function doRefreshProfile() {
     state.member.bingo = bingoOf(bingoRaw, bingoEvent());
     // Профиль Bingo: невыполненные цели ивента идут в план (advisor bingoRules)
     if (state.member.gameMode === 'bingo') state.member.bingoGoals = bingoGoalsLeft(bingoRaw, bingoEvent());
-    const gear = reanalyze();
+    const gear = await reanalyze();
     const snap = snapshot(state.member, gear);
     const prev = lastSnap || state.history[state.history.length - 1];
     const ev = [...diffFeed(prev, snap), ...adviceFeed(prevRoadmap, state.analysis?.roadmap, snap.t)];
