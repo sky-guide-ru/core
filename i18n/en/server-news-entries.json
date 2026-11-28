@@ -289,5 +289,8 @@
  "Питомцы по этапам в гайдах": "Pets by stage in guides",
  "В гайдах по занятиям — питомцы от дешёвых до эндгейма: что дают, где взять, цена и шанс выпадения.": "Activity guides now list pets from cheap to endgame: what they give, where to get them, price and drop chance.",
  "Пример — [Mining](guides/mining#pets): Armadillo для гемов на старте, Scatha — в эндгейме, с честным шансом.": "Example: [Mining](guides/mining#pets) suggests Armadillo for gemstones early and Scatha for endgame, with an honest drop chance.",
- "Питомцы, которых уже перекрывает свой питомец получше, не советуются, а дорогие — только по карману.": "Pets already outclassed by one you own are not suggested, and expensive ones only when you can afford them."
+ "Питомцы, которых уже перекрывает свой питомец получше, не советуются, а дорогие — только по карману.": "Pets already outclassed by one you own are not suggested, and expensive ones only when you can afford them.",
+ "В [гайде The Forge](guides/forge) видно, что лежит в слотах и когда будет готово.": "The [The Forge guide](guides/forge) shows what is in your slots and when it will be ready.",
+ "Выгодные рецепты считаются под HotM и то, как часто удаётся зайти в Forge.": "Profitable recipes follow your HotM and how often you can visit the Forge.",
+ "Детали бура собираются по шагам в блоке [Улучшить бур](guides/forge#forge-drill): что есть, сколько ковать и что докупить.": "Drill parts are built step by step in [Upgrade your drill](guides/forge#forge-drill): what you have, how long to forge and what to buy."
 }

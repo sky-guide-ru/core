@@ -4,7 +4,17 @@
 
 ## Не выпущено
 
+## 0.2.49
+
 - Гайды: «Питомцы по этапам» (`src/guides/pets.js`: `PET_LADDERS`, `petLadderSection`, `petNextStep`) в Mining, Farming, Foraging, Fishing, Trophy Fish, слеерах (свой босс), Dungeons (свой класс), Kuudra и Crimson Isle. Старт → средний → эндгейм с живой ценой AH, шансом выпадения и источником (fandom, NEU, 28.11.2026). Питомец той же цели ступенью выше закрывает младшего; в добыче стартовых не советуем после первого среднего; шаг плана — только по карману (30% монет), без рынка — по монетам NPC; Bingo без эндгейма; питомцы событий в план не идут. Старые таблицы питомцев в Mining, Farming, Foraging и строки питомцев в Fishing заменены.
+
+## 0.2.48
+
+- Гайд «The Forge» (`guides/forge.js`, вид `extra.forge`): слоты из `gather.forge` с временем готовности (Quick Forge учтён), выгодные рецепты под ритм заходов 4/12/24 ч (`forgeProfitPlans`: слот занят `ceil(длительность/ритм)·ритм`), цели под 🔒, цепочки деталей бура (`drillUpgrades`, `forgeChain`: вычитает запасы из хранилищ, Sacks и деталей на бурах, считает время по слотам и длинной ветке, цену материалов и готового).
+- Ironman/Stranded/Bingo: в гайде вместо цен — «Что ковать для себя» (`forgeForSelf`).
+- `guideCtx`: новые `deps.market` (MarketCtx) и `deps.collections`.
+- `craftFlips`: поле `hotm` (уровень HotM из рецепта) для колонки в «Заработке».
+- Шаг 3 гайда Mining ведёт в гайд The Forge (`link` у шага); новость «Гайд The Forge».
 
 ## 0.2.47
 

@@ -50,10 +50,18 @@ export const AFTER = {
     ],
     related: ['fishing'],
   },
+  forge: {
+    goals: [
+      'Собери лучшие детали бура: Amber-Polished Drill Engine и Perfectly-Cut Fuel Tank.',
+      'Держи все слоты занятыми на ночь: длинные рецепты вроде Drill Motor или Mithril Plate.',
+      'Divan\'s Drill и броня Divan тоже куются здесь — из материалов Crystal Hollows.',
+    ],
+    related: ['mining'],
+  },
   mining: {
     goals: [
       'Гемы ради денег: Divan\'s Drill, броня Divan, Perfect-гемы в слоты, продажа Flawless на Bazaar.',
-      'Держи все слоты The Forge занятыми выгодными рецептами.',
+      'Держи все слоты The Forge занятыми: что выгодно ковать — в гайде The Forge.',
       'Mineshafts и Frozen Corpse ради материалов и Glacite Powder.',
     ],
     related: ['foraging', 'minions'],

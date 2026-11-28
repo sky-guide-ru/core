@@ -1,0 +1,15 @@
+{
+ "Забери готовое из Forge: {0}": "Collect finished items from the Forge: {0}",
+ "Слот простаивает, пока результат лежит в нём. /warp forge.": "The slot sits idle while the result is in it. /warp forge.",
+ "Свободных слотов: {0}": "Free slots: {0}",
+ "Положи {0} — самый выгодный сейчас рецепт под твой HotM.": "Put in {0} — the most profitable recipe for your HotM right now.",
+ "Положи выгодный рецепт из блока «Выгодно ковать».": "Put in a profitable recipe from «Profitable to forge».",
+ "{0} бура: {1}": "Drill {0}: {1}",
+ "Пошаговая цепочка — в блоке «Улучшить бур»: около {0} дн. ковки на твоих слотах.": "Step-by-step chain in «Upgrade your drill»: about {0} d of forging on your slots.",
+ "Что ковать в The Forge и как собрать детали бура: прибыль по живым ценам, время ковки и цепочки рецептов.": "What to forge in The Forge and how to build drill parts: profit at live prices, forge time and recipe chains.",
+ "Forge откроется с HotM 1: начни с заданий в Dwarven Mines.": "The Forge opens at HotM 1: start with commissions in the Dwarven Mines.",
+ "≈ {0}/ч на все слоты": "≈ {0}/h on all slots",
+ "Как работает Forge": "How the Forge works",
+ "The Forge в Dwarven Mines (/warp forge) открывается с HotM 1. Положи материалы в слот — предмет куётся в реальном времени, даже когда ты не в игре.": "The Forge in the Dwarven Mines (/warp forge) opens at HotM 1. Put materials in a slot — the item forges in real time, even while you are offline.",
+ "Слоты добавляются с уровнями HotM, перк Quick Forge ускоряет ковку до 30%. Детали бура снимает и переставляет Jotraeline Greatforge в той же кузнице.": "Slots come with HotM levels, the Quick Forge perk speeds forging up to 30%. Jotraeline Greatforge in the same forge installs and removes drill parts."
+}
