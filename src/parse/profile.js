@@ -345,7 +345,6 @@ export async function parseMember(profile, uuid, extra = {}) {
     kingQuests: g(mc, 'biomes.goblin.king_quests_completed', 0),
     mineshafts: g(m, 'glacite_player_data.mineshafts_entered', 0),
     corpses: g(m, 'glacite_player_data.corpses_looted', {}),
-    fossilDust: g(m, 'glacite_player_data.fossil_dust', 0),
     nucleusRuns: g(m, 'leveling.completions.NUCLEUS_RUNS', 0),
     nucleusMeter: findNucleusMeter(m),
   };

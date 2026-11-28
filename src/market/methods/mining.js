@@ -517,7 +517,7 @@ export const MINING_DETAILS = {
       'Копай в Glacite Tunnels: примерно раз на 2 000 блоков открывается вход в Mineshaft (перки Surveyor и Tunnel Vision чаще).',
       'Заранее купи Umber Key и Tungsten Key и держи по одному в инвентаре: какой труп будет в шахте, заранее неизвестно. Для шахты Fairy нужен Skeleton Key.',
       'В шахте найди трупы: Lapis открывается без ключа, остальные ключом своего типа. Каждый игрок открывает труп один раз.',
-      'Копай гемы в самой шахте, выходи (+1 000 Powder Glacite за выход) и продавай Fine гемы и Suspicious Scrap на Bazaar.',
+      'Копай гемы в самой шахте, выходи (+1 000 Powder Glacite за выход) и продавай Fine гемы и Suspicious Scrap на Bazaar. Открывать скрап в Fossil Excavator стоит ради окаменелостей, а не ради монет.',
       'Забирай награды за вехи у Grandpa Wolf (/corpsemilestones) и выбери цель RNG Meter: так каждый труп работает и на редкий дроп.',
     ],
     risks: [

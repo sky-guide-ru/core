@@ -4,6 +4,7 @@ import { hotmTreeSection } from './trees/index.js';
 import { petLadderSection, petNextStep } from './pets.js';
 import { fmt, short, plural, hasItem, ladderPos, howText, constants, cell, tone, topNext, lc } from './gathering-util.js';
 import { tx } from '../../i18n/msg.js';
+import { fossilSections } from './fossil.js';
 import { NUCLEUS_CRYSTALS, OTHER_CRYSTALS } from './crystals.js';
 import { corpseGuide } from './corpses.js';
 
@@ -168,6 +169,11 @@ export default {
     });
 
     sections.push(...cg.sections);
+
+    // Fossil Excavator: открытие Suspicious Scrap, формы окаменелостей, выгода
+    const fossil = fossilSections(m, ctx);
+    sections.push(...fossil.sections);
+    next.push(...fossil.next);
 
     const bestDrill = [drill.have, gem.have].filter(Boolean);
     sections.push({
