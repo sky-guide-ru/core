@@ -312,5 +312,9 @@
  "Гайд по Experimentation Table": "Experimentation Table guide",
  "В [гайде Enchanting](guides/enchanting#superpairs) — ставки Superpairs, Chronomatron и Ultrasequencer по уровням.": "The [Enchanting guide](guides/enchanting#superpairs) lists Superpairs, Chronomatron and Ultrasequencer stakes by level.",
  "Подсказки, как играть в каждую игру, и что продаётся: Titanic Experience Bottle, Metaphysical Serum.": "Tips for playing each game, and what sells: Titanic Experience Bottle, Metaphysical Serum.",
- "Прогресс из профиля: лучшая ставка, выпитые Serum, пройден ли стол сегодня.": "Progress from the profile: best stake, Serums drunk, whether the table is done today."
+ "Прогресс из профиля: лучшая ставка, выпитые Serum, пройден ли стол сегодня.": "Progress from the profile: best stake, Serums drunk, whether the table is done today.",
+ "Какие гемы вставить в снаряжение": "Which gems to put in your gear",
+ "В [Снаряжении](gear#gems) — все Gemstone-слоты вещей: что вставлено, что пусто, что закрыто.": "[Gear](gear#gems) lists every Gemstone slot on your items: filled, empty and locked.",
+ "Самые выгодные камни под роль вещи и бюджет, с ценой Bazaar и открытием слота.": "Best-value gems for the item's role and budget, with Bazaar price and slot unlock cost.",
+ "Fine, Flawless и Perfect для каждого слота — с прибавкой к стату; в плане появился шаг «Гемы».": "Fine, Flawless and Perfect for each slot with the stat gain; the plan has a new Gems step."
 }

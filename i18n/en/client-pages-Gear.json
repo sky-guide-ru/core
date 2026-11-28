@@ -62,5 +62,6 @@
  "Ближе всего к tier 15: {0}.": "Closest to tier 15: {0}.",
  "По правилам реворка Magic Find (17.11.2026): Looting даёт MF, пока оружие в руке. Сверх 100% шанса предмет иногда выпадает вдвое.": "Rules of the Magic Find rework (17.11.2026): Looting gives MF while the weapon is held. Above 100% chance an item sometimes drops twice.",
  "Цель — всё, что даёт MF на любых мобах. Потолок стата {0}: остальное дают баффы, Bestiary и бонусы на отдельных мобов.": "The goal is everything that gives MF on any mob. The stat cap is {0}: the rest comes from buffs, Bestiary and bonuses on specific mobs.",
- "действует сейчас": "active now"
+ "действует сейчас": "active now",
+ "Гемы в снаряжении": "Gemstones in your gear"
 }

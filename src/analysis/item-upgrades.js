@@ -13,6 +13,7 @@
 // Knockback, а из взаимоисключающих чар (Sharpness / Smite / Bane) берём ту, что уже стоит, иначе основную.
 
 import { buildUpgrades, nextUpgrade } from '../lib/acc-upgrades.js';
+import { SLOT_GEMS as GEM_SLOTS_ALLOWED, ROLE_GEMS, GEM_STAT, gemStat, statText } from '../calc/gems.js';
 import { tx } from '../../i18n/msg.js';
 import { canSellCopy } from '../lib/item-props.js';
 
@@ -334,13 +335,10 @@ function starSteps(it, cls, ctx) {
 
 // ---------- Gemstones ----------
 
-const SLOT_GEMS = {
-  COMBAT: ['JASPER', 'SAPPHIRE', 'RUBY', 'AMETHYST', 'ONYX'], OFFENSIVE: ['JASPER', 'SAPPHIRE'], DEFENSIVE: ['RUBY', 'AMETHYST', 'OPAL'],
-  MINING: ['JADE', 'AMBER', 'TOPAZ'], UNIVERSAL: ['JASPER', 'SAPPHIRE', 'RUBY', 'AMETHYST', 'ONYX', 'OPAL', 'JADE', 'AMBER', 'TOPAZ', 'PERIDOT', 'AQUAMARINE', 'CITRINE'],
-  CHISEL: ['CITRINE', 'AQUAMARINE', 'PERIDOT', 'ONYX'],
-};
-const GEM_PREF = { melee: ['JASPER', 'ONYX', 'RUBY'], archer: ['JASPER', 'ONYX', 'RUBY'], mage: ['SAPPHIRE', 'RUBY'], tank: ['AMETHYST', 'RUBY', 'OPAL'], mining: ['JADE', 'TOPAZ', 'AMBER'], farming: ['PERIDOT'], fishing: ['AQUAMARINE'], foraging: ['CITRINE'] };
-const GEM_RU = { RUBY: 'Ruby (здоровье)', AMETHYST: 'Amethyst (защита)', JADE: 'Jade (Mining Fortune)', AMBER: 'Amber (Mining Speed)', TOPAZ: 'Topaz (Pristine)', SAPPHIRE: 'Sapphire (интеллект)', JASPER: 'Jasper (сила)', OPAL: 'Opal (истинная защита)', ONYX: 'Onyx (крит. урон)', AQUAMARINE: 'Aquamarine (шанс Sea Creatures)', CITRINE: 'Citrine (удача лесоруба)', PERIDOT: 'Peridot (удача фермера)' };
+// Какие камни в какой слот и какой роли нужен — общая таблица с блоком «Гемы в снаряжении» (calc/gems.js, по вики)
+const SLOT_GEMS = GEM_SLOTS_ALLOWED;
+const GEM_PREF = ROLE_GEMS;
+const GEM_RU = Object.fromEntries(Object.entries(GEM_STAT).map(([g, st]) => [g, tx`${g[0] + g.slice(1).toLowerCase()} (${st})`]));
 const QUALITY = ['ROUGH', 'FLAWED', 'FINE', 'FLAWLESS', 'PERFECT'];
 
 function gemSteps(it, cls, ctx) {
@@ -370,7 +368,7 @@ function gemSteps(it, cls, ctx) {
     }
     if (unlock && cost != null) { cost += unlock.cost; parts.push(...unlock.parts); }
     steps.push({
-      key: tx`gem:${slot}`, group: 'gems', title: tx`Самоцвет в ${slotRu}: Perfect ${GEM_RU[rec] || rec}`,
+      key: tx`gem:${slot}`, group: 'gems', title: tx`Самоцвет в ${slotRu}: Perfect ${GEM_RU[rec] || rec}`, why: statText(rec, gemStat(rec, 'PERFECT', it.rarity)) || undefined,
       current: quality ? tx`${title(quality)} ${title(gemType || '?')}` : 'пусто', target: tx`Perfect ${title(rec)}`, done, cost: done ? 0 : cost, parts,
       impact: quality ? 1 + (4 - QUALITY.indexOf(quality)) * 0.6 : 3,
       note: unlock ? `слот закрыт: открыть в меню самоцветов (Gemstone Grinder), цена открытия включена` : null,

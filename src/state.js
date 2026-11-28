@@ -20,6 +20,8 @@ import { npcOnlyCtx } from './market/methods.js';
 import { SKILLS, SLAYERS } from '../i18n/ru.js';
 import { pricesReady, priceOf, buyPriceOf, prices } from './prices.js';
 import { magicFind } from './calc/magic-find.js';
+import { gemPlan, gemCandidates } from './calc/gems.js';
+import { classify } from './analysis/item-upgrades.js';
 import { buildUpgrades } from './lib/acc-upgrades.js';
 import { petScoreSummary } from './analysis/pet-score.js';
 import { enrichGuide } from './guides/refs.js';
@@ -155,6 +157,16 @@ export function diffFeed(prev, cur) {
 export function analyzeMember(m) {
   const acc = analyzeAccessories(m);
   const gear = analyzeGear(m);
+  // Гемы в снаряжении — до плана: шаг «Гемы» берёт этот же расчёт (цены покупки на Bazaar)
+  if (gear) {
+    try {
+      const noMkt = profileMode(m.gameMode).market === false;
+      gear.gems = gemPlan(gemCandidates(gear, m, classify, neu.items), {
+        costs: neu.constants?.gemstonecosts, price: buyPriceOf, sell: priceOf, market: !noMkt,
+        coins: (m.purse || 0) + (m.bank || 0) + (m.personalBank || 0), stock: m.inv?.sacks,
+      });
+    } catch (e) { console.warn('[гемы]', e.message); }
+  }
   const { roadmap, map, plan, summary, power } = advise(m, acc, gear);
   const methods = moneyMethods(m, { networth: gear?.networth?.total });
   // Ironman, Stranded, Bingo: покупать можно только у NPC за монеты — Museum и Pet Score считают по ценам NPC, а не AH
