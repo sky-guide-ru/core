@@ -4,6 +4,7 @@
 // Brewing_Stand, Tutorial:Alchemy_Guide) и описания зелий в NEU (POTION_<ID>;<уровень>, POTION_DUNGEON;7).
 import { fmt, short, plural, cell, topNext, bestPet } from './gathering-util.js';
 import { tx } from '../../i18n/msg.js';
+import { extractRecipes, marketId, ahNet } from '../market/util.js';
 
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 const R = n => ROMAN[n] || String(n);
@@ -86,8 +87,8 @@ export const XP_BREWS = [
 const XP_PER_POTION = 15_000;
 
 /** Стоимость 1 млн Alchemy XP по варке: ингредиент на 3 зелья + Nether Wart + Glowstone Dust − продажа NPC */
-export function xpCostPerMillion(b, buy) {
-  const ing = buy(b.id), wart = b.wart ? 3 * buy('NETHER_STALK') : 0, glow = buy('GLOWSTONE_DUST');
+export function xpCostPerMillion(b, buy, ingPrice = buy(b.id)) {
+  const ing = ingPrice, wart = b.wart ? 3 * buy('NETHER_STALK') : 0, glow = buy('GLOWSTONE_DUST');
   if (!ing) return null;
   const spend = ing + wart + glow;
   const net = spend - b.sell3;
@@ -95,12 +96,38 @@ export function xpCostPerMillion(b, buy) {
 }
 
 /** Себестоимость одного зелья на максимум: ингредиент + Enchanted Redstone Block + Enchanted Glowstone на 3 зелья, плюс Nether Wart */
-export function brewCost(b, buy) {
+export function brewCost(b, buy, ingPrice = buy(b.ings[b.ings.length - 1][0])) {
   const top = b.ings[b.ings.length - 1];
-  const ing = buy(top[0]);
+  const ing = ingPrice;
   if (!ing) return null;
   const lvl = Math.min(b.max, top[1] + 3);
   return { id: top[0], lvl, perPotion: Math.round((ing + buy(LONG) + buy(UP3)) / 3 + buy('NETHER_STALK')) };
+}
+
+/**
+ * Ингредиент тремя способами: купить готовым, скрафтить из сырья с Bazaar (рецепт NEU, до 2 ступеней сжатия)
+ * и «своё» — сколько он стоил бы при продаже (своё добытое тоже стоит денег: его можно было продать).
+ * @returns {{ buy: number, craft: number, via: string|null, ratio: number, own: number }}
+ */
+export function ingredientCosts(id, { buy, sell, items }, depth = 2) {
+  const out = { buy: buy(id) || 0, craft: 0, via: null, ratio: 0, own: sell(id) || 0 };
+  const item = items?.get?.(id);
+  if (depth > 0 && item) {
+    for (const r of extractRecipes(item)) {
+      const keys = Object.keys(r.inputs);
+      if (r.type !== 'craft' || keys.length !== 1) continue;
+      const src = marketId(keys[0], items), ratio = r.inputs[keys[0]] / (r.count || 1);
+      if (ratio < 2) continue;
+      const sub = ingredientCosts(src, { buy, sell, items }, depth - 1);
+      const unit = Math.min(...[sub.buy, sub.craft].filter(x => x > 0));
+      if (!Number.isFinite(unit)) continue;
+      const c = unit * ratio;
+      if (!out.craft || c < out.craft) Object.assign(out, { craft: c, via: sub.craft && sub.craft < sub.buy ? sub.via : src, ratio: sub.craft && sub.craft < sub.buy ? ratio * sub.ratio : ratio });
+      const ownSub = (sub.own || 0) * ratio;
+      if (ownSub > out.own) out.own = ownSub; // из своего сырья: оно тоже продаётся
+    }
+  }
+  return out;
 }
 
 /** Активен ли God Potion: почти все его эффекты висят с запасом больше часа */
@@ -129,6 +156,9 @@ export function build(m, ctx) {
   const info = id => ctx.priceInfo?.(id) || null;
   const buy = id => info(id)?.bazaar?.buy || ctx.price(id) || 0;
   const bin = id => info(id)?.bin?.price || 0;
+  const sell = id => info(id)?.bazaar?.sell || 0;
+  const ingOf = id => ingredientCosts(id, { buy, sell, items: ctx.items });
+  const cheap = c => { const v = Math.min(...[c.buy, c.craft].filter(x => x > 0)); return Number.isFinite(v) ? v : 0; };
   const cols = ctx.collections;
   const unlocked = u => {
     if (!u) return true;
@@ -241,45 +271,71 @@ export function build(m, ctx) {
 
   // ── Сварить или купить
   const brewRows = BREWS.map(b => {
-    const c = noMarket ? null : brewCost(b, buy);
+    const topId = b.ings[b.ings.length - 1][0];
+    const ic = noMarket ? null : ingOf(topId);
+    const c = ic && cheap(ic) ? brewCost(b, buy, cheap(ic)) : null;
+    const own = ic?.own ? brewCost(b, buy, ic.own) : null;
     const key = c ? `POTION_${b.effect === 'true_resistance' ? 'TRUE_DEFENSE' : b.effect.toUpperCase()};${c.lvl}` : null;
     const ah = key ? bin(key) : 0;
     const ok = unlocked(b.unlock);
     const unlockText = !b.unlock ? 'сразу' : typeof b.unlock === 'string' ? b.unlock : tx`${b.unlock[0]} ${R(b.unlock[1])}`;
-    return { b, c, ah, ok, row: [
-      cell(tx`${b.name} ${R(b.max)}`, { item: b.ings[b.ings.length - 1][0] }),
+    const craftWins = ic && ic.craft && ic.craft < ic.buy * 0.97;
+    return { b, c, own, ah, ic, ok, craftWins, row: [
+      cell(tx`${b.name} ${R(b.max)}`, { item: topId }),
       b.gives,
-      b.ings.map(([id, l]) => tx`${ctx.name(id) || id} (${R(l)})`).join(' → '),
       cell(unlockText, { tone: ok === true ? 'good' : ok === false ? 'bad' : undefined }),
-      ...(noMarket ? [] : [c ? short(c.perPotion) : '—', ah ? cell(short(ah), { tone: c && ah < c.perPotion ? 'good' : undefined }) : '—']),
+      noMarket ? b.ings.map(([id, l]) => tx`${ctx.name(id) || id} (${R(l)})`).join(' → ')
+        : cell(ic?.buy ? tx`${ctx.name(topId) || topId}: ${short(ic.buy)}` : ctx.name(topId) || topId, { item: topId, tone: ic?.buy && !craftWins ? 'good' : undefined }),
+      ...(noMarket ? [] : [
+        ic?.craft ? cell(tx`${short(ic.craft)} из ${ctx.name(ic.via) || ic.via}`, { tone: craftWins ? 'good' : undefined }) : '—',
+        c ? short(c.perPotion) : '—',
+        own ? short(own.perPotion) : '—',
+        ah ? cell(short(ah), { tone: c && ah < c.perPotion ? 'good' : undefined }) : '—',
+      ]),
     ] };
   });
   sections.push({
     kind: 'table', title: noMarket ? 'Что варить' : 'Сварить или купить', news: 'brews',
     note: noMarket
       ? 'Ингредиенты добывай сам: миньоны, коллекции, мобы. Уровень поднимает Glowstone, время — Redstone.'
-      : tx`Себестоимость — одно зелье на максимум с Enchanted Glowstone и Enchanted Redstone Block (${LONG_MIN} минут, у тебя ${fmt(LONG_MIN * (1 + lvl / 100))}). Ингредиенты по цене покупки на Bazaar. Зелёная цена на аукционе — купить дешевле, чем сварить.`,
-    columns: ['Зелье', 'Даёт', 'Ингредиент (уровень)', 'Открывается', ...(noMarket ? [] : ['Сварить', 'Аукцион'])],
+      : tx`Ингредиент на 3 зелья: купить готовым или скрафтить из сырья (зелёное дешевле). Зелье — одно на максимум с Enchanted Glowstone и Enchanted Redstone Block (${LONG_MIN} минут, у тебя ${fmt(LONG_MIN * (1 + lvl / 100))}). «Из своего» — если ингредиент добыт самим: он стоит столько, за сколько его можно продать. Зелёная цена на аукционе — купить зелье дешевле, чем сварить.`,
+    columns: ['Зелье', 'Даёт', 'Открывается', ...(noMarket ? ['Ингредиент (уровень)'] : ['Купить ингредиент', 'Скрафтить', 'Зелье', 'Из своего', 'Аукцион'])],
     rows: brewRows.map(x => x.row),
   });
   if (!noMarket) {
-    const flips = brewRows.filter(x => x.c && x.ah && x.ah * 0.97 > x.c.perPotion * 1.1).sort((a, b) => (b.ah - b.c.perPotion) - (a.ah - a.c.perPotion));
+    const gain = (x, base) => ahNet(x.ah) - base.perPotion;
+    const flips = brewRows.filter(x => x.c && x.ah && gain(x, x.c) > x.c.perPotion * 0.1).sort((a, b) => gain(b, b.c) - gain(a, a.c));
+    const ownFlips = brewRows.filter(x => x.own && x.ah && !flips.includes(x) && gain(x, x.own) > x.own.perPotion * 0.1).sort((a, b) => gain(b, b.own) - gain(a, a.own));
+    const crafts = brewRows.filter(x => x.craftWins);
     sections.push({
       kind: 'text', title: 'Варка на продажу', news: 'sell',
       text: [
         ...(perHour && brewRows[0].c ? [tx`Одно Strength VIII на ${fmt(LONG_MIN * (1 + lvl / 100))} минут обходится в ${short(brewRows[0].c.perPotion)}, а God Potion — ${short(perHour)} за час со всеми баффами: для обычной игры он дешевле.`] : []),
         flips.length
-          ? tx`Сейчас окупаются: ${flips.slice(0, 3).map(x => tx`${x.b.name} ${R(x.c.lvl)} (сварить ${short(x.c.perPotion)}, на аукционе ${short(x.ah)})`).join('; ')}. Спрос на отдельные зелья маленький: продавай понемногу.`
-          : 'Сейчас ни одно зелье на аукционе не стоит заметно дороже себестоимости: варить на продажу невыгодно.',
+          ? tx`Окупаются даже с покупкой ингредиентов: ${flips.slice(0, 3).map(x => tx`${x.b.name} ${R(x.c.lvl)} (сварить ${short(x.c.perPotion)}, на аукционе ${short(x.ah)})`).join('; ')}. Спрос на отдельные зелья маленький: продавай понемногу.`
+          : 'С покупкой ингредиентов сейчас ни одно зелье на аукционе не окупается заметно.',
+        ...(ownFlips.length ? [tx`Из своих ресурсов выгоднее варить, чем продавать ингредиент: ${ownFlips.slice(0, 3).map(x => tx`${x.b.name} ${R(x.own.lvl)} (+${short(gain(x, x.own))} с зелья)`).join('; ')}.`] : []),
+        ...(crafts.length ? [tx`Ингредиент дешевле скрафтить из сырья, чем купить: ${crafts.slice(0, 4).map(x => ctx.name(x.ic.via) ? tx`${ctx.name(x.b.ings[x.b.ings.length - 1][0])} из ${ctx.name(x.ic.via)}` : x.b.name).join(', ')}.`] : []),
         'NPC платит за зелья меньше, чем стоят ингредиенты: продажа NPC только возвращает часть денег при прокачке Alchemy.',
         'Главный спрос — God Potion и Booster Cookie, а не отдельные зелья: God Potion перекрывает почти все баффы.',
       ],
     });
   }
 
+  // ── Автоварка
+  sections.push({
+    kind: 'text', title: 'Автоварка', news: 'auto',
+    text: [
+      'Воронки (Hopper) подают ингредиенты в Brewing Stand, но, по вики, так варятся только ванильные зелья. Зелья SkyBlock и XP Alchemy надёжно получаются только руками.',
+      'Варка идёт, только пока Private Island загружен: без тебя на острове стойки стоят.',
+      'Быстрее всего — ряды по 64 стойки: заполни все водой, потом Nether Wart, ингредиент и Glowstone Dust. Все стойки варят одновременно, 20 секунд на шаг (с Witch — 10).',
+      'Water Bottle продаёт Alchemist в Hub. Готовую партию продавай NPC прямо из меню Booster Cookie.',
+    ],
+  });
+
   // ── Как качать Alchemy
   const xpLeft = Math.max(0, XP_TOTAL_50 - (sk.xp || 0));
-  const xpRowsAll = noMarket ? [] : XP_BREWS.map(b => ({ b, c: xpCostPerMillion(b, buy) })).filter(x => x.c);
+  const xpRowsAll = noMarket ? [] : XP_BREWS.map(b => { const ic = ingOf(b.id); return { b, c: cheap(ic) ? xpCostPerMillion(b, buy, cheap(ic)) : null }; }).filter(x => x.c);
   xpRowsAll.sort((a, b) => a.c.perMillion - b.c.perMillion);
   const xpRows = xpRowsAll;
   const xpPlain = noMarket || !xpRows.length;

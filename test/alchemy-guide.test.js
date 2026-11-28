@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { godHours, alchemyInt, xpCostPerMillion, brewCost, godActive, GOD_EFFECTS, XP_BREWS, BREWS, build } from '../src/guides/alchemy.js';
+import { ingredientCosts, godHours, alchemyInt, xpCostPerMillion, brewCost, godActive, GOD_EFFECTS, XP_BREWS, BREWS, build } from '../src/guides/alchemy.js';
 import { auctionKey } from '../src/market/auctions.js';
 
 test('alchemy: God Potion и награды уровней по вики', () => {
@@ -47,4 +47,17 @@ test('alchemy: Ironman без цен рынка', () => {
   assert.ok(!g.sections.some(s => s.news === 'sell'));
   assert.ok(!JSON.stringify(g).includes('аукцион'), 'в Ironman не предлагаем аукцион');
   assert.equal(g.level.value, 12);
+});
+
+test('alchemy: ингредиент купить, скрафтить из сырья или своё', () => {
+  const items = new Map([['ENCHANTED_SUGAR_CANE', { id: 'ENCHANTED_SUGAR_CANE', recipe: { B2: 'ENCHANTED_SUGAR:160' } }], ['ENCHANTED_SUGAR', { id: 'ENCHANTED_SUGAR', recipe: { B2: 'SUGAR_CANE:160' } }]]);
+  const B = { ENCHANTED_SUGAR_CANE: 60_000, ENCHANTED_SUGAR: 400, SUGAR_CANE: 2 };
+  const S = { ENCHANTED_SUGAR_CANE: 55_000, ENCHANTED_SUGAR: 380, SUGAR_CANE: 2.5 };
+  const c = ingredientCosts('ENCHANTED_SUGAR_CANE', { buy: id => B[id] || 0, sell: id => S[id] || 0, items });
+  assert.equal(c.buy, 60_000);
+  assert.equal(c.craft, 160 * 160 * 2); // из Sugar Cane дешевле, чем из Enchanted Sugar
+  assert.equal(c.via, 'SUGAR_CANE');
+  assert.equal(c.own, 160 * 160 * 2.5); // своё сырьё дороже продать сырьём
+  const none = ingredientCosts('FLINT', { buy: () => 0, sell: () => 0, items });
+  assert.deepEqual([none.buy, none.craft, none.own], [0, 0, 0]);
 });

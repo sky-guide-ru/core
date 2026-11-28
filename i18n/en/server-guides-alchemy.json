@@ -126,5 +126,21 @@
  "Питомец Witch для варки": "Witch pet for brewing",
  "Варка идёт вдвое быстрее: 10 секунд вместо 20.": "Brewing goes twice as fast: 10 seconds instead of 20.",
  "действует": "active",
- "Зелья и Alchemy": "Potions and Alchemy"
+ "Зелья и Alchemy": "Potions and Alchemy",
+ "Ингредиент: купить готовым или скрафтить из сырья (зелёное дешевле). Зелье — одно на максимум с Enchanted Glowstone и Enchanted Redstone Block ({0} минут, у тебя {1}). «Из своего» — если ингредиент добыт самим: он стоит столько, за сколько его можно продать. Зелёная цена на аукционе — купить зелье дешевле, чем сварить.": "Ingredient: buy it ready or craft it from raw materials (green is cheaper). Potion — one at max level with Enchanted Glowstone and an Enchanted Redstone Block ({0} minutes, {1} for you). «From your own» — if you gathered the ingredient yourself: it's worth what you could sell it for. A green Auction House price means buying the potion is cheaper than brewing.",
+ "Ингредиент: купить": "Ingredient: buy",
+ "Ингредиент: скрафтить": "Ingredient: craft",
+ "Из своего": "From your own",
+ "Окупаются даже с покупкой ингредиентов: {0}. Спрос на отдельные зелья маленький: продавай понемногу.": "Profitable even with bought ingredients: {0}. Demand for single potions is small: sell a few at a time.",
+ "С покупкой ингредиентов сейчас ни одно зелье на аукционе не окупается заметно.": "With bought ingredients no potion on the Auction House pays off noticeably right now.",
+ "Из своих ресурсов выгоднее варить, чем продавать ингредиент: {0}.": "From your own resources brewing beats selling the ingredient: {0}.",
+ "{0} {1} (+{2} с зелья)": "{0} {1} (+{2} per potion)",
+ "Ингредиент дешевле скрафтить из сырья, чем купить: {0}.": "Cheaper to craft the ingredient from raw materials than to buy it: {0}.",
+ "Автоварка": "Auto-brewing",
+ "Воронки (Hopper) подают ингредиенты в Brewing Stand, но, по вики, так варятся только ванильные зелья. Зелья SkyBlock и XP Alchemy надёжно получаются только руками.": "Hoppers feed ingredients into a Brewing Stand, but according to the wiki only vanilla potions brew that way. SkyBlock potions and Alchemy XP reliably come only by hand.",
+ "Варка идёт, только пока Private Island загружен: без тебя на острове стойки стоят.": "Brewing only runs while your Private Island is loaded: without you on the island the stands stop.",
+ "Быстрее всего — ряды по 64 стойки: заполни все водой, потом Nether Wart, ингредиент и Glowstone Dust. Все стойки варят одновременно, 20 секунд на шаг (с Witch — 10).": "Fastest is rows of 64 stands: fill them all with water, then Nether Wart, the ingredient and Glowstone Dust. All stands brew at once, 20 seconds per step (10 with Witch).",
+ "Water Bottle продаёт Alchemist в Hub. Готовую партию продавай NPC прямо из меню Booster Cookie.": "The Alchemist in the Hub sells Water Bottles. Sell the finished batch to NPCs right from the Booster Cookie menu.",
+ "Ингредиент на 3 зелья: купить готовым или скрафтить из сырья (зелёное дешевле). Зелье — одно на максимум с Enchanted Glowstone и Enchanted Redstone Block ({0} минут, у тебя {1}). «Из своего» — если ингредиент добыт самим: он стоит столько, за сколько его можно продать. Зелёная цена на аукционе — купить зелье дешевле, чем сварить.": "Ingredient for 3 potions: buy it ready or craft it from raw materials (green is cheaper). Potion — one at max level with Enchanted Glowstone and an Enchanted Redstone Block ({0} minutes, {1} for you). «From your own» — if you gathered the ingredient yourself: it is worth what you could sell it for. A green Auction House price means buying the potion is cheaper than brewing.",
+ "Купить ингредиент": "Buy ingredient"
 }
