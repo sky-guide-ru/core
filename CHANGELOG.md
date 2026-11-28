@@ -4,11 +4,17 @@
 
 ## Не выпущено
 
-## 0.2.49
+## 0.2.50
 
 - Гайд майнинга: чек-лист «Другие кристаллы: для Perfect-гемов» (Jasper, Ruby, Opal, Aquamarine, Peridot, Onyx, Citrine) — где искать и что найдено по `mining_core.crystals`.
 - `guides/crystals.js`: справочник 12 Gemstone Crystals (где искать) и `crystalFound(member, key)`. «Как получить» (`costTree`, `buildObtainGuide`): кристалл в рецепте Perfect-гема — «найден / не найден · где искать» вместо «нет цены и рецепта», у карточки кристалла первым способ «Найти кристалл».
 - Новость «Кристаллы для Perfect-гемов в гайде».
+
+## 0.2.49
+
+- Дерево HotM: сборка `mithril` («Mithril и Titanium»): Titanium Insanium, Metal Head, Strong Arm, Precision Mining, Mining Speed Boost, Luck of the Cave, Sky Mall (×5 Titanium на день). Mithril и Titanium — Dwarven Metals (NEU), поэтому перки металлов сверху дерева.
+- `peel` (что снять при перестановке): сначала лишние перки, «по желанию» (Sky Mall и др.) — только если лишнее не снять; после каждого снятия снова с лишних.
+- Секция дерева HotM в гайде Mining: `news: 'hotm'` для ссылок из новостей.
 
 ## 0.2.48
 

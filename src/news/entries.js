@@ -25,6 +25,17 @@ export const NEWS = [
     ],
   },
   {
+    id: '2026-11-28-mithril',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Дерево HotM для Mithril и Titanium',
+    items: [
+      'В [дереве Heart of the Mountain](guides/mining#hotm) новая сборка «Mithril и Titanium».',
+      'Главные перки — Titanium Insanium, Metal Head и Strong Arm: больше Titanium и быстрее добыча металлов.',
+      'План подсказывает, какие перки Mineshaft и гемов снять, чтобы хватило токенов.',
+    ],
+  },
+  {
     id: '2026-11-28-forge',
     date: '2026-11-28',
     kind: 'new',

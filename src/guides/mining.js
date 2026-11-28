@@ -21,7 +21,7 @@ const KEY_PERKS = {
   front_loaded: 'Первые 2 500 гемов за день: ×3 Gemstone Powder, Fortune и скорость',
   daily_powder: 'Ежедневный бонус Powder за первую руду',
   daily_grind: 'Ежедневный бонус Powder за первое задание на каждом острове',
-  strong_arm: 'Скорость по Dwarven Metals (Umber, Tungsten, Glacite)',
+  strong_arm: 'Скорость по Dwarven Metals (Mithril, Titanium, Umber и др.)',
   metal_head: 'Dwarven Metal Fortune',
   steady_hand: 'Gemstone Spread в Mineshafts',
   mining_master: 'Pristine: чаще выпадают Flawless-гемы',
@@ -156,7 +156,7 @@ export default {
     });
 
     const tree = hotmTreeSection(m, ctx);
-    if (tree) sections.push(tree);
+    if (tree) sections.push({ ...tree, news: 'hotm' });   // ссылка из новостей: guides/mining#hotm
     sections.push({
       kind: 'checklist', title: 'Crystal Hollows: кристаллы для Crystal Nucleus',
       note: tx`Nucleus пройден ${fmt(nucleusRuns)} ${plural(nucleusRuns, 'раз', 'раза', 'раз')}. Кристаллы сбрасываются после каждого прохождения, поэтому «найден» — это текущий заход.`,
