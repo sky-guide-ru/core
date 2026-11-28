@@ -38,13 +38,17 @@ const SLAYER_KEYS = { zombie: 'zombie', revenant: 'zombie', spider: 'spider', ta
  * Запасной словарь «название → id коллекции» из базы NEU, пока ресурс коллекций Hypixel не загружен.
  * @param {Map<string, { name?: string }>} items
  */
+const fromNeuMemo = new WeakMap();
 export function collectionsFromNeu(items) {
+  // База NEU меняется целиком (новый Map раз в несколько часов), а словарь нужен на каждый разбор профиля: помним
+  if (items && typeof items === 'object' && fromNeuMemo.has(items)) return fromNeuMemo.get(items);
   const out = new Map();
   for (const [id, it] of items || []) {
     if (!/^[A-Z0-9_:]+$/.test(id) || /^(ENCHANTED_|.*_GENERATOR_)/.test(id)) continue;
     const name = String(it?.name || '').replace(/§./g, '').trim().toLowerCase();
     if (name && !out.has(name)) out.set(name, { id: id.replace(/-(\d+)$/, ':$1'), tiers: [] });
   }
+  if (items && typeof items === 'object') fromNeuMemo.set(items, out);
   return out;
 }
 

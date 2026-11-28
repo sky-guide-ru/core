@@ -4,6 +4,13 @@
 
 ## Не выпущено
 
+## 0.2.68
+
+- Разбор профиля не держит сервер: `analyzeMemberAsync` проходит те же шаги, что `analyzeMember` (генератор `analyzeSteps`), но между крупными блоками (аксессуары, снаряжение, заработок, план, гемы, музей, Pet Score, Magic Find) отдаёт ход другим запросам через `setImmediate`. `reanalyze()` и `reanalyzeForPrices()` теперь асинхронные, разборы идут по одному, одновременные вызовы ждут один разбор; время шагов последнего разбора — `analyzeTimings`. `players.js` по умолчанию разбирает чужие профили так же.
+- Разбор быстрее примерно вдвое: способы заработка считаются один раз (план получает их из `analyzeMember` и считает с тем же бюджетом, что раздел «Заработок»), линейки аксессуаров (`neuForCalc`, обратная карта в `coveredBy`) и словарь `collectionsFromNeu` запоминаются на справочник NEU.
+- `decodeItems`: распаковка gzip в пуле потоков (`zlib.gunzip`), между сундуками профиля сервер отвечает другим.
+- Новость «Разделы открываются без подвисаний».
+
 ## 0.2.67
 
 - Новый гайд «Зелья и Alchemy» (`src/guides/alchemy.js`, группа skills) по вики (Alchemy, Potions, God Potion, Booster Cookie, Mixins, 28.11.2026): баффы и действующие эффекты игрока, God Potion и Booster Cookie с ценой часа, рост God Potion с Alchemy (`godHours`: 12 + 0,24 ч за уровень), зелья под занятие, прокачка по ценам Bazaar (`xpCostPerMillion`, `brewCost`, `ingredientCosts` — купить или скрафтить), сколько стоек ставить (`standPlan`), где взять ингредиенты (`ING_SOURCES`, `stockUnits` — запас из мешков, `caneFarmPerHour` — фарм Sugar Cane в Garden), варка на продажу, Mixins, автоварка. Ironman/Stranded/Bingo — без цен рынка.

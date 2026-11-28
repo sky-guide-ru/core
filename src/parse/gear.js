@@ -23,10 +23,17 @@ function upgradesMap() {
 }
 
 // Все предметы, которые "покрывает" данный аксессуар (его младшие версии)
+// Обратная карта «старший → младшие» строится один раз на справочник: раньше на каждый аксессуар игрока
+// перебирались все линейки NEU, и это была заметная часть разбора профиля
+const lowersMemo = new WeakMap();
 function coveredBy(id, up) {
-  const out = new Set();
-  for (const [low, highs] of Object.entries(up)) if (highs.includes(id)) out.add(low);
-  return out;
+  let inv = lowersMemo.get(up);
+  if (!inv) {
+    inv = new Map();
+    for (const [low, highs] of Object.entries(up)) for (const h of highs) { if (!inv.has(h)) inv.set(h, new Set()); inv.get(h).add(low); }
+    lowersMemo.set(up, inv);
+  }
+  return inv.get(id) || new Set();
 }
 
 export function analyzeAccessories(member) {

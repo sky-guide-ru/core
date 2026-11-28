@@ -360,5 +360,7 @@
  "Подсказки /warp учитывают MVP+ и свитки": "/warp hints account for MVP+ and scrolls",
  "Каждый /warp на сайте показывает, сработает ли телепорт у игрока: нужен ли Travel Scroll или MVP+.": "Every /warp on the site shows whether the teleport will work for the player: whether a Travel Scroll or MVP+ is needed.",
  "Под закрытым телепортом — дорога пешком и где взять свиток.": "Below a locked teleport: the way on foot and where to get the scroll.",
- "Открытые свитки отмечаются в блоке [Мои телепорты](guides/collectibles#warps).": "Unlocked scrolls are ticked in the [My teleports](guides/collectibles#warps) block."
+ "Открытые свитки отмечаются в блоке [Мои телепорты](guides/collectibles#warps).": "Unlocked scrolls are ticked in the [My teleports](guides/collectibles#warps) block.",
+ "Разделы открываются без подвисаний": "Sections open without freezes",
+ "Исправлены подвисания: разделы сайта иногда открывались с задержкой до секунды.": "Fixed freezes: site sections sometimes took up to a second to open."
 }

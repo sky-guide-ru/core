@@ -1,12 +1,16 @@
 import nbt from 'prismarine-nbt';
 import { upgradeParts } from './parse/upgrades.js';
-import { gunzipSync } from 'node:zlib';
+import { gunzipSync, gunzip } from 'node:zlib';
+import { promisify } from 'node:util';
+
+const gunzipAsync = promisify(gunzip);
 
 // Декодирует base64 gzip NBT из Hypixel API в массив предметов
 export async function decodeItems(b64) {
   if (!b64) return [];
   try {
-    const buf = gunzipSync(Buffer.from(b64, 'base64'));
+    // Распаковка в пуле потоков Node (а не gunzipSync): между сундуками профиля сервер успевает ответить другим
+    const buf = await gunzipAsync(Buffer.from(b64, 'base64'));
     const { parsed } = await nbt.parse(buf);
     const list = nbt.simplify(parsed).i || [];
     return list.map(normalizeItem);
