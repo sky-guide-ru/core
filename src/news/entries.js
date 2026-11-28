@@ -14,6 +14,17 @@
 
 export const NEWS = [
   {
+    id: '2026-11-28-fossil',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по Fossil Excavator',
+    items: [
+      'В [гайде Mining](guides/mining#fossil) — как открыть Suspicious Scrap и формы всех окаменелостей.',
+      'Процент первой клетки подсказывает фигуру, а сданные Dr. Stone окаменелости отмечены.',
+      'Блок «Открыть скрап или продать?» считает средний доход по ценам Bazaar.',
+    ],
+  },
+  {
     id: '2026-11-27-strong',
     date: '2026-11-27',
     kind: 'fix',

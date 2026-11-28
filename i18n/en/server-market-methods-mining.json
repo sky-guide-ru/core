@@ -71,7 +71,6 @@
  "Копай в Glacite Tunnels: примерно раз на 2 000 блоков открывается вход в Mineshaft (перки Surveyor и Tunnel Vision чаще).": "Mine in the Glacite Tunnels: roughly once per 2,000 blocks a Mineshaft entrance opens (the Surveyor and Tunnel Vision perks make it more frequent).",
  "Заранее купи или скрафти Umber Key и Tungsten Key, а для шахты Fairy — Skeleton Key.": "Buy or craft an Umber Key and a Tungsten Key in advance, and a Skeleton Key for the Fairy shaft.",
  "В шахте найди трупы: Lapis открывается без ключа, остальные ключом своего типа. Каждый игрок открывает труп один раз.": "Find the corpses in the shaft: Lapis opens without a key, the others with a key of their type. Each player opens a corpse once.",
- "Копай гемы в самой шахте, выходи (+1 000 Powder Glacite за выход) и продавай Fine гемы и Suspicious Scrap на Bazaar.": "Mine gems in the shaft itself, exit (+1,000 Glacite Powder per exit) and sell Fine gems and Suspicious Scrap on the Bazaar.",
  "Ключ тратится, а лут случайный: открывай Umber и Tungsten, только если ключ дешевле среднего лута (сайт это учитывает).": "The key is consumed and the loot is random: open Umber and Tungsten only if the key is cheaper than the average loot (the site accounts for this).",
  "Шахта бывает пустой на нужные трупы, а вход выпадает случайно.": "A shaft can have none of the corpses you need, and the entrance is random.",
  "Число бросков с трупа на вики не указано, мы берём 3: реальный доход может отличаться.": "The wiki doesn't give the number of rolls per corpse; we use 3, so real income may differ.",
@@ -104,5 +103,6 @@
  "Убивай сильных гоблинов (Flamethrower, Murderlover, Creeperlobber): у них шанс на яйца выше.": "Kill strong goblins (Flamethrower, Murderlover, Creeperlobber): they have a higher egg chance.",
  "Яйца продавай на Bazaar, одно оставь для кристалла Amber.": "Sell eggs on the Bazaar, keep one for the Amber crystal.",
  "Денег немного: синее яйцо (0,1%) делает основную часть дохода.": "Little money: the blue egg (0.1%) makes up most of the income.",
- "Гоблинов делишь с другими игроками.": "You share goblins with other players."
+ "Гоблинов делишь с другими игроками.": "You share goblins with other players.",
+ "Копай гемы в самой шахте, выходи (+1 000 Powder Glacite за выход) и продавай Fine гемы на Bazaar. Suspicious Scrap обычно выгоднее открыть в Fossil Excavator, чем продать.": "Mine gems inside the shaft, leave (+1,000 Glacite Powder per exit) and sell Fine gems on the Bazaar. Suspicious Scrap is usually worth more opened in the Fossil Excavator than sold."
 }

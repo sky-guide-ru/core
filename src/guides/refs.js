@@ -286,7 +286,7 @@ function eachString(g, fn) {
     v(s.note); v(s.columns);
     if (s.kind === 'text') v(s.text);
     for (const it of s.items || []) { v(it.title); v(it.text); v(it.hint); }
-    for (const r of s.rows || []) for (const c of r) v(c && typeof c === 'object' ? c.text : typeof c === 'string' ? c : null);
+    for (const r of Array.isArray(s.rows) ? s.rows : []) for (const c of Array.isArray(r) ? r : []) v(c && typeof c === 'object' ? c.text : typeof c === 'string' ? c : null);
   }
   // свои блоки гайдов (Рифт: подсказки к душам и т. п.)
   const deep = (o, d = 0) => {
@@ -338,7 +338,7 @@ export function enrichGuide(guide, deps = {}) {
   // предметы ячеек и иконок тоже получают подсказку при наведении
   const extraItems = new Set();
   for (const s of guide.sections || []) {
-    for (const r of s.rows || []) for (const c of r) if (c && typeof c === 'object' && c.item) extraItems.add(c.item);
+    for (const r of Array.isArray(s.rows) ? s.rows : []) for (const c of Array.isArray(r) ? r : []) if (c && typeof c === 'object' && c.item) extraItems.add(c.item);
     for (const it of s.items || []) { if (it.item) extraItems.add(it.item); for (const id of it.items || []) extraItems.add(id); }
   }
   for (const n of guide.next || []) if (n.item) extraItems.add(n.item);

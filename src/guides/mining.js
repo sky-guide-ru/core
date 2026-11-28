@@ -3,6 +3,7 @@ import { treePerks } from '../advisor/lib/hotm.js';
 import { hotmTreeSection } from './trees/index.js';
 import { fmt, short, plural, hasItem, bestPet, ladderPos, howText, constants, cell, tone, topNext, lc } from './gathering-util.js';
 import { tx } from '../../i18n/msg.js';
+import { fossilSections } from './fossil.js';
 
 const POWDER = { MITHRIL: 'Mithril', GEMSTONE: 'Gemstone', GLACITE: 'Glacite' };
 
@@ -181,6 +182,11 @@ export default {
       rows: [['Lapis', 'lapis', 'не нужен'], ['Umber', 'umber', 'Umber Key'], ['Tungsten', 'tungsten', 'Tungsten Key'], ['Vanguard', 'vanguard', 'Skeleton Key']]
         .map(([n, k, key]) => [n, cell(fmt(corpses[k] || 0), { tone: corpses[k] ? 'good' : 'muted' }), key]),
     });
+
+    // Fossil Excavator: открытие Suspicious Scrap, формы окаменелостей, выгода
+    const fossil = fossilSections(m, ctx);
+    sections.push(...fossil.sections);
+    next.push(...fossil.next);
 
     const bestDrill = [drill.have, gem.have].filter(Boolean);
     sections.push({

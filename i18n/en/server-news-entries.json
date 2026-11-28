@@ -285,5 +285,9 @@
  "Ender Dragon не советуется при Golden Dragon, шлем Kuudra — при другом шлеме в том же сете.": "Ender Dragon is no longer suggested if you have Golden Dragon, nor a Kuudra helmet if the set uses another helmet.",
  "Magic Find от Pet Score выше 325 очков и улучшения аксессуаров с Recombobulator считаются верно.": "Magic Find from Pet Score above 325 points and accessory upgrades with a Recombobulator are counted correctly.",
  "Головы игроков — по их скину": "Player heads match their skin",
- "Исправлен сбой, из-за которого у части игроков вместо их головы показывался Steve.": "Fixed a glitch where some players were shown Steve instead of their own head."
+ "Исправлен сбой, из-за которого у части игроков вместо их головы показывался Steve.": "Fixed a glitch where some players were shown Steve instead of their own head.",
+ "Гайд по Fossil Excavator": "Fossil Excavator guide",
+ "В [гайде Mining](guides/mining#fossil) — как открыть Suspicious Scrap и формы всех окаменелостей.": "The [Mining guide](guides/mining#fossil) shows how to open Suspicious Scrap and the shapes of all fossils.",
+ "Процент первой клетки подсказывает фигуру, а сданные Dr. Stone окаменелости отмечены.": "The first tile's percent tells the shape, and fossils donated to Dr. Stone are checked off.",
+ "Блок «Открыть скрап или продать?» считает средний доход по ценам Bazaar.": "The \"Open the scrap or sell it?\" block works out the average income at Bazaar prices."
 }

@@ -4,6 +4,14 @@
 
 ## Не выпущено
 
+## 0.2.48
+
+- Гайд Mining: блок Fossil Excavator (`src/guides/fossil.js`) — как открыть Suspicious Scrap, формы шести окаменелостей с процентом «Fossil Excavation Progress», сданные Dr. Stone (`gather.fossils`), выгода «открыть или продать» (`excavatorValue`, веса лута с вики) и Chisel игрока. Шаги «Открой скрап», «Сдай окаменелости», «Улучши Chisel».
+- Новый тип секции гайда `shapes` (фигуры на сетке), описан в `src/guides/README.md`.
+- `mining.fossilDust` убран: с апреля 2026 Fossil Dust заменён на Fossil Essence (`essence.FOSSIL`).
+- `enrichGuide`: секция-дерево (`rows` — число рядов) больше не роняет подсказки по тексту всего гайда Mining.
+- Способ «Glacite Mineshaft»: совет продавать Suspicious Scrap заменён на «выгоднее открыть».
+
 ## 0.2.47
 
 - «Где XP дешевле» (`sbxpPlan`, опция `collections`): Collections считаются тем же `analyzeCollections`, что раздел «Коллекции» (кооп и максимум из справочника). Было 2696 / 2696 против 3172 в разделе.
