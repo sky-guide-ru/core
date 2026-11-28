@@ -95,5 +95,6 @@
  "Citrine Mineshaft; редко с Frozen Corpse, которым нужен ключ": "Citrine Mineshaft; rarely from Frozen Corpses that need a key",
  "Другие кристаллы: для Perfect-гемов": "Other crystals: for Perfect gems",
  "Найдено {0} из {1}. Для Crystal Nucleus они не нужны: каждый кристалл уходит в Forge на один Perfect-гем (5 Flawless + 1 Crystal, 20 ч, HotM 5). В Mineshaft нужного типа кристалл появляется с шансом 25%, забрать его может только тот, кто нашёл шахту.": "Found {0} of {1}. Not needed for the Crystal Nucleus: each crystal goes into the Forge for one Perfect gem (5 Flawless + 1 Crystal, 20h, HotM 5). A crystal spawns in 25% of Mineshafts of its type, and only the player who found the shaft can claim it.",
- " · найден {0} {1}": " · found {0} {1}"
+ " · найден {0} {1}": " · found {0} {1}",
+ "Frozen Corpse: гемы, Suspicious Scrap, Plate, ключи и Caged Wisp; Shattered Locket не продаётся": "Frozen Corpse: gemstones, Suspicious Scrap, Plates, keys and Caged Wisp; Shattered Locket cannot be sold"
 }

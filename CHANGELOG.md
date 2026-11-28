@@ -4,6 +4,14 @@
 
 ## Не выпущено
 
+## 0.2.53
+
+- Гайд Mining: Frozen Corpse Milestones (`guides/corpses.js`: `CORPSE_TYPES`, `MILESTONES`, `RNG_METER`, `milestoneState`, `corpseGuide`) по вики «Frozen Corpses» / «Grandpa Wolf» (28.11.2026). Таблица 7 вех с прогрессом по `glacite_player_data.corpses_looted` (`news: 'corpses'`), таблица трупов с Glacite Powder и очками RNG Meter, таблица целей RNG Meter с монетами за труп.
+- Шаги: «Забери награду за веху у Grandpa Wolf» (веха пройдена, а Organ Donor нужного уровня нигде нет), «Frozen Corpse Milestone N» с ценой недостающих ключей; дороже трети денег — «На потом», перки Gifts from the Departed / Dead Man's Chest и ключи в инвентаре — в совете.
+- «Заработок», Glacite Mineshaft: таблицы лута по патчу 0.24.2 (веса редких предметов по вики), броски 4,5 / 5,5 / 6,5 вместо 3, 2,5 трупа на шахту. Экспорт `CORPSES` (+`rolls`, Vanguard), `CORPSES_PER_SHAFT`; `CORPSE_ROLLS` убран.
+- Глоссарий: Frozen Corpse Milestones, Grandpa Wolf; `curated-ru`: откуда Organ Donor Talisman/Ring/Artifact и Shattered Locket.
+- Новость «Frozen Corpse Milestones в гайде Mining».
+
 ## 0.2.51
 
 - Гайд майнинга: чек-лист «Другие кристаллы: для Perfect-гемов» (Jasper, Ruby, Opal, Aquamarine, Peridot, Onyx, Citrine) — где искать и что найдено по `mining_core.crystals`.

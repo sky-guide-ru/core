@@ -139,8 +139,8 @@ export const GLOSSARY = {
   },
   rng_meter: {
     names: ['RNG-метр', 'RNG-метра', 'RNG-метру', 'RNG Meter'], kind: 'mech', title: 'RNG-метр',
-    text: 'Шкала гарантированного дропа: выбери редкий предмет, и за каждый заход/босса шкала копит очки. Когда заполнится — предмет выпадет гарантированно. У слееров и каждого этажа данжа свой метр.',
-    how: ['Открывается кликом по Catacombs-сундуку или у Maddox (слееры): выбери цель и просто фарми.'],
+    text: 'Шкала гарантированного дропа: выбери редкий предмет, и за каждый заход/босса шкала копит очки. Когда заполнится — предмет выпадет гарантированно. У слееров, каждого этажа данжа и трупов в Mineshafts свой метр.',
+    how: ['Открывается кликом по Catacombs-сундуку, у Maddox (слееры) или у Grandpa Wolf (/corpsemilestones): выбери цель и просто фарми.'],
   },
   secrets: {
     names: ['секреты', 'Секреты', 'секретов', 'Секретов', 'Secrets'], kind: 'mech', title: 'Secrets',
@@ -280,8 +280,17 @@ export const GLOSSARY = {
     text: 'Случайные шахты, которые иногда открываются при добыче в Glacite Tunnels. Внутри Frozen Corpse с лутом и гемы. Шанс растёт с перком Surveyor.',
   },
   frozen_corpse: {
-    names: ['Frozen Corpse'], kind: 'mech', title: 'Frozen Corpse',
-    text: 'Замёрзшие трупы гномов в Mineshafts. Lapis открывается сразу, Umber, Tungsten и Vanguard — ключами. Дают материалы Dwarven Handwarmers, броню и Glacite Powder.',
+    names: ['Frozen Corpse', 'Frozen Corpses'], kind: 'mech', title: 'Frozen Corpse',
+    text: 'Замёрзшие трупы гномов в Mineshafts. Lapis открывается сразу, Umber и Tungsten — своим ключом, Vanguard (только в шахте Fairy) — Skeleton Key. Дают гемы, Plate, ключи, Glacite Powder и опыт HotM.',
+  },
+  corpse_milestones: {
+    names: ['Frozen Corpse Milestones', 'Frozen Corpse Milestone'], kind: 'mech', title: 'Frozen Corpse Milestones',
+    text: '7 вех за открытые трупы в Mineshafts. Награды: Organ Donor Talisman → Ring → Artifact, +10% шанс на лишний труп и лишний предмет, Glacite Powder и очки RNG Meter. Старые трупы засчитаны.',
+    how: ['Поговори с Grandpa Wolf в его пещере в Glacite Tunnels (-56 125 332).', 'Дальше меню открывается командой /corpsemilestones.', 'Награду за каждую веху забирай в меню сам.'],
+  },
+  grandpa_wolf: {
+    names: ['Grandpa Wolf'], kind: 'npc', title: 'Grandpa Wolf',
+    text: 'NPC в Grandpa Wolf’s Cave в Glacite Tunnels (-56 125 332). Открывает Frozen Corpse Milestones и RNG Meter для трупов; в его пещере не холодно.',
   },
   pristine: {
     names: ['Pristine'], kind: 'stat', title: 'Pristine',

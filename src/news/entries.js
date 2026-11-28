@@ -14,6 +14,17 @@
 
 export const NEWS = [
   {
+    id: '2026-11-28-corpses',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Frozen Corpse Milestones в гайде Mining',
+    items: [
+      'В [гайде Mining](guides/mining#corpses) — все 7 вех Grandpa Wolf, свой прогресс и цена ключей до следующей.',
+      'Гайд напомнит забрать награду за веху, а дорогие вехи отложит на потом.',
+      'RNG Meter для трупов: какую цель выгоднее выбрать по ценам Bazaar.',
+    ],
+  },
+  {
     id: '2026-11-28-crystals',
     date: '2026-11-28',
     kind: 'new',

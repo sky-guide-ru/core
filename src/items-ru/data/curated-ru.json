@@ -111,5 +111,44 @@
         "textRu": "Продаётся на аукционе: из-за ошибки игры лот всегда стоит не больше 50 тыс., какой бы ни была редкость"
       }
     ]
+  },
+  "ORGAN_DONOR_TALISMAN": {
+    "descriptionRu": "Звенит, когда рядом (до 20 блоков) неоткрытый Frozen Corpse.",
+    "whereToGet": [
+      {
+        "kind": "other",
+        "source": null,
+        "textRu": "Награда за Frozen Corpse Milestone I (10 трупов Lapis) у Grandpa Wolf в Glacite Tunnels, /corpsemilestones; потерянный — у Rusty за 1 млн"
+      }
+    ]
+  },
+  "ORGAN_DONOR_RING": {
+    "descriptionRu": "Звенит, когда рядом неоткрытый Frozen Corpse.",
+    "whereToGet": [
+      {
+        "kind": "other",
+        "source": null,
+        "textRu": "Апгрейд за Frozen Corpse Milestone IV у Grandpa Wolf (/corpsemilestones); потерянный — у Rusty за 2,5 млн"
+      }
+    ]
+  },
+  "ORGAN_DONOR_ARTIFACT": {
+    "descriptionRu": "Звенит, когда рядом неоткрытый Frozen Corpse.",
+    "whereToGet": [
+      {
+        "kind": "other",
+        "source": null,
+        "textRu": "Апгрейд за Frozen Corpse Milestone VII у Grandpa Wolf (/corpsemilestones); потерянный — у Rusty за 5 млн"
+      }
+    ]
+  },
+  "SHATTERED_PENDANT": {
+    "whereToGet": [
+      {
+        "kind": "other",
+        "source": null,
+        "textRu": "Редкий дроп с трупа Vanguard в Glacite Mineshaft или цель Frozen Corpse RNG Meter (2,5 млн очков); не продаётся"
+      }
+    ]
   }
 }
