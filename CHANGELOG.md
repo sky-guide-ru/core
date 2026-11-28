@@ -4,6 +4,12 @@
 
 ## Не выпущено
 
+## 0.2.67
+
+- Новый гайд «Зелья и Alchemy» (`src/guides/alchemy.js`, группа skills) по вики (Alchemy, Potions, God Potion, Booster Cookie, Mixins, 28.11.2026): баффы и действующие эффекты игрока, God Potion и Booster Cookie с ценой часа, рост God Potion с Alchemy (`godHours`: 12 + 0,24 ч за уровень), зелья под занятие, прокачка по ценам Bazaar (`xpCostPerMillion`, `brewCost`, `ingredientCosts` — купить или скрафтить), сколько стоек ставить (`standPlan`), где взять ингредиенты (`ING_SOURCES`, `stockUnits` — запас из мешков, `caneFarmPerHour` — фарм Sugar Cane в Garden), варка на продажу, Mixins, автоварка. Ironman/Stranded/Bingo — без цен рынка.
+- `auctionKey`: зелья на аукционе получают ключ `POTION_<ЭФФЕКТ>;<уровень>` (splash — по-прежнему `POTION`).
+- Новость «Гайд по зельям и Alchemy», переводы.
+
 ## 0.2.66
 
 - Выборы мэра (`src/calendar/election.js`, без диска и сети): снимки голосов (`addElection`), тренд доли за 3 ч (`trendOf`), шанс победы (`winChances`: доля + приглушённый тренд, разброс растёт с корнем из оставшихся часов, множитель `sigmaK` подбирается по прошлым выборам со снимками — `calibrate`), история (`historyStats`, `incumbentRuns`, `specialCycle` — правила выводятся из итогов, а не задаются руками), вид `electionView`: кандидаты с голосами, трендом, шансом, «почему», «если победит», пометками «новый» и «сильные перки»; лента «Ближайшие мэры», «когда снова» для каждого мэра (`nextFor`), доля побед, мэр для гайда (`GUIDE_MAYOR`).

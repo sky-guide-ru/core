@@ -38,6 +38,7 @@ const WIKI_EXTRA = {
   museum: ['Museum', 'Museum/Items'],
   collectibles: ['Fairy Souls', 'Abiphones'],
   enchanting: ['Experiments', 'Experimentation Table', 'Enchanting', 'Metaphysical Serum'],
+  alchemy: ['Alchemy', 'Potions', 'God Potion', 'Booster Cookie', 'Mixins', 'Brewing Stand'],
   taming: ['Taming', 'Pets', 'Pet Items', 'Fann', 'Pet Food', 'Kat', 'George'],
 };
 

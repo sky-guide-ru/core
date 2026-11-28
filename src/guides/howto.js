@@ -132,6 +132,12 @@ export const HOWTO = {
     step('Сыграй Superpairs', 'Открывай клетки по две: одинаковая пара забирает награду. Выбирай самую высокую открытую ставку.'),
     step('Повторяй каждый день', 'У стола 3 заряда, они возвращаются через 24 часа. Ещё 3 захода в день покупаются за Bits и уровни опыта.'),
   ],
+  alchemy: [
+    step('Купи God Potion за Bits', 'Пока действует Booster Cookie, копятся Bits. 1 500 Bits — это God Potion: почти все зелья сразу. Длится 12 часов и растёт с Alchemy: на 50 — 24 часа.', ['GOD_POTION_2']),
+    step('В Dungeons бери Dungeon Potion', 'В Catacombs God Potion на паузе. Ophelia в Dungeon Hub продаёт Dungeon Potion.'),
+    step('Докупи то, чего нет в God Potion', 'Для Farming — Harvest Harbinger, для Fishing — Mushed Glowy Tonic.'),
+    step('Захочешь варить сам — Brewing Stand', 'Продаёт Alchemist в Hub за 30 монет. Как варить и качать Alchemy — ниже.', ['BREWING_STAND_ITEM']),
+  ],
   taming: [
     step('Выбери питомца под занятие', 'Питомец растёт от опыта скилла своего типа: Combat-питомец в бою, Mining-питомец на шахте. Чужой скилл даёт втрое меньше.'),
     step('Дай ему Exp Boost', 'Zog в Pet Care (Hub) продаёт Exp Boost за 50–60 тыс.: +20% опыта от своего скилла или +10% от всех.', ['PET_ITEM_ALL_SKILLS_BOOST_COMMON']),

@@ -29,6 +29,7 @@ import diana from './diana.js';
 import hunting from './hunting.js';
 import chocolate from './chocolate.js';
 import enchanting from './enchanting.js';
+import alchemy from './alchemy.js';
 import bestiary from './bestiary.js';
 import taming from './taming.js';
 import { tx } from '../../i18n/msg.js';
@@ -56,6 +57,7 @@ export const GUIDES = [
   diana,
   chocolate,
   enchanting,
+  alchemy,
   taming,
 ];
 
