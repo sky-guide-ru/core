@@ -24,6 +24,7 @@ const WIKI_EXTRA = {
   'slayer-enderman': ['Slayer', 'Voidgloom Seraph'],
   'slayer-blaze': ['Slayer', 'Inferno Demonlord'],
   'slayer-vampire': ['Slayer', 'Riftstalker Bloodfiend'],
+  dragons: ['Ender Dragon', 'Summoning Eye', 'Zealot', "Dragon's Nest", 'Dragon Armor', 'Draconic Altar', 'Tutorial:Dragon Fights Guide'],
   kuudra: ['Kuudra', 'Tutorial:Kuudra Guide', 'Kuudra Key'],
   crimson: ['Crimson Isle'],
   rift: ['Rift Dimension'],

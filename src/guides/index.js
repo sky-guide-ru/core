@@ -12,6 +12,7 @@ import { sourcesSection } from './sources.js';
 import dungeons from './dungeons.js';
 import slayers from './slayers.js';
 import kuudra from './kuudra.js';
+import dragons from './dragons.js';
 import crimson from './crimson.js';
 import rift from './rift.js';
 import fishing from './fishing.js';
@@ -35,6 +36,7 @@ export const GUIDES = [
   dungeons,
   ...slayers,
   kuudra,
+  dragons,
   crimson,
   rift,
   fishing,
