@@ -68,7 +68,7 @@ export const PET_ITEMS = [
   { id: 'PET_ITEM_TEXTBOOK', group: 'Бой', what: 'Intelligence питомца +100%', how: 'крафт после Lapis X: 8 Enchanted Lapis Block и 64 Enchanted Paper', fit: 'Mage-питомцам с Intelligence, например Sheep' },
   { id: 'REINFORCED_SCALES', group: 'Бой', what: '+40 Defense', how: 'крафт: Hardened Scales (Zog, 1 млн), 18 Enchanted Gold Block и Zog Anvil', fit: 'Tank в Dungeons' },
   { id: 'DWARF_TURTLE_SHELMET', group: 'Бой', what: '+10 True Defense и нет отбрасывания', how: 'Gaia Construct (0,35–0,6%) на Diana; Hephaestus Shelmet — 3 штуки и Hephaestus Anvil, +20', fit: 'Tank и боссам, которые отбрасывают' },
-  { id: 'PET_ITEM_BUBBLEGUM', group: 'Бой', what: 'Deployables (Flare, Orb) держатся вдвое дольше', how: 'Zog за 5 млн', fit: 'тому, кто ставит Flare или Power Orb: слееры, Healer' },
+  { id: 'PET_ITEM_BUBBLEGUM', group: 'Бой', what: 'Deployables (Flare, Orb) держатся вдвое дольше', how: 'Zog за 5 млн', fit: 'тому, кто ставит Flare или Power Orb' },
   // добыча
   { id: 'PET_ITEM_QUICK_CLAW', group: 'Mining', what: '+1 Mining Speed и +1 Mining Fortune за каждые 2 уровня питомца', how: 'Treasure stash Crystal Nucleus', fit: 'Mining-питомцам высокого уровня: Scatha, Glacite Golem, Goblin' },
   { id: 'BEJEWELED_COLLAR', group: 'Mining', what: '+25 Mining Speed, +10 Mining Fortune', how: 'Forge (HotM 2): Bejeweled Handle и 4 Refined Mithril', fit: 'дешёвый вариант для Mining-питомца' },
@@ -82,7 +82,7 @@ export const PET_ITEMS = [
   // удача и редкость
   { id: 'PET_ITEM_LUCKY_CLOVER', group: 'Удача', what: '+7 Magic Find', how: 'крафт: 256 Enchanted Emerald и Lucky Clover Core', fit: 'фарму редких дропов, где питомец не даёт статов для боя' },
   { id: 'CRETAN_URN', group: 'Удача', what: '+5 Pet Luck', how: 'Cretan Bull (0,2–0,5%) на Diana; Hephaestus Urn — 3 штуки и Hephaestus Anvil, +10', fit: 'охоте за питомцами с мобов' },
-  { id: 'PET_ITEM_TIER_BOOST', group: 'Редкость', what: 'редкость питомца +1 ступень (до Legendary)', how: 'крафт: 10 Enchanted Iron Block и Tier Boost Core', fit: 'Epic-питомцу, у которого Legendary открывает нужный перк; Kat такого питомца не берёт' },
+  { id: 'PET_ITEM_TIER_BOOST', group: 'Редкость', what: 'редкость питомца +1 ступень (до Legendary)', how: 'крафт: 10 Enchanted Iron Block и Tier Boost Core', fit: 'Epic-питомцу, у которого Legendary открывает нужный перк; не работает на Griffin и Wisp, Kat такого питомца не берёт' },
   // только для одного питомца
   { id: 'FOUR_EYED_FISH', group: 'Свой питомец', pet: 'GRIFFIN', what: '+10 Magic Find, +55 Defense, +2 000 монет с каждой норы', how: 'крафт: 384 Enchanted Spider Eye, Lucky Clover, Reinforced Scales и Pre-Digestion Fish', fit: 'только Griffin' },
   { id: 'PET_ITEM_FLYING_PIG', group: 'Свой питомец', pet: 'PIG', what: '+40 Potato Fortune, +20 Speed', how: 'Shiny Pig (0,14%)', fit: 'только Pig' },
@@ -297,7 +297,7 @@ export function build(m, ctx) {
       ['Taming', '+0,2% за уровень, до 12%', 'качать Taming', cell(tx`+${String(Math.round(taming * 2) / 10).replace('.', ',')}%`, { tone: taming ? 'good' : 'muted' })],
       [cell('Exp Share', { item: 'PET_ITEM_EXP_SHARE' }), '+15%', 'предмет питомца в слоте Exp Share: 72 Enchanted Gold Ingot и Exp Share Core (1 из 10 000 с мобов Deep Caverns)', shareItem ? cell('есть', { tone: 'good' }) : cell('нет', { tone: 'muted' })],
       ['Diana: Sharing is Caring', '+10% и ещё 2 слота', 'перк мэра Diana', sharing ? cell('сейчас действует', { tone: 'good' }) : cell('не сейчас', { tone: 'muted' })],
-      ['Why Not More', '+10%', 'атрибут; вместе с Sharing is Caring по вики выходит максимум 37%', cell('—', { tone: 'muted' })],
+      ['Why Not More', '+1% за уровень, до +10%', 'атрибут (осколок из Hunting Box); вики называет общий максимум 37%', cell('—', { tone: 'muted' })],
     ],
   });
 
@@ -415,7 +415,7 @@ export function build(m, ctx) {
   const idle = growing.find(p => !p.active && tierOf(p) >= 4);
   if (taming >= 10 && idle) next.push({ priority: 35, item: tx`${idle.type};${tierOf(idle)}`, title: tx`Отдай ${petLabel(ctx, idle)} на тренировку к Fann`,
     why: tx`Бесплатная тренировка даёт до 50 тыс. опыта в день, Light — 250 тыс. за 200 тыс. монет в день. До максимума осталось ${short(maxXp(idle) - (idle.exp || 0))} опыта.` });
-  if (!shareItem && growing.length > 1) next.push({ priority: 25, item: 'PET_ITEM_EXP_SHARE', title: 'Заполни слоты Exp Share в /pets',
+  if (!shareItem && growing.length > 1) next.push({ priority: 25, item: 'PET_ITEM_EXP_SHARE', title: 'Заполни слот Exp Share в /pets',
     why: tx`Меню /pets → Exp Share: питомец получает ${String(expShareRate(taming)).replace('.', ',')}% опыта активного, а с предметом Exp Share — ещё +15%.` });
   if (taming >= 50 && cap < TAMING_MAX_CAP) next.push({ priority: 60, title: tx`Подними кап Taming: ${cap} → ${TAMING_MAX_CAP}`, why: 'George в Pet Care поднимает кап на 1 за каждого питомца из списка. Список — в блоке ниже.', item: 'ENDERMAN;5' });
 

@@ -65,7 +65,6 @@
  "+10% и ещё 2 слота": "+10% and 2 more slots",
  "перк мэра Diana": "Diana's mayor perk",
  "не сейчас": "not now",
- "атрибут; вместе с Sharing is Caring по вики выходит максимум 37%": "attribute; together with Sharing is Caring the wiki gives a 37% maximum",
  "Fann: тренировка за монеты": "Fann: training for coins",
  " (у тебя {0})": " (you have {0})",
  "Тренировка": "Training",
@@ -121,7 +120,6 @@
  "больше года": "over a year",
  "Качай Taming до 50 (сейчас {0})": "Level Taming to 50 (now {0})",
  "Каждый уровень — +1% опыта всем питомцам и +1 Pet Luck. С 50 George поднимает кап до {0}.": "Each level is +1% XP for all pets and +1 Pet Luck. From 50 George raises the cap to {0}.",
- "Заполни слоты Exp Share в /pets": "Fill the Exp Share slots in /pets",
  "Sea Leech и Deep Sea Protector (0,02%), Water Hydra (0,04%)": "Sea Leech and Deep Sea Protector (0.02%), Water Hydra (0.04%)",
  "Бой": "Combat",
  "все статы питомца +33,3% (не перки)": "all pet stats +33.3% (not perks)",
@@ -155,7 +153,6 @@
  "Tank и боссам, которые отбрасывают": "Tank and bosses that knock you back",
  "Deployables (Flare, Orb) держатся вдвое дольше": "Deployables (Flare, Orb) last twice as long",
  "Zog за 5 млн": "Zog for 5M",
- "тому, кто ставит Flare или Power Orb: слееры, Healer": "whoever places a Flare or Power Orb: slayers, Healer",
  "+1 Mining Speed и +1 Mining Fortune за каждые 2 уровня питомца": "+1 Mining Speed and +1 Mining Fortune per 2 pet levels",
  "Mining-питомцам высокого уровня: Scatha, Glacite Golem, Goblin": "high-level Mining pets: Scatha, Glacite Golem, Goblin",
  "Forge (HotM 2): Bejeweled Handle и 4 Refined Mithril": "Forge (HotM 2): Bejeweled Handle and 4 Refined Mithril",
@@ -180,7 +177,6 @@
  "охоте за питомцами с мобов": "hunting pets from mobs",
  "редкость питомца +1 ступень (до Legendary)": "pet rarity +1 tier (up to Legendary)",
  "крафт: 10 Enchanted Iron Block и Tier Boost Core": "craft: 10 Enchanted Iron Block and Tier Boost Core",
- "Epic-питомцу, у которого Legendary открывает нужный перк; Kat такого питомца не берёт": "an Epic pet whose Legendary unlocks the perk you need; Kat won't take such a pet",
  "Свой питомец": "Single pet",
  "+10 Magic Find, +55 Defense, +2 000 монет с каждой норы": "+10 Magic Find, +55 Defense, +2,000 coins per burrow",
  "крафт: 384 Enchanted Spider Eye, Lucky Clover, Reinforced Scales и Pre-Digestion Fish": "craft: 384 Enchanted Spider Eye, Lucky Clover, Reinforced Scales and Pre-Digestion Fish",
@@ -198,5 +194,10 @@
  "Предметы для питомцев: статы и бонусы": "Pet items: stats and bonuses",
  "Один предмет на питомца: ПКМ по призванному питомцу с предметом в руке. Проценты (Claws, Remedies, Textbook, Relic) умножают статы самого питомца, поэтому их ставят питомцам, у которых этих статов много. Предметы с Diana падают с мифических мобов Mythological Ritual.{0}": "One item per pet: right-click the summoned pet with the item in hand. Percent items (Claws, Remedies, Textbook, Relic) multiply the pet's own stats, so they go on pets with a lot of those stats. Diana items drop from Mythological Ritual creatures.{0}",
  "{0} · у {1}": "{0} · on {1}",
- "{0}{1}. Где взять: {2}.": "{0}{1}. Where to get: {2}."
+ "{0}{1}. Где взять: {2}.": "{0}{1}. Where to get: {2}.",
+ "тому, кто ставит Flare или Power Orb": "whoever places a Flare or Power Orb",
+ "Epic-питомцу, у которого Legendary открывает нужный перк; не работает на Griffin и Wisp, Kat такого питомца не берёт": "an Epic pet whose Legendary unlocks the perk you need; doesn't work on Griffin and Wisp, and Kat won't take such a pet",
+ "+1% за уровень, до +10%": "+1% per level, up to +10%",
+ "атрибут (осколок из Hunting Box); вики называет общий максимум 37%": "attribute (shard from the Hunting Box); the wiki gives a 37% total maximum",
+ "Заполни слот Exp Share в /pets": "Fill the Exp Share slot in /pets"
 }

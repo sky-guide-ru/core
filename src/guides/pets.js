@@ -178,6 +178,7 @@ export function petLadderSection(ctx, key, opts = {}) {
   return {
     kind: 'table', title: opts.title || 'Питомцы по этапам', news: 'pets',
     note: note.join(' '),
+    link: { href: '#/guides/taming', text: 'Как быстро прокачать питомца и какой предмет ему дать →' },
     columns: ['Этап', 'Питомец', 'Для чего', 'Что даёт', 'Где взять', 'У тебя'],
     rows: L.rows.map(r => [
       r.event ? EVENT : STAGES[r.stage],
