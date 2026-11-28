@@ -42,7 +42,7 @@ function build(m, ctx) {
     next.push({ title: 'Поговорить с Bramass Beastslayer в Spider\'s Den', why: 'Без этого убийства в Bestiary не считаются.', priority: 80 });
   }
   sections.push({
-    kind: 'checklist', title: 'Твой прогресс', news: 'progress',
+    bx: true, kind: 'checklist', title: 'Твой прогресс', news: 'progress',
     note: tx`Веха — каждые ${TIERS_PER_MILESTONE} уровней семейств, сумма по всем мобам.`,
     items: [
       { text: tx`Bestiary Milestone ${s.milestone} из ${s.maxMilestone}`, done: s.milestone >= s.maxMilestone,
@@ -60,10 +60,10 @@ function build(m, ctx) {
     next.push({
       title: tx`До вехи ${s.nextMs}: ${s.toNext} ${plural(s.toNext, 'уровень', 'уровня', 'уровней')} Bestiary`,
       why: tx`Быстрее всего: ${s.plan.slice(0, 3).map(r => tx`${r.f.name} (${fmt(r.kills)})`).join(', ')}. Начни с ${first.f.name}: ${spotOf(first.f).where}.`,
-      priority: 55,
+      priority: 55, bx: true, // на своей странице это карточка «Быстрее всего»
     });
     sections.push({
-      kind: 'table', title: tx`До вехи ${s.nextMs}: самое быстрое`, news: 'plan',
+      bx: true, kind: 'table', title: tx`До вехи ${s.nextMs}: самое быстрое`, news: 'plan',
       note: tx`Нужно ${s.toNext} ${plural(s.toNext, 'уровень', 'уровня', 'уровней')}. Оценка по числу убийств, Health моба и дороге; события не учтены.${s.nextXp ? tx` Веха ${s.nextXpAt} даст ещё ${short(s.nextXp)} Combat XP.` : ''}`,
       columns: ['Моб', 'Где', 'Убить', 'Уровень', 'Бонус на нём'],
       rows: s.plan.map(r => [
@@ -80,7 +80,7 @@ function build(m, ctx) {
   const main = s.progress.filter(f => f.kills > 0).sort((a, b) => b.kills - a.kills).slice(0, 8);
   if (main.length) {
     sections.push({
-      kind: 'table', title: 'Твои главные мобы', news: 'main',
+      bx: true, kind: 'table', title: 'Твои главные мобы', news: 'main',
       note: 'Бонус действует только против этого семейства: Magic Find повышает шанс редкого дропа.',
       columns: ['Моб', 'Убито', 'Уровень', 'Сейчас', 'До следующего'],
       rows: main.map(f => [f.name, fmt(f.kills), tierCell(f), bonusText(tierBonus(f)),
@@ -93,7 +93,7 @@ function build(m, ctx) {
     .sort((a, b) => (a.cap - a.kills) * killCost(a) - (b.cap - b.kills) * killCost(b)).slice(0, 8);
   if (almost.length) {
     sections.push({
-      kind: 'table', title: 'Почти максимум',
+      bx: true, kind: 'table', title: 'Почти максимум',
       note: 'Последние уровни семейства: на максимуме бонус против него самый большой.',
       columns: ['Моб', 'Где', 'Уровень', 'До максимума', 'Бонус на максимуме'],
       rows: almost.map(f => [f.name, spotOf(f).where, tierCell(f), killsText(f.cap - f.kills), bonusText(tierBonus(f, f.max))]),
@@ -105,7 +105,7 @@ function build(m, ctx) {
     .map(f => ({ f, left: (f.next ?? f.cap) - f.kills })).sort((a, b) => a.left - b.left).slice(0, 8);
   if (ev.length) {
     sections.push({
-      kind: 'table', title: 'Во время событий',
+      bx: true, kind: 'table', title: 'Во время событий',
       note: 'Эти мобы бывают только на событиях: когда событие идёт, их уровни самые быстрые.',
       columns: ['Моб', 'Когда', 'Уровень', 'До следующего'],
       rows: ev.map(({ f, left }) => [f.name, spotOf(f).where, tierCell(f), killsText(left)]),
@@ -114,7 +114,7 @@ function build(m, ctx) {
 
   // ── По островам
   sections.push({
-    kind: 'table', title: 'По разделам Bestiary', news: 'islands',
+    bx: true, kind: 'table', title: 'По разделам Bestiary', news: 'islands',
     columns: ['Раздел', 'Найдено', 'На максимуме', 'Уровни'],
     rows: s.islands.map(r => [r.where, tx`${r.found} / ${r.families}`,
       { text: tx`${r.maxed} / ${r.families}`, tone: r.maxed === r.families ? 'good' : undefined },
@@ -132,6 +132,20 @@ function build(m, ctx) {
     rows: upcoming.map(n => [tx`${n}`, fmt(milestoneCombatXp(n)), n % 10 ? '—' : '+10']),
   });
 
+  // Данные для своего вида страницы (web/src/guides/Bestiary.jsx): карточки и полоски вместо таблиц.
+  // Секции с bx: true — то же самое таблицами для общего рендера, поиска и английской версии без своего вида.
+  const mob = f => ({ name: f.name, where: spotOf(f).where, kills: f.kills, tier: f.tier, max: f.max,
+    left: f.done ? 0 : (f.next ?? f.cap) - f.kills, toMax: f.cap - f.kills, bonus: bonusText(tierBonus(f)), maxBonus: bonusText(tierBonus(f, f.max)) });
+  const extra = { bestiary: {
+    milestone: s.milestone, maxMilestone: s.maxMilestone, claimed: s.claimed, unclaimed: s.unclaimed,
+    nextMs: s.nextMs, toNext: s.toNext, inMs: TIERS_PER_MILESTONE - s.toNext, perMs: TIERS_PER_MILESTONE, nextXp: s.nextXp, nextXpAt: s.nextXpAt,
+    tiers: s.tiers, maxTiers: s.maxTiers, found: s.found, families: s.families, maxed: s.maxed, started: !none,
+    plan: s.plan.map(r => ({ ...mob(r.f), need: r.kills, to: r.to, gain: r.tiers, bonusTo: bonusText(tierBonus(r.f, r.to)) })),
+    main: main.map(mob), almost: almost.map(mob), events: ev.map(({ f }) => mob(f)),
+    islands: s.islands.map(r => ({ where: r.where, found: r.found, families: r.families, maxed: r.maxed, tiers: r.tiers, max: r.max })),
+    rewards: upcoming.map(n => ({ n, xp: milestoneCombatXp(n), sbxp: n % 10 ? 0 : 10 })),
+  } };
+
   const status = none ? 'start' : s.milestone >= s.maxMilestone ? 'done' : 'progress';
   return {
     summary: none ? 'Bestiary ещё не начат: убийства не считаются, пока не поговоришь с Bramass Beastslayer.'
@@ -140,6 +154,7 @@ function build(m, ctx) {
     level: { label: 'Bestiary Milestone', value: s.milestone, max: s.maxMilestone },
     next: next.sort((a, b) => b.priority - a.priority),
     sections,
+    extra,
   };
 }
 
