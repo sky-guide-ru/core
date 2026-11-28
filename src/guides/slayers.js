@@ -4,6 +4,7 @@ import { SLAYER_INFO, SLAYER_UNLOCKS, SLAYER_RNG, SLAYER_COST, SLAYER_BOSS_XP, S
 import { fmtCoins, plural, num, priceText, method, methodText, sortNext, nice, priceOfDrop } from './combat/util.js';
 import { slayerPlan, VERDICT_RU, LACK_RU, secText, DAGGER_PAIRS } from '../calc/slayer-ready.js';
 import { pieceDetail, upgradeHints } from '../calc/kit-detail.js';
+import { kitGemHint } from '../calc/gems.js';
 import { SLAYER_BOSSES } from '../calc/slayer-bosses.js';
 import { activePerks } from '../calendar/index.js';
 import { tx } from '../../i18n/msg.js';
@@ -62,6 +63,12 @@ function kitSections(plan, key, ctx) {
   if (c.pet?.pet) items.push({ title: tx`Питомец: ${c.pet.label}`, items: [] });
   const lack = t.lack || t.hypo?.lack;
   const hints = upgradeHints(c, { types: SLAYER_BOSSES[key]?.types, lack, price: id => ctx.price(id), fmt: fmtCoins });
+  // Пустые и слабые слоты гемов на вещах набора — по ценам Bazaar и под деньги игрока (calc/gems.js)
+  const costs = ctx.constants?.gemstonecosts;
+  if (costs && ctx.adv?.market !== false && hints.length < 4) {
+    const gh = kitGemHint([...(c.armor.items || []), ...(w ? [c.weapon.item] : [])].filter(i => i?.id), { costs, price: id => ctx.price(id), sell: id => ctx.price(id), coins: ctx.adv?.liquid || 0, role: 'melee', fmt: fmtCoins });
+    if (gh) hints.push(gh);
+  }
   const f = c.f;
   const note = tx`${saved ? tx`Твой сохранённый набор «${saved}». ` : ''}По расчёту: удар ~${num(f.avg)}, урон в секунду ~${num(f.dps)}, Health ${num(f.health)}, EHP ~${num(Math.round(f.ehp))}.`;
   return [

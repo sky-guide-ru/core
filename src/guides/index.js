@@ -29,6 +29,8 @@ import diana from './diana.js';
 import hunting from './hunting.js';
 import chocolate from './chocolate.js';
 import enchanting from './enchanting.js';
+import bestiary from './bestiary.js';
+import taming from './taming.js';
 import { tx } from '../../i18n/msg.js';
 
 export const GUIDES = [
@@ -37,6 +39,7 @@ export const GUIDES = [
   ...slayers,
   kuudra,
   dragons,
+  bestiary,
   crimson,
   rift,
   fishing,
@@ -53,6 +56,7 @@ export const GUIDES = [
   diana,
   chocolate,
   enchanting,
+  taming,
 ];
 
 export const GROUPS = {

@@ -20,12 +20,15 @@ import { npcOnlyCtx } from './market/methods.js';
 import { SKILLS, SLAYERS } from '../i18n/ru.js';
 import { pricesReady, priceOf, buyPriceOf, prices } from './prices.js';
 import { magicFind } from './calc/magic-find.js';
+import { gemPlan, gemCandidates } from './calc/gems.js';
+import { classify } from './analysis/item-upgrades.js';
 import { buildUpgrades } from './lib/acc-upgrades.js';
 import { petScoreSummary } from './analysis/pet-score.js';
 import { enrichGuide } from './guides/refs.js';
 import { chocolateAdvice } from './analysis/chocolate.js';
 import { returningInfo } from './analysis/returning.js';
 import { dailiesOf } from './analysis/dailies.js';
+import { liveCtx } from './analysis/daily-npcs.js';
 import { sbxpPlan } from './analysis/sbxp.js';
 import { dungeonChests } from './market/methods/combat.js';
 import { listByCategory } from './items-ru/index.js';
@@ -156,6 +159,16 @@ export function analyzeMember(m) {
   const acc = analyzeAccessories(m);
   const gear = analyzeGear(m);
   const { roadmap, map, plan, summary, power } = advise(m, acc, gear);
+  // Гемы в снаряжении: цены покупки на Bazaar, статы игрока (Onyx или Jasper) — как в шаге плана «Гемы»
+  if (gear) {
+    try {
+      const noMkt = profileMode(m.gameMode).market === false;
+      gear.gems = gemPlan(gemCandidates(gear, m, classify, neu.items), {
+        costs: neu.constants?.gemstonecosts, price: buyPriceOf, sell: priceOf, market: !noMkt,
+        coins: (m.purse || 0) + (m.bank || 0) + (m.personalBank || 0), stock: m.inv?.sacks, stats: power?.world || null,
+      });
+    } catch (e) { console.warn('[гемы]', e.message); }
+  }
   const methods = moneyMethods(m, { networth: gear?.networth?.total });
   // Ironman, Stranded, Bingo: покупать можно только у NPC за монеты — Museum и Pet Score считают по ценам NPC, а не AH
   const noMarket = profileMode(m.gameMode).market === false;
@@ -182,7 +195,7 @@ export function analyzeMember(m) {
   const safe = (name, fn) => { try { return fn(); } catch (e) { console.warn(tx`[${name}]`, e.message); return null; } };
   // «Обзор»: перерыв в игре и ежедневные дела; «Прогресс»: дешёвый SkyBlock XP и сундуки данжей
   const returning = safe('возвращение', () => returningInfo(m));
-  const dailies = safe('дейлики', () => dailiesOf(m));
+  const dailies = safe('дейлики', () => dailiesOf(m, Date.now(), liveCtx(neu.items, noMarket)));
   // Коллекции — тем же расчётом, что раздел «Коллекции» (кооп, максимум из справочника Hypixel)
   const colls = safe('коллекции', () => analyzeCollections(m));
   const sbxp = safe('SkyBlock XP', () => sbxpPlan(m, { acc, petScore, museumBest: museum?.best || null, museumFreeXp: museum?.canDonateXp || 0, noMarket, collections: colls?.status === 'ok' ? colls : null }));

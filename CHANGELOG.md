@@ -4,11 +4,62 @@
 
 ## Не выпущено
 
-## 0.2.56
+## 0.2.63
 
 - Новый гайд «Драконы и Zealots» (`src/guides/dragons.js`, данные `dragons-data.js`, группа combat) по вики (Ender Dragon, Summoning Eye, Zealot, Dragon's Nest, Dragon Armor, Draconic Altar, 28.11.2026): 7 вариантов дракона с шансами, Dragon Weight за глаза и место по урону, главный дроп с порогами и шансами (правка весов 2025/Sep 2), выгода раскладов по ценам (`lootFor`, `averageLoot`, `SCENARIOS`), источники Summoning Eye, шанс Special Zealot, бои игрока. Шаги: Combat 12, лук с Dragon Tracer, продать глаза или класть 4, Ender Dragon Epic → Legendary, Zealuck. Ironman/Stranded/Bingo — без цен.
 - Гайд отдаёт `extra.dragons` для своей страницы в web: карточки вариантов, сетка калькулятора вклада (`grid[глаза][место]`: вклад, средний дроп, цена глаз, итог, что открыто), пороги дропа. Секции, показанные карточками, помечены `card`.
 - `extras.dragonFight`: убийства и смерти по видам драконов (`player_stats.kills/deaths.<тип>_dragon`), лучший урон, быстрейшее убийство, призвано, своих глаз положено, разбито Ender Crystal.
+- Личные шансы: Magic Find со «Снаряжения» + Bestiary «Dragon» (+45/60/75 с 15/20/25 уровня, `dragonBestiary`), Pet Luck (`statSheet`) для питомца, шанс Special Zealot с Enderman 100 и Zealuck (`zealotChance`). `lootFor`/`averageLoot` принимают `luck`, сетка калькулятора отдаёт `chance` — шанс каждой вещи за дракона. Секция «Твоя удача на драконах».
+
+## 0.2.62
+
+- «Дела на сегодня»: Fetchur и Puzzler (`src/analysis/daily-npcs.js`) по вики (Fetchur, Puzzler, 28.11.2026). Fetchur — 12 предметов по кругу, с 1-го числа заново, день по Нью-Йорку (`FETCHUR`, `fetchurIndex`, `fetchurRequest`): что просит сегодня и завтра, где взять дешевле (NPC за монеты или Bazaar/AH через `liveCtx`; Ironman, Stranded, Bingo — только NPC), сколько уже есть у игрока. Puzzler — как решать. Оба только с доступом в Dwarven Mines. API не показывает, сделано ли, поэтому у дел новый признак `manual: 'day' | '24h'` и `done: null` — отметку ставит сайт.
+- `dailiesOf(m, now, ctx)`: третий аргумент — цены для Fetchur; без `member.daily`, но с `mining` тоже возвращает дела.
+- Гайд Mining: секция «Каждый день: Fetchur и Puzzler» (`news: 'fetchur'`) — круг Fetchur по числам месяца с ценами, координаты NPC, решение Puzzler.
+
+## 0.2.61
+
+- Гемы в снаряжении (`src/calc/gems.js`: `gemPlan`, `itemGems`, `gemCandidates`, `kitGemHint`): статы камней по таблице официальной вики «Gemstone/Stats» (качество × редкость, 28.11.2026; Aquamarine — Fishing Speed с 0.22, Talisman of Power — половина стата), какие камни подходят в слот, цена открытия слота (NEU `gemstonecosts`), плата за снятие у Gemstone Grinder. Камень под роль вещи (Onyx вместо Jasper, если Strength больше Crit Damage на треть), качество под деньги (за слот не дороже 1% монет), камни из Gemstone Sack. Слоты Chisel не считаются (перки Fossil Excavator). Ironman, Stranded, Bingo — без цен.
+- `gear.gems` в разборе снаряжения (цены покупки Bazaar, статы игрока), шаг плана `gear-gems`; гемы убраны из шага «Доведи снаряжение». `roadmap.js` передаёт плану `buyPrice`.
+- Гайды слееров, «Что улучшить в первую очередь»: подсказка про пустые и слабые слоты гемов на вещах набора.
+- Карточка предмета: слоты и роли камней из общей таблицы (в Combat-слот подходят Onyx и Opal), стат Perfect в шаге.
+- Новость «Какие гемы вставить в снаряжение», перевод блока «Гемы в снаряжении».
+
+## 0.2.60
+
+- Перевод новости «Гайд по Bestiary» для английской версии (без него api падал на тесте новостей /en/).
+
+## 0.2.59
+
+- Новый гайд Bestiary (`src/guides/bestiary.js`, группа combat) и расчёт `src/calc/bestiary.js`: семейства и пороги из NEU `constants/bestiary.json` (28.11.2026 совпали с официальной вики по всем семействам; fandom устарел), уровни по `bestiary.kills`, вехи каждые 10 уровней, незабранные награды (`last_claimed_milestone`), план самых дешёвых уровней до следующей вехи (`cheapestTiers`: убийства × Health моба × место × редкий спавн, без событий).
+- Данные вики — `src/guides/bestiary-data.js`: награды уровня (3 × Tier Magic Find и Strength, Farming Fortune у вредителей, Hunting Fortune у существ), Combat XP вех, места спавна и Health мобов, разделы с трудностью доступа.
+- `extra.bestiary` для своего вида страницы в web; секции с `bx: true` — те же данные таблицами для общего рендера.
+- `magic-find.bestiaryTiers` использует общий подсчёт: существа Hunting берут свои пороги (`bracketSets.CRITTERS`). `neu.js`: запасной путь грузит и `bestiary`.
+- Глоссарий и цель Fishing: убран «Sea Creature Chance за Bestiary» (вики не подтверждает).
+- Новость «Гайд по Bestiary».
+
+## 0.2.58
+
+- Новый гайд «Taming и прокачка питомцев» (`src/guides/taming.js`, группа skills) по вики (Taming, Pets, Pet Items, Exp Share, Pet Food, Fann, Kat, George, Beastmaster Crest, 28.11.2026): вехи Taming, множители опыта питомца (`XP_FACTORS`) с тем, что есть у игрока, свои питомцы и скилл полного опыта (NEU `pet_types`), Exp Boost (`EXP_BOOSTS`), доля Exp Share (`expShareRate`), тренировка Fann (`FANN`), Carrot Candy (`FOOD`), опыт до 100/200, выгода докачки на продажу (lowest BIN 100 уровня против дешёвого лота, `cheapestXp`), George для капа, остальные Pet Items (`PET_ITEMS`: что дают, где взять, кому подходят; у кого из питомцев уже надет) и совет предмета для каждого своего питомца (`petItemFor`: по типу, уровню и уровню Garden). Шаги: Diana, Exp Boost активному, Taming 10/20, Fann, Exp Share, кап George.
+- Сверка текстов про питомцев с вики: подсказка Taming (не «нужен для высоких уровней», а Kat и +1% опыта), кап Taming в `CAP_RAISE` (10 питомцев George, а не «любые новые типы»), перк Sharing is Caring (ещё 2 слота Exp Share и +10%, было «3 слота»), совет `pets-level` про слот Exp Share. Таблица «Питомцы по этапам» ссылается на гайд Taming.
+- «Питомцы по этапам» (`petLadder`): режим профиля, деньги и наличие рынка берутся из `ctx.adv` — раньше в гайдах деньги считались нулём (любой платный питомец «дорого») и Ironman видел цены аукциона.
+
+## 0.2.57
+
+- Гайд Mining: Commissions и Commission Milestones (`src/guides/commissions.js`: `COMMISSION_MILESTONES`, `COMMISSION_AREAS`, `commissionState`, `commissionsToNextHotm`, `commissionGuide`) по вики (Commissions, Emissaries, King, Royal Pigeon, Queen Mismyla, Heart of the Mountain, 28.11.2026). Таблица шести вех (`news: 'commissions'`), острова с Emissary, опытом HotM, Powder и быстрыми заданиями, чек-лист «Commissions быстрее» (слоты, Royal Pigeon / Queen Mismyla, King Talisman).
+- Шаги: «Забери награду за Commission Milestone N», «Четвёртый слот заданий: Core of the Mountain → 3», «Royal Pigeon». Шаг «Подними HotM» и совет плана считают, сколько заданий до следующего уровня.
+- Прогресс только по выбранному профилю: `mining.commissionMilestone` — забранная веха из `objectives.tutorial`, `mining.commissionsDone` — `mining_core.commissions_completed`, если API его отдаёт. Общее по аккаунту достижение Hard Working Miner не используется (смешивало бы профили); без числа по профилю гайд пишет «не меньше N» по забранной вехе.
+- Новость «Гайд по Commissions».
+
+## 0.2.56
+
+- Гайд Dungeons: загадки, секреты и счёт (`src/guides/dungeons-rooms.js`) по вики (Catacombs Puzzle Rooms, Dungeon Secrets, Dungeon Score, Dungeon Blessing, The Watcher, Mimic, 28.11.2026). 10 текущих загадок карточками с решением (`PUZZLES`), таблица счёта по этажам из API (`best_score`, рекорд S+, норма секретов, лимит времени), разбор 300 очков, секреты, Blood Room и The Watcher, блессинги. Шаг «Добейся S+» на лучшем этаже.
+- Интерактивные секции `kind: 'tool'`: калькулятор счёта (`SCORE_FLOORS`, `dungeonScore` по формулам Dungeon Score) и помощники для загадок (`WEIRDOS` — все 18 фраз Three Weirdos, `QUIZ` — вопросы и ответы Oruo).
+- Новый тип секции гайда `cards` (карточки с «Подробнее»), описан в `src/guides/README.md`.
+- `wiki/watch.js`: страницы вики гайда Dungeons, дата сверки по гайду (`VERIFIED_BY_GUIDE`).
+- Глоссарий: S+ и Secrets уточнены, новые — загадки, Blood Room, The Watcher, Mimic, Blessing.
+- Новость «Загадки и секреты Dungeons».
+
 ## 0.2.55
 
 - Новый гайд «Enchanting и Experiments» (`src/guides/enchanting.js`, группа skills) по вики (Experiments, Experimentation Table, Metaphysical Serum, Enchanting, 28.11.2026): ставки Superpairs, Chronomatron и Ultrasequencer (`SUPERPAIRS`, `CHRONOMATRON`, `ULTRASEQUENCER`, `runXp`), заряды и докупка за Bits (`RESETS`), как играть, что продаётся, Metaphysical Serum и RNG Meter, уровни Enchanting, зачарования по слотам (`ENCHANTS`). Шаги: пройти Experiments сегодня, играть на открытой ставке, следующий уровень, Serum, Guardian.
