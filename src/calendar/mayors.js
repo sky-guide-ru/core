@@ -42,7 +42,7 @@ export const PERK_RU = {
   'Lucky!': ['Удача', '+25 ♣ Pet Luck.'],
   'Mythological Ritual': ['Мифологический ритуал', 'Ивент Diana: с Ancestral Spade ищешь норы грифонов в Hub, из нор лезут мифические мобы с ценным дропом.'],
   'Pet XP Buff': ['Больше опыта питомцам', '+35% опыта питомцам.'],
-  'Sharing is Caring': ['Делиться — хорошо', 'Ещё 3 слота EXP Share у питомцев.'],
+  'Sharing is Caring': ['Делиться — хорошо', 'Ещё 2 слота Exp Share у питомцев и +10% к доле опыта.'],
   "Huntress' Intuition": ['Чутьё охотницы', 'Бонус к охоте и поиску зверей для Hunting.'],
   // Diaz
   'Shopping Spree': ['Шопинг', 'Дневные лимиты покупок у NPC ×10.'],

@@ -1,5 +1,6 @@
 // Быстрые победы, скиллы, добыча, Foraging (Galatea), Garden, Rift.
 import { hotmPowderRemaining } from '../hotm.js';
+import { commissionState, commissionsToNextHotm } from '../../../guides/commissions.js';
 import { fmtCoins, fmtNum, plural } from '../util.js';
 import { ru } from '../../../../i18n/msg.js';
 import { tx } from '../../../../i18n/msg.js';
@@ -121,6 +122,18 @@ export function foragingRules(ctx, add) {
   }
 }
 
+// Как качать HotM: задания (Commissions) — сколько до следующего уровня, слоты, вехи (guides/commissions.js)
+function hotmHow(m) {
+  const to = commissionsToNextHotm(m.mining?.hotm);
+  const st = commissionState(m);
+  const how = [to
+    ? ru`Commissions: ≈${fmtNum(to.count)} до HotM ${m.mining.hotm.level + 1} (${fmtNum(to.per)} опыта за задание в ${to.area})`
+    : 'Commissions в Dwarven Mines и Glacite Tunnels — основной опыт HotM'];
+  how.push('Первые 4 задания каждый день дают ещё +900 опыта HotM — больше, чем само задание');
+  if (st.slots < 4) how.push(ru`Слотов заданий ${st.slots} из 4: третий — за 100 заданий, четвёртый — Core of the Mountain 3`);
+  return how;
+}
+
 export function miningRules(ctx, add) {
   const mi = ctx.m.mining;
   if (!mi) return;
@@ -129,7 +142,7 @@ export function miningRules(ctx, add) {
       id: 'hotm', cat: 'Mining', priority: 44, effort: 'долго',
       title: tx`Heart of the Mountain ${mi.hotm.level} → 10`,
       why: 'HotM открывает перки скорости и Mining Fortune и Peak of the Mountain — основа дохода с гемов и Glacite.',
-      how: ['Commissions в Dwarven Mines и Glacite Tunnels — основной опыт HotM'],
+      how: hotmHow(ctx.m),
       link: 'mining',
     });
   }

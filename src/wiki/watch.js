@@ -15,6 +15,9 @@ export const WIKI_URL = 'https://hypixel-skyblock.fandom.com/wiki/';
 
 /** Дата сверки и страницы вики, на которых держатся цифры каждого гайда. */
 export const VERIFIED_AT = '2026-11-23';
+/** Гайды, сверенные позже общей даты. */
+export const VERIFIED_BY_GUIDE = { dungeons: '2026-11-28' };
+const verifiedAt = id => VERIFIED_BY_GUIDE[id] || VERIFIED_AT;
 export const GUIDE_PAGES = {
   trophy: ['Trophy Fish', 'Trophy Fish Chance', 'Odger', 'Essence Shops/Gold', 'Essence Shops/Diamond'],
   fishing: ['Sea Creatures'],
@@ -27,6 +30,7 @@ export const GUIDE_PAGES = {
   hunting: ['Hunting', 'Attributes', 'Attributes/List/Common', 'Attributes/List/Uncommon', 'Attributes/List/Rare', 'Attributes/List/Epic',
     'Attributes/List/Legendary', 'Huntraps', 'Salts', 'Attribute Fusion'],
   chocolate: ['Chocolate Factory', "Hoppity's Hunt"],
+  dungeons: ['Catacombs Puzzle Rooms', 'Dungeon Puzzle Rooms', 'Dungeon Secrets', 'Dungeon Score', 'Dungeon Blessing', 'The Watcher', 'Mimic'],
 };
 
 const FILE = () => path.join(config.dataDir, 'wiki-revisions.json');
@@ -69,7 +73,7 @@ export async function refreshWiki({ fetchJson = getJson, save = true } = {}) {
 
 /** Страницы гайда, которые правили после сверки: [{ title, at, url }]. */
 export function wikiChanges(guideId) {
-  const since = Date.parse(`${VERIFIED_AT}T23:59:59Z`);
+  const since = Date.parse(`${verifiedAt(guideId)}T23:59:59Z`);
   return (GUIDE_PAGES[guideId] || [])
     .map(title => ({ title, at: state.pages?.[title] || null }))
     .filter(x => x.at && Date.parse(x.at) > since)
@@ -85,7 +89,7 @@ export function wikiNoticeSection(guideId) {
   return {
     kind: 'text', title: 'Вики обновилась после сверки',
     text: [
-      tx`Цифры этого гайда сверены с fandom-вики ${ruDate(`${VERIFIED_AT}T12:00:00Z`)}. После этого на вики правили: ${ch.map(x => `${x.title} (${ruDate(x.at)})`).join(', ')}.`,
+      tx`Цифры этого гайда сверены с fandom-вики ${ruDate(`${verifiedAt(guideId)}T12:00:00Z`)}. После этого на вики правили: ${ch.map(x => `${x.title} (${ruDate(x.at)})`).join(', ')}.`,
       'Правка могла быть мелкой, но если цифра в игре не сходится с гайдом, верь игре.',
     ],
   };

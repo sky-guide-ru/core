@@ -1,6 +1,7 @@
 import { ru } from '../../i18n/msg.js';
 import { activeAccessories } from './stats.js';
 import { petScoreReward } from '../analysis/pet-score.js';
+import { bestiaryFamilies, familyProgress } from './bestiary.js';
 // Magic Find после реворка SkyBlock 0.27.3 (17.11.2026): откуда у игрока MF, чего не хватает и что взять дальше.
 // Чистые функции: профиль, константы NEU и цены приходят параметрами.
 //
@@ -98,32 +99,22 @@ const allItems = inv => PLACES.flatMap(k => inv?.[k] || []).filter(it => it?.id)
 const lootingOf = it => Math.max(Number(it?.enchants?.looting_new) || 0, Number(it?.enchants?.looting) || 0);
 
 /**
- * Bestiary: уровни (tier) мобов. На форуме: +45 MF на моба при tier 15, +60 при 20, +75 при 25.
+ * Bestiary: уровни (tier) мобов. +3 MF против семейства за уровень (вики, 0.27.3): tier 15 → +45, 20 → +60, 25 → +75.
  * @returns {{ t15, t20, t25, total, near: Array<{ name, tier, kills, need }> }}
  */
 export function bestiaryTiers(kills, bestiary) {
   if (!kills || !bestiary?.brackets) return null;
-  const fams = [];
-  const walk = cat => {
-    for (const mob of cat?.mobs || []) fams.push(mob);
-    if (cat?.hasSubcategories) for (const [k, v] of Object.entries(cat)) if (v && typeof v === 'object' && v.mobs) walk(v);
-  };
-  for (const [k, cat] of Object.entries(bestiary)) if (k !== 'brackets' && k !== 'bracketSets') walk(cat);
+  const prog = familyProgress(kills, bestiaryFamilies(bestiary)).filter(f => f.reward === 'mob'); // MF дают только обычные мобы
   let t15 = 0, t20 = 0, t25 = 0;
   const near = [];
-  for (const f of fams) {
-    const br = bestiary.brackets[f.bracket];
-    if (!br) continue;
-    const n = (f.mobs || []).reduce((s, id) => s + (Number(kills[id]) || 0), 0);
-    const steps = br.filter(x => x <= (f.cap || Infinity));
-    const tier = steps.filter(x => n >= x).length;
-    if (tier >= 15) t15++;
-    if (tier >= 20) t20++;
-    if (tier >= 25) t25++;
-    if (tier < 15 && steps.length >= 15 && n > 0) near.push({ name: strip(f.name), tier, kills: n, need: steps[14] });
+  for (const f of prog) {
+    if (f.tier >= 15) t15++;
+    if (f.tier >= 20) t20++;
+    if (f.tier >= 25) t25++;
+    if (f.tier < 15 && f.max >= 15 && f.kills > 0) near.push({ name: f.name, tier: f.tier, kills: f.kills, need: f.steps[14] });
   }
   near.sort((a, b) => b.kills / b.need - a.kills / a.need);
-  return { t15, t20, t25, total: fams.length, near: near.slice(0, 3) };
+  return { t15, t20, t25, total: prog.length, near: near.slice(0, 3) };
 }
 
 /**

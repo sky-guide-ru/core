@@ -25,6 +25,7 @@ const WIKI_EXTRA = {
   'slayer-blaze': ['Slayer', 'Inferno Demonlord'],
   'slayer-vampire': ['Slayer', 'Riftstalker Bloodfiend'],
   kuudra: ['Kuudra', 'Tutorial:Kuudra Guide', 'Kuudra Key'],
+  bestiary: ['Bestiary', 'Bramass Beastslayer'],
   crimson: ['Crimson Isle'],
   rift: ['Rift Dimension'],
   fishing: ['Fishing'],
@@ -36,6 +37,7 @@ const WIKI_EXTRA = {
   museum: ['Museum', 'Museum/Items'],
   collectibles: ['Fairy Souls', 'Abiphones'],
   enchanting: ['Experiments', 'Experimentation Table', 'Enchanting', 'Metaphysical Serum'],
+  taming: ['Taming', 'Pets', 'Pet Items', 'Fann', 'Pet Food', 'Kat', 'George'],
 };
 
 // Проверено 23.11.2026 через oEmbed YouTube: видео открыто, название и канал ниже — как отдаёт YouTube.

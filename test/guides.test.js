@@ -4,7 +4,7 @@ import { buildGuides, buildGuide, guideCtx, GUIDES, GROUPS } from '../src/guides
 import { ownercatMember, PRICES } from './fixtures/ownercat.js';
 
 const deps = { priceOf: id => PRICES[id] || 0 };
-const KINDS = new Set(['text', 'steps', 'checklist', 'table', 'tree', 'sources', 'shapes', 'miningEvents']);
+const KINDS = new Set(['text', 'steps', 'checklist', 'table', 'tree', 'sources', 'shapes', 'cards', 'tool', 'miningEvents']);
 
 test('гайды: оболочка собирает контекст и ловит ошибки отдельного гайда', () => {
   const m = ownercatMember();
@@ -35,6 +35,7 @@ test('гайды: все зарегистрированные гайды соб�
     for (const s of g.sections) {
       assert.ok(KINDS.has(s.kind), `${g.id}: секция ${s.title} с типом ${s.kind}`);
       assert.ok(s.title, `${g.id}: секция без заголовка`);
+      if (s.kind === 'cards') for (const it of s.items) assert.ok(it.name && it.text, `${g.id}/${s.title}: карточка без имени или текста`);
       if (s.kind === 'shapes') for (const it of s.items) assert.ok(it.name && it.cells?.length, `${g.id}/${s.title}: фигура без имени или клеток`);
       if (s.kind === 'table') for (const r of s.rows) assert.equal(r.length, s.columns.length, `${g.id}/${s.title}: ширина строки`);
     }

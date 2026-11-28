@@ -34,6 +34,81 @@ export const NEWS = [
     ],
   },
   {
+    id: '2026-11-28-fetchur',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Fetchur и Puzzler в делах дня',
+    items: [
+      'В [Делах на сегодня](overview#dailies) — что Fetchur просит сегодня, где это купить и почём.',
+      'Puzzler там же: как решить головоломку; оба дают по 2 500 Mithril Powder в день.',
+      'Круг просьб Fetchur по числам месяца — в [гайде Mining](guides/mining#fetchur).',
+    ],
+  },
+  {
+    id: '2026-11-28-gems',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Какие гемы вставить в снаряжение',
+    items: [
+      'В [Снаряжении](gear#gems) — все Gemstone-слоты вещей: что вставлено, что пусто, что закрыто.',
+      'Самые выгодные камни под роль вещи и бюджет, с ценой Bazaar и открытием слота.',
+      'Fine, Flawless и Perfect для каждого слота — с прибавкой к стату; в плане появился шаг «Гемы».',
+    ],
+  },
+  {
+    id: '2026-11-28-bestiary',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по Bestiary',
+    items: [
+      'В [гайде Bestiary](guides/bestiary#plan) — какие мобы быстрее всего доведут до следующей вехи и где их искать.',
+      'Видно уровни всех семейств, Magic Find и Strength против своих основных мобов и незабранные награды вех.',
+    ],
+  },
+  {
+    id: '2026-11-28-taming',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по Taming и прокачке питомцев',
+    items: [
+      'В [гайде Taming](guides/taming#xp) — что ускоряет опыт питомцев: Exp Boost, Beastmaster Crest, Diana, Exp Share.',
+      'Тренировка у Fann и Carrot Candy: сколько дней и монет нужно до 100 уровня.',
+      'Для своих питомцев — где каждый качается без штрафа, какой предмет ему надеть и стоит ли докачать.',
+    ],
+  },
+  {
+    id: '2026-11-28-pets-fix',
+    date: '2026-11-28',
+    kind: 'fix',
+    title: '«Питомцы по этапам» учитывают монеты',
+    items: [
+      'Исправлена ошибка: [питомцы по этапам](guides/mining#pets) всегда считались дорогими, а Ironman видел цены аукциона.',
+    ],
+  },
+  {
+    id: '2026-11-28-commissions',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по Commissions',
+    items: [
+      'В [гайде Mining](guides/mining#commissions) — Commission Milestones с прогрессом и наградами за каждую веху.',
+      'Где брать задания на трёх островах, сколько дают опыта HotM и Powder, какие делать быстрее.',
+      'План считает, сколько заданий осталось до следующего уровня HotM.',
+    ],
+  },
+  {
+    id: '2026-11-28-puzzles',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Загадки и секреты Dungeons',
+    items: [
+      'В [гайде Dungeons](guides/dungeons#puzzles) — решения всех загадок: Three Weirdos, Water Board, Quiz и других.',
+      '[Помощники](guides/dungeons#helpers) подсказывают ход в Tic Tac Toe, нужного NPC в Three Weirdos и ответы Quiz.',
+      'Калькулятор показывает, чего не хватает до S+, а таблица — лучший счёт по этажам.',
+      'Блоки про секреты, Blood Room, The Watcher и блессинги.',
+    ],
+  },
+  {
     id: '2026-11-28-experiments',
     date: '2026-11-28',
     kind: 'new',
