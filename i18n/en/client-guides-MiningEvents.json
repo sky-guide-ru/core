@@ -21,5 +21,8 @@
  "сейчас не идёт": "not running now",
  "Голосование откроется {0} (через {1}): тогда станет видно, есть ли среди кандидатов Cole.": "Voting opens {0} (in {1}): then it will be clear whether Cole is a candidate.",
  " Выборы →": " Election →",
- "Ивенты: трекер Soopy · обновлено {0} назад": "Events: Soopy tracker · updated {0} ago"
+ "Ивенты: трекер Soopy · обновлено {0} назад": "Events: Soopy tracker · updated {0} ago",
+ "ты здесь": "you are here",
+ "У каждого лобби своё расписание: что идёт именно у тебя — в табличке справа на экране.": "Each lobby has its own schedule: what runs in yours is shown in the sidebar on screen.",
+ "ты в {0}": "you are in {0}"
 }
