@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { standPlan, ingredientCosts, godHours, alchemyInt, xpCostPerMillion, brewCost, godActive, GOD_EFFECTS, XP_BREWS, BREWS, build } from '../src/guides/alchemy.js';
+import { standPlan, ingredientCosts, godHours, alchemyInt, xpCostPerMillion, brewCost, godActive, GOD_EFFECTS, XP_BREWS, BREWS, build, ING_SOURCES, stockUnits, caneFarmPerHour } from '../src/guides/alchemy.js';
 import { auctionKey } from '../src/market/auctions.js';
 
 test('alchemy: God Potion и награды уровней по вики', () => {
@@ -69,4 +69,18 @@ test('alchemy: стойки — больше стоек, больше XP в ча
   assert.equal(b.roundSec, 3 * 64 + 20);
   assert.ok(b.perHour > a.perHour);
   assert.equal(standPlan(10, { steps: 2, brewSec: 10, perStand: 1 }).roundSec, 2 * 10 + 10);
+});
+
+test('stockUnits: запас в пересчёте на ингредиенты', () => {
+  const src = ING_SOURCES[0];
+  const have = { SUGAR_CANE: 51_200, ENCHANTED_SUGAR: 160, ENCHANTED_SUGAR_CANE: 1 };
+  const r = stockUnits(src, id => have[id] || 0);
+  assert.equal(r.units, 4);
+  assert.equal(r.have.length, 3);
+  assert.equal(stockUnits(src, () => 0).units, 0);
+});
+
+test('caneFarmPerHour растёт с Farming Fortune', () => {
+  assert.ok(caneFarmPerHour(0) > 4 && caneFarmPerHour(0) < 5);
+  assert.ok(Math.abs(caneFarmPerHour(100) - 2 * caneFarmPerHour(0)) < 1e-9);
 });

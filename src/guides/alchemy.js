@@ -5,6 +5,8 @@
 import { fmt, short, plural, cell, topNext, bestPet } from './gathering-util.js';
 import { tx } from '../../i18n/msg.js';
 import { extractRecipes, marketId, ahNet } from '../market/util.js';
+import { ownedCount } from '../lib/owned.js';
+import { estimateFarmingFortune } from '../market/methods.js';
 
 const ROMAN = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 const R = n => ROMAN[n] || String(n);
@@ -85,6 +87,35 @@ export const XP_BREWS = [
   { id: 'ENCHANTED_GOLD_BLOCK', potion: 'Absorption', base: 'Awkward Potion', wart: true, sell3: 26_001 },
 ];
 const XP_PER_POTION = 15_000;
+
+// Откуда взять ингредиент для XP-варки: сам предмет и его сырьё (сколько штук сырья на 1 ингредиент, рецепты NEU).
+// Один ингредиент варит 3 зелья (одна стойка).
+export const ING_SOURCES = [
+  { id: 'ENCHANTED_SUGAR_CANE', potion: 'Speed V', parts: [['ENCHANTED_SUGAR_CANE', 1], ['ENCHANTED_SUGAR', 160], ['SUGAR_CANE', 25_600]],
+    where: 'Garden (Sugar Cane) или миньоны Sugar Cane', crop: 'SUGAR_CANE' },
+  { id: 'ENCHANTED_GOLD_BLOCK', potion: 'Absorption V', parts: [['ENCHANTED_GOLD_BLOCK', 1], ['ENCHANTED_GOLD', 160], ['GOLD_INGOT', 25_600]],
+    where: 'Gold Mine, Dwarven Mines или миньоны Gold' },
+  { id: 'ENCHANTED_FERMENTED_SPIDER_EYE', potion: 'Weakness V', parts: [['ENCHANTED_FERMENTED_SPIDER_EYE', 1], ['ENCHANTED_SPIDER_EYE', 64]],
+    where: "Spider's Den или миньоны Spider; ещё 64 Brown Mushroom и 64 Sugar на штуку" },
+];
+
+/** Сколько ингредиентов выходит из запаса игрока: count(id) — сколько штук есть. → { units, have: [[id, n]] } */
+export function stockUnits(src, count) {
+  let units = 0;
+  const have = [];
+  for (const [id, per] of src.parts) {
+    const n = Number(count(id)) || 0;
+    if (n <= 0) continue;
+    units += n / per;
+    have.push([id, n]);
+  }
+  return { units: Math.floor(units), have };
+}
+
+/** Enchanted Sugar Cane за час фарма в Garden: те же допущения, что в «Заработке» (19,5 блока/с, 90% времени, 2 дропа). */
+export function caneFarmPerHour(ff, { bps = 19.5, uptime = 0.9 } = {}) {
+  return bps * 3600 * uptime * 2 * (1 + Math.max(0, ff) / 100) / 25_600;
+}
 
 /** Стоимость 1 млн Alchemy XP по варке: ингредиент на 3 зелья + Nether Wart + Glowstone Dust − продажа NPC */
 export function xpCostPerMillion(b, buy, ingPrice = buy(b.id)) {
@@ -403,8 +434,50 @@ export function build(m, ctx) {
     ],
   });
 
+  // ── Где взять ингредиенты: свой запас, фарм в Garden, покупка
+  {
+    const count = id => ownedCount(m.inv, id);
+    const potsOf = u => u * 3;
+    const pots = n => tx`${fmt(n)} ${plural(n, 'зелье', 'зелья', 'зелий')}`;
+    const srcRows = ING_SOURCES.map(src => ({ src, ...stockUnits(src, count), price: noMarket ? 0 : cheap(ingOf(src.id)), sellNow: noMarket ? 0 : sell(src.id) }));
+    const ff = estimateFarmingFortune(m);
+    const caneHour = caneFarmPerHour(ff);
+    const bestStock = [...srcRows].sort((a, b) => b.units - a.units)[0];
+    const text = [];
+    if (bestStock?.units > 0) {
+      text.push(tx`Из твоего запаса выйдет ${fmt(bestStock.units)} ${ctx.name(bestStock.src.id) || bestStock.src.id}: это ${pots(potsOf(bestStock.units))} и ${short(potsOf(bestStock.units) * xpPer)} XP. Начни с него.`);
+    } else {
+      text.push('В мешках и сундуках пока не хватает ни на один ингредиент для XP-варки.');
+    }
+    const farmLine = tx`Час фарма Sugar Cane в Garden (у тебя примерно ${fmt(ff)} Farming Fortune) — около ${fmt(Math.floor(caneHour))} Enchanted Sugar Cane, это ${pots(Math.floor(caneHour) * 3)} и ${short(Math.floor(caneHour) * 3 * xpPer)} XP.`;
+    if (noMarket) {
+      text.push(tx`${farmLine} Это лучший источник для Ironman.`);
+      text.push('Gold и Spider Eye бери, если они уже накопились от миньонов: добывать их специально дольше.');
+      text.push('Nether Wart и Water Bottle продаёт Alchemist в Hub (Nether Wart — 10 монет).');
+    } else {
+      const cane = srcRows[0];
+      const buyHour = cane.price * caneHour, sellHour = cane.sellNow * caneHour;
+      text.push(buyHour > 0 ? tx`${farmLine} Купить столько же на Bazaar — ${short(buyHour)}${sellHour > 0 ? tx`, продать свой урожай — ${short(sellHour)}` : ''}.` : farmLine);
+      if (best) text.push(tx`Если покупать, сейчас дешевле всего ${ctx.name(best.b.id) || best.b.id}: ${short(best.c.perMillion / wf)} за 1 млн XP с учётом продажи зелий NPC.`);
+      text.push('Если урожай выгоднее продать, чем сварить, — продай его и купи ингредиент.');
+    }
+    sections.push({
+      kind: 'table', title: 'Где взять ингредиенты', news: 'ingredients',
+      note: text.join(' '),
+      columns: ['Ингредиент', 'Зелье', 'У тебя есть', 'Хватит на', 'Где добыть', ...(noMarket ? [] : ['Купить 1 шт', 'Твой запас на Bazaar'])],
+      rows: srcRows.map(r => [
+        cell(ctx.name(r.src.id) || r.src.id, { item: r.src.id, tone: r === bestStock && r.units > 0 ? 'good' : undefined }),
+        r.src.potion,
+        r.have.length ? r.have.map(([id, n]) => tx`${ctx.name(id) || id} ×${fmt(n)}`).join(', ') : '—',
+        r.units ? tx`${pots(potsOf(r.units))}, ${short(potsOf(r.units) * xpPer)} XP` : '—',
+        r.src.where,
+        ...(noMarket ? [] : [r.price ? short(r.price) : '—', r.units && r.sellNow ? short(r.units * r.sellNow) : '—']),
+      ]),
+    });
+  }
+
   // Порядок: сначала простое (баффы, God Potion, что нужно), потом варка, в конце — деньги и тонкости
-  const ORDER = ['buffs', 'effects', 'god', 'godlevel', 'activities', 'dungeons', 'brew', 'leveling', 'stands', 'tips', 'brews', 'sell', 'mixins', 'auto'];
+  const ORDER = ['buffs', 'effects', 'god', 'godlevel', 'activities', 'dungeons', 'brew', 'leveling', 'ingredients', 'stands', 'tips', 'brews', 'sell', 'mixins', 'auto'];
   sections.sort((a, b) => ORDER.indexOf(a.news) - ORDER.indexOf(b.news));
 
   // ── Что дальше
