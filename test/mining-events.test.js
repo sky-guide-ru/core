@@ -74,3 +74,23 @@ test('«Дела на сегодня»: метка mining, если есть Hot
   assert.equal(dailiesOf({ daily: {}, mining: { hotm: { level: 3 } } }, NOW).mining, true);
   assert.equal(dailiesOf({ daily: {}, mining: { hotm: { level: 0 } } }, NOW), null);
 });
+
+test('Mining Fiesta: идёт сейчас или шансы Cole на выборах', async () => {
+  const { setElection, fiestaOutlook } = await import('../src/calendar/index.js');
+  const T = Date.parse('2026-11-23T10:00:00Z');
+  setElection({ mayor: { key: 'mining', name: 'Cole', perks: [{ name: 'Mining Fiesta' }] }, current: { year: 1, candidates: [] } }, T);
+  let f = fiestaOutlook(T);
+  assert.equal(f.now.by, 'Cole');
+  assert.ok(f.now.until > T);
+  setElection({ mayor: { key: 'fishing', name: 'Marina', perks: [], minister: { name: 'Cole', perk: { name: 'Mining Fiesta' } } }, current: { year: 1, candidates: [] } }, T);
+  assert.equal(fiestaOutlook(T).now.role, 'minister');
+  setElection({ mayor: { key: 'fishing', name: 'Marina', perks: [] }, current: { year: 2, candidates: [
+    { key: 'dungeons', name: 'Paul', perks: [], votes: 600 },
+    { key: 'mining', name: 'Cole', perks: [{ name: 'Mining Fiesta', minister: true }, { name: 'Prospection' }], votes: 400 },
+  ] } }, T);
+  f = fiestaOutlook(T);
+  assert.equal(f.now, null);
+  assert.deepEqual(f.election.cole, { pct: 40, place: 2, fiesta: true, ministerFiesta: true });
+  assert.equal(f.election.leader.name, 'Paul');
+  assert.ok(f.next.to > f.next.from);
+});

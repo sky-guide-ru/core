@@ -181,7 +181,7 @@ export default {
         ...MINING_EVENTS.map(e => [e.name, e.min ? tx`${e.where} · ${e.min} мин` : tx`${e.where} · случайно`, e.gives, e.todo]),
         [cell('Gone with the Wind', { tone: 'muted' }), cell('Убран в августе 2026', { tone: 'muted' }), cell('Вместо него погода: Breeze и Mist, каждый час с XX:35 до XX:55', { tone: 'muted' }), cell('—', { tone: 'muted' })],
       ],
-      note: 'Предметы с ивентов: Mining Exp Boost, книга Flowstate I, Dwarven O\'s Ore Oats, Dwarven Treasure и Titanium Minecart. Mining Fiesta — отдельное событие мэра Cole, её даты в «Событиях».',
+      note: 'Предметы с ивентов: Mining Exp Boost, книга Flowstate I, Dwarven O\'s Ore Oats, Dwarven Treasure и Titanium Minecart. Mining Fiesta — событие мэра Cole: идёт ли она и будет ли в следующий срок, видно в блоке выше.',
     });
 
     // Fossil Excavator: открытие Suspicious Scrap, формы окаменелостей, выгода
