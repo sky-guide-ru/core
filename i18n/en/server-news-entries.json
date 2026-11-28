@@ -334,5 +334,9 @@
  "Какие гемы вставить в снаряжение": "Which gems to put in your gear",
  "В [Снаряжении](gear#gems) — все Gemstone-слоты вещей: что вставлено, что пусто, что закрыто.": "[Gear](gear#gems) lists every Gemstone slot on your items: filled, empty and locked.",
  "Самые выгодные камни под роль вещи и бюджет, с ценой Bazaar и открытием слота.": "Best-value gems for the item's role and budget, with Bazaar price and slot unlock cost.",
- "Fine, Flawless и Perfect для каждого слота — с прибавкой к стату; в плане появился шаг «Гемы».": "Fine, Flawless and Perfect for each slot with the stat gain; the plan has a new Gems step."
+ "Fine, Flawless и Perfect для каждого слота — с прибавкой к стату; в плане появился шаг «Гемы».": "Fine, Flawless and Perfect for each slot with the stat gain; the plan has a new Gems step.",
+ "Выборы мэра: голоса и шансы": "Mayor election: votes and chances",
+ "В [Выборах](events#election) — голоса каждого кандидата, как у Election Booth, и примерный шанс победы.": "[Election](events#election) shows each candidate's votes, like the Election Booth, and an approximate chance to win.",
+ "Лента [Ближайшие мэры](events#mayors): кто следующий, когда новые выборы и особый мэр.": "The [Upcoming mayors](events#mayors) timeline: who's next, when the next election and the special mayor come.",
+ "Пока идут выборы, на главной видно лидера, а при открытии выборов всплывает короткая сводка.": "While voting is on, the home page shows the leader, and a short summary pops up when an election opens."
 }

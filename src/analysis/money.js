@@ -7,6 +7,7 @@ import { prices } from '../prices.js';
 import { neu, itemName } from '../neu.js';
 import { getElection, getFireSales, getBingoResource } from '../hypixel.js';
 import { setElection, setFireSales, setBingo, activePerks } from '../calendar/index.js';
+import { recordElection } from '../calendar/election-store.js';
 import { fmtCoins } from '../../i18n/ru.js';
 import * as mk from '../market/index.js';
 import { displayName, itemCategory } from '../names.js';
@@ -49,10 +50,11 @@ export function addSession(s) {
   return session;
 }
 
-/** Обновить текущего мэра и выборы (Diana в «Заработке», календарь событий). Вызывать раз в 20 минут. */
+/** Обновить текущего мэра и выборы (Diana в «Заработке», календарь событий, шансы на выборах). Вызывать раз в 5 минут. */
 export async function refreshMayor() {
   const d = await getElection();
   setElection(d); // календарь событий и советчик (server/calendar)
+  recordElection(d); // снимки голосов и итоги для шансов (calendar/election-store.js)
   getFireSales().then(r => setFireSales(r, itemName)).catch(() => {}); // Fire Sales в календарь: публичный запрос, лимит ключа не тратит
   getBingoResource().then(setBingo).catch(() => {}); // ивент Bingo: тоже без ключа
   // Mythological Ritual бывает и у министра Diana: тогда метод «Diana» в «Заработке» тоже доступен
