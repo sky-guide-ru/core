@@ -4,13 +4,22 @@
 
 ## Не выпущено
 
-## 0.2.59
+## 0.2.60
 
 - Гемы в снаряжении (`src/calc/gems.js`: `gemPlan`, `itemGems`, `gemCandidates`, `kitGemHint`): статы камней по таблице официальной вики «Gemstone/Stats» (качество × редкость, 28.11.2026; Aquamarine — Fishing Speed с 0.22, Talisman of Power — половина стата), какие камни подходят в слот, цена открытия слота (NEU `gemstonecosts`), плата за снятие у Gemstone Grinder. Камень под роль вещи (Onyx вместо Jasper, если Strength больше Crit Damage на треть), качество под деньги (за слот не дороже 1% монет), камни из Gemstone Sack. Слоты Chisel не считаются (перки Fossil Excavator). Ironman, Stranded, Bingo — без цен.
 - `gear.gems` в разборе снаряжения (цены покупки Bazaar, статы игрока), шаг плана `gear-gems`; гемы убраны из шага «Доведи снаряжение». `roadmap.js` передаёт плану `buyPrice`.
 - Гайды слееров, «Что улучшить в первую очередь»: подсказка про пустые и слабые слоты гемов на вещах набора.
 - Карточка предмета: слоты и роли камней из общей таблицы (в Combat-слот подходят Onyx и Opal), стат Perfect в шаге.
 - Новость «Какие гемы вставить в снаряжение», перевод блока «Гемы в снаряжении».
+
+## 0.2.59
+
+- Новый гайд Bestiary (`src/guides/bestiary.js`, группа combat) и расчёт `src/calc/bestiary.js`: семейства и пороги из NEU `constants/bestiary.json` (28.11.2026 совпали с официальной вики по всем семействам; fandom устарел), уровни по `bestiary.kills`, вехи каждые 10 уровней, незабранные награды (`last_claimed_milestone`), план самых дешёвых уровней до следующей вехи (`cheapestTiers`: убийства × Health моба × место × редкий спавн, без событий).
+- Данные вики — `src/guides/bestiary-data.js`: награды уровня (3 × Tier Magic Find и Strength, Farming Fortune у вредителей, Hunting Fortune у существ), Combat XP вех, места спавна и Health мобов, разделы с трудностью доступа.
+- `extra.bestiary` для своего вида страницы в web; секции с `bx: true` — те же данные таблицами для общего рендера.
+- `magic-find.bestiaryTiers` использует общий подсчёт: существа Hunting берут свои пороги (`bracketSets.CRITTERS`). `neu.js`: запасной путь грузит и `bestiary`.
+- Глоссарий и цель Fishing: убран «Sea Creature Chance за Bestiary» (вики не подтверждает).
+- Новость «Гайд по Bestiary».
 
 ## 0.2.58
 

@@ -78,8 +78,8 @@ export const GLOSSARY = {
   },
   bestiary: {
     names: ['бестиарий', 'бестиария', 'бестиарию', 'бестиарием', 'Бестиарий', 'Bestiary'], kind: 'mech', title: 'Bestiary',
-    text: 'Счётчик убийств каждого вида мобов. За уровни бестиария дают постоянные статы и SkyBlock XP, а у Sea Creatures — ещё и бонус к Sea Creature Chance по этому виду.',
-    how: ['Прогресс виден в SkyBlock Menu → Your SkyBlock Profile → Bestiary. Для Sea Creatures просто лови их нужное число раз.'],
+    text: 'Счётчик убийств каждого семейства мобов. Уровень семейства даёт +3 Magic Find и +3 Strength против него, каждые 10 уровней — веха: +1 Health и Combat XP.',
+    how: ['Счёт включает Bramass Beastslayer в Spider\'s Den. Прогресс: SkyBlock Menu → Your Skills → Combat → Bestiary. Sea Creatures засчитываются тому, кто их поймал.'],
   },
   sea_creature: {
     names: ['Sea Creatures', 'Sea Creature', 'морские существа', 'морское существо', 'морских существ', 'Морские существа', 'существа', 'существ'], kind: 'mech', title: 'Sea Creatures',
