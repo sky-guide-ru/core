@@ -57,3 +57,15 @@ test('питомцы по этапам: в гайде режим, деньги �
   assert.equal(L.market, false);
   assert.equal(L.liquid, 2e9 + (m.bank || 0) + (m.personalBank || 0));
 });
+
+test('taming: предметы для питомцев — по типу, уровню и Garden', async () => {
+  const { petItemFor, PET_ITEMS } = await import('../src/guides/taming.js');
+  assert.ok(PET_ITEMS.every(i => i.id && i.what && i.how && i.fit && i.group));
+  assert.equal(new Set(PET_ITEMS.map(i => i.id)).size, PET_ITEMS.length);
+  assert.equal(petItemFor({ type: 'GRIFFIN' }, 'COMBAT')[0], 'FOUR_EYED_FISH');
+  assert.equal(petItemFor({ type: 'SLUG' }, 'FARMING')[0], 'BROWN_BANDANA');
+  assert.equal(petItemFor({ type: 'MOOSHROOM_COW' }, 'FARMING', { garden: 3 })[0], 'YELLOW_BANDANA');
+  assert.equal(petItemFor({ type: 'MOOSHROOM_COW' }, 'FARMING', { garden: 12 })[0], 'GREEN_BANDANA');
+  assert.equal(petItemFor({ type: 'SCATHA', level: 80 }, 'MINING')[0], 'PET_ITEM_QUICK_CLAW');
+  assert.equal(petItemFor({ type: 'SILVERFISH', level: 5 }, 'MINING')[0], 'BEJEWELED_COLLAR');
+});

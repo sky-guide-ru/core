@@ -42,16 +42,69 @@ export const EXP_BOOSTS = [
   { id: 'PET_ITEM_MINING_SKILL_BOOST_RARE', skill: 'MINING', pct: 40, how: 'шанс 20% за участие в Mining Event в Dwarven Mines' },
   { id: 'PET_ITEM_COMBAT_SKILL_BOOST_COMMON', skill: 'COMBAT', pct: 20, how: 'Zog в Pet Care', coins: 60e3 },
   { id: 'PET_ITEM_COMBAT_SKILL_BOOST_UNCOMMON', skill: 'COMBAT', pct: 30, how: 'редкий дроп с Magma Cube' },
-  { id: 'PET_ITEM_COMBAT_SKILL_BOOST_RARE', skill: 'COMBAT', pct: 40, how: 'редкий дроп с боевых мобов (Seer и др.)' },
-  { id: 'PET_ITEM_COMBAT_SKILL_BOOST_EPIC', skill: 'COMBAT', pct: 50, how: 'очень редкий дроп с боевых мобов (Seer и др.)' },
+  { id: 'PET_ITEM_COMBAT_SKILL_BOOST_RARE', skill: 'COMBAT', pct: 40, how: 'Seer (0,015%), Obsidian Defender (0,01%)' },
+  { id: 'PET_ITEM_COMBAT_SKILL_BOOST_EPIC', skill: 'COMBAT', pct: 50, how: 'Seer (0,002%), Obsidian Defender (0,0033%)' },
   { id: 'PET_ITEM_FORAGING_SKILL_BOOST_COMMON', skill: 'FORAGING', pct: 20, how: 'Zog в Pet Care', coins: 60e3 },
-  { id: 'PET_ITEM_FORAGING_SKILL_BOOST_EPIC', skill: 'FORAGING', pct: 50, how: 'редкий дроп с Ent (0,02%)' },
+  { id: 'PET_ITEM_FORAGING_SKILL_BOOST_EPIC', skill: 'FORAGING', pct: 50, how: 'Ent (0,02%), Soul of the Alpha (0,01%)' },
   { id: 'PET_ITEM_FISHING_SKILL_BOOST_COMMON', skill: 'FISHING', pct: 20, how: 'Zog в Pet Care', coins: 60e3 },
   { id: 'PET_ITEM_FISHING_SKILL_BOOST_UNCOMMON', skill: 'FISHING', pct: 30, how: 'Night Squid (0,5%)' },
-  { id: 'PET_ITEM_FISHING_SKILL_BOOST_RARE', skill: 'FISHING', pct: 40, how: 'Night Squid (0,1%)' },
-  { id: 'PET_ITEM_FISHING_SKILL_BOOST_EPIC', skill: 'FISHING', pct: 50, how: 'Sea Leech (0,02%)' },
+  { id: 'PET_ITEM_FISHING_SKILL_BOOST_RARE', skill: 'FISHING', pct: 40, how: 'Night Squid (0,1%), Sea Leech (0,08%)' },
+  { id: 'PET_ITEM_FISHING_SKILL_BOOST_EPIC', skill: 'FISHING', pct: 50, how: 'Sea Leech и Deep Sea Protector (0,02%), Water Hydra (0,04%)' },
 ];
 const BOOST_BY_ID = new Map(EXP_BOOSTS.map(b => [b.id, b]));
+
+// Остальные предметы питомцев (Pet Items, 28.11.2026): что дают, где взять и кому подходят.
+// Статы в процентах (Claws, Remedies, Textbook, Relic) умножают статы самого питомца, а не игрока.
+export const PET_ITEMS = [
+  // бой
+  { id: 'MINOS_RELIC', group: 'Бой', what: 'все статы питомца +33,3% (не перки)', how: 'Minos Champion (0,02–0,04%) на Diana', fit: 'сильным боевым питомцам: Ender Dragon, Golden Dragon, Tiger' },
+  { id: 'HEPHAESTUS_RELIC', group: 'Бой', what: 'все статы питомца +50% (не перки)', how: 'крафт: 3 Minos Relic и Hephaestus Anvil', fit: 'эндгейм-питомцам вместо Minos Relic' },
+  { id: 'GOLD_CLAWS', group: 'Бой', what: 'Crit Damage и Crit Chance питомца +50%', how: 'крафт: Iron Claws (Zog, 750 тыс.), 18 Enchanted Gold Block и Zog Anvil', fit: 'питомцам с крит-статами: Ender Dragon, Tiger' },
+  { id: 'ANTIQUE_REMEDIES', group: 'Бой', what: 'Strength питомца +80%', how: 'Harpy (0,35–0,6%) на Diana', fit: 'питомцам с большой Strength: Tiger, Golden Dragon' },
+  { id: 'SERRATED_CLAWS', group: 'Бой', what: '+25 Crit Damage', how: 'крафт: Sharpened Claws (Zog, 1 млн), 18 Enchanted Gold Block и Zog Anvil', fit: 'любому питомцу, если нужен Crit Damage' },
+  { id: 'BIGGER_TEETH', group: 'Бой', what: '+10 Crit Chance', how: 'крафт: Big Teeth (Zog, 750 тыс.), 18 Enchanted Gold Block и Zog Anvil', fit: 'пока не хватает Crit Chance' },
+  { id: 'CROCHET_TIGER_PLUSHIE', group: 'Бой', what: '+35 Bonus Attack Speed', how: 'Siamese Lynx (0,05–0,4%) на Diana; Hephaestus Plushie — 3 штуки и Hephaestus Anvil, +50', fit: 'ближнему бою с низкой скоростью атаки' },
+  { id: 'REAPER_GEM', group: 'Бой', what: '+8 Ferocity на 5 с после убийства', how: 'Rusty за 20 млн, нужен Zombie Slayer 9', fit: 'фарму мобов и слеерам' },
+  { id: 'PET_ITEM_TEXTBOOK', group: 'Бой', what: 'Intelligence питомца +100%', how: 'крафт после Lapis X: 8 Enchanted Lapis Block и 64 Enchanted Paper', fit: 'Mage-питомцам с Intelligence, например Sheep' },
+  { id: 'REINFORCED_SCALES', group: 'Бой', what: '+40 Defense', how: 'крафт: Hardened Scales (Zog, 1 млн), 18 Enchanted Gold Block и Zog Anvil', fit: 'Tank в Dungeons' },
+  { id: 'DWARF_TURTLE_SHELMET', group: 'Бой', what: '+10 True Defense и нет отбрасывания', how: 'Gaia Construct (0,35–0,6%) на Diana; Hephaestus Shelmet — 3 штуки и Hephaestus Anvil, +20', fit: 'Tank и боссам, которые отбрасывают' },
+  { id: 'PET_ITEM_BUBBLEGUM', group: 'Бой', what: 'Deployables (Flare, Orb) держатся вдвое дольше', how: 'Zog за 5 млн', fit: 'тому, кто ставит Flare или Power Orb: слееры, Healer' },
+  // добыча
+  { id: 'PET_ITEM_QUICK_CLAW', group: 'Mining', what: '+1 Mining Speed и +1 Mining Fortune за каждые 2 уровня питомца', how: 'Treasure stash Crystal Nucleus', fit: 'Mining-питомцам высокого уровня: Scatha, Glacite Golem, Goblin' },
+  { id: 'BEJEWELED_COLLAR', group: 'Mining', what: '+25 Mining Speed, +10 Mining Fortune', how: 'Forge (HotM 2): Bejeweled Handle и 4 Refined Mithril', fit: 'дешёвый вариант для Mining-питомца' },
+  { id: 'PET_ITEM_TITANIUM_MINECART', group: 'Mining', what: '+33,3 Mining Fortune по Titanium Ore', how: 'шанс 20% за участие в Mining Event в Dwarven Mines', fit: 'фарму Titanium в Dwarven Mines' },
+  { id: 'YELLOW_BANDANA', group: 'Farming', what: '+30 Farming Fortune', how: 'SkyMart на Garden за 300 Copper', fit: 'Farming-питомцу, пока Garden ниже 8 уровня' },
+  { id: 'GREEN_BANDANA', group: 'Farming', what: '+4 Farming Fortune за каждый уровень Garden', how: 'награда посетителей Garden', fit: 'Farming-питомцу с Garden 8 и выше: Mooshroom Cow, Elephant, Rose Dragon' },
+  { id: 'BROWN_BANDANA', group: 'Farming', what: '+0,2 Bonus Pest Chance за тир бестиария Pests', how: 'Talbot за 50 тыс.', fit: 'питомцам для Pests: Slug, Hedgehog, Mosquito' },
+  { id: 'WASHED_UP_SOUVENIR', group: 'Fishing', what: '+5 Sea Creature Chance', how: 'Stranded Nymph (0,2–0,5%) на Diana; Hephaestus Souvenir — 3 штуки и Hephaestus Anvil, +10', fit: 'рыбалке на существ: Flying Fish, Ammonite, Dolphin' },
+  { id: 'EDIBLE_SEAWEED', group: 'Fishing', what: '+10 Fishing Speed', how: 'Snapping Turtle (0,5%)', fit: 'рыбалке на Trophy Fish и предметы' },
+  { id: 'BURNT_TEXTS', group: 'Fishing', what: '+5 Double Hook Chance, −50 Fishing Speed', how: 'Ragnarock (1%)', fit: 'фарму существ, когда Fishing Speed с запасом' },
+  // удача и редкость
+  { id: 'PET_ITEM_LUCKY_CLOVER', group: 'Удача', what: '+7 Magic Find', how: 'крафт: 256 Enchanted Emerald и Lucky Clover Core', fit: 'фарму редких дропов, где питомец не даёт статов для боя' },
+  { id: 'CRETAN_URN', group: 'Удача', what: '+5 Pet Luck', how: 'Cretan Bull (0,2–0,5%) на Diana; Hephaestus Urn — 3 штуки и Hephaestus Anvil, +10', fit: 'охоте за питомцами с мобов' },
+  { id: 'PET_ITEM_TIER_BOOST', group: 'Редкость', what: 'редкость питомца +1 ступень (до Legendary)', how: 'крафт: 10 Enchanted Iron Block и Tier Boost Core', fit: 'Epic-питомцу, у которого Legendary открывает нужный перк; Kat такого питомца не берёт' },
+  // только для одного питомца
+  { id: 'FOUR_EYED_FISH', group: 'Свой питомец', pet: 'GRIFFIN', what: '+10 Magic Find, +55 Defense, +2 000 монет с каждой норы', how: 'крафт: 384 Enchanted Spider Eye, Lucky Clover, Reinforced Scales и Pre-Digestion Fish', fit: 'только Griffin' },
+  { id: 'PET_ITEM_FLYING_PIG', group: 'Свой питомец', pet: 'PIG', what: '+40 Potato Fortune, +20 Speed', how: 'Shiny Pig (0,14%)', fit: 'только Pig' },
+  { id: 'GRANDMAS_KNITTING_NEEDLE', group: 'Свой питомец', pet: 'GRANDMA_WOLF', what: '+5% Magic Find при комбо от 50', how: 'Oruo the Almighty за 50 Sun Gecko Essence', fit: 'только Grandma Wolf' },
+  { id: 'PET_ITEM_SADDLE', group: 'Свой питомец', pet: 'HORSE', what: 'скорость +50%, прыжок +100%', how: 'крафт после Leather VII: 24 Enchanted Leather и 8 Enchanted Iron', fit: 'только Horse и Skeleton Horse' },
+];
+const PET_ONLY = new Map(PET_ITEMS.filter(i => i.pet).map(i => [i.pet, i]));
+const ITEM_BY_ID = new Map([...EXP_BOOSTS, ...PET_ITEMS].map(i => [i.id, i]));
+const PEST_PETS = new Set(['SLUG', 'HEDGEHOG', 'MOSQUITO']);
+
+/** Что надеть питомцу: id предметов по порядку (первый — лучший), по типу питомца, уровню и уровню Garden. */
+export function petItemFor(p, type, { garden = 0 } = {}) {
+  if (PET_ONLY.has(p.type)) return [PET_ONLY.get(p.type).id];
+  if (p.type === 'SKELETON_HORSE') return ['PET_ITEM_SADDLE'];
+  if (PEST_PETS.has(p.type)) return ['BROWN_BANDANA'];
+  const lvl = p.level || 0;
+  if (type === 'MINING') return lvl >= 30 ? ['PET_ITEM_QUICK_CLAW', 'BEJEWELED_COLLAR'] : ['BEJEWELED_COLLAR', 'PET_ITEM_QUICK_CLAW'];
+  if (type === 'FARMING') return garden >= 8 ? ['GREEN_BANDANA', 'YELLOW_BANDANA'] : ['YELLOW_BANDANA', 'GREEN_BANDANA'];
+  if (type === 'FISHING') return ['WASHED_UP_SOUVENIR', 'EDIBLE_SEAWEED'];
+  if (type === 'COMBAT') return ['MINOS_RELIC', 'GOLD_CLAWS'];
+  return ['PET_ITEM_ALL_SKILLS_BOOST_COMMON'];
+}
 
 // Fann в Pet Care (с Taming 10): тренировка за монеты, опыт в день (без Owl)
 export const FANN = [
@@ -122,6 +175,15 @@ export function build(m, ctx) {
   const crest = crestBonus(crestTier, kills);
   const activeBoost = active?.heldItem ? BOOST_BY_ID.get(active.heldItem) : null;
   const shareItem = pets.some(p => p.heldItem === 'PET_ITEM_EXP_SHARE');
+  const gl = m.extras?.view?.gardenLevel;
+  const garden = Number(typeof gl === 'object' ? gl?.level : gl) || 0;
+  const heldCell = p => {
+    if (p.heldItem) return cell(ctx.name(p.heldItem), { item: p.heldItem, tone: ITEM_BY_ID.has(p.heldItem) || p.heldItem === 'PET_ITEM_EXP_SHARE' ? 'good' : undefined });
+    const pick = petItemFor(p, types[p.type], { garden })[0];
+    const boost = !isMax(p) && (EXP_BOOSTS.find(b => b.skill === types[p.type] && b.coins) || EXP_BOOSTS[0]);
+    if (boost && boost.id !== pick) return cell(tx`пусто → ${ctx.name(boost.id)}, после прокачки ${ctx.name(pick)}`, { item: boost.id, tone: 'warn' });
+    return cell(tx`пусто → ${ctx.name(pick)}`, { item: pick, tone: 'warn' });
+  };
   const sections = [];
   const next = [];
 
@@ -179,7 +241,7 @@ export function build(m, ctx) {
     sections.push({
       kind: 'table', title: 'Твои питомцы: где качать',
       note: 'Лучший питомец каждого вида, который ещё не на максимуме. «Полный опыт» — скилл, от которого питомец растёт без штрафа.',
-      columns: ['Питомец', 'Уровень', 'Полный опыт', 'До максимума'],
+      columns: ['Питомец', 'Уровень', 'Полный опыт', 'До максимума', 'Предмет'],
       rows: growing.map(p => {
         const t = types[p.type];
         return [
@@ -187,6 +249,7 @@ export function build(m, ctx) {
           p.level ? tx`${p.level} / ${p.maxLevel || (DRAGONS.has(p.type) ? 200 : 100)}` : '—',
           t ? cell(tx`${SKILL_NAME[t] || t}${t === 'MINING' || t === 'FISHING' ? ' (×1,5)' : ''}`) : cell('—', { tone: 'muted' }),
           tx`${short(maxXp(p) - (p.exp || 0))} опыта`,
+          heldCell(p),
         ];
       }),
     });
@@ -195,11 +258,31 @@ export function build(m, ctx) {
   // --- Exp Boost ---
   sections.push({
     kind: 'table', title: 'Предметы Exp Boost',
-    note: tx`Предмет питомца даёт бонус только к опыту своего скилла (All Skills — ко всем). С января 2026 предмет питомца можно снять и переставить.${market ? ' Цена — Bazaar или самый дешёвый лот аукциона.' : ''}`,
+    note: tx`Предмет питомца даёт бонус только к опыту своего скилла (All Skills — ко всем). Если надеть новый предмет, старый вернётся за плату (от 25 тыс. до 2,5 млн по редкости), так что Exp Boost на время прокачки не пропадает.${market ? ' Цена — Bazaar или самый дешёвый лот аукциона.' : ''}`,
     columns: market ? ['Предмет', 'Бонус', 'Скилл', 'Где взять', 'Цена'] : ['Предмет', 'Бонус', 'Скилл', 'Где взять'],
     rows: EXP_BOOSTS.map(b => {
       const row = [cell(ctx.name(b.id), { item: b.id }), tx`+${b.pct}%`, SKILL_NAME[b.skill], b.coins ? tx`${b.how} за ${short(b.coins)}` : b.how];
       if (market) { const p = ctx.price(b.id); row.push(p ? short(p) : cell('—', { tone: 'muted' })); }
+      return row;
+    }),
+  });
+
+  // --- Остальные предметы ---
+  const holders = new Map();
+  for (const p of pets) if (p.heldItem) holders.set(p.heldItem, [...(holders.get(p.heldItem) || []), p]);
+  const fitsMine = it => it.pet ? pets.some(p => p.type === it.pet || (it.pet === 'HORSE' && p.type === 'SKELETON_HORSE')) : true;
+  const itemRows = PET_ITEMS.filter(it => !it.pet || fitsMine(it));
+  sections.push({
+    kind: 'table', title: 'Предметы для питомцев: статы и бонусы', news: 'items',
+    note: tx`Один предмет на питомца: ПКМ по призванному питомцу с предметом в руке. Проценты (Claws, Remedies, Textbook, Relic) умножают статы самого питомца, поэтому их ставят питомцам, у которых этих статов много. Предметы с Diana падают с мифических мобов Mythological Ritual.${market ? ' Цена — Bazaar или самый дешёвый лот аукциона.' : ''}`,
+    columns: market ? ['Предмет', 'Для чего', 'Что даёт', 'Кому', 'Где взять', 'Цена'] : ['Предмет', 'Для чего', 'Что даёт', 'Кому', 'Где взять'],
+    rows: itemRows.map(it => {
+      const on = holders.get(it.id);
+      const row = [
+        cell(on ? tx`${ctx.name(it.id)} · у ${on.map(p => petLabel(ctx, p)).join(', ')}` : ctx.name(it.id), { item: it.id, ...(on || ctx.has(it.id) ? { tone: 'good' } : {}) }),
+        it.group, it.what, it.fit, it.how,
+      ];
+      if (market) { const pr = ctx.price(it.id); row.push(pr ? short(pr) : cell('—', { tone: 'muted' })); }
       return row;
     }),
   });
@@ -316,6 +399,11 @@ export function build(m, ctx) {
     const pick = EXP_BOOSTS.find(b => b.skill === t && b.coins) || EXP_BOOSTS[0];
     next.push({ priority: 55, item: pick.id, title: tx`Дай ${petLabel(ctx, active)} ${ctx.name(pick.id)}`,
       why: tx`+${pick.pct}% опыта питомцу${t && pick.skill === t ? tx` от ${SKILL_NAME[t]}` : ' от всех скиллов'}. Продаёт Zog в Pet Care за ${short(pick.coins)}.` });
+  }
+  if (active && !active.heldItem && isMax(active)) {
+    const pick = petItemFor(active, activeType, { garden })[0];
+    const it = ITEM_BY_ID.get(pick);
+    if (it) next.push({ priority: 50, item: pick, title: tx`Дай ${petLabel(ctx, active)} ${ctx.name(pick)}`, why: tx`${it.what[0].toUpperCase()}${it.what.slice(1)}. Где взять: ${it.how}.` });
   }
   if (active && activeType && activeType !== 'ALL' && !isMax(active)) {
     next.push({ priority: 30, item: tx`${active.type};${Math.max(0, tierOf(active))}`, title: tx`${petLabel(ctx, active)} растёт быстрее всего от ${SKILL_NAME[activeType] || activeType}`,

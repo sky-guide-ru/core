@@ -4,7 +4,7 @@
 
 ## Не выпущено
 
-- Новый гайд «Taming и прокачка питомцев» (`src/guides/taming.js`, группа skills) по вики (Taming, Pets, Pet Items, Exp Share, Pet Food, Fann, Kat, George, Beastmaster Crest, 28.11.2026): вехи Taming, множители опыта питомца (`XP_FACTORS`) с тем, что есть у игрока, свои питомцы и скилл полного опыта (NEU `pet_types`), Exp Boost (`EXP_BOOSTS`), доля Exp Share (`expShareRate`), тренировка Fann (`FANN`), Carrot Candy (`FOOD`), опыт до 100/200, выгода докачки на продажу (lowest BIN 100 уровня против дешёвого лота, `cheapestXp`), George для капа. Шаги: Diana, Exp Boost активному, Taming 10/20, Fann, Exp Share, кап George.
+- Новый гайд «Taming и прокачка питомцев» (`src/guides/taming.js`, группа skills) по вики (Taming, Pets, Pet Items, Exp Share, Pet Food, Fann, Kat, George, Beastmaster Crest, 28.11.2026): вехи Taming, множители опыта питомца (`XP_FACTORS`) с тем, что есть у игрока, свои питомцы и скилл полного опыта (NEU `pet_types`), Exp Boost (`EXP_BOOSTS`), доля Exp Share (`expShareRate`), тренировка Fann (`FANN`), Carrot Candy (`FOOD`), опыт до 100/200, выгода докачки на продажу (lowest BIN 100 уровня против дешёвого лота, `cheapestXp`), George для капа, остальные Pet Items (`PET_ITEMS`: что дают, где взять, кому подходят; у кого из питомцев уже надет) и совет предмета для каждого своего питомца (`petItemFor`: по типу, уровню и уровню Garden). Шаги: Diana, Exp Boost активному, Taming 10/20, Fann, Exp Share, кап George.
 - «Питомцы по этапам» (`petLadder`): режим профиля, деньги и наличие рынка берутся из `ctx.adv` — раньше в гайдах деньги считались нулём (любой платный питомец «дорого») и Ironman видел цены аукциона.
 
 ## 0.2.55
