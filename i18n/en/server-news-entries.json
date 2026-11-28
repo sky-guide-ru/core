@@ -327,5 +327,8 @@
  "Гайд по Commissions": "Commissions guide",
  "В [гайде Mining](guides/mining#commissions) — Commission Milestones с прогрессом и наградами за каждую веху.": "The [Mining guide](guides/mining#commissions) now has Commission Milestones with progress and the reward for each milestone.",
  "Где брать задания на трёх островах, сколько дают опыта HotM и Powder, какие делать быстрее.": "Where to get commissions on three islands, how much HotM XP and Powder they give, and which are fastest.",
- "План считает, сколько заданий осталось до следующего уровня HotM.": "The plan counts how many commissions are left to the next HotM level."
+ "План считает, сколько заданий осталось до следующего уровня HotM.": "The plan counts how many commissions are left to the next HotM level.",
+ "Гайд по Bestiary": "Bestiary guide",
+ "В [гайде Bestiary](guides/bestiary#plan) — какие мобы быстрее всего доведут до следующей вехи и где их искать.": "The [Bestiary guide](guides/bestiary#plan) shows which mobs get you to the next milestone fastest and where to find them.",
+ "Видно уровни всех семейств, Magic Find и Strength против своих основных мобов и незабранные награды вех.": "See tiers of all families, Magic Find and Strength against your main mobs, and unclaimed milestone rewards."
 }
