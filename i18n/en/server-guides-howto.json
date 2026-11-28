@@ -205,7 +205,6 @@
  "Повторяй каждый день": "Repeat every day",
  "У стола 3 заряда, они возвращаются через 24 часа. Ещё 3 захода в день покупаются за Bits и уровни опыта.": "The table has 3 charges that come back after 24 hours. 3 more runs a day can be bought with Bits and XP levels.",
  "Доберись до Dragon's Nest": "Get to Dragon's Nest",
- "Нужен Combat 12. Телепорт /warp drag ведёт прямо в гнездо, где живут Zealot.": "You need Combat 12. /warp drag takes you straight into the nest where Zealots live.",
  "Фарми Zealot ради Summoning Eye": "Farm Zealots for Summoning Eyes",
  "Примерно один Zealot из 420 вызывает Special Zealot: убей его, и Summoning Eye твой.": "About one Zealot in 420 spawns a Special Zealot: kill it and the Summoning Eye is yours.",
  "Положи глаза в Ender Altar": "Place eyes in the Ender Altar",
@@ -213,5 +212,6 @@
  "Бей дракона луком": "Hit the dragon with a bow",
  "Сначала разбей Ender Crystal на шипах, потом стреляй луком с Dragon Tracer. Remnant of the Eye в инвентаре спасает от смерти.": "First break the Ender Crystals on the spikes, then shoot with a Dragon Tracer bow. A Remnant of the Eye in the inventory saves you from death.",
  "Сравни дроп с ценой глаз": "Compare loot to the eye price",
- "Чем больше вклад (свои глаза и место по урону), тем лучше дроп. Таблица «Выгода» ниже считает, окупается ли призыв.": "The more weight (own eyes and damage place), the better the loot. The \"Profit\" table below shows whether summoning pays off."
+ "Чем больше вклад (свои глаза и место по урону), тем лучше дроп. Таблица «Выгода» ниже считает, окупается ли призыв.": "The more weight (own eyes and damage place), the better the loot. The \"Profit\" table below shows whether summoning pays off.",
+ "Нужен Combat 12. С острова The End иди вниз по тропе к воротам гнезда. Команда /warp drag есть только с MVP+ и после Travel Scroll to Dragon's Nest.": "You need Combat 12. From The End island walk down the path to the nest gate. The /warp drag command needs MVP+ and the Travel Scroll to Dragon's Nest."
 }

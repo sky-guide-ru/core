@@ -27,7 +27,6 @@
  ", положено {0}": ", placed {0}",
  "Драконов пока не убивал. Summoning Eye: {0}{1}.": "No dragons killed yet. Summoning Eyes: {0}{1}.",
  "Как это устроено": "How it works",
- "Zealot — эндермены в Dragon's Nest (/warp drag). После убийства Zealot примерно 1 раз из 420 рядом появляется Special Zealot с порталом в руках: с него всегда падает Summoning Eye.": "Zealots are Endermen in Dragon's Nest (/warp drag). After a Zealot kill, about 1 time in 420 a Special Zealot holding a portal frame spawns nearby: it always drops a Summoning Eye.",
  "8 Summoning Eye в рамки Ender Altar в центре Dragon's Nest — и вылупляется дракон. Положенный глаз становится Sleeping Eye: до появления дракона его можно забрать. После появления он превращается в Remnant of the Eye — один раз спасает от смерти в The End.": "Put 8 Summoning Eyes into the Ender Altar frames in the middle of Dragon's Nest and a dragon hatches. A placed eye becomes a Sleeping Eye: you can take it back until the dragon spawns. After that it turns into a Remnant of the Eye, which saves you from death in The End once.",
  "Дракон — один из 7 вариантов. Вокруг гнезда появляются Ender Crystal: пока целы, лечат дракона. Разбитый кристалл даёт Crystal Fragment и 1 000 урона в зачёт.": "The dragon is one of 7 variants. Ender Crystals appear around the nest and heal the dragon while intact. A broken crystal gives a Crystal Fragment and 1,000 counted damage.",
  "Урон по дракону режется: всё, что выше 0,4% его HP за удар, почти не засчитывается. Поэтому важнее частые попадания (Ferocity, шортбоу), чем один огромный удар.": "Damage to dragons is capped: anything above 0.4% of its HP per hit barely counts. Frequent hits (Ferocity, shortbows) matter more than one huge hit.",
@@ -82,5 +81,6 @@
  "Твоих Zealot по Bestiary: {0}{1}.": "Your Zealots in Bestiary: {0}{1}.",
  ", Special Zealot: {0} (в среднем 1 на {1})": ", Special Zealots: {0} (1 per {1} on average)",
  "Zealot по Bestiary в профиле пока нет.": "No Zealots in Bestiary yet.",
- "Драконы и Zealots": "Dragons and Zealots"
+ "Драконы и Zealots": "Dragons and Zealots",
+ "Zealot — эндермены в Dragon's Nest, внизу острова The End. После убийства Zealot примерно 1 раз из 420 рядом появляется Special Zealot с порталом в руках: с него всегда падает Summoning Eye.": "Zealots are Endermen in Dragon's Nest, at the bottom of The End island. After a Zealot kill, about 1 time in 420 a Special Zealot holding a portal frame spawns nearby: it always drops a Summoning Eye."
 }
