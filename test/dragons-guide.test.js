@@ -43,3 +43,17 @@ test('драконы: бои из профиля попадают в гайд, I
   assert.ok(scen.rows.every(r => r[4] === '—'));
   assert.ok(iron.next.some(n => /Special Zealot/.test(n.title)));
 });
+
+test('драконы: личная удача — Magic Find множит шансы, Bestiary даёт +45 с 15 уровня, Special Zealot с бонусами', async () => {
+  const { dragonBestiary, zealotChance } = await import('../src/guides/dragons.js');
+  const young = DRAGONS.find(d => d.key === 'young');
+  const base = lootFor(young, 4, 480, () => 1).rows.find(r => r.id === 'YOUNG_DRAGON_LEGGINGS');
+  const lucky = lootFor(young, 4, 480, () => 1, { mf: 100 }).rows.find(r => r.id === 'ASPECT_OF_THE_DRAGON');
+  assert.ok(lucky.p > lootFor(young, 4, 480, () => 1).rows.find(r => r.id === 'ASPECT_OF_THE_DRAGON').p * 1.9);
+  assert.ok(base.p > 0);
+  assert.deepEqual(dragonBestiary({ bestiaryKills: { young_dragon_100: 200, old_dragon_100: 60 } }, null).mf, 45);
+  assert.equal(dragonBestiary({ bestiaryKills: { young_dragon_100: 100, master_wither_king_dragon_100: 999 } }, null).tier, 12);
+  const z = zealotChance({ pets: [{ type: 'ENDERMAN', tier: 'LEGENDARY', level: 100 }], perks: { inc_zealots_odds: 5 } });
+  assert.equal(Math.round(z.oneIn), Math.round(420 / (1.25 * 1.1)));
+  assert.equal(Math.round(zealotChance({}).oneIn), 420);
+});

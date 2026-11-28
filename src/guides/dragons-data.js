@@ -28,10 +28,10 @@ export const PLACE_WEIGHT = [
 // share — примерная добавка за долю урона от лидера (100 × твой урон / урон первого места) для калькулятора
 
 // Главный дроп: проверяется по порядку, от самого высокого порога. Получил одну вещь — остальные уже не выпадут,
-// а из вклада вычитается её порог. chance(eyes, type) — базовый шанс (без Magic Find).
+// а из вклада вычитается её порог. chance(eyes, type) — базовый шанс; Magic Find множит его (×(1 + MF/100)), у питомца ещё и Pet Luck.
 export const MAJOR = [
-  { id: 'ENDER_DRAGON;4', label: 'Ender Dragon (Legendary)', req: 450, chance: e => e * 0.0001, text: '0,01% за каждый свой глаз' },
-  { id: 'ENDER_DRAGON;3', label: 'Ender Dragon (Epic)', req: 449, chance: e => e * 0.0005, text: '0,05% за каждый свой глаз' },
+  { id: 'ENDER_DRAGON;4', label: 'Ender Dragon (Legendary)', pet: true, req: 450, chance: e => e * 0.0001, text: '0,01% за каждый свой глаз' },
+  { id: 'ENDER_DRAGON;3', label: 'Ender Dragon (Epic)', pet: true, req: 449, chance: e => e * 0.0005, text: '0,05% за каждый свой глаз' },
   { id: 'DRAGON_HORN', req: 448, chance: (e, t) => (t === 'superior' ? 0.3 : 0), text: '30%, только Superior' },
   { id: 'ASPECT_OF_THE_DRAGON', req: 447, chance: (e, t) => (t === 'superior' ? 0 : e * 0.03), text: '3% за каждый свой глаз, кроме Superior' },
   { id: 'DRAGON_CLAW', req: 446, chance: e => e * 0.02, text: '2% за каждый свой глаз' },
