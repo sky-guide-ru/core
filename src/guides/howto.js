@@ -119,11 +119,11 @@ export const HOWTO = {
     step('Повторяй каждый день', 'У стола 3 заряда, они возвращаются через 24 часа. Ещё 3 захода в день покупаются за Bits и уровни опыта.'),
   ],
   alchemy: [
-    step('Купи Brewing Stand', 'Alchemist в Hub продаёт стойки за 30 монет и Water Bottle. Поставь стойку на Private Island.', ['BREWING_STAND_ITEM']),
-    step('Свари Awkward Potion', 'Три Water Bottle вниз, Nether Wart сверху: 20 секунд. Это основа почти всех зелий.', ['NETHER_STALK']),
-    step('Добавь ингредиент', 'Например, Blaze Powder для Strength или Sugar Cane для Speed. Зачарованный ингредиент даёт уровень выше.'),
-    step('Усиль', 'Glowstone поднимает уровень, Redstone продлевает. Одного типа действует один усилитель.'),
-    step('Держи God Potion', 'Для игры важнее God Potion: почти все баффы на 12–24 часа. Отдельные зелья нужны в Dungeons и для того, чего в нём нет.', ['GOD_POTION_2']),
+    step('Забери бесплатный Booster Cookie', 'У Elizabeth в Community Center (Hub). Один раз на аккаунт.', ['BOOSTER_COOKIE']),
+    step('Купи God Potion за Bits', 'Пока печенье действует, копятся Bits. 1 500 Bits — это God Potion: почти все зелья сразу на 12–24 часа.', ['GOD_POTION_2']),
+    step('В Dungeons бери Dungeon Potion', 'В Catacombs God Potion на паузе. Ophelia в Dungeon Hub продаёт Dungeon Potion.'),
+    step('Докупи то, чего нет в God Potion', 'Для Farming — Harvest Harbinger, для Fishing — Mushed Glowy Tonic.'),
+    step('Захочешь варить сам — Brewing Stand', 'Продаёт Alchemist в Hub за 30 монет. Как варить и качать Alchemy — ниже.', ['BREWING_STAND_ITEM']),
   ],
   chocolate: [
     step('Открой фабрику', 'Команда /cf. Накликай 50 Chocolate и найми Rabbit Bro: дальше Chocolate копится сам.'),

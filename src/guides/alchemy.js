@@ -176,16 +176,16 @@ export function build(m, ctx) {
   const cookiePrice = noMarket ? 0 : buy('BOOSTER_COOKIE');
   sections.push({
     kind: 'checklist', title: 'Твои баффы сейчас', news: 'buffs',
-    note: 'Зелья тикают только, пока ты в игре: в офлайне время не уходит. На Private Island God Potion тоже не тратится.',
+    note: 'Зелья — это временные статы. Время уходит, только пока ты в игре.',
     items: [
       { text: god ? 'God Potion действует' : 'God Potion не действует', done: god, item: 'GOD_POTION_2',
-        hint: god ? undefined : tx`Почти все баффы на максимум на ${fmt(hours)} ч с твоим Alchemy. 1 500 Bits у Elizabeth${godPrice ? tx` или ${short(godPrice)} на аукционе` : ''}.` },
+        hint: god ? undefined : tx`Самое важное зелье: почти все баффы сразу на ${fmt(hours)} ч. Стоит 1 500 Bits у Elizabeth${godPrice ? tx` или ${short(godPrice)} на аукционе` : ''}.` },
       { text: cookie ? 'Booster Cookie действует' : 'Booster Cookie не действует', done: cookie, item: 'BOOSTER_COOKIE',
-        hint: cookie ? undefined : tx`+25 ко всем Wisdom, +10 Magic Find, Bits и команды /ah, /bz, /potionbag.${cookiePrice ? tx` Сейчас ${short(cookiePrice)} на Bazaar.` : ''}` },
+        hint: cookie ? undefined : tx`Опыт быстрее, +10 Magic Find и Bits, на которые покупают God Potion.${cookiePrice ? tx` Сейчас ${short(cookiePrice)} на Bazaar.` : ''}` },
       { text: tx`Alchemy ${lvl} из 50: зелья дольше на ${lvl}%, +${alchemyInt(lvl)} Intelligence`, done: lvl >= 50,
         hint: lvl < 50 && sk.xpForNext ? tx`До ${lvl + 1}: ${fmt(sk.xpForNext - (sk.xpCurrent || 0))} XP` : undefined },
       { text: bag.length ? tx`Potion Bag: ${bag.length} ${plural(bag.length, 'зелье', 'зелья', 'зелий')}` : 'Potion Bag пуст или закрыт в API', done: bag.length > 0,
-        hint: 'Potion Bag (/potionbag с Booster Cookie) хранит зелья и Mixins, до 45 штук.' },
+        hint: 'Сумка для зелий: /potionbag, до 45 штук.' },
       ...(parrot ? [{ text: tx`Parrot ${parrot.tier}: God Potion дольше до 20%`, done: parrot.tier === 'LEGENDARY' || parrot.tier === 'MYTHIC', item: 'PARROT;4' }] : []),
     ],
   });
@@ -206,9 +206,9 @@ export function build(m, ctx) {
 
   // ── Что держать под занятие
   sections.push({
-    kind: 'table', title: 'Какие зелья держать', news: 'activities',
-    note: god ? 'God Potion уже даёт всё, что в нём есть. Сверху докупай только то, чего в нём нет: Harvest Harbinger, Mushed Glowy Tonic и Mixins.' : 'Всё, кроме Harvest Harbinger и Mushed Glowy Tonic, входит в God Potion. Зелёным — то, что действует сейчас.',
-    columns: ['Занятие', 'Зелья', 'Совет'],
+    kind: 'table', title: 'Какие зелья нужны под занятие', news: 'activities',
+    note: god ? 'У тебя God Potion: он уже даёт почти всё из списка. Докупать стоит только Harvest Harbinger и Mushed Glowy Tonic. ✓ — действует сейчас.' : 'Почти всё из списка даёт один God Potion. Отдельно нужны только Harvest Harbinger и Mushed Glowy Tonic. ✓ — действует сейчас.',
+    columns: ['Чем занят', 'Зелья', 'Главное'],
     rows: ACTIVITIES.map(a => [
       a.title,
       a.effects.map(id => {
@@ -222,8 +222,8 @@ export function build(m, ctx) {
   sections.push({
     kind: 'text', title: 'Dungeons', news: 'dungeons',
     text: [
-      'В Catacombs все твои зелья, включая God Potion, ставятся на паузу. За заход можно выпить или бросить только одно зелье.',
-      'Поэтому берут Dungeon Potion: VII даёт на 40 минут Strength V, Critical III, Speed III, Resistance V, Archery III и Regeneration IV. Его продаёт Ophelia в Dungeon Hub по 5 000 монет за уровень.',
+      'В Catacombs God Potion и другие зелья на паузе, а за заход можно выпить только одно зелье.',
+      'Бери Dungeon Potion: VII даёт на 40 минут сразу Strength, Critical, Speed, Resistance, Archery и Regeneration. Продаёт Ophelia в Dungeon Hub, 5 000 монет за уровень.',
       'Healer с питомцем Jellyfish усиливает такие зелья для всей команды.',
     ],
   });
@@ -232,21 +232,13 @@ export function build(m, ctx) {
   const perHour = godPrice ? godPrice / hours : 0;
   sections.push({
     kind: 'table', title: 'God Potion и Booster Cookie', news: 'god',
+    note: 'Обычные зелья поверх God Potion ничего не добавляют, а Milk Bucket снимает все эффекты: не пей его случайно.',
     columns: ['', 'God Potion', 'Booster Cookie'],
     rows: [
-      ['Что даёт', '32 эффекта на максимуме: Strength VIII, Critical IV, Spirit IV, Magic Find IV, Haste IV, Spelunker V и другие', '+25 ко всем Wisdom, +10 Magic Find, Bits, монеты не теряются при смерти, команды меню'],
-      ['Сколько длится', tx`12 ч + 0,24 ч за уровень Alchemy: у тебя ${fmt(hours)} ч${parrot ? ', Parrot добавляет до 20%' : ''}. Время суммируется до 8 дней`, '4 дня, тикает и в офлайне. Можно съесть несколько подряд'],
+      ['Что даёт', 'Почти все зелья сразу и на максимуме: 32 эффекта, в том числе Strength VIII, Critical IV, Magic Find IV', 'Опыт всех скиллов +25%, +10 Magic Find, Bits, команды /ah и /bz из любого места, монеты не теряются при смерти'],
+      ['Сколько длится', tx`12–24 ч игры, чем выше Alchemy, тем дольше: у тебя ${fmt(hours)} ч${parrot ? ', Parrot добавляет до 20%' : ''}. Можно пить подряд, время складывается`, '4 дня, идёт и когда ты не в игре. Можно съесть несколько подряд'],
       ['Где взять', noMarket ? '1 500 Bits у Elizabeth в Community Center' : '1 500 Bits у Elizabeth в Community Center или аукцион', '325 SkyBlock Gems у Elizabeth или Bazaar. Первый — бесплатно, раз на аккаунт'],
       ...(noMarket ? [] : [['Цена сейчас', godPrice ? tx`${short(godPrice)}, это ${short(perHour)} в час игры` : '—', cookiePrice ? tx`${short(cookiePrice)}, это ${short(cookiePrice / 96)} в час` : '—']]),
-    ],
-  });
-  sections.push({
-    kind: 'text', title: 'Что выбрать первым',
-    text: [
-      'Сначала Booster Cookie: без него нет Bits, а 1 500 Bits — это и есть God Potion из магазина Elizabeth.',
-      'Самый дешёвый путь: забрать бесплатный Booster Cookie, накопить 1 500 Bits и купить God Potion. Дальше Bits с каждого печенья окупают новые God Potion.',
-      'Обычные зелья поверх God Potion не продлевают его и не усиливают: они бесполезны, пока он действует. Выключить лишние эффекты можно в меню Booster Cookie → Toggle Potion Effects.',
-      'Milk Bucket снимает все эффекты, включая God Potion: не пей его случайно.',
     ],
   });
   sections.push({
@@ -263,7 +255,7 @@ export function build(m, ctx) {
       { title: 'Brewing Stand', text: 'Продаёт Alchemist в Hub за 30 монет или крафт: 3 Cobblestone и Blaze Rod. Ставь сразу несколько.' },
       { title: 'Основа', text: 'Внизу 3 Water Bottle (у Alchemist). Nether Wart превращает их в Awkward Potion. Weakness варится прямо из воды.' },
       { title: 'Ингредиент', text: 'Сверху кладёшь ингредиент зелья: зачарованный даёт уровень выше. Варка идёт 20 секунд, Witch ускоряет до 10.' },
-      { title: 'Усилители', text: 'Glowstone Dust / Enchanted Glowstone Dust / Enchanted Glowstone: +1/+2/+3 уровня. Redstone Dust / Enchanted Redstone / Enchanted Redstone Block: 8/16/40 минут.' },
+      { title: 'Сильнее и дольше', text: 'Glowstone поднимает уровень зелья (+1, +2 или +3 у зачарованных форм). Redstone продлевает: 8, 16 или 40 минут.' },
       { title: 'Порядок', text: 'Одного типа усилителя действует один. Enchanted Gunpowder кладут после Redstone, иначе он работает как обычный порох.' },
       { title: 'Новые зелья', text: 'Большинство зелий открываются уровнем коллекции ингредиента: рецепты видно в Recipe Book.' },
     ],
@@ -298,8 +290,8 @@ export function build(m, ctx) {
     kind: 'table', title: noMarket ? 'Что варить' : 'Сварить или купить', news: 'brews',
     note: noMarket
       ? 'Ингредиенты добывай сам: миньоны, коллекции, мобы. Уровень поднимает Glowstone, время — Redstone.'
-      : tx`Ингредиент на 3 зелья: купить готовым или скрафтить из сырья (зелёное дешевле). Зелье — одно на максимум с Enchanted Glowstone и Enchanted Redstone Block (${LONG_MIN} минут, у тебя ${fmt(LONG_MIN * (1 + lvl / 100))}). «Из своего» — если ингредиент добыт самим: он стоит столько, за сколько его можно продать. Зелёная цена на аукционе — купить зелье дешевле, чем сварить.`,
-    columns: ['Зелье', 'Даёт', 'Открывается', ...(noMarket ? ['Ингредиент (уровень)'] : ['Купить ингредиент', 'Скрафтить', 'Зелье', 'Из своего', 'Аукцион'])],
+      : tx`Для тех, кто хочет экономить или зарабатывать. Зелёное — дешевле. «1 зелье» — максимальный уровень на ${fmt(LONG_MIN * (1 + lvl / 100))} минут. «Из своего фарма» — если ингредиент добыл сам.`,
+    columns: ['Зелье', 'Даёт', 'Открывается', ...(noMarket ? ['Ингредиент (уровень)'] : ['Купить ингредиент', 'Скрафтить', '1 зелье', 'Из своего фарма', 'Аукцион'])],
     rows: brewRows.map(x => x.row),
   });
   if (!noMarket) {
@@ -343,8 +335,8 @@ export function build(m, ctx) {
     kind: 'table', title: 'Как качать Alchemy', news: 'leveling',
     note: xpPlain
       ? 'Без Bazaar: ферма Sugar Cane или миньоны Sugar Cane и Gold. Absorption III из Enchanted Gold даёт 300 XP за зелье.'
-      : tx`15 000 Alchemy XP за зелье: XP даёт только первый ингредиент. Glowstone Dust поднимает зелье до VI, его продают NPC, чтобы вернуть часть денег.${lvl < 50 ? tx` До Alchemy 50 тебе осталось ${short(xpLeft)} XP.` : ''}`,
-    columns: xpPlain ? ['Ингредиент', 'Зелье', 'XP за зелье'] : ['Ингредиент', 'Зелье', 'Основа', 'На 3 зелья', 'NPC за 3 (VI)', '1 млн XP', ...(lvl < 50 ? ['До 50'] : [])],
+      : tx`Каждое такое зелье даёт 15 000 XP. Добавь Glowstone Dust и продай зелья NPC: так вернётся часть денег.${lvl < 50 ? tx` До Alchemy 50 осталось ${short(xpLeft)} XP.` : ''}`,
+    columns: xpPlain ? ['Ингредиент', 'Зелье', 'XP за зелье'] : ['Ингредиент', 'Зелье', 'Основа', 'Потратишь на 3', 'Вернёт NPC', 'Цена 1 млн XP', ...(lvl < 50 ? ['До 50'] : [])],
     rows: xpPlain
       ? [[cell('Enchanted Sugar Cane', { item: 'ENCHANTED_SUGAR_CANE' }), 'Speed V', '15 000'], [cell('Enchanted Gold Block', { item: 'ENCHANTED_GOLD_BLOCK' }), 'Absorption V', '15 000'], [cell('Enchanted Gold', { item: 'ENCHANTED_GOLD' }), 'Absorption III', '300']]
       : xpRows.map((x, i) => [
@@ -353,7 +345,7 @@ export function build(m, ctx) {
       ]),
   });
   sections.push({
-    kind: 'text', title: 'Советы по прокачке',
+    kind: 'text', title: 'Советы по прокачке', news: 'tips',
     text: [
       'Ставь ряд Brewing Stand и вари партиями: вода → Nether Wart → ингредиент → Glowstone Dust. С Booster Cookie продавай зелья NPC прямо из меню печенья.',
       'Wisdom ускоряет: Booster Cookie (+25 Alchemy Wisdom) и Alchemy XP Boost III из подарков Jerry\'s Workshop (+20). God Potion включает этот буст.',
@@ -361,6 +353,10 @@ export function build(m, ctx) {
       'Питомец Witch вдвое ускоряет варку: 10 секунд вместо 20.',
     ],
   });
+
+  // Порядок: сначала простое (баффы, God Potion, что нужно), потом варка, в конце — деньги и тонкости
+  const ORDER = ['buffs', 'effects', 'god', 'first', 'activities', 'dungeons', 'brew', 'leveling', 'tips', 'brews', 'sell', 'mixins', 'auto'];
+  sections.sort((a, b) => ORDER.indexOf(a.news) - ORDER.indexOf(b.news));
 
   // ── Что дальше
   if (!cookie) next.push({ title: 'Съешь Booster Cookie', priority: 70, item: 'BOOSTER_COOKIE', why: tx`+25 ко всем Wisdom, +10 Magic Find и Bits на God Potion.${cookiePrice ? tx` ${short(cookiePrice)} на Bazaar.` : ''}` });
