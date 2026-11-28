@@ -1,5 +1,6 @@
 // Гайд «Crimson Isle»: фракция и репутация, ежедневные дела, Dojo по испытаниям, пояса, мини-боссы, Matriarch, ключи Kuudra.
 // Kuudra целиком — в своём гайде (kuudra.js); здесь только то, что нужно для репутации и ключей.
+import { petLadderSection } from './pets.js';
 import { KUUDRA_TIERS } from './combat/data.js';
 import { num, plural, sortNext } from './combat/util.js';
 import { DOJO_TESTS, DOJO_RANKS, dojoState, BELTS, FACTIONS, FACTION_TITLES, KUUDRA_KEYS, QUEST_TYPES, MINIBOSSES } from './crimson-data.js';
@@ -116,6 +117,7 @@ export function build(m, ctx) {
     sections: [
       { kind: 'table', title: 'Репутация и тиры Kuudra', note: tx`${f ? tx`Фракция ${f.name} (${f.ru}), город ${f.town}. ` : ''}Тиры открывает репутация любой фракции.${otherRep ? tx` У второй фракции ${num(otherRep)} реп.` : ''} Сменить фракцию можно у Elle, но вся текущая репутация сгорит.`,
         columns: ['Что откроет', 'Титул фракции', 'Репутация', 'У тебя'], rows: repRows, current: nextTier ? KUUDRA_TIERS.indexOf(nextTier) : undefined },
+      petLadderSection(ctx, 'crimson', { title: 'Питомцы для Crimson Isle' }),
       { kind: 'steps', title: 'Каждый день на Crimson Isle', note: 'Порядок, в котором выгоднее всего: сначала квесты (их видно на доске), остальное — по пути.', items: dailies },
       { kind: 'table', title: 'Квесты фракции', note: 'До 5 в день. Тип квеста выпадает случайно; невыгодный можно не брать.',
         columns: ['Тип', 'Что сделать'], rows: QUEST_TYPES.map(q => [q.ru === q.name ? q.name : tx`${q.name} · ${q.ru}`, q.name === 'Rescue' && f ? tx`${q.text} Тебе — ${f.rescue}.` : q.text]) },

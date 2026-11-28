@@ -1,4 +1,5 @@
 // Гайд по рыбалке: уровень, удочки и броня, Sea Creatures, Trophy Fish, события, заработок и что делать дальше.
+import { petLadderSection, petNextStep } from './pets.js';
 import {
   RODS, ROD_PARTS, ARMOR, armorIds, EQUIPMENT, CREATURES, ZONES, TROPHY_FISH, TIERS, TIER_RU, TROPHY_RANKS,
   DROPS, FISHING_PETS, COLLECTIONS, trophyTierCounts,
@@ -140,9 +141,8 @@ export default {
     }
     if (spooky?.active) next.push({ title: 'Идёт Spooky Festival — лови Spooky существ', why: 'Phantom Fisher и Grim Reaper ловятся только сейчас; Spooky Bait и Spooky Hook повышают шанс.', priority: 90 });
     if (jerry?.active) next.push({ title: "Открыт Jerry's Workshop — зимняя рыбалка", why: 'Yeti и Reindrake ловятся только в Late Winter. Ice/Frozen Bait работают только там.', priority: 88 });
-    if (!FISHING_PETS.some(t => m.pets?.some(p => p.type === t))) {
-      next.push({ title: 'Заведи питомца для рыбалки', why: 'Flying Fish (вода и лава) или Ammonite дают Sea Creature Chance и скорость.', priority: 55 });
-    }
+    const petStep = petNextStep(ctx, 'fishing', FISHING_PETS.some(t => m.pets?.some(p => p.type === t)) ? 30 : 55);
+    if (petStep) next.push(petStep);
     next.sort((a, b) => b.priority - a.priority);
 
     // ---------- секции ----------
@@ -214,15 +214,12 @@ export default {
     });
 
     sections.push({
-      kind: 'checklist', title: 'Снаряжение и питомцы',
+      kind: 'checklist', title: 'Снаряжение',
       items: [
         ...EQUIPMENT.map(e => ({ text: tx`${e.tier} Cloak/Belt/Gloves (+${e.fs} Fishing Speed за часть)`, done: ctx.has(e.id) || ctx.has(e.id.replace('CLOAK', 'BELT')), item: e.id })),
-        ...['FLYING_FISH', 'AMMONITE', 'MEGALODON', 'BABY_YETI'].map(t => {
-          const p = (m.pets || []).filter(x => x.type === t).sort((a, b) => (b.level || 0) - (a.level || 0))[0];
-          return { text: tx`Питомец ${t.split('_').map(w => w[0] + w.slice(1).toLowerCase()).join(' ')}`, done: !!p, hint: p ? tx`${p.tier}, ур. ${p.level ?? '?'}` : undefined, item: tx`${t};4` };
-        }),
       ],
     });
+    sections.push(petLadderSection(ctx, 'fishing'));
 
     // Trophy Fish
     sections.push({
