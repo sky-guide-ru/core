@@ -19,7 +19,7 @@ function zucchini() {
     powder: { mithrilAvail: 8_749_860, gemstoneAvail: 27_946_599, glaciteAvail: 680_743 },
     nodes: { core_of_the_mountain: 10, blockhead: 20, eager_adventurer: 55, efficient_miner: 100, fortunate_mineman: 21, gem_lover: 20, great_explorer: 20, keep_it_cool: 50, lonesome_miner: 37, mining_fortune: 50, mining_speed: 48, mole: 200, old_school: 20, powder_buff: 50, professional: 140, quick_forge: 20, seasoned_mineman: 1, sheer_force: 1, sky_mall: 1, speedy_mineman: 50, subterranean_fisher: 40, surveyor: 11, vanguard_seeker: 1, dead_mans_chest: 1, mining_master: 3 },
     potm: 10,
-    crystals: { jade: { state: 'NOT_FOUND', placed: 25 }, amber: { state: 'NOT_FOUND', placed: 25 }, amethyst: { state: 'NOT_FOUND', placed: 25 }, sapphire: { state: 'NOT_FOUND', placed: 25 }, topaz: { state: 'NOT_FOUND', placed: 25 } },
+    crystals: { jade: { state: 'NOT_FOUND', placed: 25 }, amber: { state: 'NOT_FOUND', placed: 25 }, amethyst: { state: 'NOT_FOUND', placed: 25 }, sapphire: { state: 'NOT_FOUND', placed: 25 }, topaz: { state: 'NOT_FOUND', placed: 25 }, jasper: { state: 'FOUND', found: 1 }, ruby: { state: 'FOUND', found: 1 }, opal: { state: 'FOUND', found: 1 }, peridot: { state: 'FOUND', found: 1 }, onyx: {} },
     mineshafts: 16, corpses: { lapis: 24, tungsten: 1 },
   };
   m.hotfXp = 28_080;
@@ -60,6 +60,11 @@ test('гайд по добыче: Powder без дела, не взятые пе
   const cr = g.sections.find(s => s.title.startsWith('Crystal Hollows'));
   assert.equal(cr.items.length, 5);
   assert.match(cr.note, /25 раз/);
+  const other = g.sections.find(s => s.news === 'crystals');
+  assert.equal(other.items.length, 7);
+  assert.equal(other.items.filter(i => i.done).length, 4);
+  assert.match(other.note, /Найдено 4 из 7/);
+  assert.ok(other.items.every(i => i.hint && /^PERFECT_\w+_GEM$/.test(i.item)));
   const tree = g.sections.find(s => s.kind === 'tree');
   assert.equal(tree.perks.length, 46);
   assert.ok(tree.plan.length > 0);

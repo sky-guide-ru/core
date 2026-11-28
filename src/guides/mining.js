@@ -40,6 +40,18 @@ const NUCLEUS = [
   ['topaz', 'Topaz', 'Magma Fields: убей босса Bal в Khazad-dûm'],
 ];
 
+// Остальные кристаллы (меню HotM → «Your Other Crystals»): каждый идёт в Forge на один Perfect-гем
+// (5 Flawless + 1 Crystal, 20 ч). Источник: вики, страница Gemstone Crystals (после v0.20, апрель 2024).
+const OTHER_CRYSTALS = [
+  ['jasper', 'Jasper', 'Fairy Grotto в Crystal Hollows: 0.1% с Butterfly и сундуков; ещё сундук Crystal Nucleus и Jasper Mineshaft'],
+  ['ruby', 'Ruby', '0.002% с добычи Ruby, сундук Crystal Nucleus (~0.8%) или Ruby Mineshaft'],
+  ['opal', 'Opal', 'Opal Mineshaft; редко с Frozen Corpse, которым нужен ключ'],
+  ['aquamarine', 'Aquamarine', 'Aquamarine Mineshaft; редко с Frozen Corpse, которым нужен ключ'],
+  ['peridot', 'Peridot', 'Peridot Mineshaft; редко с Frozen Corpse, которым нужен ключ'],
+  ['onyx', 'Onyx', 'Onyx Mineshaft; редко с Frozen Corpse, которым нужен ключ'],
+  ['citrine', 'Citrine', 'Citrine Mineshaft; редко с Frozen Corpse, которым нужен ключ'],
+];
+
 const DRILLS = ['MITHRIL_PICKAXE', 'REFINED_MITHRIL_PICKAXE', 'TITANIUM_PICKAXE', 'REFINED_TITANIUM_PICKAXE', 'MITHRIL_DRILL_1', 'MITHRIL_DRILL_2', 'TITANIUM_DRILL_1', 'TITANIUM_DRILL_2', 'TITANIUM_DRILL_3', 'TITANIUM_DRILL_4', 'DIVAN_DRILL'];
 const GEM_DRILLS = ['GEMSTONE_DRILL_1', 'GEMSTONE_DRILL_2', 'GEMSTONE_DRILL_3', 'GEMSTONE_DRILL_4'];
 const ARMOR = [
@@ -173,6 +185,17 @@ export default {
       })),
     });
     if (missing.length && nucleusRuns > 0) sections[sections.length - 1].note += tx` Для следующего захода не хватает: ${missing.map(x => x[1]).join(', ')}.`;
+    const otherFound = OTHER_CRYSTALS.filter(([k]) => cr[k]?.state === 'FOUND').length;
+    sections.push({
+      kind: 'checklist', news: 'crystals', title: 'Другие кристаллы: для Perfect-гемов',
+      note: tx`Найдено ${otherFound} из ${OTHER_CRYSTALS.length}. Для Crystal Nucleus они не нужны: каждый кристалл уходит в Forge на один Perfect-гем (5 Flawless + 1 Crystal, 20 ч, HotM 5). В Mineshaft нужного типа кристалл появляется с шансом 25%, забрать его может только тот, кто нашёл шахту.`,
+      items: OTHER_CRYSTALS.map(([k, n, where]) => ({
+        text: tx`${n} Crystal${cr[k]?.found ? tx` · найден ${fmt(cr[k].found)} ${plural(cr[k].found, 'раз', 'раза', 'раз')}` : ''}`,
+        done: cr[k]?.state === 'FOUND',
+        hint: where,
+        item: `PERFECT_${n.toUpperCase()}_GEM`,
+      })),
+    });
 
     sections.push({
       kind: 'table', title: 'Glacite Tunnels и Mineshafts',

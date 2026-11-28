@@ -14,6 +14,16 @@
 
 export const NEWS = [
   {
+    id: '2026-11-28-crystals',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Кристаллы для Perfect-гемов в гайде',
+    items: [
+      'В [гайде по добыче](guides/mining#crystals) — Jasper, Ruby, Opal, Aquamarine, Peridot, Onyx и Citrine с отметкой найденных.',
+      'Каждый кристалл уходит в Forge на один Perfect-гем; Opal, Onyx и прочие ищутся в Glacite Mineshafts.',
+    ],
+  },
+  {
     id: '2026-11-27-strong',
     date: '2026-11-27',
     kind: 'fix',

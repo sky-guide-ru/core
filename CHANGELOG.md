@@ -4,6 +4,9 @@
 
 ## Не выпущено
 
+- Гайд майнинга: чек-лист «Другие кристаллы: для Perfect-гемов» (Jasper, Ruby, Opal, Aquamarine, Peridot, Onyx, Citrine) — где искать и что найдено по `mining_core.crystals`.
+- Новость «Кристаллы для Perfect-гемов в гайде».
+
 ## 0.2.47
 
 - «Где XP дешевле» (`sbxpPlan`, опция `collections`): Collections считаются тем же `analyzeCollections`, что раздел «Коллекции» (кооп и максимум из справочника). Было 2696 / 2696 против 3172 в разделе.
