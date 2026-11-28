@@ -87,7 +87,7 @@ export async function loadNeu({ force = false } = {}) {
     return;
   }
   // Запасной путь: хотя бы константы по одной
-  for (const c of ['sacks', 'essenceshops', 'leveling', 'misc', 'pets', 'parents', 'essencecosts', 'museum', 'enchants', 'reforgestones', 'reforges', 'gemstonecosts', 'petnums', 'bonuses']) {
+  for (const c of ['sacks', 'essenceshops', 'leveling', 'misc', 'pets', 'parents', 'essencecosts', 'museum', 'enchants', 'reforgestones', 'reforges', 'gemstonecosts', 'petnums', 'bonuses', 'bestiary']) {
     try {
       const r = await fetch(RAW + `constants/${c}.json`);
       if (r.ok) neu.constants[c] = await r.json();

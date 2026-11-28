@@ -14,6 +14,16 @@
 
 export const NEWS = [
   {
+    id: '2026-11-28-bestiary',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по Bestiary',
+    items: [
+      'В [гайде Bestiary](guides/bestiary#plan) — какие мобы быстрее всего доведут до следующей вехи и где их искать.',
+      'Видно уровни всех семейств, Magic Find и Strength против своих основных мобов и незабранные награды вех.',
+    ],
+  },
+  {
     id: '2026-11-28-taming',
     date: '2026-11-28',
     kind: 'new',

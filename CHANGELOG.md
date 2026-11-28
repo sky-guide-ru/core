@@ -4,6 +4,15 @@
 
 ## Не выпущено
 
+## 0.2.59
+
+- Новый гайд Bestiary (`src/guides/bestiary.js`, группа combat) и расчёт `src/calc/bestiary.js`: семейства и пороги из NEU `constants/bestiary.json` (28.11.2026 совпали с официальной вики по всем семействам; fandom устарел), уровни по `bestiary.kills`, вехи каждые 10 уровней, незабранные награды (`last_claimed_milestone`), план самых дешёвых уровней до следующей вехи (`cheapestTiers`: убийства × Health моба × место × редкий спавн, без событий).
+- Данные вики — `src/guides/bestiary-data.js`: награды уровня (3 × Tier Magic Find и Strength, Farming Fortune у вредителей, Hunting Fortune у существ), Combat XP вех, места спавна и Health мобов, разделы с трудностью доступа.
+- `extra.bestiary` для своего вида страницы в web; секции с `bx: true` — те же данные таблицами для общего рендера.
+- `magic-find.bestiaryTiers` использует общий подсчёт: существа Hunting берут свои пороги (`bracketSets.CRITTERS`). `neu.js`: запасной путь грузит и `bestiary`.
+- Глоссарий и цель Fishing: убран «Sea Creature Chance за Bestiary» (вики не подтверждает).
+- Новость «Гайд по Bestiary».
+
 ## 0.2.58
 
 - Новый гайд «Taming и прокачка питомцев» (`src/guides/taming.js`, группа skills) по вики (Taming, Pets, Pet Items, Exp Share, Pet Food, Fann, Kat, George, Beastmaster Crest, 28.11.2026): вехи Taming, множители опыта питомца (`XP_FACTORS`) с тем, что есть у игрока, свои питомцы и скилл полного опыта (NEU `pet_types`), Exp Boost (`EXP_BOOSTS`), доля Exp Share (`expShareRate`), тренировка Fann (`FANN`), Carrot Candy (`FOOD`), опыт до 100/200, выгода докачки на продажу (lowest BIN 100 уровня против дешёвого лота, `cheapestXp`), George для капа, остальные Pet Items (`PET_ITEMS`: что дают, где взять, кому подходят; у кого из питомцев уже надет) и совет предмета для каждого своего питомца (`petItemFor`: по типу, уровню и уровню Garden). Шаги: Diana, Exp Boost активному, Taming 10/20, Fann, Exp Share, кап George.
