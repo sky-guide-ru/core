@@ -48,5 +48,7 @@
  "Не найдено: {0}.": "Not found: {0}.",
  "Подсказки по каждой душе, координаты и отметки — в гайде «Рифт».": "Hints for every soul, coordinates and checkmarks are in the Rift guide.",
  "Fairy Souls {0}/{1} · Enigma {2}/{3} · Abiphone {4} · арфа {5}/{6}": "Fairy Souls {0}/{1} · Enigma {2}/{3} · Abiphone {4} · harp {5}/{6}",
- "Собрано всего": "Total collected"
+ "Собрано всего": "Total collected",
+ "Мои телепорты: Travel Scrolls": "My teleports: Travel Scrolls",
+ "Отметь открытые свитки — подсказки «/warp …» на всём сайте покажут, сработает ли телепорт. Hub, Private Island и Garden открыты всегда, EPIC-свитки работают только с MVP+.": "Tick the scrolls you have unlocked, and \"/warp …\" hints across the site will show whether the teleport works. Hub, Private Island and Garden are always open; EPIC scrolls work only with MVP+."
 }

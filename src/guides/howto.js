@@ -14,6 +14,13 @@ const SLAYER = [
 ];
 
 export const HOWTO = {
+  dragons: [
+    step('Доберись до Dragon\'s Nest', 'Нужен Combat 12. С острова The End иди вниз по тропе к воротам гнезда или телепортируйся: /warp drag ведёт прямо в гнездо.', ['DRAGON_NEST_TRAVEL_SCROLL']),
+    step('Фарми Zealot ради Summoning Eye', 'Примерно один Zealot из 420 вызывает Special Zealot: убей его, и Summoning Eye твой.', ['SUMMONING_EYE']),
+    step('Положи глаза в Ender Altar', 'ПКМ по пустой рамке в центре гнезда. Пока дракон не вылупился, глаз можно забрать обратно (Sleeping Eye).'),
+    step('Бей дракона луком', 'Сначала разбей Ender Crystal на шипах, потом стреляй луком с Dragon Tracer. Remnant of the Eye в инвентаре спасает от смерти.', ['DRAGON_SHORTBOW', 'REMNANT_OF_THE_EYE']),
+    step('Сравни дроп с ценой глаз', 'Чем больше вклад (свои глаза и место по урону), тем лучше дроп. Таблица «Выгода» ниже считает, окупается ли призыв.'),
+  ],
   dungeons: [
     step('Собери группу', 'Телепорт /warp dungeon_hub, затем Party Finder: выбери этаж, свой класс и минимальный Catacombs. В группе 5 человек, лучше разные классы.'),
     step('Подготовься', 'Возьми снаряжение из чек-листа ниже (маски «второй жизни», Aspect of the Void, Spirit-питомца) и зелья. Класс выбирается в меню данжа до старта.'),
@@ -29,6 +36,13 @@ export const HOWTO = {
     step('Бей Kuudra', 'Стреляй из баллисты и бей Kuudra, когда он выныривает. На Infernal есть ещё финальная фаза.'),
     step('Открой сундук', 'Бесплатный сундук даётся всегда, платный — за Kuudra Key своего тира. Сравни цену ключа с ценой лута в таблице ниже.', ['KUUDRA_TIER_KEY']),
     step('Качай репутацию', 'Каждый день бери 5 квестов фракции на доске в её городе: репутация открывает следующие тиры.'),
+  ],
+  bestiary: [
+    step('Включи счёт', 'Поговори с Bramass Beastslayer у Grandma\'s House на холме в Spider\'s Den: до этого убийства в Bestiary не идут.'),
+    step('Начни с новых семейств', 'Первые уровни у ещё не тронутых мобов стоят 1–20 убийств. Таблица «До вехи» ниже показывает самые быстрые.'),
+    step('Бей своих основных мобов', 'Каждый уровень даёт +3 Magic Find и +3 Strength против этого семейства: на мобах для фарма и слееров это заметно.'),
+    step('Забирай награды вех', 'SkyBlock Menu → Your Skills → Combat → Bestiary → Milestones: +1 Health за веху и Combat XP каждые 5 вех.'),
+    step('Не пропускай события', 'Spooky Festival, Diana и Season of Jerry: у их мобов первые уровни почти бесплатные, но только пока идёт событие.'),
   ],
   crimson: [
     step('Доберись до острова', 'Нужен Combat 24. На Crimson Isle ведёт лаунчпад в глубине Spider\'s Den, дальше /warp nether.'),
@@ -123,6 +137,13 @@ export const HOWTO = {
     step('В Dungeons бери Dungeon Potion', 'В Catacombs God Potion на паузе. Ophelia в Dungeon Hub продаёт Dungeon Potion.'),
     step('Докупи то, чего нет в God Potion', 'Для Farming — Harvest Harbinger, для Fishing — Mushed Glowy Tonic.'),
     step('Захочешь варить сам — Brewing Stand', 'Продаёт Alchemist в Hub за 30 монет. Как варить и качать Alchemy — ниже.', ['BREWING_STAND_ITEM']),
+  ],
+  taming: [
+    step('Выбери питомца под занятие', 'Питомец растёт от опыта скилла своего типа: Combat-питомец в бою, Mining-питомец на шахте. Чужой скилл даёт втрое меньше.'),
+    step('Дай ему Exp Boost', 'Zog в Pet Care (Hub) продаёт Exp Boost за 50–60 тыс.: +20% опыта от своего скилла или +10% от всех.', ['PET_ITEM_ALL_SKILLS_BOOST_COMMON']),
+    step('Заполни слот Exp Share', 'Меню /pets → Exp Share: питомец в слоте получает долю опыта активного, даже когда не призван.', ['PET_ITEM_EXP_SHARE']),
+    step('Отдай питомца Fann', 'С Taming 10 Fann в Pet Care тренирует питомца, пока ты играешь: бесплатно или быстрее за монеты.'),
+    step('Подними кап у George', 'После Taming 50 George в Pet Care берёт 10 питомцев из своего списка и поднимает кап до 60.'),
   ],
   chocolate: [
     step('Открой фабрику', 'Команда /cf. Накликай 50 Chocolate и найми Rabbit Bro: дальше Chocolate копится сам.'),

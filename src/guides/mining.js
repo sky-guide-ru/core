@@ -7,6 +7,9 @@ import { tx } from '../../i18n/msg.js';
 import { fossilSections } from './fossil.js';
 import { NUCLEUS_CRYSTALS, OTHER_CRYSTALS } from './crystals.js';
 import { corpseGuide } from './corpses.js';
+import { MINING_EVENTS } from '../calendar/mining.js';
+import { fetchurPuzzlerSection, liveCtx } from '../analysis/daily-npcs.js';
+import { commissionGuide } from './commissions.js';
 
 const POWDER = { MITHRIL: 'Mithril', GEMSTONE: 'Gemstone', GLACITE: 'Glacite' };
 
@@ -61,6 +64,8 @@ export default {
     const perks = treePerks(nodes, layout);
     const next = [];
     const sections = [];
+    // Commissions и вехи (commissions.js): шаги, секции и подсказка «сколько заданий до следующего HotM»
+    const cm = commissionGuide(m, ctx);
 
     // ---- Powder: сколько есть и куда вложить ----
     const avail = { MITHRIL: mi.powder?.mithrilAvail || 0, GEMSTONE: mi.powder?.gemstoneAvail || 0, GLACITE: mi.powder?.glaciteAvail || 0 };
@@ -77,7 +82,7 @@ export default {
     if (lvl < 10) {
       next.push({
         title: tx`Подними Heart of the Mountain: ${lvl} → 10`, priority: 80,
-        why: 'Каждый уровень открывает новый ряд перков и токен. Опыт HotM дают задания (commissions) в Dwarven Mines, Crystal Hollows и Glacite Tunnels; первое задание за день на каждом острове даёт больше.',
+        why: tx`Каждый уровень открывает новый ряд перков и токен. Опыт HotM дают задания (commissions) в Dwarven Mines, Crystal Hollows и Glacite Tunnels. ${cm.hotmHow || 'Первые 4 задания за день дают больше.'} Подробнее — блок «Commission Milestones» ниже.`,
       });
     }
     for (const [k, n] of Object.entries(POWDER)) {
@@ -97,6 +102,7 @@ export default {
         why: tx`${(keyLocked.length ? keyLocked : locked).slice(0, 6).map(p => tx`${p.name}${KEY_PERKS[p.id] ? tx` (${lc(KEY_PERKS[p.id])})` : ''}`).join('; ')}. Если свободных токенов нет, перераспредели дерево под свой способ добычи: сброс в меню HotM.`,
       });
     }
+    next.push(...cm.next);
     if (layout && potm < 10) {
       next.push({ title: tx`Core of the Mountain: ${potm} → 10`, priority: 62, why: 'Даёт слоты Forge, токены HotM и бонусы к Powder. Уровни 1–3 стоят Mithril Powder, 4–7 Gemstone, 8–10 Glacite.' });
     }
@@ -137,15 +143,19 @@ export default {
     sections.push({
       kind: 'steps', title: 'Порядок прокачки добычи',
       items: [
-        { title: 'Dwarven Mines: HotM 1–3', text: 'Задания Royal Pigeon / Emissary, Mithril и Titanium. Первый бур Mithril Drill, затем Titanium Drill. Forge открывается с HotM 2.', done: lvl >= 3 },
+        { title: 'Dwarven Mines: HotM 1–3', text: 'Задания у King и Emissary (до 4 за раз), Mithril и Titanium. Первый бур Mithril Drill, затем Titanium Drill. Forge открывается с HotM 2.', done: lvl >= 3 },
         { title: 'Crystal Hollows: HotM 3–6', text: 'Пропуск в Crystal Hollows, задания и гемы. Собери 5 кристаллов и проходи Crystal Nucleus ради частей Divan и Gemstone Powder.', done: lvl >= 6 && nucleusRuns > 0, current: lvl >= 3 && lvl < 6 },
         { title: 'Glacite Tunnels: HotM 7–10', text: 'Dwarven Base Camp → Glacite Tunnels: Umber, Tungsten, Glacite и гемы Onyx, Aquamarine, Citrine, Peridot. Отсюда Glacite Powder и вход в Mineshafts.', done: lvl >= 10, current: lvl >= 7 && lvl < 10 },
         { title: 'Mineshafts и Divan', text: 'Frozen Corpse, Dwarven Handwarmers, Divan’s Drill и броня Divan. Дальше — фарм гемов и Glacite ради денег.', current: lvl >= 10 },
       ],
     });
 
+    sections.push(...cm.sections);
+
     const tree = hotmTreeSection(m, ctx);
     if (tree) sections.push({ ...tree, news: 'hotm' });   // ссылка из новостей: guides/mining#hotm
+    // Fetchur и Puzzler: бесплатный Mithril Powder каждый день (ссылка из новостей: guides/mining#fetchur)
+    sections.push({ ...fetchurPuzzlerSection(m, liveCtx(ctx.items, ctx.adv?.market === false)), news: 'fetchur' });
     sections.push({
       kind: 'checklist', title: 'Crystal Hollows: кристаллы для Crystal Nucleus',
       note: tx`Nucleus пройден ${fmt(nucleusRuns)} ${plural(nucleusRuns, 'раз', 'раза', 'раз')}. Кристаллы сбрасываются после каждого прохождения, поэтому «найден» — это текущий заход.`,
@@ -169,6 +179,19 @@ export default {
     });
 
     sections.push(...cg.sections);
+
+    // Ивенты майнинга: живой блок (сайт сам берёт /v1/mining-events) и что даёт каждый ивент
+    sections.push({ kind: 'miningEvents', news: 'events', title: 'Ивенты майнинга сейчас',
+      note: 'Ивенты идут каждые 20 минут, у каждого лобби своё расписание. Цифры — по лобби, где сейчас есть игроки с модами.' });
+    sections.push({
+      kind: 'table', title: 'Что дают ивенты и что делать',
+      columns: ['Ивент', 'Где · сколько', 'Что даёт', 'Что делать'],
+      rows: [
+        ...MINING_EVENTS.map(e => [e.name, e.min ? tx`${e.where} · ${e.min} мин` : tx`${e.where} · случайно`, e.gives, e.todo]),
+        [cell('Gone with the Wind', { tone: 'muted' }), cell('Убран в августе 2026', { tone: 'muted' }), cell('Вместо него погода: Breeze и Mist, каждый час с XX:35 до XX:55', { tone: 'muted' }), cell('—', { tone: 'muted' })],
+      ],
+      note: 'Предметы с ивентов: Mining Exp Boost, книга Flowstate I, Dwarven O\'s Ore Oats, Dwarven Treasure и Titanium Minecart. Mining Fiesta — событие мэра Cole: идёт ли она и будет ли в следующий срок, видно в блоке выше.',
+    });
 
     // Fossil Excavator: открытие Suspicious Scrap, формы окаменелостей, выгода
     const fossil = fossilSections(m, ctx);

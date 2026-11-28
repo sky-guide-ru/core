@@ -346,6 +346,13 @@ export async function parseMember(profile, uuid, extra = {}) {
     mineshafts: g(m, 'glacite_player_data.mineshafts_entered', 0),
     corpses: g(m, 'glacite_player_data.corpses_looted', {}),
     nucleusRuns: g(m, 'leveling.completions.NUCLEUS_RUNS', 0),
+    // Число заданий в этом профиле, если API его отдаёт (иначе null; общее по аккаунту не берём)
+    commissionsDone: Number.isFinite(mc.commissions_completed) ? mc.commissions_completed : null,
+    // Забранная веха Commission Milestones: objectives.tutorial «commission_milestone_reward_mining_xp_tier_N»
+    commissionMilestone: (g(m, 'objectives.tutorial', []) || []).reduce((mx, k) => {
+      const t = /^commission_milestone_reward_mining_xp_tier_(\d+)$/.exec(String(k));
+      return t ? Math.max(mx, Number(t[1])) : mx;
+    }, 0),
     nucleusMeter: findNucleusMeter(m),
   };
 
@@ -431,6 +438,20 @@ export async function parseMember(profile, uuid, extra = {}) {
     candy: g(ps, 'candy_collected.total', 0),
     dragons: g(ps, 'end_island.dragon_fight.amount_summoned', null),
     zealotLoot: g(ps, 'end_island.special_zealot_loot_collected', 0),
+    // Бои с драконами (player_stats.end_island.dragon_fight + kills/deaths «<тип>_dragon»), для гайда «Драконы»
+    dragonFight: (() => {
+      const df = g(ps, 'end_island.dragon_fight', null);
+      const pick = (o, re) => Object.fromEntries(Object.entries(o || {}).filter(([k, v]) => re.test(k) && Number(v) > 0).map(([k, v]) => [k.replace(/_dragon$/, ''), Number(v)]));
+      const kills = pick(ps.kills, /^(protector|old|wise|unstable|young|strong|superior)_dragon$/);
+      if (!df && !Object.keys(kills).length) return null;
+      const num = o => (o && typeof o === 'object' ? Object.fromEntries(Object.entries(o).filter(([, v]) => Number(v) > 0).map(([k, v]) => [k, Number(v)])) : {});
+      return {
+        kills, deaths: pick(ps.deaths, /^(protector|old|wise|unstable|young|strong|superior)_dragon$/),
+        mostDamage: num(df?.most_damage), fastestKill: num(df?.fastest_kill),
+        summoned: num(df?.amount_summoned), eyesPlaced: num(df?.summoning_eyes_contributed),
+        crystals: Number(df?.ender_crystals_destroyed) || 0,
+      };
+    })(),
     abiphone: (g(nether, 'abiphone.active_contacts', [])).length,
     matriarchPearls: g(nether, 'matriarch.pearls_collected', 0),
     trapperPelts: g(m, 'quests.trapper_quest.pelt_count', 0),

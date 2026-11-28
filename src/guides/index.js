@@ -12,6 +12,7 @@ import { sourcesSection } from './sources.js';
 import dungeons from './dungeons.js';
 import slayers from './slayers.js';
 import kuudra from './kuudra.js';
+import dragons from './dragons.js';
 import crimson from './crimson.js';
 import rift from './rift.js';
 import fishing from './fishing.js';
@@ -29,6 +30,8 @@ import hunting from './hunting.js';
 import chocolate from './chocolate.js';
 import enchanting from './enchanting.js';
 import alchemy from './alchemy.js';
+import bestiary from './bestiary.js';
+import taming from './taming.js';
 import { tx } from '../../i18n/msg.js';
 
 export const GUIDES = [
@@ -36,6 +39,8 @@ export const GUIDES = [
   dungeons,
   ...slayers,
   kuudra,
+  dragons,
+  bestiary,
   crimson,
   rift,
   fishing,
@@ -53,6 +58,7 @@ export const GUIDES = [
   chocolate,
   enchanting,
   alchemy,
+  taming,
 ];
 
 export const GROUPS = {

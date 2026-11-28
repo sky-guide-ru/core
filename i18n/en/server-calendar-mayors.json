@@ -24,7 +24,6 @@
  "Шанс редкого дропа с боссов слееров выше на 20%.": "Rare drop chance from Slayer bosses is 20% higher.",
  "Больше опыта добычи": "Mining XP Buff",
  "+60 ☯ Mining Wisdom на общих островах.": "+60 ☯ Mining Wisdom on public islands.",
- "Несколько фиест за срок мэра: двойной дроп при добыче.": "Several fiestas during the term: double drops while mining.",
  "Быстрая кузня": "Molten Forge",
  "Forge работает на 25% быстрее.": "The Forge works 25% faster.",
  "Разведка": "Prospection",
@@ -34,7 +33,6 @@
  "Больше опыта питомцам": "Pet XP Buff",
  "+35% опыта питомцам.": "+35% pet XP.",
  "Делиться — хорошо": "Sharing is Caring",
- "Ещё 3 слота EXP Share у питомцев.": "3 more EXP Share slots for pets.",
  "Чутьё охотницы": "Hunter's Instinct",
  "Бонус к охоте и поиску зверей для Hunting.": "A bonus to hunting and tracking animals for Hunting.",
  "Шопинг": "Shopping Spree",
@@ -90,5 +88,7 @@
  "Взятка": "Bribe",
  "Голосовавшие за Scorpius получают монеты.": "Scorpius voters get coins.",
  "Тёмные торги": "Darker Auctions",
- "На Dark Auction больше лотов и редкие предметы.": "The Dark Auction has more lots and rare items."
+ "На Dark Auction больше лотов и редкие предметы.": "The Dark Auction has more lots and rare items.",
+ "Весь срок мэра: +25% Mining Fortune, Refined Mineral и Glossy Gemstone при добыче.": "Whole term: +25% Mining Fortune, Refined Mineral and Glossy Gemstone while mining.",
+ "Ещё 2 слота Exp Share у питомцев и +10% к доле опыта.": "2 more Exp Share slots for pets and +10% Exp Share rate."
 }

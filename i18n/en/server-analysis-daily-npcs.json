@@ -1,0 +1,14 @@
+{
+ "добыть в Dwarven Mines": "mine it in the Dwarven Mines",
+ "добыть в Deep Caverns (Slimehill)": "mine it in the Deep Caverns (Slimehill)",
+ "у NPC {0}": "from NPC {0}",
+ "уже есть: {0} шт.": "already have: {0}",
+ "{0}, около {1} монет": "{0}, about {1} coins",
+ "Сегодня просит {0} ({1}). Награда: 2 500 Mithril Powder и 20 000 монет. Завтра: {2}× {3}.": "Today wants {0} ({1}). Reward: 2,500 Mithril Powder and 20,000 coins. Tomorrow: {2}× {3}.",
+ "У Grand Library: встаньте на Glowstone лицом к выходу из комнаты, пройдите по стрелкам и сломайте блок под ногами. Награда: 2 500 Mithril Powder.": "Near the Grand Library: stand on the Glowstone facing the room's exit, follow the arrows and break the block you end up on. Reward: 2,500 Mithril Powder.",
+ "Каждый день: Fetchur и Puzzler": "Every day: Fetchur and Puzzler",
+ "Оба NPC стоят в Dwarven Mines и дают по 2 500 Mithril Powder в день, Powder Buff и событие 2x Powder увеличивают награду. Fetchur (84, 224, −118) просит один предмет на всех игроков и ещё платит 20 000 монет: просьба меняется в полночь по Нью-Йорку, с 1-го числа круг начинается заново, отдать нужно ровно столько, сколько он просит. Puzzler (182, 196, 136) сидит в комнате рядом с Grand Library: нажмите на него, встаньте на Glowstone лицом к выходу из комнаты и пройдите по стрелкам (одна стрелка — один блок: ▲ к выходу, ▼ от выхода, ◀ влево, ▶ вправо), затем сломайте блок, на котором оказались. Новая головоломка — через 24 часа после решения.": "Both NPCs are in the Dwarven Mines and give 2,500 Mithril Powder a day each; Powder Buff and the 2x Powder event increase the reward. Fetchur (84, 224, −118) asks everyone for the same item and also pays 20,000 coins: the request changes at midnight New York time, the cycle restarts on the 1st of each month, and you must hand over exactly the amount asked. Puzzler (182, 196, 136) sits in the room next to the Grand Library: click him, stand on the Glowstone facing the room's exit and follow the arrows (one arrow is one block: ▲ toward the exit, ▼ away from it, ◀ left, ▶ right), then break the block you end up on. A new puzzle comes 24 hours after you solve one.",
+ "Числа месяца": "Days of the month",
+ "Fetchur просит": "Fetchur wants",
+ "{0} · сегодня": "{0} · today"
+}

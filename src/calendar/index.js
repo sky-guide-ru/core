@@ -21,6 +21,7 @@ export function setElection(raw, at = Date.now()) {
   if (raw && (raw.mayor || raw.current)) { state.raw = raw; state.at = at; }
 }
 export const electionRaw = () => state.raw;
+export const electionUpdatedAt = () => state.at || null;
 
 // Fire Sales: косметика за SkyBlock Gems в магазине (Community Center). { sales: [{ item_id, start, end, amount, price }] }
 const fire = { sales: [] };
@@ -233,3 +234,34 @@ export function moneyHints(perks) {
 
 /** Маршрут /api/calendar (общий для всех: не зависит от профиля). refs — «подсказки по тексту» для блока про заработок. */
 
+
+/**
+ * Mining Fiesta: идёт ли сейчас и будет ли в следующий срок (для блока ивентов майнинга).
+ * { now: { by, until } | null, election: { open, opens, closes, year, cole: { pct, place, fiesta, ministerFiesta } | null, leader } , next: { from, to } }
+ * Срок мэра — год SkyBlock (≈124 ч): если на выборах победит Cole с перком Mining Fiesta, фиеста идёт весь следующий срок.
+ * Министр (второе место) даёт один перк: фиеста, только если это его перк министра.
+ */
+export function fiestaOutlook(now = Date.now()) {
+  const raw = state.raw;
+  const termEnd = nextTermChange(now);
+  const w = electionWindow(now);
+  let active = null;
+  if (raw?.mayor) {
+    if ((raw.mayor.perks || []).some(p => p.name === 'Mining Fiesta')) active = { by: raw.mayor.name, role: 'mayor', until: termEnd };
+    else if (raw.mayor.minister?.perk?.name === 'Mining Fiesta') active = { by: raw.mayor.minister.name, role: 'minister', until: termEnd };
+  }
+  const list = raw?.current?.candidates?.length ? candidatesView(raw.current.candidates) : null;
+  const i = list ? list.findIndex(c => c.key === 'cole' || /^cole$/i.test(c.name)) : -1;
+  const c = i >= 0 ? list[i] : null;
+  const cole = c ? {
+    pct: c.pct, place: i + 1,
+    fiesta: c.perks.some(p => p.name === 'Mining Fiesta'),
+    ministerFiesta: c.perks.some(p => p.name === 'Mining Fiesta' && p.minister),
+  } : null;
+  return {
+    updatedAt: state.at || null,
+    now: active,
+    election: { open: w.open && !!list, opens: w.opens, closes: w.closes, year: raw?.current?.year ?? null, cole, leader: list?.[0] ? { name: list[0].name, pct: list[0].pct } : null },
+    next: { from: termEnd, to: termEnd + YEAR },
+  };
+}

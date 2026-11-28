@@ -24,7 +24,9 @@ const WIKI_EXTRA = {
   'slayer-enderman': ['Slayer', 'Voidgloom Seraph'],
   'slayer-blaze': ['Slayer', 'Inferno Demonlord'],
   'slayer-vampire': ['Slayer', 'Riftstalker Bloodfiend'],
+  dragons: ['Ender Dragon', 'Summoning Eye', 'Zealot', "Dragon's Nest", 'Dragon Armor', 'Draconic Altar', 'Tutorial:Dragon Fights Guide'],
   kuudra: ['Kuudra', 'Tutorial:Kuudra Guide', 'Kuudra Key'],
+  bestiary: ['Bestiary', 'Bramass Beastslayer'],
   crimson: ['Crimson Isle'],
   rift: ['Rift Dimension'],
   fishing: ['Fishing'],
@@ -37,6 +39,7 @@ const WIKI_EXTRA = {
   collectibles: ['Fairy Souls', 'Abiphones'],
   enchanting: ['Experiments', 'Experimentation Table', 'Enchanting', 'Metaphysical Serum'],
   alchemy: ['Alchemy', 'Potions', 'God Potion', 'Booster Cookie', 'Mixins', 'Brewing Stand'],
+  taming: ['Taming', 'Pets', 'Pet Items', 'Fann', 'Pet Food', 'Kat', 'George'],
 };
 
 // Проверено 23.11.2026 через oEmbed YouTube: видео открыто, название и канал ниже — как отдаёт YouTube.

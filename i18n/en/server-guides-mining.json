@@ -96,5 +96,18 @@
  "Другие кристаллы: для Perfect-гемов": "Other crystals: for Perfect gems",
  "Найдено {0} из {1}. Для Crystal Nucleus они не нужны: каждый кристалл уходит в Forge на один Perfect-гем (5 Flawless + 1 Crystal, 20 ч, HotM 5). В Mineshaft нужного типа кристалл появляется с шансом 25%, забрать его может только тот, кто нашёл шахту.": "Found {0} of {1}. Not needed for the Crystal Nucleus: each crystal goes into the Forge for one Perfect gem (5 Flawless + 1 Crystal, 20h, HotM 5). A crystal spawns in 25% of Mineshafts of its type, and only the player who found the shaft can claim it.",
  " · найден {0} {1}": " · found {0} {1}",
- "Frozen Corpse: гемы, Suspicious Scrap, Plate, ключи и Caged Wisp; Shattered Locket не продаётся": "Frozen Corpse: gemstones, Suspicious Scrap, Plates, keys and Caged Wisp; Shattered Locket cannot be sold"
+ "Frozen Corpse: гемы, Suspicious Scrap, Plate, ключи и Caged Wisp; Shattered Locket не продаётся": "Frozen Corpse: gemstones, Suspicious Scrap, Plates, keys and Caged Wisp; Shattered Locket cannot be sold",
+ "Ивенты майнинга сейчас": "Mining events now",
+ "Ивенты идут каждые 20 минут, у каждого лобби своё расписание. Цифры — по лобби, где сейчас есть игроки с модами.": "Events happen every 20 minutes, each lobby has its own schedule. Numbers are for lobbies with players using mods right now.",
+ "Что дают ивенты и что делать": "What events give and what to do",
+ "Ивент": "Event",
+ "Где · сколько": "Where · how long",
+ "{0} · {1} мин": "{0} · {1} min",
+ "{0} · случайно": "{0} · random",
+ "Убран в августе 2026": "Removed in August 2026",
+ "Вместо него погода: Breeze и Mist, каждый час с XX:35 до XX:55": "Replaced by weather: Breeze and Mist, every hour from XX:35 to XX:55",
+ "Предметы с ивентов: Mining Exp Boost, книга Flowstate I, Dwarven O's Ore Oats, Dwarven Treasure и Titanium Minecart. Mining Fiesta — событие мэра Cole: идёт ли она и будет ли в следующий срок, видно в блоке выше.": "Event items: Mining Exp Boost, Flowstate I book, Dwarven O's Ore Oats, Dwarven Treasure and Titanium Minecart. Mining Fiesta is mayor Cole's event: whether it is running or will run next term is shown in the block above.",
+ "Каждый уровень открывает новый ряд перков и токен. Опыт HotM дают задания (commissions) в Dwarven Mines, Crystal Hollows и Glacite Tunnels. {0} Подробнее — блок «Commission Milestones» ниже.": "Each level unlocks a new row of perks and a token. HotM XP comes from commissions in the Dwarven Mines, Crystal Hollows and Glacite Tunnels. {0} More in the «Commission Milestones» block below.",
+ "Первые 4 задания за день дают больше.": "The first 4 commissions of the day give more.",
+ "Задания у King и Emissary (до 4 за раз), Mithril и Titanium. Первый бур Mithril Drill, затем Titanium Drill. Forge открывается с HotM 2.": "Commissions from the King and Emissaries (up to 4 at a time), Mithril and Titanium. First drill: Mithril Drill, then Titanium Drill. The Forge unlocks at HotM 2."
 }
