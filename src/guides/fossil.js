@@ -5,13 +5,13 @@
 import { fmt, short, plural, hasItem, ladderPos, cell } from './gathering-util.js';
 import { tx } from '../../i18n/msg.js';
 
-// cells — [x, y] в исходной ориентации; pct — строка «Fossil Excavation Progress» после первой клетки
+// cells — [x, y] в исходной ориентации (повороты по SkyHanni: Spine/Footprint/Ugly — 4 поворота, Tusk — 8, Webbed — прямо и вверх ногами, Clubbed — 4 горизонтальных); pct — строка «Fossil Excavation Progress» после первой клетки
 export const FOSSILS = [
-  { id: 'TUSK_FOSSIL', key: 'TUSK', name: 'Tusk', pct: '12.5', pet: 'MAMMOTH', gem: 'Flawless Onyx', flip: true,
+  { id: 'TUSK_FOSSIL', key: 'TUSK', name: 'Tusk', pct: '12.5', pet: 'MAMMOTH', gem: 'Flawless Onyx',
     cells: [[0, 2], [0, 3], [0, 4], [1, 1], [2, 0], [3, 1], [3, 3], [4, 2]] },
-  { id: 'WEBBED_FOSSIL', key: 'WEBBED', name: 'Webbed', pct: '10', pet: 'PENGUIN', gem: 'Flawless Aquamarine', flip: true,
+  { id: 'WEBBED_FOSSIL', key: 'WEBBED', name: 'Webbed', pct: '10', pet: 'PENGUIN', gem: 'Flawless Aquamarine',
     cells: [[0, 2], [1, 1], [2, 0], [3, 0], [3, 1], [3, 2], [3, 3], [4, 0], [5, 1], [6, 2]] },
-  { id: 'CLUBBED_FOSSIL', key: 'CLUBBED', name: 'Clubbed', pct: '9.1', pet: 'ANKYLOSAURUS', gem: 'Flawless Opal', flip: true,
+  { id: 'CLUBBED_FOSSIL', key: 'CLUBBED', name: 'Clubbed', pct: '9.1', pet: 'ANKYLOSAURUS', gem: 'Flawless Opal',
     cells: [[0, 2], [0, 3], [1, 2], [1, 3], [2, 1], [3, 0], [4, 0], [5, 0], [6, 0], [6, 2], [7, 1]] },
   { id: 'SPINE_FOSSIL', key: 'SPINE', name: 'Spine', pct: '8.3', pet: 'SPINOSAURUS', gem: 'Flawless Aquamarine',
     cells: [[0, 2], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2], [3, 0], [3, 1], [3, 2], [4, 1], [4, 2], [5, 2]] },
@@ -98,7 +98,7 @@ export function fossilSections(m, ctx) {
 
   sections.push({
     kind: 'shapes', title: tx`Окаменелости: форма и процент · сдано ${doneAll} из 8`,
-    note: 'Фигура лежит в любом повороте, а Tusk, Webbed и Clubbed бывают ещё и отражены. Окаменелость есть в 10% скрапов, все шесть одинаково частые. Helix и Claw выпадают только из Crystal Nucleus.',
+    note: 'Spine, Footprint и Ugly лежат в любом из четырёх поворотов, Tusk — ещё и зеркально. Webbed бывает только как на рисунке или вверх ногами, Clubbed — только лёжа. Окаменелость есть в 10% скрапов, все шесть одинаково частые. Helix и Claw выпадают только из Crystal Nucleus.',
     items: FOSSILS.map(f => ({
       item: f.id, name: tx`${f.name} Fossil`, badge: tx`${f.pct}%`, cells: f.cells, done: donated.has(f.key),
       text: tx`${f.cells.length} ${plural(f.cells.length, 'клетка', 'клетки', 'клеток')} · питомец ${ctx.name(`${f.pet};4`)?.replace(/^\[Lvl \{LVL\}\] /, '') || f.pet}`,
@@ -128,7 +128,7 @@ export function fossilSections(m, ctx) {
 
   sections.push({
     kind: 'table', title: 'Chisel',
-    note: tx`${haveChisel ? tx`Сейчас: ${ctx.name(haveChisel.id)}, ${haveChisel.charges} зарядов. ` : 'Chisel не нашёлся в инвентаре и сундуках. '}С 18 зарядами решатель находит любую фигуру. Гемы в слотах: Aquamarine — шанс лишнего заряда, Citrine — подсветка сокровища, Onyx — лишнее сокровище, Peridot — больше Fossil Essence.${scrapsOwned ? tx` Скрапов в запасе: ${fmt(scrapsOwned)}.` : ''}${essence ? tx` Fossil Essence: ${fmt(essence)}.` : ''}`,
+    note: tx`${haveChisel ? tx`Сейчас: ${ctx.name(haveChisel.id)}, ${haveChisel.charges} зарядов. ` : 'Chisel не нашёлся в инвентаре и сундуках. '}С 18 зарядами решатель (например, в моде SkyHanni) находит любую фигуру. Гемы в слотах: Aquamarine — шанс лишнего заряда, Citrine — подсветка сокровища, Onyx — лишнее сокровище, Peridot — больше Fossil Essence.${scrapsOwned ? tx` Скрапов в запасе: ${fmt(scrapsOwned)}.` : ''}${essence ? tx` Fossil Essence: ${fmt(essence)}.` : ''}`,
     columns: ['Chisel', 'Зарядов', 'Как получить'],
     current: chisel.best >= 0 ? chisel.best : undefined,
     rows: CHISELS.map((c, i) => [
