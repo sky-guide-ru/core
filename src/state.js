@@ -28,6 +28,7 @@ import { enrichGuide } from './guides/refs.js';
 import { chocolateAdvice } from './analysis/chocolate.js';
 import { returningInfo } from './analysis/returning.js';
 import { dailiesOf } from './analysis/dailies.js';
+import { liveCtx } from './analysis/daily-npcs.js';
 import { sbxpPlan } from './analysis/sbxp.js';
 import { dungeonChests } from './market/methods/combat.js';
 import { listByCategory } from './items-ru/index.js';
@@ -194,7 +195,7 @@ export function analyzeMember(m) {
   const safe = (name, fn) => { try { return fn(); } catch (e) { console.warn(tx`[${name}]`, e.message); return null; } };
   // «Обзор»: перерыв в игре и ежедневные дела; «Прогресс»: дешёвый SkyBlock XP и сундуки данжей
   const returning = safe('возвращение', () => returningInfo(m));
-  const dailies = safe('дейлики', () => dailiesOf(m));
+  const dailies = safe('дейлики', () => dailiesOf(m, Date.now(), liveCtx(neu.items, noMarket)));
   // Коллекции — тем же расчётом, что раздел «Коллекции» (кооп, максимум из справочника Hypixel)
   const colls = safe('коллекции', () => analyzeCollections(m));
   const sbxp = safe('SkyBlock XP', () => sbxpPlan(m, { acc, petScore, museumBest: museum?.best || null, museumFreeXp: museum?.canDonateXp || 0, noMarket, collections: colls?.status === 'ok' ? colls : null }));

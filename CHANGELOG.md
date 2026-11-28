@@ -4,6 +4,12 @@
 
 ## Не выпущено
 
+## 0.2.62
+
+- «Дела на сегодня»: Fetchur и Puzzler (`src/analysis/daily-npcs.js`) по вики (Fetchur, Puzzler, 28.11.2026). Fetchur — 12 предметов по кругу, с 1-го числа заново, день по Нью-Йорку (`FETCHUR`, `fetchurIndex`, `fetchurRequest`): что просит сегодня и завтра, где взять дешевле (NPC за монеты или Bazaar/AH через `liveCtx`; Ironman, Stranded, Bingo — только NPC), сколько уже есть у игрока. Puzzler — как решать. Оба только с доступом в Dwarven Mines. API не показывает, сделано ли, поэтому у дел новый признак `manual: 'day' | '24h'` и `done: null` — отметку ставит сайт.
+- `dailiesOf(m, now, ctx)`: третий аргумент — цены для Fetchur; без `member.daily`, но с `mining` тоже возвращает дела.
+- Гайд Mining: секция «Каждый день: Fetchur и Puzzler» (`news: 'fetchur'`) — круг Fetchur по числам месяца с ценами, координаты NPC, решение Puzzler.
+
 ## 0.2.61
 
 - Гемы в снаряжении (`src/calc/gems.js`: `gemPlan`, `itemGems`, `gemCandidates`, `kitGemHint`): статы камней по таблице официальной вики «Gemstone/Stats» (качество × редкость, 28.11.2026; Aquamarine — Fishing Speed с 0.22, Talisman of Power — половина стата), какие камни подходят в слот, цена открытия слота (NEU `gemstonecosts`), плата за снятие у Gemstone Grinder. Камень под роль вещи (Onyx вместо Jasper, если Strength больше Crit Damage на треть), качество под деньги (за слот не дороже 1% монет), камни из Gemstone Sack. Слоты Chisel не считаются (перки Fossil Excavator). Ironman, Stranded, Bingo — без цен.

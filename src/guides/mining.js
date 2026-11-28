@@ -7,6 +7,7 @@ import { tx } from '../../i18n/msg.js';
 import { fossilSections } from './fossil.js';
 import { NUCLEUS_CRYSTALS, OTHER_CRYSTALS } from './crystals.js';
 import { corpseGuide } from './corpses.js';
+import { fetchurPuzzlerSection, liveCtx } from '../analysis/daily-npcs.js';
 import { commissionGuide } from './commissions.js';
 
 const POWDER = { MITHRIL: 'Mithril', GEMSTONE: 'Gemstone', GLACITE: 'Glacite' };
@@ -152,6 +153,8 @@ export default {
 
     const tree = hotmTreeSection(m, ctx);
     if (tree) sections.push({ ...tree, news: 'hotm' });   // ссылка из новостей: guides/mining#hotm
+    // Fetchur и Puzzler: бесплатный Mithril Powder каждый день (ссылка из новостей: guides/mining#fetchur)
+    sections.push({ ...fetchurPuzzlerSection(m, liveCtx(ctx.items, ctx.adv?.market === false)), news: 'fetchur' });
     sections.push({
       kind: 'checklist', title: 'Crystal Hollows: кристаллы для Crystal Nucleus',
       note: tx`Nucleus пройден ${fmt(nucleusRuns)} ${plural(nucleusRuns, 'раз', 'раза', 'раз')}. Кристаллы сбрасываются после каждого прохождения, поэтому «найден» — это текущий заход.`,
