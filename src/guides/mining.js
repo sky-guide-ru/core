@@ -6,6 +6,7 @@ import { fmt, short, plural, hasItem, ladderPos, howText, constants, cell, tone,
 import { tx } from '../../i18n/msg.js';
 import { fossilSections } from './fossil.js';
 import { NUCLEUS_CRYSTALS, OTHER_CRYSTALS } from './crystals.js';
+import { corpseGuide } from './corpses.js';
 
 const POWDER = { MITHRIL: 'Mithril', GEMSTONE: 'Gemstone', GLACITE: 'Glacite' };
 
@@ -108,17 +109,11 @@ export default {
       next.push({ title: 'Пройди первый Crystal Nucleus', priority: 58, why: 'Собери 5 кристаллов и поставь их в Crystal Nucleus в центре Crystal Hollows: это открывает сундук с частями Divan, гемами и Powder. Где искать: в разделе «Crystal Hollows».' });
     }
 
-    // ---- Glacite ----
+    // ---- Glacite: Frozen Corpse, вехи Grandpa Wolf и RNG Meter (corpses.js) ----
     const corpses = mi.corpses || {};
     const shafts = Number(mi.mineshafts || 0);
-    if (lvl >= 7 || skill?.level >= 30) {
-      if (!(corpses.umber > 0) || !(corpses.vanguard > 0)) {
-        next.push({
-          title: tx`Фарми Glacite Mineshafts: ${fmt(shafts)} ${plural(shafts, 'вход', 'входа', 'входов')}, ${fmt(Object.values(corpses).reduce((s, v) => s + (Number(v) || 0), 0))} трупов`, priority: 52,
-          why: tx`Frozen Corpse дают материалы для Dwarven Handwarmers, броню и Glacite Powder. Сейчас: Lapis ${fmt(corpses.lapis || 0)}, Umber ${fmt(corpses.umber || 0)}, Tungsten ${fmt(corpses.tungsten || 0)}, Vanguard ${fmt(corpses.vanguard || 0)}. Для Umber, Tungsten и Vanguard нужны ключи (Umber Key, Tungsten Key, Skeleton Key).`,
-        });
-      }
-    }
+    const cg = corpseGuide(ctx, { corpses, shafts, perks, active: lvl >= 7 || skill?.level >= 30 || shafts > 0 });
+    next.push(...cg.next);
 
     // ---- Снаряжение ----
     const drill = ladderPos(ctx, DRILLS);
@@ -173,13 +168,7 @@ export default {
       })),
     });
 
-    sections.push({
-      kind: 'table', title: 'Glacite Tunnels и Mineshafts',
-      note: tx`Входов в Mineshaft: ${fmt(shafts)}. Шанс найти Mineshaft растёт с перками Surveyor, а лишний труп даёт Dead Man’s Chest.`,
-      columns: ['Frozen Corpse', 'Залутано', 'Нужен ключ'],
-      rows: [['Lapis', 'lapis', 'не нужен'], ['Umber', 'umber', 'Umber Key'], ['Tungsten', 'tungsten', 'Tungsten Key'], ['Vanguard', 'vanguard', 'Skeleton Key']]
-        .map(([n, k, key]) => [n, cell(fmt(corpses[k] || 0), { tone: corpses[k] ? 'good' : 'muted' }), key]),
-    });
+    sections.push(...cg.sections);
 
     // Fossil Excavator: открытие Suspicious Scrap, формы окаменелостей, выгода
     const fossil = fossilSections(m, ctx);
@@ -214,7 +203,7 @@ export default {
           ['Forge', 'пассивно', 'Все слоты Forge заняты выгодным рецептом (см. «Заработок» → Forge)'],
         ] : []),
         ['Glacite и Umber/Tungsten', 'зависит от цен', 'Glacite Tunnels с Glacite Golem; продавай Enchanted-формы на Bazaar'],
-        ['Mineshafts', 'зависит от цен', 'Frozen Corpse: материалы Handwarmers, Shattered Locket и т. п. продаются на аукционе'],
+        ['Mineshafts', 'зависит от цен', 'Frozen Corpse: гемы, Suspicious Scrap, Plate, ключи и Caged Wisp; Shattered Locket не продаётся'],
       ],
     });
 

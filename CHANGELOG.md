@@ -4,13 +4,21 @@
 
 ## Не выпущено
 
-## 0.2.52
+## 0.2.54
 
 - Гайд Mining: блок Fossil Excavator (`src/guides/fossil.js`) — как открыть Suspicious Scrap, формы шести окаменелостей с процентом «Fossil Excavation Progress», сданные Dr. Stone (`gather.fossils`), выгода «открыть или продать» (`excavatorValue`: веса лута с вики, но забирается только откопанное — заряды, Citrine, Onyx, Aquamarine, Peridot из гемов Chisel через `chiselGems`) и Chisel игрока. Шаги «Скрап выгоднее продать / открой», «Сдай Dr. Stone» (только те окаменелости, что лежат у игрока), «Улучши Chisel».
 - Новый тип секции гайда `shapes` (фигуры на сетке), описан в `src/guides/README.md`.
 - `mining.fossilDust` убран: с апреля 2026 Fossil Dust заменён на Fossil Essence (`essence.FOSSIL`).
 - `enrichGuide`: секция-дерево (`rows` — число рядов) больше не роняет подсказки по тексту всего гайда Mining.
 - Способ «Glacite Mineshaft»: уточнено, что скрап открывают ради окаменелостей, а не монет.
+
+## 0.2.53
+
+- Гайд Mining: Frozen Corpse Milestones (`guides/corpses.js`: `CORPSE_TYPES`, `MILESTONES`, `RNG_METER`, `milestoneState`, `corpseGuide`) по вики «Frozen Corpses» / «Grandpa Wolf» (28.11.2026). Таблица 7 вех с прогрессом по `glacite_player_data.corpses_looted` (`news: 'corpses'`), таблица трупов с Glacite Powder и очками RNG Meter, таблица целей RNG Meter с монетами за труп.
+- Шаги: «Забери награду за веху у Grandpa Wolf» (веха пройдена, а Organ Donor нужного уровня нигде нет), «Frozen Corpse Milestone N» с ценой недостающих ключей; дороже трети денег — «На потом», перки Gifts from the Departed / Dead Man's Chest и ключи в инвентаре — в совете.
+- «Заработок», Glacite Mineshaft: таблицы лута по патчу 0.24.2 (веса редких предметов по вики), броски 4,5 / 5,5 / 6,5 вместо 3, 2,5 трупа на шахту. Экспорт `CORPSES` (+`rolls`, Vanguard), `CORPSES_PER_SHAFT`; `CORPSE_ROLLS` убран.
+- Глоссарий: Frozen Corpse Milestones, Grandpa Wolf; `curated-ru`: откуда Organ Donor Talisman/Ring/Artifact и Shattered Locket.
+- Новость «Frozen Corpse Milestones в гайде Mining».
 
 ## 0.2.51
 

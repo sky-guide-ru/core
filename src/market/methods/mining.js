@@ -11,7 +11,7 @@
 //
 // Темп (действий в час) — оценка для хорошей, но не максимальной экипировки, два значения: [осторожно, обычно].
 // Шансы дропа: NEU-REPO (мобы), hypixel-skyblock.fandom.com (Crystal Nucleus, Jungle Loot), skykings.net
-// (трупы Mineshaft, Ghost и Scatha — обновлено в ноябре 2026). Сверено 23.11.2026.
+// (Ghost и Scatha), трупы Mineshaft — патч 0.24.2 и вики «Frozen Corpses» (28.11.2026). Сверено 23.11.2026.
 import { hasAny } from '../methods.js';
 import { sellValue, buyPrice, DEMAND_SHARE } from '../flips.js';
 import { nameOf } from '../util.js';
@@ -230,27 +230,52 @@ export function nucleusMeterTargets() {
 export const NUCLEUS_FIXED = [...HOLLOWS_GEMS, 'JASPER', 'OPAL'].map(g => ({ id: tx`FINE_${g}_GEM` }));
 export const AUTOMATON_PARTS = ['SYNTHETIC_HEART', 'CONTROL_SWITCH', 'SUPERLITE_MOTOR', 'ROBOTRON_REFLECTOR', 'FTX_3070', 'ELECTRON_TRANSMITTER'];
 
-/** Трупы в Glacite Mineshaft (skykings.net, ноябрь 2026). Шанс — на один бросок. */
-export const CORPSES = {
-  lapis: { key: null, chance: 0.5, loot: [
-    ...['ONYX', 'PERIDOT', 'CITRINE', 'AQUAMARINE'].map(g => ({ id: tx`FLAWED_${g}_GEM`, n: 20, p: pct(5.97) })),
-    { id: 'GOBLIN_EGG', p: pct(4.77) }, { id: 'GOBLIN_EGG_GREEN', p: pct(4.17) }, { id: 'GOBLIN_EGG_YELLOW', p: pct(4.17) }, { id: 'GOBLIN_EGG_RED', p: pct(4.17) },
-    { id: 'ENCHANTED_UMBER', p: pct(2.98) }, { id: 'ENCHANTED_TUNGSTEN', p: pct(2.98) }, { id: 'ENCHANTED_GLACITE', p: pct(2.98) },
-    { id: 'GLACITE_JEWEL', p: pct(2.98) }, { id: 'UMBER_KEY', p: pct(0.14) },
-  ] },
-  umber: { key: 'UMBER_KEY', chance: 0.25, loot: null },
-  tungsten: { key: 'TUNGSTEN_KEY', chance: 0.25, loot: null },
+/**
+ * Трупы в Glacite Mineshaft: таблицы лута из патча 0.24.2 (форум Hypixel, 18.02.2026) с поправками вики
+ * (hypixelskyblock.minecraft.wiki «Frozen Corpses», 28.11.2026: веса Skeleton Key, Caged Wisp, Frozen Scute, Shattered Locket).
+ * Каждый бросок выбирает одну строку по весу. Броски: Lapis 3–6, Umber/Tungsten 4–7, Vanguard 5–8 (берём середину).
+ * Dead Man's Chestplate (добавлен в октябре 2026) не учтён: вес на вики неизвестен.
+ */
+const fromWeights = rows => {
+  const total = rows.reduce((s, r) => s + r[2], 0);
+  return rows.map(([id, n, w]) => ({ id, n, p: w / total }));
 };
-const METAL_CORPSE = [
-  ...['ONYX', 'PERIDOT', 'CITRINE', 'AQUAMARINE'].map(g => ({ id: tx`FINE_${g}_GEM`, n: 4, p: pct(10.7) })),
-  { id: 'SUSPICIOUS_SCRAP', n: 2, p: pct(10.7) }, { id: 'GOBLIN_EGG_BLUE', p: pct(1.22) },
-  { id: 'OPAL_CRYSTAL', p: pct(0.61) }, { id: 'REFINED_UMBER', p: pct(0.3) }, { id: 'DWARVEN_OS_METALLIC_MINIS', p: pct(0.3) },
-  { id: 'UMBER_KEY', p: pct(0.15) }, { id: 'FROZEN_SCUTE', p: pct(0.06) }, { id: 'CAGED_WISP', p: pct(0.03) },
-];
-CORPSES.umber.loot = METAL_CORPSE;
-CORPSES.tungsten.loot = METAL_CORPSE;
-// Сколько бросков даёт один труп, на вики не указано; берём 3 (без перка Gifts from the Departed) — допущение.
-export const CORPSE_ROLLS = 3;
+const GEMS4 = ['ONYX', 'PERIDOT', 'CITRINE', 'AQUAMARINE'];
+const CRYSTALS = ['OPAL', 'ONYX', 'PERIDOT', 'CITRINE', 'AQUAMARINE'].map(g => tx`${g}_CRYSTAL`);
+const steps = (id, list) => list.map(([n, w]) => [id, n, w]);
+const LAPIS_LOOT = fromWeights([
+  ...GEMS4.flatMap(g => [...steps(tx`FLAWED_${g}_GEM`, [[20, 1000], [40, 500]]), ...steps(tx`FINE_${g}_GEM`, [[1, 250], [2, 125]])]),
+  ['SUSPICIOUS_SCRAP', 1, 500],
+  ...['GOBLIN_EGG'].flatMap(id => steps(id, [[1, 800], [2, 400], [4, 200]])),
+  ...['GOBLIN_EGG_GREEN', 'GOBLIN_EGG_YELLOW', 'GOBLIN_EGG_RED'].flatMap(id => steps(id, [[1, 700], [2, 350], [4, 175]])),
+  ...['ENCHANTED_UMBER', 'ENCHANTED_TUNGSTEN', 'ENCHANTED_GLACITE'].flatMap(id => steps(id, [[1, 500], [2, 250], [4, 125]])),
+  ['REFINED_UMBER', 1, 25], ['REFINED_TUNGSTEN', 1, 25], ['GLACITE_AMALGAMATION', 1, 25], ['UMBER_KEY', 1, 25], ['TUNGSTEN_KEY', 1, 25],
+  ...steps('GLACITE_JEWEL', [[1, 500], [2, 250]]), ...steps('BEJEWELED_HANDLE', [[1, 100], [2, 50], [4, 25]]),
+]);
+const METAL_CORPSE = fromWeights([
+  ...GEMS4.flatMap(g => [...steps(tx`FINE_${g}_GEM`, [[2, 800], [4, 400], [8, 200]]), [tx`FLAWLESS_${g}_GEM`, 1, 20]]),
+  ...steps('SUSPICIOUS_SCRAP', [[2, 800], [4, 400]]),
+  ['ENCHANTMENT_ICE_COLD_1', 1, 80], ['GOBLIN_EGG_BLUE', 1, 80], ['REFINED_UMBER', 1, 20], ['REFINED_TUNGSTEN', 1, 20], ['GLACITE_AMALGAMATION', 1, 20],
+  ['UMBER_PLATE', 1, 5], ['TUNGSTEN_PLATE', 1, 5], ['MITHRIL_PLATE', 1, 10], ...CRYSTALS.map(id => [id, 1, 40]),
+  ['UMBER_KEY', 1, 10], ['TUNGSTEN_KEY', 1, 10], ['FROZEN_SCUTE', 1, 4], ['DWARVEN_OS_METALLIC_MINIS', 1, 20], ['SKELETON_KEY', 1, 4], ['CAGED_WISP', 1, 2],
+]);
+const VANGUARD_LOOT = fromWeights([
+  ...GEMS4.flatMap(g => steps(tx`FLAWLESS_${g}_GEM`, [[1, 160], [2, 80]])),
+  ['DWARVEN_OS_METALLIC_MINIS', 1, 120], ...steps('SUSPICIOUS_SCRAP', [[8, 160], [16, 80]]), ['ENCHANTMENT_ICE_COLD_1', 1, 160],
+  ...steps('GOBLIN_EGG_BLUE', [[1, 160], [2, 80]]), ...steps('REFINED_UMBER', [[1, 160], [2, 80]]), ...steps('REFINED_TUNGSTEN', [[1, 160], [2, 80]]),
+  ...steps('GLACITE_AMALGAMATION', [[1, 160], [2, 80], [4, 40]]), ['MITHRIL_PLATE', 1, 60], ['UMBER_PLATE', 1, 30], ['TUNGSTEN_PLATE', 1, 30],
+  ...CRYSTALS.map(id => [id, 1, 120]), ...steps('UMBER_KEY', [[1, 80], [2, 40], [4, 20]]), ...steps('TUNGSTEN_KEY', [[1, 80], [2, 40], [4, 20]]),
+  ['SKELETON_KEY', 1, 10], ['FROZEN_SCUTE', 1, 10], ['CAGED_WISP', 1, 10], ['SHATTERED_PENDANT', 1, 5],
+]);
+/** chance — доля трупов этого типа (Lapis 50%, Umber и Tungsten по 25%), rolls — средние броски с трупа. */
+export const CORPSES = {
+  lapis: { key: null, chance: 0.5, rolls: 4.5, loot: LAPIS_LOOT },
+  umber: { key: 'UMBER_KEY', chance: 0.25, rolls: 5.5, loot: METAL_CORPSE },
+  tungsten: { key: 'TUNGSTEN_KEY', chance: 0.25, rolls: 5.5, loot: METAL_CORPSE },
+  vanguard: { key: 'SKELETON_KEY', chance: 0, rolls: 6.5, loot: VANGUARD_LOOT },
+};
+/** Трупов в обычной шахте: 2 всегда, третий с шансом 50% (лишний от перков не считаем). */
+export const CORPSES_PER_SHAFT = 2.5;
 
 /** Черви в Crystal Hollows: 80% Stoneworm (NEU), 20% Scatha (skykings.net). */
 export const WORM_LOOT = [
@@ -339,19 +364,21 @@ export const MINING_METHODS = [
   },
   {
     id: 'glacite-mineshaft', title: 'Glacite Mineshaft и трупы', tag: 'Mining', mode: 'active',
-    desc: 'Во время копания в Glacite Tunnels открывается вход в шахту. Внутри трупы: Lapis (без ключа), Umber и Tungsten (нужен ключ своего типа), а в редкой шахте Fairy — Vanguard (Skeleton Key). С трупов падают Fine гемы, Suspicious Scrap, яйца гоблинов и редкие Opal Crystal, Frozen Scute.',
+    desc: 'Во время копания в Glacite Tunnels открывается вход в шахту. Внутри трупы: Lapis (без ключа), Umber и Tungsten (нужен ключ своего типа), а в редкой шахте Fairy — Vanguard (Skeleton Key). С трупов падают гемы, Suspicious Scrap, яйца гоблинов, ключи и редкие Plate, Frozen Scute и Caged Wisp.',
     req: m => [tunnelsReq(m), { text: 'Mineshaft уже открывал', ok: Number(m?.mining?.mineshafts || 0) > 0, soft: true, have: tx`входов: ${fmtN(m?.mining?.mineshafts || 0)}` }],
     compute: (ctx) => {
       // Сначала стоимость одного трупа: решаем, окупает ли он ключ (ключ без цены — труп не открываем)
-      const lapis = lootIncome(ctx, CORPSES.lapis.loot, CORPSE_ROLLS).perHour;
-      const metal = lootIncome(ctx, METAL_CORPSE, CORPSE_ROLLS);
+      const L = CORPSES.lapis, U = CORPSES.umber;
+      const lapis = lootIncome(ctx, L.loot, L.rolls).perHour;
+      const metal = lootIncome(ctx, METAL_CORPSE, U.rolls);
       const keyU = cost(ctx, 'UMBER_KEY'), keyT = cost(ctx, 'TUNGSTEN_KEY');
       const openU = keyU != null && metal.perHour > keyU, openT = keyT != null && metal.perHour > keyT;
       // Затем весь лут за час одним списком, чтобы спрос рынка считался один раз на час, а не на каждую шахту
-      const metalShare = (openU ? CORPSES.umber.chance : 0) + (openT ? CORPSES.tungsten.chance : 0);
-      const keysPerShaft = (openU ? CORPSES.umber.chance * keyU : 0) + (openT ? CORPSES.tungsten.chance * keyT : 0);
+      const metalShare = ((openU ? U.chance : 0) + (openT ? CORPSES.tungsten.chance : 0)) * CORPSES_PER_SHAFT;
+      const lapisShare = L.chance * CORPSES_PER_SHAFT;
+      const keysPerShaft = ((openU ? U.chance * keyU : 0) + (openT ? CORPSES.tungsten.chance * keyT : 0)) * CORPSES_PER_SHAFT;
       const hourly = shafts => {
-        const loot = [...scaled(CORPSES.lapis.loot, CORPSES.lapis.chance * CORPSE_ROLLS * shafts), ...scaled(METAL_CORPSE, metalShare * CORPSE_ROLLS * shafts)];
+        const loot = [...scaled(L.loot, lapisShare * L.rolls * shafts), ...scaled(METAL_CORPSE, metalShare * U.rolls * shafts)];
         const li = lootIncome(ctx, loot, 1);
         return { ...li, perHour: li.perHour - keysPerShaft * shafts };
       };
@@ -364,12 +391,12 @@ export const MINING_METHODS = [
       if (hi.perHour <= 0 && !gems.hi) return null;
       const r = { lo: Math.max(0, lo.perHour) + gems.lo, hi: Math.max(0, hi.perHour) + gems.hi, rows: hi.rows };
       const keyText = k => k == null ? 'ключа нет в продаже — не открываем' : fmtK(k);
-      return result(ctx, r, tx`Трупы: Lapis ≈${fmtK(lapis)}, Umber/Tungsten ≈${fmtK(metal.perHour)} за труп; ключ Umber ${keyText(keyU)}, Tungsten ${keyText(keyT)}${!openU || !openT ? ' (труп, который не окупает ключ, не открываем)' : ''}. При ${rateText(RATES.mineshafts, 'шахт')} трупы дают ${fmtK(Math.max(0, hi.perHour))}/ч. Гемы: половину времени копаешь жилы туннелей, лучший сейчас ${GEM_RU[gems.g]} — ${fmtK(gems.hi)}/ч. Берём ${CORPSE_ROLLS} предмета с трупа (на вики число бросков не указано), Lapis в половине шахт, Umber и Tungsten — в четверти. Glacite Powder и опыт HotM сверху.`,
+      return result(ctx, r, tx`Трупы: Lapis ≈${fmtK(lapis)}, Umber/Tungsten ≈${fmtK(metal.perHour)} за труп; ключ Umber ${keyText(keyU)}, Tungsten ${keyText(keyT)}${!openU || !openT ? ' (труп, который не окупает ключ, не открываем)' : ''}. При ${rateText(RATES.mineshafts, 'шахт')} трупы дают ${fmtK(Math.max(0, hi.perHour))}/ч. Гемы: половину времени копаешь жилы туннелей, лучший сейчас ${GEM_RU[gems.g]} — ${fmtK(gems.hi)}/ч. В шахте в среднем 2,5 трупа: половина Lapis (4–5 предметов), по четверти Umber и Tungsten (5–6 предметов). Glacite Powder и опыт HotM сверху.`,
         { top: [{ id: tx`FLAWLESS_${gems.g}_GEM`, name: tx`${GEM_RU[gems.g]} (жилы в шахте)`, perHour: gems.hi }, ...topOf(ctx, hi.rows, 4)],
-          breakdown: breakdownOf(ctx, [{ loot: CORPSES.lapis.loot, k: CORPSES.lapis.chance * CORPSE_ROLLS }, { loot: METAL_CORPSE, k: metalShare * CORPSE_ROLLS }], RATES.mineshafts[1]),
+          breakdown: breakdownOf(ctx, [{ loot: L.loot, k: lapisShare * L.rolls }, { loot: METAL_CORPSE, k: metalShare * U.rolls }], RATES.mineshafts[1]),
           breakdownUnit: 'шахту' });
     },
-    drops: ['SUSPICIOUS_SCRAP', 'OPAL_CRYSTAL', 'FROZEN_SCUTE', 'DWARVEN_OS_METALLIC_MINIS', 'GOBLIN_EGG_BLUE'],
+    drops: ['SUSPICIOUS_SCRAP', 'UMBER_PLATE', 'FROZEN_SCUTE', 'CAGED_WISP', 'DWARVEN_OS_METALLIC_MINIS'],
   },
   {
     id: 'crystal-nucleus', title: 'Раны Crystal Nucleus', tag: 'Mining', mode: 'active',
@@ -488,14 +515,15 @@ export const MINING_DETAILS = {
     effort: 'focus', risk: 'mid', xp: 'Опыт HotM (труп Lapis 100, Umber и Tungsten по 1 000, Vanguard 5 000), Powder Glacite',
     steps: [
       'Копай в Glacite Tunnels: примерно раз на 2 000 блоков открывается вход в Mineshaft (перки Surveyor и Tunnel Vision чаще).',
-      'Заранее купи или скрафти Umber Key и Tungsten Key, а для шахты Fairy — Skeleton Key.',
+      'Заранее купи Umber Key и Tungsten Key и держи по одному в инвентаре: какой труп будет в шахте, заранее неизвестно. Для шахты Fairy нужен Skeleton Key.',
       'В шахте найди трупы: Lapis открывается без ключа, остальные ключом своего типа. Каждый игрок открывает труп один раз.',
       'Копай гемы в самой шахте, выходи (+1 000 Powder Glacite за выход) и продавай Fine гемы и Suspicious Scrap на Bazaar. Открывать скрап в Fossil Excavator стоит ради окаменелостей, а не ради монет.',
+      'Забирай награды за вехи у Grandpa Wolf (/corpsemilestones) и выбери цель RNG Meter: так каждый труп работает и на редкий дроп.',
     ],
     risks: [
       'Ключ тратится, а лут случайный: открывай Umber и Tungsten, только если ключ дешевле среднего лута (сайт это учитывает).',
       'Шахта бывает пустой на нужные трупы, а вход выпадает случайно.',
-      'Число бросков с трупа на вики не указано, мы берём 3: реальный доход может отличаться.',
+      'Лут Umber и Tungsten по таблице патча 0.24.2: вики с тех пор поправила часть весов, доход может немного отличаться.',
     ],
     kit: [{ text: 'Ключи для трупов', buy: ['UMBER_KEY', 'TUNGSTEN_KEY'], note: 'цена одного ключа' }],
   },
