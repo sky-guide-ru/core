@@ -4,6 +4,12 @@
 
 ## Не выпущено
 
+## 0.2.48
+
+- Дерево HotM: сборка `mithril` («Mithril и Titanium»): Titanium Insanium, Metal Head, Strong Arm, Precision Mining, Mining Speed Boost, Luck of the Cave. Mithril и Titanium — Dwarven Metals (NEU), поэтому перки металлов сверху дерева.
+- `peel` (что снять при перестановке): сначала лишние перки, «по желанию» (Sky Mall и др.) — только если лишнее не снять; после каждого снятия снова с лишних.
+- Секция дерева HotM в гайде Mining: `news: 'hotm'` для ссылок из новостей.
+
 ## 0.2.47
 
 - «Где XP дешевле» (`sbxpPlan`, опция `collections`): Collections считаются тем же `analyzeCollections`, что раздел «Коллекции» (кооп и максимум из справочника). Было 2696 / 2696 против 3172 в разделе.

@@ -285,5 +285,9 @@
  "Ender Dragon не советуется при Golden Dragon, шлем Kuudra — при другом шлеме в том же сете.": "Ender Dragon is no longer suggested if you have Golden Dragon, nor a Kuudra helmet if the set uses another helmet.",
  "Magic Find от Pet Score выше 325 очков и улучшения аксессуаров с Recombobulator считаются верно.": "Magic Find from Pet Score above 325 points and accessory upgrades with a Recombobulator are counted correctly.",
  "Головы игроков — по их скину": "Player heads match their skin",
- "Исправлен сбой, из-за которого у части игроков вместо их головы показывался Steve.": "Fixed a glitch where some players were shown Steve instead of their own head."
+ "Исправлен сбой, из-за которого у части игроков вместо их головы показывался Steve.": "Fixed a glitch where some players were shown Steve instead of their own head.",
+ "Дерево HotM для Mithril и Titanium": "HotM tree for Mithril and Titanium",
+ "В [дереве Heart of the Mountain](guides/mining#hotm) новая сборка «Mithril и Titanium».": "The [Heart of the Mountain tree](guides/mining#hotm) has a new \"Mithril and Titanium\" build.",
+ "Главные перки — Titanium Insanium, Metal Head и Strong Arm: больше Titanium и быстрее добыча металлов.": "Key perks are Titanium Insanium, Metal Head and Strong Arm: more Titanium and faster metal mining.",
+ "План подсказывает, какие перки Mineshaft и гемов снять, чтобы хватило токенов.": "The plan shows which Mineshaft and gemstone perks to drop to free up tokens."
 }

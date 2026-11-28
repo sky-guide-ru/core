@@ -156,3 +156,21 @@ test('перестановка подбирает замену, если выб�
   assert.deepEqual(swap.add, ['speedy_mineman']);
   assert.ok(connected(s, owned.filter(id => !swap.remove.includes(id)).concat(swap.add)));
 });
+
+test('сборка Mithril и Titanium: металлы сверху дерева, Sky Mall остаётся', () => {
+  const s = hotmTreeSection(zucchini(), {});
+  const b = s.builds.find(x => x.id === 'mithril');
+  assert.ok(b, 'есть вкладка Mithril и Titanium');
+  // Mithril и Titanium — Dwarven Metals: Strong Arm и Metal Head в сборке, Titanium Insanium — шанс Titanium
+  for (const id of ['titanium_insanium', 'strong_arm', 'metal_head']) assert.equal(b.targets[id].status, 'add', id);
+  assert.equal(b.targets.titanium_insanium.target, 50);
+  const swap = b.steps.find(x => x.kind === 'swap');
+  assert.ok(swap && swap.add.includes('titanium_insanium') && swap.add.includes('metal_head'));
+  assert.ok(swap.bridge.includes('no_stone_unturned'), 'Metal Head достаётся через No Stone Unturned');
+  // снимаются лишние перки сверху, а не Sky Mall «по желанию»
+  assert.ok(!swap.remove.includes('sky_mall'), swap.remove.join());
+  assert.ok(connected(s, s.perks.filter(p => p.level > 0).map(p => p.id).filter(id => !swap.remove.includes(id)).concat(swap.add)));
+  // гемовые перки на Mithril не работают, но держат дерево — «оставить для прохода», а не «сделано»
+  assert.equal(b.targets.professional.status, 'bridge');
+  assert.equal(b.targets.mole.status, 'bridge');
+});
