@@ -359,7 +359,6 @@ export function build(m, ctx) {
   sections.sort((a, b) => ORDER.indexOf(a.news) - ORDER.indexOf(b.news));
 
   // ── Что дальше
-  if (!cookie) next.push({ title: 'Съешь Booster Cookie', priority: 70, item: 'BOOSTER_COOKIE', why: tx`+25 ко всем Wisdom, +10 Magic Find и Bits на God Potion.${cookiePrice ? tx` ${short(cookiePrice)} на Bazaar.` : ''}` });
   if (!god && m.mode?.id !== 'bingo') next.push({ title: 'Выпей God Potion', priority: 60, item: 'GOD_POTION_2', why: tx`Strength VIII, Critical IV, Spirit IV, Magic Find IV и ещё 28 эффектов на ${fmt(hours)} ч игры.` });
   if (lvl < 50 && xpRows[0]) next.push({ title: tx`Качай Alchemy на ${ctx.name(xpRows[0].b.id) || xpRows[0].b.id}`, priority: lvl < 20 ? 35 : 20, item: xpRows[0].b.id, why: tx`Самая дешёвая варка сейчас: ${short(xpRows[0].c.perMillion)} за 1 млн XP. Каждый уровень +1% к зельям и God Potion дольше.` });
   if (!witch && lvl < 50) next.push({ title: 'Питомец Witch для варки', priority: 10, why: 'Варка идёт вдвое быстрее: 10 секунд вместо 20.' });
