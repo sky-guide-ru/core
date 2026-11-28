@@ -51,8 +51,8 @@ export const PERK_EVENTS = {
     what: 'Норы грифонов в Hub.', tip: 'Копай норы грифонов с Ancestral Spade и питомцем Griffin. Пошагово — в гайде «Diana».', guide: 'diana' },
   'Fishing Festival': { id: 'fishfest', name: 'Рыболовный фестиваль', en: 'Fishing Festival', icon: 'SHARK_FIN', color: '#2dd4bf', tier: 'big', monthDays: [1, 3],
     what: 'Акулы в любой воде.', tip: 'Бери Shark Bait и рыбачь в любой воде: акулы дают Shark Fin и зубы, их продают или крафтят Shark Scale Armor.', guide: 'fishing' },
-  'Mining Fiesta': { id: 'fiesta', name: 'Фиеста добычи', en: 'Mining Fiesta', icon: 'MITHRIL_ORE', color: '#c9a36b', tier: 'big', whole: true, approx: true,
-    what: 'Двойной дроп при добыче.', tip: 'Во время фиесты добыча даёт двойной дроп: копай Mithril и гемы. Точные дни видно в игре: /calendar.' },
+  'Mining Fiesta': { id: 'fiesta', name: 'Фиеста добычи', en: 'Mining Fiesta', icon: 'MITHRIL_ORE', color: '#c9a36b', tier: 'big', whole: true,
+    what: '+25% Mining Fortune, Refined Mineral и Glossy Gemstone.', tip: 'Весь срок мэра на публичных островах: +25% Mining Fortune и +25 Mining Wisdom, из руды падает Refined Mineral, из гемов — Glossy Gemstone. Fiesta Flask у Brynmor в Dwarven Tavern удваивает шанс на них.', guide: 'mining' },
   'Chivalrous Carnival': { id: 'carnival', name: 'Карнавал', en: 'Carnival', icon: 'CARNIVAL_TICKET', color: '#ff9f43', tier: 'big', whole: true,
     what: 'Мини-игры в Hub.', tip: 'Мини-игры карнавала дают Carnival Ticket: на них меняются косметика и полезные предметы.' },
 };

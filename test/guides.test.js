@@ -4,7 +4,7 @@ import { buildGuides, buildGuide, guideCtx, GUIDES, GROUPS } from '../src/guides
 import { ownercatMember, PRICES } from './fixtures/ownercat.js';
 
 const deps = { priceOf: id => PRICES[id] || 0 };
-const KINDS = new Set(['text', 'steps', 'checklist', 'table', 'tree', 'sources', 'shapes', 'cards', 'tool']);
+const KINDS = new Set(['text', 'steps', 'checklist', 'table', 'tree', 'sources', 'shapes', 'cards', 'tool', 'miningEvents']);
 
 test('гайды: оболочка собирает контекст и ловит ошибки отдельного гайда', () => {
   const m = ownercatMember();

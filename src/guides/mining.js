@@ -7,6 +7,7 @@ import { tx } from '../../i18n/msg.js';
 import { fossilSections } from './fossil.js';
 import { NUCLEUS_CRYSTALS, OTHER_CRYSTALS } from './crystals.js';
 import { corpseGuide } from './corpses.js';
+import { MINING_EVENTS } from '../calendar/mining.js';
 import { fetchurPuzzlerSection, liveCtx } from '../analysis/daily-npcs.js';
 import { commissionGuide } from './commissions.js';
 
@@ -178,6 +179,19 @@ export default {
     });
 
     sections.push(...cg.sections);
+
+    // Ивенты майнинга: живой блок (сайт сам берёт /v1/mining-events) и что даёт каждый ивент
+    sections.push({ kind: 'miningEvents', news: 'events', title: 'Ивенты майнинга сейчас',
+      note: 'Ивенты идут каждые 20 минут, у каждого лобби своё расписание. Цифры — по лобби, где сейчас есть игроки с модами.' });
+    sections.push({
+      kind: 'table', title: 'Что дают ивенты и что делать',
+      columns: ['Ивент', 'Где · сколько', 'Что даёт', 'Что делать'],
+      rows: [
+        ...MINING_EVENTS.map(e => [e.name, e.min ? tx`${e.where} · ${e.min} мин` : tx`${e.where} · случайно`, e.gives, e.todo]),
+        [cell('Gone with the Wind', { tone: 'muted' }), cell('Убран в августе 2026', { tone: 'muted' }), cell('Вместо него погода: Breeze и Mist, каждый час с XX:35 до XX:55', { tone: 'muted' }), cell('—', { tone: 'muted' })],
+      ],
+      note: 'Предметы с ивентов: Mining Exp Boost, книга Flowstate I, Dwarven O\'s Ore Oats, Dwarven Treasure и Titanium Minecart. Mining Fiesta — событие мэра Cole: идёт ли она и будет ли в следующий срок, видно в блоке выше.',
+    });
 
     // Fossil Excavator: открытие Suspicious Scrap, формы окаменелостей, выгода
     const fossil = fossilSections(m, ctx);
