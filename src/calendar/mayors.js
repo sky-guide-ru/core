@@ -35,7 +35,7 @@ export const PERK_RU = {
   'Pathfinder': ['Следопыт', 'Шанс редкого дропа с боссов слееров выше на 20%.'],
   // Cole
   'Mining XP Buff': ['Больше опыта добычи', '+60 ☯ Mining Wisdom на общих островах.'],
-  'Mining Fiesta': ['Фиеста добычи', 'Несколько фиест за срок мэра: двойной дроп при добыче.'],
+  'Mining Fiesta': ['Фиеста добычи', 'Весь срок мэра: +25% Mining Fortune, Refined Mineral и Glossy Gemstone при добыче.'],
   'Molten Forge': ['Быстрая кузня', 'Forge работает на 25% быстрее.'],
   'Prospection': ['Разведка', 'Миньоны добычи работают на 25% быстрее.'],
   // Diana

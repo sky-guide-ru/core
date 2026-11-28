@@ -96,5 +96,15 @@
  "Другие кристаллы: для Perfect-гемов": "Other crystals: for Perfect gems",
  "Найдено {0} из {1}. Для Crystal Nucleus они не нужны: каждый кристалл уходит в Forge на один Perfect-гем (5 Flawless + 1 Crystal, 20 ч, HotM 5). В Mineshaft нужного типа кристалл появляется с шансом 25%, забрать его может только тот, кто нашёл шахту.": "Found {0} of {1}. Not needed for the Crystal Nucleus: each crystal goes into the Forge for one Perfect gem (5 Flawless + 1 Crystal, 20h, HotM 5). A crystal spawns in 25% of Mineshafts of its type, and only the player who found the shaft can claim it.",
  " · найден {0} {1}": " · found {0} {1}",
- "Frozen Corpse: гемы, Suspicious Scrap, Plate, ключи и Caged Wisp; Shattered Locket не продаётся": "Frozen Corpse: gemstones, Suspicious Scrap, Plates, keys and Caged Wisp; Shattered Locket cannot be sold"
+ "Frozen Corpse: гемы, Suspicious Scrap, Plate, ключи и Caged Wisp; Shattered Locket не продаётся": "Frozen Corpse: gemstones, Suspicious Scrap, Plates, keys and Caged Wisp; Shattered Locket cannot be sold",
+ "Ивенты майнинга сейчас": "Mining events now",
+ "Ивенты идут каждые 20 минут, у каждого лобби своё расписание. Цифры — по лобби, где сейчас есть игроки с модами.": "Events happen every 20 minutes, each lobby has its own schedule. Numbers are for lobbies with players using mods right now.",
+ "Что дают ивенты и что делать": "What events give and what to do",
+ "Ивент": "Event",
+ "Где · сколько": "Where · how long",
+ "{0} · {1} мин": "{0} · {1} min",
+ "{0} · случайно": "{0} · random",
+ "Убран в августе 2026": "Removed in August 2026",
+ "Вместо него погода: Breeze и Mist, каждый час с XX:35 до XX:55": "Replaced by weather: Breeze and Mist, every hour from XX:35 to XX:55",
+ "Предметы с ивентов: Mining Exp Boost, книга Flowstate I, Dwarven O's Ore Oats, Dwarven Treasure и Titanium Minecart. Mining Fiesta — отдельное событие мэра Cole, её даты в «Событиях».": "Event items: Mining Exp Boost, Flowstate I book, Dwarven O's Ore Oats, Dwarven Treasure and Titanium Minecart. Mining Fiesta is a separate event of mayor Cole, its dates are in \"Events\"."
 }

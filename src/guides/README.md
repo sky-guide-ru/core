@@ -37,6 +37,7 @@ Section (`kind`):
 - `steps`: `{ kind: 'steps', title, items: [{ title, text?, done?, current?, items?: [id] }] }`
 - `checklist`: `{ kind: 'checklist', title, items: [{ text, done, hint?, item? }] }`
 - `shapes`: `{ kind: 'shapes', title, items: [{ name, cells: [[x, y]], badge?, text?, hint?, done?, item? }] }` — фигуры на сетке (окаменелости Fossil Excavator)
+- `miningEvents`: `{ kind: 'miningEvents', title, note? }` — живой блок «что идёт сейчас»: сайт сам берёт `/v1/mining-events` (calendar/mining.js)
 - `table`: `{ kind: 'table', title, columns: [string], rows: [[Cell]], current?: rowIndex }`, где Cell — строка, число или `{ text, item?, tone?: 'good'|'bad'|'warn'|'muted' }`
 
 Любая секция может иметь `note` (мелкий текст под заголовком).

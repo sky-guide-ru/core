@@ -49,6 +49,8 @@ export function dailiesOf(m, now = Date.now()) {
     items.push({ id: 'visitors', title: 'Garden Visitors', done: n === 0, progress: null, text: n ? ru`Ждут посетители: ${n}. Copper и опыт Garden.` : 'Посетителей нет, новые приходят сами.', href: '#/guides/farming' });
   }
 
-  if (!items.length) return null;
-  return { reset, next: reset + DAY, done: items.filter(i => i.done).length, total: items.length, items };
+  // Ивенты майнинга: сайт сам подставляет, что идёт сейчас (/v1/mining-events), если игрок уже копает в Dwarven Mines
+  const mining = (m.mining?.hotm?.level || 0) > 0;
+  if (!items.length && !mining) return null;
+  return { reset, next: reset + DAY, done: items.filter(i => i.done).length, total: items.length, items, mining };
 }
