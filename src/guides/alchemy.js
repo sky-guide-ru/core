@@ -130,6 +130,18 @@ export function ingredientCosts(id, { buy, sell, items }, depth = 2) {
   return out;
 }
 
+/**
+ * Сколько стоек ставить: раунд — все стойки проходят шаги варки (вода → Nether Wart → ингредиент → Glowstone Dust).
+ * Время раунда — раскладка руками (perStand секунд на стойку за шаг) плюс последняя варка, пока раскладываешь, стойки
+ * уже варят. XP только с шага ингредиента.
+ */
+export function standPlan(n, { steps = 3, brewSec = 20, perStand = 1, xpPer = XP_PER_POTION } = {}) {
+  const potions = 3 * n;
+  const roundSec = steps * Math.max(brewSec, n * perStand) + brewSec;
+  const rounds = 3600 / roundSec;
+  return { n, potions, xpRound: potions * xpPer, roundSec: Math.round(roundSec), perHour: Math.round(potions * xpPer * rounds), potionsHour: Math.round(potions * rounds) };
+}
+
 /** Активен ли God Potion: почти все его эффекты висят с запасом больше часа */
 export function godActive(effects) {
   const act = new Map((effects?.active || []).map(e => [e.id, e]));
@@ -138,8 +150,9 @@ export function godActive(effects) {
 }
 
 const hm = sec => {
-  const h = Math.floor(sec / 3600), mn = Math.round((sec % 3600) / 60);
-  return h ? tx`${h} ч ${mn} мин` : tx`${mn} мин`;
+  const t = Math.round(sec / 60), h = Math.floor(t / 60), mn = t % 60;
+  if (!h && !mn) return tx`${Math.max(1, Math.round(sec))} с`;
+  return h ? (mn ? tx`${h} ч ${mn} мин` : tx`${h} ч`) : tx`${mn} мин`;
 };
 
 export function build(m, ctx) {
@@ -179,7 +192,7 @@ export function build(m, ctx) {
     note: 'Зелья — это временные статы. Время уходит, только пока ты в игре.',
     items: [
       { text: god ? 'God Potion действует' : 'God Potion не действует', done: god, item: 'GOD_POTION_2',
-        hint: god ? undefined : tx`Самое важное зелье: почти все баффы сразу на ${fmt(hours)} ч. Стоит 1 500 Bits у Elizabeth${godPrice ? tx` или ${short(godPrice)} на аукционе` : ''}.` },
+        hint: god ? undefined : tx`Самое важное зелье: почти все баффы сразу на ${hm(hours * 3600)}. Стоит 1 500 Bits у Elizabeth${godPrice ? tx` или ${short(godPrice)} на аукционе` : ''}.` },
       { text: cookie ? 'Booster Cookie действует' : 'Booster Cookie не действует', done: cookie, item: 'BOOSTER_COOKIE',
         hint: cookie ? undefined : tx`Опыт быстрее, +10 Magic Find и Bits, на которые покупают God Potion.${cookiePrice ? tx` Сейчас ${short(cookiePrice)} на Bazaar.` : ''}` },
       { text: tx`Alchemy ${lvl} из 50: зелья дольше на ${lvl}%, +${alchemyInt(lvl)} Intelligence`, done: lvl >= 50,
@@ -236,7 +249,7 @@ export function build(m, ctx) {
     columns: ['', 'God Potion', 'Booster Cookie'],
     rows: [
       ['Что даёт', 'Почти все зелья сразу и на максимуме: 32 эффекта, в том числе Strength VIII, Critical IV, Magic Find IV', 'Опыт всех скиллов +25%, +10 Magic Find, Bits, команды /ah и /bz из любого места, монеты не теряются при смерти'],
-      ['Сколько длится', tx`12–24 ч игры, чем выше Alchemy, тем дольше: у тебя ${fmt(hours)} ч${parrot ? ', Parrot добавляет до 20%' : ''}. Можно пить подряд, время складывается`, '4 дня, идёт и когда ты не в игре. Можно съесть несколько подряд'],
+      ['Сколько длится', tx`12 ч на Alchemy 0, 24 ч на Alchemy 50. У тебя ${hm(hours * 3600)}${parrot ? ', Parrot добавляет до 20%' : ''}. Можно пить подряд, время складывается`, '4 дня, идёт и когда ты не в игре. Можно съесть несколько подряд'],
       ['Где взять', noMarket ? '1 500 Bits у Elizabeth в Community Center' : '1 500 Bits у Elizabeth в Community Center или аукцион', '325 SkyBlock Gems у Elizabeth или Bazaar. Первый — бесплатно, раз на аккаунт'],
       ...(noMarket ? [] : [['Цена сейчас', godPrice ? tx`${short(godPrice)}, это ${short(perHour)} в час игры` : '—', cookiePrice ? tx`${short(cookiePrice)}, это ${short(cookiePrice / 96)} в час` : '—']]),
     ],
@@ -331,17 +344,53 @@ export function build(m, ctx) {
   xpRowsAll.sort((a, b) => a.c.perMillion - b.c.perMillion);
   const xpRows = xpRowsAll;
   const xpPlain = noMarket || !xpRows.length;
+  const boost = active.get('alchemy_xp_boost');
+  const wisdom = (cookie ? 25 : 0) + (boost ? [0, 5, 10, 20][Math.min(3, boost.level)] || 0 : 0);
+  const xpPer = Math.round(XP_PER_POTION * (1 + wisdom / 100));
+  const potionsTo50 = Math.ceil(xpLeft / xpPer);
+  const best = xpRows[0];
+  const wf = 1 + wisdom / 100; // Wisdom удешевляет 1 млн XP
+  const costTo50 = best ? best.c.perMillion / wf * xpLeft / 1e6 : 0;
+
+  // ── God Potion растёт с Alchemy
+  const ladder = [...new Set([0, 10, 20, 30, 40, 50, lvl])].sort((a, b) => a - b);
+  sections.push({
+    kind: 'table', title: 'God Potion растёт с Alchemy', news: 'godlevel',
+    note: lvl >= 50
+      ? 'У тебя Alchemy 50: каждый God Potion длится 24 часа — вдвое дольше, чем на старте.'
+      : tx`Каждый уровень Alchemy добавляет каждому God Potion 14 минут. На 50 он длится 24 ч — вдвое дольше, чем на старте. Тебе до 50: ${short(xpLeft)} XP, это около ${fmt(potionsTo50)} зелий${costTo50 > 0 ? tx` и ${short(costTo50)} монет` : ''}.`,
+    columns: ['Alchemy', 'God Potion длится', 'С 1 500 Bits выходит'],
+    rows: ladder.map(l => [cell(l === lvl ? tx`${l} (ты)` : String(l), { tone: l === lvl ? 'good' : l < lvl ? 'muted' : undefined }), hm(godHours(l) * 3600), tx`${fmt(godHours(l) / 12 * 100)}% от базовых 12 ч`]),
+    current: ladder.indexOf(lvl),
+  });
+
+  // ── Сколько стоек ставить
+  if (lvl < 50 && best) {
+    const steps = best.b.wart ? 3 : 2;
+    const brewSec = witch ? 10 : 20;
+    const plans = [8, 16, 32, 64].map(n => standPlan(n, { steps, brewSec, xpPer }));
+    sections.push({
+      kind: 'table', title: 'Сколько стоек ставить', news: 'stands',
+      note: tx`Расчёт для ${ctx.name(best.b.id) || best.b.id} (${best.b.potion}): ${fmt(xpPer)} XP за зелье${wisdom ? tx` с твоими +${wisdom} Alchemy Wisdom` : ''}. Пока раскладываешь ингредиенты по стойкам, первые уже варят, поэтому больше стоек — больше XP в час. Время примерное: около секунды на стойку за шаг${witch ? ', варка с Witch — 10 секунд' : ''}.`,
+      columns: ['Стоек', 'Зелий за круг', 'XP за круг', 'Круг', 'XP в час', ...(costTo50 > 0 ? ['Потратишь за час'] : []), 'До Alchemy 50'],
+      rows: plans.map(x => [
+        cell(String(x.n), { tone: x.n === 64 ? 'good' : undefined }), fmt(x.potions), short(x.xpRound), x.roundSec < 600 ? tx`${Math.floor(x.roundSec / 60)} мин ${x.roundSec % 60} с` : hm(x.roundSec), short(x.perHour),
+        ...(costTo50 > 0 ? [short(best.c.perMillion / wf * x.perHour / 1e6)] : []),
+        x.perHour ? hm(xpLeft / x.perHour * 3600) : '—',
+      ]),
+    });
+  }
   sections.push({
     kind: 'table', title: 'Как качать Alchemy', news: 'leveling',
     note: xpPlain
       ? 'Без Bazaar: ферма Sugar Cane или миньоны Sugar Cane и Gold. Absorption III из Enchanted Gold даёт 300 XP за зелье.'
-      : tx`Каждое такое зелье даёт 15 000 XP. Добавь Glowstone Dust и продай зелья NPC: так вернётся часть денег.${lvl < 50 ? tx` До Alchemy 50 осталось ${short(xpLeft)} XP.` : ''}`,
+      : tx`Каждое такое зелье даёт ${fmt(xpPer)} XP${wisdom ? tx` (15 000 и твои +${wisdom} Alchemy Wisdom)` : ''}. Добавь Glowstone Dust и продай зелья NPC: так вернётся часть денег.${lvl < 50 ? tx` До Alchemy 50 осталось ${short(xpLeft)} XP.` : ''}`,
     columns: xpPlain ? ['Ингредиент', 'Зелье', 'XP за зелье'] : ['Ингредиент', 'Зелье', 'Основа', 'Потратишь на 3', 'Вернёт NPC', 'Цена 1 млн XP', ...(lvl < 50 ? ['До 50'] : [])],
     rows: xpPlain
       ? [[cell('Enchanted Sugar Cane', { item: 'ENCHANTED_SUGAR_CANE' }), 'Speed V', '15 000'], [cell('Enchanted Gold Block', { item: 'ENCHANTED_GOLD_BLOCK' }), 'Absorption V', '15 000'], [cell('Enchanted Gold', { item: 'ENCHANTED_GOLD' }), 'Absorption III', '300']]
       : xpRows.map((x, i) => [
         cell(ctx.name(x.b.id) || x.b.id, { item: x.b.id, tone: i === 0 ? 'good' : undefined }), tx`${x.b.potion} V → VI`, x.b.base,
-        short(x.c.spend3), short(x.b.sell3), short(x.c.perMillion), ...(lvl < 50 ? [short(x.c.perMillion * xpLeft / 1e6)] : []),
+        short(x.c.spend3), short(x.b.sell3), short(x.c.perMillion / wf), ...(lvl < 50 ? [short(x.c.perMillion / wf * xpLeft / 1e6)] : []),
       ]),
   });
   sections.push({
@@ -355,12 +404,12 @@ export function build(m, ctx) {
   });
 
   // Порядок: сначала простое (баффы, God Potion, что нужно), потом варка, в конце — деньги и тонкости
-  const ORDER = ['buffs', 'effects', 'god', 'first', 'activities', 'dungeons', 'brew', 'leveling', 'tips', 'brews', 'sell', 'mixins', 'auto'];
+  const ORDER = ['buffs', 'effects', 'god', 'godlevel', 'activities', 'dungeons', 'brew', 'leveling', 'stands', 'tips', 'brews', 'sell', 'mixins', 'auto'];
   sections.sort((a, b) => ORDER.indexOf(a.news) - ORDER.indexOf(b.news));
 
   // ── Что дальше
-  if (!god && m.mode?.id !== 'bingo') next.push({ title: 'Выпей God Potion', priority: 60, item: 'GOD_POTION_2', why: tx`Strength VIII, Critical IV, Spirit IV, Magic Find IV и ещё 28 эффектов на ${fmt(hours)} ч игры.` });
-  if (lvl < 50 && xpRows[0]) next.push({ title: tx`Качай Alchemy на ${ctx.name(xpRows[0].b.id) || xpRows[0].b.id}`, priority: lvl < 20 ? 35 : 20, item: xpRows[0].b.id, why: tx`Самая дешёвая варка сейчас: ${short(xpRows[0].c.perMillion)} за 1 млн XP. Каждый уровень +1% к зельям и God Potion дольше.` });
+  if (!god && m.mode?.id !== 'bingo') next.push({ title: 'Выпей God Potion', priority: 60, item: 'GOD_POTION_2', why: tx`Strength VIII, Critical IV, Spirit IV, Magic Find IV и ещё 28 эффектов на ${hm(hours * 3600)} игры.` });
+  if (lvl < 50 && xpRows[0]) next.push({ title: tx`Качай Alchemy на ${ctx.name(xpRows[0].b.id) || xpRows[0].b.id}`, priority: lvl < 20 ? 35 : 20, item: xpRows[0].b.id, why: tx`Самая дешёвая варка сейчас: ${short(xpRows[0].c.perMillion / wf)} за 1 млн XP. Каждый уровень — +14 минут к God Potion, на 50 он длится 24 ч.` });
   if (!witch && lvl < 50) next.push({ title: 'Питомец Witch для варки', priority: 10, why: 'Варка идёт вдвое быстрее: 10 секунд вместо 20.' });
 
   const status = lvl >= 50 ? 'done' : lvl > 0 ? 'progress' : 'start';

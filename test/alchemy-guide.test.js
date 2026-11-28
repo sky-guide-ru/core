@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { ingredientCosts, godHours, alchemyInt, xpCostPerMillion, brewCost, godActive, GOD_EFFECTS, XP_BREWS, BREWS, build } from '../src/guides/alchemy.js';
+import { standPlan, ingredientCosts, godHours, alchemyInt, xpCostPerMillion, brewCost, godActive, GOD_EFFECTS, XP_BREWS, BREWS, build } from '../src/guides/alchemy.js';
 import { auctionKey } from '../src/market/auctions.js';
 
 test('alchemy: God Potion и награды уровней по вики', () => {
@@ -60,4 +60,13 @@ test('alchemy: ингредиент купить, скрафтить из сыр
   assert.equal(c.own, 160 * 160 * 2.5); // своё сырьё дороже продать сырьём
   const none = ingredientCosts('FLINT', { buy: () => 0, sell: () => 0, items });
   assert.deepEqual([none.buy, none.craft, none.own], [0, 0, 0]);
+});
+
+test('alchemy: стойки — больше стоек, больше XP в час, но раскладка ограничивает', () => {
+  const a = standPlan(8), b = standPlan(64);
+  assert.equal(a.potions, 24);
+  assert.equal(a.roundSec, 3 * 20 + 20); // 8 стоек раскладываются быстрее, чем варятся
+  assert.equal(b.roundSec, 3 * 64 + 20);
+  assert.ok(b.perHour > a.perHour);
+  assert.equal(standPlan(10, { steps: 2, brewSec: 10, perStand: 1 }).roundSec, 2 * 10 + 10);
 });

@@ -119,7 +119,7 @@ export const HOWTO = {
     step('Повторяй каждый день', 'У стола 3 заряда, они возвращаются через 24 часа. Ещё 3 захода в день покупаются за Bits и уровни опыта.'),
   ],
   alchemy: [
-    step('Купи God Potion за Bits', 'Пока печенье действует, копятся Bits. 1 500 Bits — это God Potion: почти все зелья сразу на 12–24 часа.', ['GOD_POTION_2']),
+    step('Купи God Potion за Bits', 'Пока действует Booster Cookie, копятся Bits. 1 500 Bits — это God Potion: почти все зелья сразу. Длится 12 часов и растёт с Alchemy: на 50 — 24 часа.', ['GOD_POTION_2']),
     step('В Dungeons бери Dungeon Potion', 'В Catacombs God Potion на паузе. Ophelia в Dungeon Hub продаёт Dungeon Potion.'),
     step('Докупи то, чего нет в God Potion', 'Для Farming — Harvest Harbinger, для Fishing — Mushed Glowy Tonic.'),
     step('Захочешь варить сам — Brewing Stand', 'Продаёт Alchemist в Hub за 30 монет. Как варить и качать Alchemy — ниже.', ['BREWING_STAND_ITEM']),
