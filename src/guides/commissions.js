@@ -2,8 +2,9 @@
 // Сверено 28.11.2026: hypixelskyblock.minecraft.wiki — Commissions, Emissaries, King, Royal Pigeon, Royal Compass,
 // Queen Mismyla, Travel Scroll to Dwarven Mines, Heart of the Mountain (опыт, бонусы), Template:Heart of the Mountain/List/Tier 5
 // (Daily Grind, Core of the Mountain 3 → слот задания).
-// Прогресс игрока: веха — objectives.tutorial «commission_milestone_reward_mining_xp_tier_N» (ставится, когда награда забрана);
-// число заданий — достижение Hard Working Miner (skyblock_hard_working_miner из /player, по всем профилям). Так же считает SkyCrypt.
+// Прогресс игрока — только по выбранному профилю: веха — objectives.tutorial «commission_milestone_reward_mining_xp_tier_N»
+// (ставится, когда награда забрана). Число заданий — mining_core.commissions_completed, если API его отдаёт.
+// Достижение Hard Working Miner из /player общее на аккаунт (все профили, и удалённые тоже) — его не берём, чтобы не смешивать профили.
 import { fmt, short, plural, hasItem, cell } from './gathering-util.js';
 import { tx } from '../../i18n/msg.js';
 
@@ -45,18 +46,19 @@ const DAILY_BONUS = 900;     // опыт HotM за каждое из первы�
 const DAILY_COUNT = 4;
 const num = v => Number(v) || 0;
 
-/** Из профиля и /player: сколько заданий, какая веха забрана, сколько слотов. */
+/** Только из профиля: сколько заданий (если API отдаёт), какая веха забрана, сколько слотов. */
 export function commissionState(m = {}) {
   const mi = m.mining || {};
-  const ach = (m.hypixel?.achievements || []).find(a => a.key === 'skyblock_hard_working_miner');
-  const completions = ach ? num(ach.value) : null;
+  const completions = Number.isFinite(mi.commissionsDone) && mi.commissionsDone > 0 ? mi.commissionsDone : null;
   const claimed = num(mi.commissionMilestone);
-  // Сколько вех хватает по числу заданий. Без /player — не меньше уже забранной
+  // Забранная веха значит, что заданий не меньше её порога
+  const atLeast = claimed ? COMMISSION_MILESTONES[claimed - 1].need : 0;
+  // Сколько вех хватает по числу заданий. Без числа — не больше уже забранной
   const reached = completions == null ? claimed : Math.max(claimed, COMMISSION_MILESTONES.filter(x => completions >= x.need).length);
   const potm = num(mi.potm);
   const slots = 2 + (reached >= 3 ? 1 : 0) + (potm >= 3 ? 1 : 0);
   const next = COMMISSION_MILESTONES[reached] || null;
-  return { completions, claimed, reached, slots, potm, next, left: next && completions != null ? Math.max(0, next.need - completions) : null };
+  return { completions, atLeast, claimed, reached, slots, potm, next, left: next && completions != null ? Math.max(0, next.need - completions) : null };
 }
 
 /** Сколько заданий до следующего уровня HotM: лучший остров по уровню и с бонусом первых 4 заданий дня. */
@@ -98,7 +100,7 @@ export function commissionGuide(m, ctx) {
     const ms = COMMISSION_MILESTONES[st.reached - 1];
     next.push({
       title: tx`Забери награду за Commission Milestone ${ms.roman}: ${ms.reward}`, priority: ms.n === 3 || ms.n === 5 ? 64 : 52, item: ms.item,
-      why: tx`Hard Working Miner насчитал ${fmt(st.completions)} ${plural(st.completions, 'задание', 'задания', 'заданий')} (по всем профилям), а в этом профиле забрана веха ${st.claimed ? ROMAN[st.claimed - 1] : '—'}. Награды не приходят сами: открой меню заданий у King, Emissary или через Royal Pigeon и нажми Commission Milestones. Там же ${fmt(ms.xp)} Mining XP. Если задания делались на другом профиле, в этом их придётся набрать заново.`,
+      why: tx`В этом профиле выполнено ${fmt(st.completions)} ${plural(st.completions, 'задание', 'задания', 'заданий')}, а забрана веха ${st.claimed ? ROMAN[st.claimed - 1] : '—'}. Награды не приходят сами: открой меню заданий у King, Emissary или через Royal Pigeon и нажми Commission Milestones. Там же ${fmt(ms.xp)} Mining XP.`,
     });
   }
   if (active && lvl >= 5 && st.potm < 3) {
@@ -117,7 +119,9 @@ export function commissionGuide(m, ctx) {
   // ---- Секция: вехи ----
   const done = st.completions == null ? null : st.completions;
   const parts = [];
-  parts.push(done == null ? tx`Забрано вех: ${st.claimed} из 6. Число выполненных заданий Hypixel ещё не прислал.` : tx`Выполнено заданий: ${fmt(done)} (Hard Working Miner, по всем профилям). Забрано вех: ${st.claimed} из 6.`);
+  parts.push(done != null
+    ? tx`Выполнено заданий в этом профиле: ${fmt(done)}. Забрано вех: ${st.claimed} из 6.`
+    : tx`Забрано вех в этом профиле: ${st.claimed} из 6${st.atLeast ? tx`, то есть выполнено не меньше ${fmt(st.atLeast)} заданий` : ''}. Точное число заданий по профилю Hypixel не отдаёт: его видно в игре, в меню заданий → Commission Milestones.`);
   if (st.next && st.left != null) parts.push(tx`До вехи ${st.next.roman}: ${fmt(st.left)} ${plural(st.left, 'задание', 'задания', 'заданий')}.`);
   parts.push(tx`Слотов заданий: ${st.slots} из 4 — третий за 100 заданий, четвёртый за Core of the Mountain 3.`);
   parts.push('Награду за веху забирают сами в меню заданий → Commission Milestones. Mining XP за вехи не умножается бустами.');

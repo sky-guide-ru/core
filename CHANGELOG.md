@@ -8,7 +8,7 @@
 
 - Гайд Mining: Commissions и Commission Milestones (`src/guides/commissions.js`: `COMMISSION_MILESTONES`, `COMMISSION_AREAS`, `commissionState`, `commissionsToNextHotm`, `commissionGuide`) по вики (Commissions, Emissaries, King, Royal Pigeon, Queen Mismyla, Heart of the Mountain, 28.11.2026). Таблица шести вех (`news: 'commissions'`), острова с Emissary, опытом HotM, Powder и быстрыми заданиями, чек-лист «Commissions быстрее» (слоты, Royal Pigeon / Queen Mismyla, King Talisman).
 - Шаги: «Забери награду за Commission Milestone N», «Четвёртый слот заданий: Core of the Mountain → 3», «Royal Pigeon». Шаг «Подними HotM» и совет плана считают, сколько заданий до следующего уровня.
-- `mining.commissionMilestone` — забранная веха из `objectives.tutorial`; достижение `skyblock_hard_working_miner` (число заданий) добавлено в `SB_ACHIEVEMENTS`.
+- Прогресс только по выбранному профилю: `mining.commissionMilestone` — забранная веха из `objectives.tutorial`, `mining.commissionsDone` — `mining_core.commissions_completed`, если API его отдаёт. Общее по аккаунту достижение Hard Working Miner не используется (смешивало бы профили); без числа по профилю гайд пишет «не меньше N» по забранной вехе.
 - Новость «Гайд по Commissions».
 
 ## 0.2.55

@@ -1,12 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { commissionState, commissionsToNextHotm, commissionGuide, COMMISSION_MILESTONES } from '../src/guides/commissions.js';
-import { hypixelInfoOf } from '../src/lib/hypixel-player.js';
 
 const ctxOf = (owned = []) => ({ price: () => 0, name: id => id, has: id => owned.includes(id), m: { inv: {} }, adv: {} });
 const member = ({ done = null, claimed = 0, potm = 0, lvl = 4, xp = { xpCurrent: 0, xpForNext: 60000 }, contacts = [] } = {}) => ({
-  mining: { hotm: { level: lvl, ...xp }, potm, commissionMilestone: claimed },
-  hypixel: done == null ? null : { achievements: [{ key: 'skyblock_hard_working_miner', value: done }] },
+  mining: { hotm: { level: lvl, ...xp }, potm, commissionMilestone: claimed, commissionsDone: done },
+  // общее по аккаунту число из /player не должно попадать в профиль
+  hypixel: { achievements: [{ key: 'skyblock_hard_working_miner', value: 9999 }] },
   abiphone: { active: contacts },
 });
 
@@ -21,11 +21,16 @@ test('состояние: слоты, забранная веха, скольк�
   assert.equal(s.slots, 4);
   assert.equal(s.next.need, 250);
   assert.equal(s.left, 130);
-  // без /player — опираемся на забранную веху
-  const s2 = commissionState(member({ claimed: 1 }));
+  // профиль не отдал число заданий — только забранная веха, аккаунтное 9999 не используется
+  const s2 = commissionState(member({ claimed: 4 }));
   assert.equal(s2.completions, null);
-  assert.equal(s2.reached, 1);
-  assert.equal(s2.slots, 2);
+  assert.equal(s2.reached, 4);
+  assert.equal(s2.atLeast, 250);
+  assert.equal(s2.slots, 3);
+  const g = commissionGuide(member({ claimed: 4, lvl: 6, potm: 3 }), ctxOf());
+  assert.ok(!g.next.some(n => /Забери награду/.test(n.title)), 'без числа по профилю шага «забери» нет');
+  assert.match(g.sections[0].note, /не меньше 250/);
+  assert.doesNotMatch(JSON.stringify(g), /9[ \u00a0]?999/);
 });
 
 test('сколько заданий до следующего HotM', () => {
@@ -52,7 +57,3 @@ test('гайд: шаг «забери веху», четвёртый слот и
   assert.equal(g2.next.length, 0);
 });
 
-test('Hard Working Miner попадает в достижения /player', () => {
-  const info = hypixelInfoOf({ achievements: { skyblock_hard_working_miner: 321 } });
-  assert.equal(info.achievements.find(a => a.key === 'skyblock_hard_working_miner').value, 321);
-});
