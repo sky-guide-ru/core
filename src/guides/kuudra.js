@@ -1,4 +1,5 @@
 // Гайд по Kuudra: тиры, репутация фракции, броня Kuudra, ключи и лут — по профилю игрока.
+import { petLadderSection } from './pets.js';
 import { CLASSES } from '../../i18n/ru.js';
 import { KUUDRA_TIERS, KUUDRA_SETS, KUUDRA_LOOT } from './combat/data.js';
 import { fmtCoins, plural, num, methodText, sortNext, pieces, nice, priceOfDrop } from './combat/util.js';
@@ -109,6 +110,7 @@ export function build(m, ctx) {
     next: sortNext(next),
     sections: [
       { kind: 'table', title: 'Тиры Kuudra', note: 'Репутация засчитывается любой фракции (Mages или Barbarians). Каждый тир требует победы на предыдущем; Hot — ещё и основной квест Crimson Isle.', columns: ['Тир', 'Репутация', 'Combat для брони', 'Статус', 'Лучшая волна'], rows: tierRows, current: nextTierI >= 0 ? nextTierI : undefined },
+      petLadderSection(ctx, 'crimson', { title: 'Питомцы для Kuudra и Crimson Isle' }),
       { kind: 'text', title: 'Как устроен заход', text: [
         'Первый заход (Basic) — по квесту с NPC Elle на Crimson Isle, дальше вход через Kuudra Gatekeeper или Party Finder. Команда — 4 игрока.',
         'После победы открывается платный сундук — для него нужен Kuudra Key своего тира. Если команда погибла, остаётся только бесплатный сундук с более скромным лутом.',

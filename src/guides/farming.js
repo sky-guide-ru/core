@@ -1,6 +1,7 @@
 // Гайд по Farming и Garden: уровень Garden, Crop Upgrades, участки, Composter, Visitors, Jacob's Contest,
 // инструменты по культурам, броня и снаряжение, Pests, питомцы, заработок.
-import { fmt, short, plural, hasItem, bestPet, ladderPos, howText, constants, cell, tone, topNext } from './gathering-util.js';
+import { petLadderSection, petNextStep } from './pets.js';
+import { fmt, short, plural, hasItem, ladderPos, howText, constants, cell, tone, topNext } from './gathering-util.js';
 import { gardenLevel, GARDEN_EXP_FALLBACK } from '../parse/extras-view.js';
 import { tx } from '../../i18n/msg.js';
 
@@ -27,13 +28,6 @@ const ARMOR = ['FARM_SUIT', 'MELON', 'CROPIE', 'SQUASH', 'FERMENTO', 'HELIANTHUS
 const PEONY = ['LOTUS_NECKLACE', 'LOTUS_CLOAK', 'LOTUS_BELT', 'LOTUS_BRACELET'];
 const PESTHUNTER = ['PESTHUNTERS_NECKLACE', 'PESTHUNTERS_CLOAK', 'PESTHUNTERS_BELT', 'PESTHUNTERS_GLOVES'];
 const VACUUMS = ['SKYMART_VACUUM', 'SKYMART_TURBO_VACUUM', 'SKYMART_HYPER_VACUUM', 'INFINI_VACUUM', 'INFINI_VACUUM_HOOVERIUS'];
-const PETS = [
-  ['MOOSHROOM_COW', 'Farming Fortune от Strength и грибы при фарме: основной питомец для культур на Garden'],
-  ['ELEPHANT', 'Farming Fortune от защиты и скорости: слабее Mooshroom Cow, запасной вариант'],
-  ['HEDGEHOG', 'Больше урона по Pests и Farming Fortune за тиры бестиария Pests'],
-  ['SLUG', 'Bonus Pest Chance и Fortune на участке со Sprayonator'],
-  ['RABBIT', 'Farming Wisdom и ускорение фермерских миньонов'],
-];
 
 const CROP_UPG_COPPER_FALLBACK = [5, 10, 20, 50, 100, 500, 1000, 2000, 4000];
 
@@ -153,9 +147,8 @@ export default {
     if (peony < 4) next.push({ title: tx`Снаряжение Peony: ${peony}/4`, priority: 40, why: 'Дёшево и сразу: по +5 Farming Fortune за предмет. Покупается у SkyMart в Garden за Copper (50–500 Copper).' });
     const vac = ladderPos(ctx, VACUUMS);
     if (vac.best < 3) next.push({ title: tx`Пылесос для Pests: ${vac.next ? ctx.name(vac.next) : '—'}`, priority: 38, why: tx`Pests появляются при фарме и режут рост культур на участке. Пылесос засасывает их и даёт Pest-дропы. ${vac.next ? howText(ctx, vac.next) : ''}` });
-    const pets = PETS.map(([t, why]) => ({ t, why, pet: bestPet(ctx, t) }));
-    const hedge = pets.find(p => p.t === 'HEDGEHOG');
-    if (hedge && !hedge.pet) next.push({ title: 'Питомец Hedgehog для Pests', priority: 30, why: hedge.why + '.' });
+    const petStep = petNextStep(ctx, 'farming');
+    if (petStep) next.push(petStep);
 
     // ================= Секции =================
     sections.push({
@@ -217,11 +210,7 @@ export default {
       ],
     });
 
-    sections.push({
-      kind: 'table', title: 'Питомцы для Farming',
-      columns: ['Питомец', 'Есть', 'Зачем'],
-      rows: pets.map(p => [cell(ctx.name(tx`${p.t};4`).replace(/^\[Lvl \{LVL\}\] /, ''), { item: tx`${p.t};4` }), cell(p.pet ? tx`${p.pet.tier[0] + p.pet.tier.slice(1).toLowerCase()}${p.pet.level ? tx`, ур. ${p.pet.level}` : ''}` : 'нет', { tone: p.pet ? 'good' : 'muted' }), p.why]),
-    });
+    sections.push(petLadderSection(ctx, 'farming'));
 
     sections.push({
       kind: 'checklist', title: 'Jacob’s Contest и Anita',

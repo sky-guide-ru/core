@@ -1,4 +1,5 @@
 // Гайды по каждому слееру: тиры, что открывают уровни, снаряжение, дропы, деньги — по профилю игрока.
+import { petLadderSection } from './pets.js';
 import { SLAYER_INFO, SLAYER_UNLOCKS, SLAYER_RNG, SLAYER_COST, SLAYER_BOSS_XP, SLAYER_MAX_TIER } from './combat/data.js';
 import { fmtCoins, plural, num, priceText, method, methodText, sortNext, nice, priceOfDrop } from './combat/util.js';
 import { slayerPlan, VERDICT_RU, LACK_RU, secText, DAGGER_PAIRS } from '../calc/slayer-ready.js';
@@ -197,6 +198,7 @@ export function build(key, m, ctx) {
     sections: [
       { kind: 'text', title: 'Где и как', text: [tx`Где: ${info.where}.`, tx`Открытие: ${info.unlock}.`, vamp ? 'Квесты оплачиваются Motes (валюта Рифта).' : 'Квест берётся у Maddox the Slayer в Hub или по Maddox Batphone (открывается Wolf Slayer 3).'] },
       { kind: 'table', title: 'Тиры босса', note: 'HP и механики — по вики; опыт и цена квеста — по данным NEU.', columns: ['Тир', 'HP', 'Механика', 'Квест', 'Опыт', 'Твои убийства'], rows: tierRows, current: farm - 1 },
+      ...(vamp ? [] : [petLadderSection(ctx, 'slayers', { boss: key, title: 'Питомцы для слееров' })]),
       ...(plan ? [{ kind: 'table', news: 'wear', title: 'Что надеть: твои вещи под каждый тир', note: 'Подобрано из твоих сетов в Wardrobe, наборов снаряжения, питомцев и оружия ближнего боя. Если твой сохранённый набор почти не хуже — показан он. Расчёт примерный: без зелий, лечения и большинства сетовых бонусов, поэтому тир, где у тебя уже есть победы, — «уже проходишь».', columns: ['Тир', 'Оценка', 'Броня', 'Оружие', 'Питомец', 'Что подтянуть'], rows: wearRows(plan, ctx), current: Math.max(0, (plan.farm?.tier || 1) - 1) }, ...kitSections(plan, key, ctx)] : []),
       ...(key === 'blaze' ? [daggerSection(m, ctx)] : []),
       { kind: 'steps', title: 'Снаряжение', items: info.gear.map(g => ({ title: g })) },

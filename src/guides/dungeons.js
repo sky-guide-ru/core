@@ -1,4 +1,5 @@
 // Гайд по данжам (Catacombs): этажи, классы, Master Mode, снаряжение — по профилю игрока.
+import { petLadderSection } from './pets.js';
 import { CLASSES } from '../../i18n/ru.js';
 import { MASTER_REQ, FLOORS, WITHER_SETS, CLASS_GEAR, DUNGEON_ESSENTIALS, RECIPES } from './combat/data.js';
 import { fmtCoins, plural, num, priceText, craftCost, methodText, sortNext, pieces, setPrice, nice } from './combat/util.js';
@@ -168,6 +169,7 @@ export function build(m, ctx) {
       { kind: 'table', title: 'Этажи и Master Mode', note: 'Ценный лут — заметные дропы из сундуков этажа (по RNG-метру NEU).', columns: ['Этаж', 'Босс', 'Пройдено', 'Master Mode', 'Ценный лут'], rows: floorRows, current: curRow },
       { kind: 'steps', title: 'Путь M1 → M7', note: tx`Каждый Master-этаж открывается победой на предыдущем (M1 — после F7) и уровнем Catacombs: M1 — 24, M2 — 26, M3 — 28, M4 — 30, M5 — 32, M6 — 34, M7 — 36. У тебя ${cata}.`, items: mPath },
       { kind: 'checklist', title: tx`Снаряжение: ${clsName}`, note: cg.note, items: gearChecks },
+      petLadderSection(ctx, 'dungeons', { cls, title: cls ? tx`Питомцы: ${clsName}` : 'Питомцы по классам' }),
       ...(setPlan ? [{ kind: 'table', title: tx`Твой сет: ${loName}`,
         note: tx`${lo.witherborn ? 'Бонус Witherborn 4/4 активен' : tx`Частей Wither в этом слоте: ${lo.wither}/4`}. Что улучшить в каждой части — по тому же движку, что карточка предмета${setPlan.cost ? tx`; всё вместе ~${fmtCoins(setPlan.cost)}` : ''}.`,
         columns: ['Часть', 'Предмет', 'Звёзды', 'Прокачано', 'Что дальше'],
