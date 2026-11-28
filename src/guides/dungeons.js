@@ -7,6 +7,7 @@ import { dungeonLoadout, witherOwned, familiesLabel, offClassPieces, bestFamilyF
 import { planItemUpgrades } from '../analysis/item-upgrades.js';
 import { masterReadiness } from '../calc/power.js';
 import { tx } from '../../i18n/msg.js';
+import { puzzlesSection, scoreTable, scoreSection, secretsSection, bloodSection, blessingSection, scoreNext, scoreCalcSection, puzzleToolsSection } from './dungeons-rooms.js';
 
 // «8 раз» целиком одной строкой: английской версии нужен свой ключ на каждую форму (once / 8 times)
 const times = n => (n === 1 ? 'один раз' : plural(n, 'раз', 'раза', 'раз') === 'раза' ? tx`${n} раза` : tx`${n} раз`);
@@ -102,6 +103,7 @@ export function build(m, ctx) {
     next.push({ priority: 55, title: tx`Добери данж-предметы: ${missEss.slice(0, 3).map(e => name(e.id)).join(', ')}${missEss.length > 3 ? tx` и ещё ${missEss.length - 3}` : ''}`,
       why: 'Они не дают урона, но сильно ускоряют и упрощают заходы.' });
   }
+  next.push(...scoreNext(d));
   const weak = Object.entries(d.classes || {}).filter(([k, c]) => k !== cls && c.level < cata - 10);
   if (weak.length) {
     next.push({ priority: 30, title: tx`Подтяни классы: ${weak.map(([, c]) => tx`${c.name} ${c.level}`).join(', ')}`,
@@ -158,6 +160,8 @@ export function build(m, ctx) {
 
   const income = (ctx.analysis?.methods || []).filter(x => x.tag === 'Dungeons').map(methodText).filter(Boolean);
 
+  // Самый высокий этаж, куда игрок уже ходит: загадки выше него — приглушены
+  const topFloor = highestF == null ? null : f7 ? 7 : Math.min(7, highestF + 1);
   const status = cata >= 50 && n(mf[7]) > 0 ? 'done' : highestF == null ? 'start' : 'progress';
   const summary = tx`Catacombs ${cata}, ${clsName} ${clsLvl}. F7 пройден ${times(f7)}; Master Mode: ${mDone.length ? tx`пройдены M${mDone.join(', M')}` : 'ещё не начат'}.`;
 
@@ -176,13 +180,20 @@ export function build(m, ctx) {
         rows: setPlan.rows.map(r => [SLOT_RU[r.slot], { text: r.name, item: r.id }, r.stars, r.score == null ? '—' : { text: tx`${r.score}%`, tone: r.score >= 90 ? 'good' : r.score >= 60 ? 'warn' : 'bad' }, r.nextList || (r.score == null ? '—' : { text: 'доведено', tone: 'good' })]) }] : []),
       { kind: 'table', title: 'Классы', note: 'Опыт получает в полной мере только выбранный класс, остальные — 25%.', columns: ['Класс', 'Уровень', 'Роль'], rows: classRows },
       { kind: 'text', title: 'Как быстрее качать Catacombs', text: [
-        'Играй на S+ (300 очков): очки дают секреты, убитые мобы, скорость и отсутствие смертей.',
+        'Играй на S+ (300 очков): из чего складывается счёт — в блоке «Как набрать 300 очков» ниже.',
         lo?.witherborn ? tx`Твой сет для данжей — ${loName}: бонус Witherborn 4/4 активен. Смешивать части Necron/Storm/Goldor/Maxor можно, бонус у них общий.`
           : wo.total ? tx`Частей Wither у тебя ${wo.total}; в лучшем слоте ${lo?.wither || 0}/4. Бонус Witherborn включается, когда надеты 4 любые части Wither.`
           : 'Брони Wither пока нет: она падает с F7/M7 и улучшается эссенцией Wither.',
-        tx`Секретов найдено: ${num(d.secrets)}. Секреты дают очки исследования (Exploration) для S+.`,
         'Kismet Feather перекручивает содержимое сундука после захода, а Dungeon Chest Key позволяет открыть ещё один сундук.',
       ] },
+      scoreTable(d),
+      scoreCalcSection(d),
+      scoreSection(),
+      puzzleToolsSection(),
+      puzzlesSection(topFloor),
+      secretsSection(d),
+      bloodSection(d),
+      blessingSection(),
       ...(income.length ? [{ kind: 'text', title: 'Заработок в данжах', text: income }] : []),
     ],
   };

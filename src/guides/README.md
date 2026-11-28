@@ -37,6 +37,7 @@ Section (`kind`):
 - `steps`: `{ kind: 'steps', title, items: [{ title, text?, done?, current?, items?: [id] }] }`
 - `checklist`: `{ kind: 'checklist', title, items: [{ text, done, hint?, item? }] }`
 - `shapes`: `{ kind: 'shapes', title, items: [{ name, cells: [[x, y]], badge?, text?, hint?, done?, item? }] }` — фигуры на сетке (окаменелости Fossil Excavator)
+- `cards`: `{ kind: 'cards', title, items: [{ name, text, tags?: [{ text, tone? }], lines?: [string], more?: { title, lines }, dim? }] }` — карточки с раскрываемыми подробностями (загадки Dungeons)
 - `table`: `{ kind: 'table', title, columns: [string], rows: [[Cell]], current?: rowIndex }`, где Cell — строка, число или `{ text, item?, tone?: 'good'|'bad'|'warn'|'muted' }`
 
 Любая секция может иметь `note` (мелкий текст под заголовком).
