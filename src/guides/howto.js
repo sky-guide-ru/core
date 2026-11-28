@@ -57,7 +57,7 @@ export const HOWTO = {
     step('Вкладывай токены и Powder', 'Открой /hotm: токены тратятся на новые перки, Powder — на уровни перков. Список важных перков — в таблице ниже.'),
     { ...step('Держи Forge занятой', 'The Forge (/warp forge) работает в реальном времени: положи рецепт и забери через несколько часов. Что выгодно ковать и как собрать детали бура — в гайде The Forge.'), link: { guide: 'forge', label: 'Гайд The Forge' } },
     step('Crystal Hollows', 'Купи пропуск у Gwendolyn в Dwarven Mines, спустись в Crystal Hollows, собери 5 кристаллов и поставь их в Crystal Nucleus.'),
-    step('Glacite Tunnels и Mineshafts', 'Из Dwarven Base Camp (/warp basecamp) иди в Glacite Tunnels: Umber, Tungsten, гемы. Если откроется Mineshaft — залутай Frozen Corpse.'),
+    step('Glacite Tunnels и Mineshafts', 'Из Dwarven Base Camp (/warp basecamp) иди в Glacite Tunnels: Umber, Tungsten, гемы. Если откроется Mineshaft — залутай Frozen Corpse, а награды за вехи забирай у Grandpa Wolf (/corpsemilestones).'),
   ],
   forge: [
     step('Открой Forge', 'Телепорт /warp forge. Forge открывается с HotM 1, новые слоты дают уровни HotM.'),
