@@ -4,6 +4,26 @@
 
 ## Не выпущено
 
+## 0.2.64
+
+- Выборы мэра (`src/calendar/election.js`, без диска и сети): снимки голосов (`addElection`), тренд доли за 3 ч (`trendOf`), шанс победы (`winChances`: доля + приглушённый тренд, разброс растёт с корнем из оставшихся часов, множитель `sigmaK` подбирается по прошлым выборам со снимками — `calibrate`), история (`historyStats`, `incumbentRuns`, `specialCycle` — правила выводятся из итогов, а не задаются руками), вид `electionView`: кандидаты с голосами, трендом, шансом, «почему», «если победит», пометками «новый» и «сильные перки»; лента «Ближайшие мэры», «когда снова» для каждого мэра (`nextFor`), доля побед, мэр для гайда (`GUIDE_MAYOR`).
+- `src/calendar/election-store.js`: итоги и снимки в `DATA_DIR/election-history.json`, `recordElection` из `refreshMayor`, `electionNow` для `/v1/election`. История с вики подключается файлом `src/calendar/data/election-history.json`, если он есть.
+- Новость «Выборы мэра: голоса и шансы», переводы блока выборов.
+
+## 0.2.63
+
+- Ивенты майнинга (`src/calendar/mining.js`): факты по 2x Powder, Better Together, Goblin Raid, Raffle, Mithril Gourmand, Fallen Star и Powder Ghast по вики hypixelskyblock.minecraft.wiki (28.11.2026); Gone with the Wind убран в 0.27.2. Что идёт сейчас — открытый трекер Soopy (`parseChEvents`, `createMiningEvents`: не чаще раза в минуту, молчит дольше 10 минут — `null`), `headline` для строки «сейчас».
+- `fiestaOutlook(now)` в `calendar/index.js`: идёт ли Mining Fiesta (мэр или министр с перком) и место, проценты и перки Cole на выборах.
+- Гайд Mining: живая секция `miningEvents` (новый тип, сайт берёт `/v1/mining-events`) и таблица «Что дают ивенты и что делать». `dailiesOf` отдаёт `mining: true` при HotM > 0.
+- Mining Fiesta: убран устаревший «двойной дроп» (календарь, перк мэра, подсказка заработка) — весь срок Cole, +25% Mining Fortune, Refined Mineral и Glossy Gemstone.
+- Новости «Ивенты майнинга в реальном времени» и «Верное описание Mining Fiesta», перевод.
+
+## 0.2.62
+
+- «Дела на сегодня»: Fetchur и Puzzler (`src/analysis/daily-npcs.js`) по вики (Fetchur, Puzzler, 28.11.2026). Fetchur — 12 предметов по кругу, с 1-го числа заново, день по Нью-Йорку (`FETCHUR`, `fetchurIndex`, `fetchurRequest`): что просит сегодня и завтра, где взять дешевле (NPC за монеты или Bazaar/AH через `liveCtx`; Ironman, Stranded, Bingo — только NPC), сколько уже есть у игрока. Puzzler — как решать. Оба только с доступом в Dwarven Mines. API не показывает, сделано ли, поэтому у дел новый признак `manual: 'day' | '24h'` и `done: null` — отметку ставит сайт.
+- `dailiesOf(m, now, ctx)`: третий аргумент — цены для Fetchur; без `member.daily`, но с `mining` тоже возвращает дела.
+- Гайд Mining: секция «Каждый день: Fetchur и Puzzler» (`news: 'fetchur'`) — круг Fetchur по числам месяца с ценами, координаты NPC, решение Puzzler.
+
 ## 0.2.61
 
 - Гемы в снаряжении (`src/calc/gems.js`: `gemPlan`, `itemGems`, `gemCandidates`, `kitGemHint`): статы камней по таблице официальной вики «Gemstone/Stats» (качество × редкость, 28.11.2026; Aquamarine — Fishing Speed с 0.22, Talisman of Power — половина стата), какие камни подходят в слот, цена открытия слота (NEU `gemstonecosts`), плата за снятие у Gemstone Grinder. Камень под роль вещи (Onyx вместо Jasper, если Strength больше Crit Damage на треть), качество под деньги (за слот не дороже 1% монет), камни из Gemstone Sack. Слоты Chisel не считаются (перки Fossil Excavator). Ironman, Stranded, Bingo — без цен.

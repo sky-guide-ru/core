@@ -25,6 +25,37 @@ export const NEWS = [
     ],
   },
   {
+    id: '2026-11-28-mining-events',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Ивенты майнинга в реальном времени',
+    items: [
+      'В [гайде Mining](guides/mining#events) видно, где сейчас идёт 2x Powder, Raffle или Goblin Raid и сколько осталось.',
+      'Там же — что даёт каждый ивент и что делать, пока он идёт.',
+      'Ивент, который идёт прямо сейчас, виден и в [Делах на сегодня](overview#dailies).',
+    ],
+  },
+  {
+    id: '2026-11-28-fiesta',
+    date: '2026-11-28',
+    kind: 'fix',
+    title: 'Верное описание Mining Fiesta',
+    items: [
+      'Mining Fiesta в [Событиях](events) идёт весь срок Cole: +25% Mining Fortune, Refined Mineral и Glossy Gemstone.',
+    ],
+  },
+  {
+    id: '2026-11-28-fetchur',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Fetchur и Puzzler в делах дня',
+    items: [
+      'В [Делах на сегодня](overview#dailies) — что Fetchur просит сегодня, где это купить и почём.',
+      'Puzzler там же: как решить головоломку; оба дают по 2 500 Mithril Powder в день.',
+      'Круг просьб Fetchur по числам месяца — в [гайде Mining](guides/mining#fetchur).',
+    ],
+  },
+  {
     id: '2026-11-28-gems',
     date: '2026-11-28',
     kind: 'new',

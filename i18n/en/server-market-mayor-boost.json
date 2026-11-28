@@ -5,7 +5,6 @@
  "+10 к оценке: S+ и лучшие сундуки проще": "+10 to the score: S+ and the best chests are easier",
  "Forge работает на 25% быстрее": "the Forge works 25% faster",
  "Майнинг": "Mining",
- "во время фиесты добычи дроп руды и гемов двойной: копай именно в эти дни (даты в «Событиях»)": "during the mining fiesta ore and gem drops are doubled: mine on exactly those days (dates in \"Events\")",
  "миньоны добычи на 25% быстрее": "mining minions are 25% faster",
  "бонусы за Pests в Garden": "Pest bonuses in the Garden",
  "счётчики культур на мотыгах засчитывают сбор дважды (урожай не растёт, быстрее качаются инструменты)": "crop counters on hoes count harvests twice (yield doesn't grow, tools level faster)",
@@ -23,5 +22,6 @@
  "на Dark Auction больше лотов": "more lots at the Dark Auction",
  "Ивенты": "Events",
  "больше конфет, подарков и Chocolate с ивентов": "more candy, gifts and Chocolate from events",
- "Сейчас действует перк {0}: {1}{2}.": "Perk {0} is active now: {1}{2}."
+ "Сейчас действует перк {0}: {1}{2}.": "Perk {0} is active now: {1}{2}.",
+ "весь срок мэра +25% Mining Fortune, а из руды и гемов падают Refined Mineral и Glossy Gemstone: хорошее время копать": "whole term +25% Mining Fortune, and ores and gemstones drop Refined Mineral and Glossy Gemstone: a good time to mine"
 }
