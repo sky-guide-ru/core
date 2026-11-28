@@ -36,17 +36,19 @@ export const BUILDS = {
     {
       id: 'mithril', title: 'Mithril и Titanium',
       desc: 'Копаешь Mithril в Dwarven Mines ради Titanium и Mithril Powder.',
-      pros: ['Больше Titanium и Mithril на продажу', 'Много Mithril Powder', 'Golden Goblin и Fallen Star чаще'],
+      pros: ['Больше Titanium и Mithril на продажу', 'Sky Mall иногда даёт ×5 Titanium на день', 'Много Mithril Powder', 'Golden Goblin и Fallen Star чаще'],
       cons: ['Мало Gemstone и Glacite Powder', 'Перки гемов и Crystal Hollows не работают'],
       // Mithril и Titanium — Dwarven Metals (NEU: type DWARVEN METAL), поэтому Strong Arm (Mining Speed по металлам)
       // и Metal Head (Dwarven Metal Fortune) — главные перки сверху дерева; Titanium Insanium — шанс Titanium.
-      // Способность: Mining Speed Boost (SkyKings, ноябрь 2026: «почти для всего»), Pickobulus — по желанию.
+      // Способность: Mining Speed Boost (SkyKings, ноябрь 2026: «почти для всего»). Sheer Force (+200 Mining Spread,
+      // Spread работает и на Dwarven Metals — вики) и Pickobulus — по желанию.
+      // Sky Mall: один из баффов — ×5 Titanium на игровой день (вики, Titanium: «extremely profitable»), через Old School.
       // Гемовые перки (Professional, Gem Lover, Mole, Front Loaded, Great Explorer) и Mineshaft-перки на Mithril не действуют.
       perks: ['mining_speed', 'mining_fortune', 'titanium_insanium', 'mining_speed_boost', 'precision_mining', 'efficient_miner',
-        'luck_of_the_cave', 'quick_forge', 'core_of_the_mountain', 'powder_buff', 'speedy_mineman', 'fortunate_mineman', 'strong_arm', 'metal_head'],
+        'luck_of_the_cave', 'sky_mall', 'quick_forge', 'core_of_the_mountain', 'powder_buff', 'speedy_mineman', 'fortunate_mineman', 'strong_arm', 'metal_head'],
       order: ['mining_speed', 'mining_fortune', 'titanium_insanium', 'metal_head', 'strong_arm', 'efficient_miner', 'speedy_mineman',
-        'fortunate_mineman', 'powder_buff', 'precision_mining', 'mining_speed_boost', 'luck_of_the_cave', 'quick_forge', 'core_of_the_mountain'],
-      optional: ['sky_mall', 'old_school', 'daily_powder', 'daily_grind', 'seasoned_mineman', 'pickobulus'],
+        'fortunate_mineman', 'powder_buff', 'precision_mining', 'mining_speed_boost', 'luck_of_the_cave', 'sky_mall', 'quick_forge', 'core_of_the_mountain'],
+      optional: ['sheer_force', 'pickobulus', 'daily_powder', 'daily_grind', 'seasoned_mineman'],
     },
     {
       id: 'commissions', title: 'Задания',

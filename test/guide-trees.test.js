@@ -167,8 +167,10 @@ test('сборка Mithril и Titanium: металлы сверху дерева
   const swap = b.steps.find(x => x.kind === 'swap');
   assert.ok(swap && swap.add.includes('titanium_insanium') && swap.add.includes('metal_head'));
   assert.ok(swap.bridge.includes('no_stone_unturned'), 'Metal Head достаётся через No Stone Unturned');
-  // снимаются лишние перки сверху, а не Sky Mall «по желанию»
+  // Sky Mall в сборке (бафф ×5 Titanium на день, вики) — не снимается
   assert.ok(!swap.remove.includes('sky_mall'), swap.remove.join());
+  assert.equal(b.targets.sky_mall.status, 'done');
+  assert.equal(b.targets.old_school.status, 'bridge', 'Old School — проход к Sky Mall');
   assert.ok(connected(s, s.perks.filter(p => p.level > 0).map(p => p.id).filter(id => !swap.remove.includes(id)).concat(swap.add)));
   // гемовые перки на Mithril не работают, но держат дерево — «оставить для прохода», а не «сделано»
   assert.equal(b.targets.professional.status, 'bridge');
