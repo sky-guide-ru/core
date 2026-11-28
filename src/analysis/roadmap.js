@@ -1,7 +1,7 @@
 // Готовая замена server/analysis/roadmap.js в ядре.
 // Модуль advisor копируется в server/advisor/, этот файл — в server/analysis/roadmap.js.
 // Сигнатура buildRoadmap(member, acc, gear) не меняется, state.js править не нужно.
-import { priceOf } from '../prices.js';
+import { priceOf, buyPriceOf } from '../prices.js';
 import { neu, itemName } from '../neu.js';
 import { moneyMethods } from './money.js';
 import * as advisor from '../advisor/index.js';
@@ -17,6 +17,8 @@ function opts(member) {
   try { methods = moneyMethods(member); } catch {}
   return {
     price: priceOf,
+    // Цена покупки (Instant Buy): для шагов, где советуем купить на Bazaar (гемы)
+    buyPrice: buyPriceOf,
     // itemName убирает шаблон «[Lvl {LVL}]» из названий питомцев NEU
     itemName: id => itemName(id)?.replace(/§./g, ''),
     constants: neu.constants,

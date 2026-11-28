@@ -2,7 +2,7 @@
 // Чистые функции: профиль (Member) + анализ аксессуаров/снаряжения + цены → шаги на русском и карта прогрессии.
 import { makeCtx, clamp, fmtCoins } from './lib/util.js';
 import { dungeonRules, slayerRules, crimsonRules } from './lib/rules/combat.js';
-import { ladderRules, upgradeRules, equipmentRules } from './lib/rules/gear.js';
+import { ladderRules, upgradeRules, equipmentRules, gemRules } from './lib/rules/gear.js';
 import { accessoryRules, petRules, minionRules, collectionRules, moneyRules, purchasePlan, bestPerHour } from './lib/rules/economy.js';
 import { quickRules, skillRules, foragingRules, miningRules, gardenRules, riftRules } from './lib/rules/skills.js';
 import { museumRules } from './lib/rules/museum.js';
@@ -67,7 +67,7 @@ export function guideFor(stepId) {
  */
 
 export const RULES = [
-  quickRules, accessoryRules, equipmentRules, upgradeRules, ladderRules,
+  quickRules, accessoryRules, equipmentRules, upgradeRules, gemRules, ladderRules,
   dungeonRules, slayerRules, crimsonRules, petRules, skillRules, foragingRules,
   miningRules, gardenRules, riftRules, minionRules, collectionRules, moneyRules, museumRules, petScoreRules, chocolateRules, bingoRules,
 ];
