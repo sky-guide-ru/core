@@ -55,6 +55,8 @@ export function dailiesOf(m, now = Date.now(), ctx = {}) {
   // Dwarven Mines: Fetchur и Puzzler — по 2 500 Mithril Powder; API не показывает, сделано ли
   items.push(...fetchurPuzzlerDailies(m, ctx, now));
 
-  if (!items.length) return null;
-  return { reset, next: reset + DAY, done: items.filter(i => i.done).length, total: items.length, items };
+  // Ивенты майнинга: сайт сам подставляет, что идёт сейчас (/v1/mining-events), если игрок уже копает в Dwarven Mines
+  const mining = (m.mining?.hotm?.level || 0) > 0;
+  if (!items.length && !mining) return null;
+  return { reset, next: reset + DAY, done: items.filter(i => i.done).length, total: items.length, items, mining };
 }

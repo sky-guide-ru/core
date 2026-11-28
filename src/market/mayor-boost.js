@@ -14,7 +14,7 @@ export const MAYOR_RULES = [
   { perk: 'EZPZ', mayor: 'Paul', tags: ['Dungeons'], factor: 1, note: '+10 к оценке: S+ и лучшие сундуки проще' },
   // Cole — добыча
   { perk: 'Molten Forge', mayor: 'Cole', ids: ['forge'], factor: 1.25, note: 'Forge работает на 25% быстрее' },
-  { perk: 'Mining Fiesta', mayor: 'Cole', tags: ['Mining', 'Майнинг'], factor: 1, note: 'во время фиесты добычи дроп руды и гемов двойной: копай именно в эти дни (даты в «Событиях»)' },
+  { perk: 'Mining Fiesta', mayor: 'Cole', tags: ['Mining', 'Майнинг'], factor: 1, note: 'весь срок мэра +25% Mining Fortune, а из руды и гемов падают Refined Mineral и Glossy Gemstone: хорошее время копать' },
   { perk: 'Prospection', mayor: 'Cole', tags: ['Миньоны'], factor: 1, note: 'миньоны добычи на 25% быстрее' },
   // Finnegan — Farming
   { perk: 'Pest Eradicator', mayor: 'Finnegan', ids: ['farming'], factor: 1.05, note: 'бонусы за Pests в Garden' },

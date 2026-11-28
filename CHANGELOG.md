@@ -4,6 +4,14 @@
 
 ## Не выпущено
 
+## 0.2.63
+
+- Ивенты майнинга (`src/calendar/mining.js`): факты по 2x Powder, Better Together, Goblin Raid, Raffle, Mithril Gourmand, Fallen Star и Powder Ghast по вики hypixelskyblock.minecraft.wiki (28.11.2026); Gone with the Wind убран в 0.27.2. Что идёт сейчас — открытый трекер Soopy (`parseChEvents`, `createMiningEvents`: не чаще раза в минуту, молчит дольше 10 минут — `null`), `headline` для строки «сейчас».
+- `fiestaOutlook(now)` в `calendar/index.js`: идёт ли Mining Fiesta (мэр или министр с перком) и место, проценты и перки Cole на выборах.
+- Гайд Mining: живая секция `miningEvents` (новый тип, сайт берёт `/v1/mining-events`) и таблица «Что дают ивенты и что делать». `dailiesOf` отдаёт `mining: true` при HotM > 0.
+- Mining Fiesta: убран устаревший «двойной дроп» (календарь, перк мэра, подсказка заработка) — весь срок Cole, +25% Mining Fortune, Refined Mineral и Glossy Gemstone.
+- Новости «Ивенты майнинга в реальном времени» и «Верное описание Mining Fiesta», перевод.
+
 ## 0.2.62
 
 - «Дела на сегодня»: Fetchur и Puzzler (`src/analysis/daily-npcs.js`) по вики (Fetchur, Puzzler, 28.11.2026). Fetchur — 12 предметов по кругу, с 1-го числа заново, день по Нью-Йорку (`FETCHUR`, `fetchurIndex`, `fetchurRequest`): что просит сегодня и завтра, где взять дешевле (NPC за монеты или Bazaar/AH через `liveCtx`; Ironman, Stranded, Bingo — только NPC), сколько уже есть у игрока. Puzzler — как решать. Оба только с доступом в Dwarven Mines. API не показывает, сделано ли, поэтому у дел новый признак `manual: 'day' | '24h'` и `done: null` — отметку ставит сайт.
