@@ -289,5 +289,12 @@
  "Гайд по Fossil Excavator": "Fossil Excavator guide",
  "В [гайде Mining](guides/mining#fossil) — как открыть Suspicious Scrap и формы всех окаменелостей.": "The [Mining guide](guides/mining#fossil) shows how to open Suspicious Scrap and the shapes of all fossils.",
  "Процент первой клетки подсказывает фигуру, а сданные Dr. Stone окаменелости отмечены.": "The first tile's percent tells the shape, and fossils donated to Dr. Stone are checked off.",
- "Блок «Открыть скрап или продать?» считает средний доход по ценам Bazaar.": "The \"Open the scrap or sell it?\" block works out the average income at Bazaar prices."
+ "Блок «Открыть скрап или продать?» считает средний доход по ценам Bazaar.": "The \"Open the scrap or sell it?\" block works out the average income at Bazaar prices.",
+ "Дерево HotM для Mithril и Titanium": "HotM tree for Mithril and Titanium",
+ "В [дереве Heart of the Mountain](guides/mining#hotm) новая сборка «Mithril и Titanium».": "The [Heart of the Mountain tree](guides/mining#hotm) has a new \"Mithril and Titanium\" build.",
+ "Главные перки — Titanium Insanium, Metal Head и Strong Arm: больше Titanium и быстрее добыча металлов.": "Key perks are Titanium Insanium, Metal Head and Strong Arm: more Titanium and faster metal mining.",
+ "План подсказывает, какие перки Mineshaft и гемов снять, чтобы хватило токенов.": "The plan shows which Mineshaft and gemstone perks to drop to free up tokens.",
+ "В [гайде The Forge](guides/forge) видно, что лежит в слотах и когда будет готово.": "The [The Forge guide](guides/forge) shows what is in your slots and when it will be ready.",
+ "Выгодные рецепты считаются под HotM и то, как часто удаётся зайти в Forge.": "Profitable recipes follow your HotM and how often you can visit the Forge.",
+ "Детали бура собираются по шагам в блоке [Улучшить бур](guides/forge#forge-drill): что есть, сколько ковать и что докупить.": "Drill parts are built step by step in [Upgrade your drill](guides/forge#forge-drill): what you have, how long to forge and what to buy."
 }

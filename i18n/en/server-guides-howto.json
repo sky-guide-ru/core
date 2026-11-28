@@ -181,5 +181,17 @@
  "Griffin Feather, Ancient Claw и Mythos Fragment идут на камни Griffin (улучшение у Kat), лопаты и броню. Редкий дроп продавай на аукционе или Bazaar.": "Griffin Feathers, Ancient Claws and Mythos Fragments go into Griffin stones (upgrades at Kat), spades and armor. Sell rare drops on the auction house or Bazaar.",
  "Как это делать — пошагово": "How to do it, step by step",
  "Подчёркнутые слова — подсказки: наведи, чтобы прочитать, нажми на предмет, чтобы открыть его карточку.": "Underlined words are hints: hover to read, click an item to open its card.",
- "До Fishing 27 — вода: Backwater Bayou, Moonglade Marsh на Galatea и Хотспоты. С 27 — лава Crimson Isle (/warp nether). Лавовые Хотспоты (пятна с частицами) дают свои бонусы и существ.": "Up to Fishing 27: water (Backwater Bayou, Moonglade Marsh on Galatea and Hotspots). From 27: Crimson Isle lava (/warp nether). Lava Hotspots (spots with particles) have their own bonuses and creatures."
+ "До Fishing 27 — вода: Backwater Bayou, Moonglade Marsh на Galatea и Хотспоты. С 27 — лава Crimson Isle (/warp nether). Лавовые Хотспоты (пятна с частицами) дают свои бонусы и существ.": "Up to Fishing 27: water (Backwater Bayou, Moonglade Marsh on Galatea and Hotspots). From 27: Crimson Isle lava (/warp nether). Lava Hotspots (spots with particles) have their own bonuses and creatures.",
+ "The Forge (/warp forge) работает в реальном времени: положи рецепт и забери через несколько часов. Что выгодно ковать и как собрать детали бура — в гайде The Forge.": "The Forge (/warp forge) works in real time: put in a recipe and collect it a few hours later. What is profitable and how to build drill parts — in the The Forge guide.",
+ "Гайд The Forge": "The Forge guide",
+ "Открой Forge": "Open the Forge",
+ "Телепорт /warp forge. Forge открывается с HotM 1, новые слоты дают уровни HotM.": "Warp /warp forge. The Forge opens at HotM 1, HotM levels add slots.",
+ "Забери готовое": "Collect finished items",
+ "Готовый предмет лежит в слоте, пока его не заберут: слот всё это время простаивает.": "A finished item stays in its slot until collected: the slot is idle all that time.",
+ "Положи выгодный рецепт": "Put in a profitable recipe",
+ "Что ковать под твой HotM и ритм заходов — в блоке «Выгодно ковать». Материалы покупай на Bazaar или бери из Sacks.": "What to forge for your HotM and visit rhythm — in «Profitable to forge». Buy materials on the Bazaar or take them from Sacks.",
+ "Собирай детали бура": "Build drill parts",
+ "Двигатель, топливный бак и модуль ставит и снимает Jotraeline Greatforge в той же кузнице. Цепочки рецептов — в блоке «Улучшить бур».": "Jotraeline Greatforge in the same forge installs and removes the engine, fuel tank and module. Recipe chains are in «Upgrade your drill».",
+ "Ускорь ковку": "Forge faster",
+ "Перк Quick Forge в /hotm сокращает время ковки до 30%.": "The Quick Forge perk in /hotm cuts forge time by up to 30%."
 }

@@ -268,6 +268,7 @@ export function craftFlips(ctx, opts = {}) {
         ingredients: Object.fromEntries(c.parts.map(p => [p.id, p.n])), parts: c.parts,
         subCrafts: c.parts.filter(p => p.via === 'craft').map(p => p.id),
         req: crafttextRu(item.crafttext), crafttext: item.crafttext || '',
+        hotm: Number(String(item.crafttext || '').match(/HotM\s+(\d+)/i)?.[1] || 0), // уровень HotM для колонки в «Заработке»
       };
       // ингредиенты тоже надо купить: не больше той же доли часового оборота каждого из них на Bazaar
       let ingCap = Infinity;
