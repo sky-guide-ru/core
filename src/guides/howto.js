@@ -55,9 +55,16 @@ export const HOWTO = {
   mining: [
     step('Задания в Dwarven Mines', 'Телепорт /warp mines. Бери задания (Commissions) у Emissary или через Royal Pigeon: они дают опыт Heart of the Mountain и Mithril Powder.'),
     step('Вкладывай токены и Powder', 'Открой /hotm: токены тратятся на новые перки, Powder — на уровни перков. Список важных перков — в таблице ниже.'),
-    step('Держи Forge занятой', 'The Forge (/warp forge) работает в реальном времени: положи выгодный рецепт и забери через несколько часов.'),
+    { ...step('Держи Forge занятой', 'The Forge (/warp forge) работает в реальном времени: положи рецепт и забери через несколько часов. Что выгодно ковать и как собрать детали бура — в гайде The Forge.'), link: { guide: 'forge', label: 'Гайд The Forge' } },
     step('Crystal Hollows', 'Купи пропуск у Gwendolyn в Dwarven Mines, спустись в Crystal Hollows, собери 5 кристаллов и поставь их в Crystal Nucleus.'),
     step('Glacite Tunnels и Mineshafts', 'Из Dwarven Base Camp (/warp basecamp) иди в Glacite Tunnels: Umber, Tungsten, гемы. Если откроется Mineshaft — залутай Frozen Corpse.'),
+  ],
+  forge: [
+    step('Открой Forge', 'Телепорт /warp forge. Forge открывается с HotM 1, новые слоты дают уровни HotM.'),
+    step('Забери готовое', 'Готовый предмет лежит в слоте, пока его не заберут: слот всё это время простаивает.'),
+    step('Положи выгодный рецепт', 'Что ковать под твой HotM и ритм заходов — в блоке «Выгодно ковать». Материалы покупай на Bazaar или бери из Sacks.'),
+    step('Собирай детали бура', 'Двигатель, топливный бак и модуль ставит и снимает Jotraeline Greatforge в той же кузнице. Цепочки рецептов — в блоке «Улучшить бур».', ['MITHRIL_DRILL_ENGINE', 'MITHRIL_FUEL_TANK']),
+    step('Ускорь ковку', 'Перк Quick Forge в /hotm сокращает время ковки до 30%.'),
   ],
   farming: [
     step('Каждый день — Visitors Garden', 'Телепорт /warp garden. Выполняй заказы Visitors у Desk: это Copper и опыт Garden. Отказывайся, если заказ дороже награды.'),

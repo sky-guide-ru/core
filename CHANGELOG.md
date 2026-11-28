@@ -4,9 +4,19 @@
 
 ## Не выпущено
 
+## 0.2.49
+
 - Гайд майнинга: чек-лист «Другие кристаллы: для Perfect-гемов» (Jasper, Ruby, Opal, Aquamarine, Peridot, Onyx, Citrine) — где искать и что найдено по `mining_core.crystals`.
 - `guides/crystals.js`: справочник 12 Gemstone Crystals (где искать) и `crystalFound(member, key)`. «Как получить» (`costTree`, `buildObtainGuide`): кристалл в рецепте Perfect-гема — «найден / не найден · где искать» вместо «нет цены и рецепта», у карточки кристалла первым способ «Найти кристалл».
 - Новость «Кристаллы для Perfect-гемов в гайде».
+
+## 0.2.48
+
+- Гайд «The Forge» (`guides/forge.js`, вид `extra.forge`): слоты из `gather.forge` с временем готовности (Quick Forge учтён), выгодные рецепты под ритм заходов 4/12/24 ч (`forgeProfitPlans`: слот занят `ceil(длительность/ритм)·ритм`), цели под 🔒, цепочки деталей бура (`drillUpgrades`, `forgeChain`: вычитает запасы из хранилищ, Sacks и деталей на бурах, считает время по слотам и длинной ветке, цену материалов и готового).
+- Ironman/Stranded/Bingo: в гайде вместо цен — «Что ковать для себя» (`forgeForSelf`).
+- `guideCtx`: новые `deps.market` (MarketCtx) и `deps.collections`.
+- `craftFlips`: поле `hotm` (уровень HotM из рецепта) для колонки в «Заработке».
+- Шаг 3 гайда Mining ведёт в гайд The Forge (`link` у шага); новость «Гайд The Forge».
 
 ## 0.2.47
 
