@@ -312,5 +312,11 @@
  "Гайд по Experimentation Table": "Experimentation Table guide",
  "В [гайде Enchanting](guides/enchanting#superpairs) — ставки Superpairs, Chronomatron и Ultrasequencer по уровням.": "The [Enchanting guide](guides/enchanting#superpairs) lists Superpairs, Chronomatron and Ultrasequencer stakes by level.",
  "Подсказки, как играть в каждую игру, и что продаётся: Titanic Experience Bottle, Metaphysical Serum.": "Tips for playing each game, and what sells: Titanic Experience Bottle, Metaphysical Serum.",
- "Прогресс из профиля: лучшая ставка, выпитые Serum, пройден ли стол сегодня.": "Progress from the profile: best stake, Serums drunk, whether the table is done today."
+ "Прогресс из профиля: лучшая ставка, выпитые Serum, пройден ли стол сегодня.": "Progress from the profile: best stake, Serums drunk, whether the table is done today.",
+ "Гайд по Taming и прокачке питомцев": "Taming and pet leveling guide",
+ "В [гайде Taming](guides/taming#xp) — что ускоряет опыт питомцев: Exp Boost, Beastmaster Crest, Diana, Exp Share.": "The [Taming guide](guides/taming#xp) shows what speeds up pet XP: Exp Boost, Beastmaster Crest, Diana, Exp Share.",
+ "Тренировка у Fann и Carrot Candy: сколько дней и монет нужно до 100 уровня.": "Fann's training and Carrot Candy: how many days and coins it takes to reach level 100.",
+ "Для своих питомцев — где каждый качается без штрафа и выгодно ли докачать его на продажу.": "For your own pets: where each one levels without a penalty and whether leveling it to sell pays off.",
+ "«Питомцы по этапам» учитывают монеты": "\"Pets by stage\" counts your coins",
+ "Исправлена ошибка: [питомцы по этапам](guides/mining#pets) всегда считались дорогими, а Ironman видел цены аукциона.": "Fixed a bug: [pets by stage](guides/mining#pets) were always shown as too expensive, and Ironman saw auction prices."
 }
