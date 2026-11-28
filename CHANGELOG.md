@@ -4,6 +4,13 @@
 
 ## Не выпущено
 
+## 0.2.64
+
+- Новый гайд «Драконы и Zealots» (`src/guides/dragons.js`, данные `dragons-data.js`, группа combat) по вики (Ender Dragon, Summoning Eye, Zealot, Dragon's Nest, Dragon Armor, Draconic Altar, 28.11.2026): 7 вариантов дракона с шансами, Dragon Weight за глаза и место по урону, главный дроп с порогами и шансами (правка весов 2025/Sep 2), выгода раскладов по ценам (`lootFor`, `averageLoot`, `SCENARIOS`), источники Summoning Eye, шанс Special Zealot, бои игрока. Шаги: Combat 12, лук с Dragon Tracer, продать глаза или класть 4, Ender Dragon Epic → Legendary, Zealuck. Ironman/Stranded/Bingo — без цен.
+- Гайд отдаёт `extra.dragons` для своей страницы в web: карточки вариантов, сетка калькулятора вклада (`grid[глаза][место]`: вклад, средний дроп, цена глаз, итог, что открыто), пороги дропа. Секции, показанные карточками, помечены `card`.
+- `extras.dragonFight`: убийства и смерти по видам драконов (`player_stats.kills/deaths.<тип>_dragon`), лучший урон, быстрейшее убийство, призвано, своих глаз положено, разбито Ender Crystal.
+- Личные шансы: Magic Find со «Снаряжения» + Bestiary «Dragon» (+45/60/75 с 15/20/25 уровня, `dragonBestiary`), Pet Luck (`statSheet`) для питомца, шанс Special Zealot с Enderman 100 и Zealuck (`zealotChance`). `lootFor`/`averageLoot` принимают `luck`, сетка калькулятора отдаёт `chance` — шанс каждой вещи за дракона. Секция «Твоя удача на драконах».
+
 ## 0.2.63
 
 - Ивенты майнинга (`src/calendar/mining.js`): факты по 2x Powder, Better Together, Goblin Raid, Raffle, Mithril Gourmand, Fallen Star и Powder Ghast по вики hypixelskyblock.minecraft.wiki (28.11.2026); Gone with the Wind убран в 0.27.2. Что идёт сейчас — открытый трекер Soopy (`parseChEvents`, `createMiningEvents`: не чаще раза в минуту, молчит дольше 10 минут — `null`), `headline` для строки «сейчас».
