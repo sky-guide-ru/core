@@ -95,5 +95,8 @@
  "Крафт на верстаке: массовый крафт из своих материалов (миньоны, мешки Sacks)": "Crafting at a workbench: bulk-craft from your own materials (minions, Sacks)",
  "+25 к Wisdom всех скиллов (≈+25% опыта), +10 Magic Find, Bits для магазина Elizabeth, монеты не теряются при смерти.": "+25 Wisdom for all skills (≈+25% XP), +10 Magic Find, Bits for Elizabeth's shop, no coins lost on death.",
  "Купи Booster Cookie в Community Shop у Elizabeth (Hub) за SkyBlock Gems и съешь": "Buy a Booster Cookie in the Community Shop from Elizabeth (Hub) for SkyBlock Gems and eat it",
- "Зачарование на Enchantment Table и книги на наковальне (до 500 тыс. XP в день)": "Enchant on the Enchantment Table and apply books on the anvil (up to 500k XP a day)"
+ "Зачарование на Enchantment Table и книги на наковальне (до 500 тыс. XP в день)": "Enchant on the Enchantment Table and apply books on the anvil (up to 500k XP a day)",
+ "Commissions: ≈{0} до HotM {1} ({2} опыта за задание в {3})": "Commissions: ≈{0} to HotM {1} ({2} XP per commission in {3})",
+ "Первые 4 задания каждый день дают ещё +900 опыта HotM — больше, чем само задание": "The first 4 commissions each day give another +900 HotM XP, more than the commission itself",
+ "Слотов заданий {0} из 4: третий — за 100 заданий, четвёртый — Core of the Mountain 3": "Commission slots {0} of 4: the third at 100 commissions, the fourth with Core of the Mountain 3"
 }

@@ -118,9 +118,11 @@ const petLabel = (ctx, type) => String(ctx.name(tx`${type};4`) || type).replace(
  * @returns {{ rows: object[], next: object|null, best: object|null }}
  */
 export function petLadder(ctx, key, opts = {}) {
-  const market = ctx.market !== false;
-  const bingo = ctx.mode?.id === 'bingo';
-  const liquid = Number(ctx.liquid || 0);
+  // В гайдах режим профиля, деньги и «есть ли рынок» лежат в ctx.adv (ctx.market там — цены The Forge, не флаг)
+  const src = ctx.adv || ctx;
+  const market = src.market !== false;
+  const bingo = src.mode?.id === 'bingo';
+  const liquid = Number(src.liquid || 0);
   // Bingo живёт недолго: эндгейм не советуем; onlyOwned показываем только владельцу
   const ladder = (PET_LADDERS[key] || []).filter(r => !(bingo && r.stage === 3) && (!r.onlyOwned || bestPet(ctx, r.type))
     && (!r.boss || r.boss === opts.boss) && (!r.cls || !opts.cls || r.cls.includes(opts.cls)));
@@ -176,6 +178,7 @@ export function petLadderSection(ctx, key, opts = {}) {
   return {
     kind: 'table', title: opts.title || 'Питомцы по этапам', news: 'pets',
     note: note.join(' '),
+    link: { href: '#/guides/taming', text: 'Как быстро прокачать питомца и какой предмет ему дать →' },
     columns: ['Этап', 'Питомец', 'Для чего', 'Что даёт', 'Где взять', 'У тебя'],
     rows: L.rows.map(r => [
       r.event ? EVENT : STAGES[r.stage],
