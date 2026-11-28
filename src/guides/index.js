@@ -27,6 +27,7 @@ import collectibles from './collectibles.js';
 import diana from './diana.js';
 import hunting from './hunting.js';
 import chocolate from './chocolate.js';
+import enchanting from './enchanting.js';
 import { tx } from '../../i18n/msg.js';
 
 export const GUIDES = [
@@ -49,6 +50,7 @@ export const GUIDES = [
   collectibles,
   diana,
   chocolate,
+  enchanting,
 ];
 
 export const GROUPS = {

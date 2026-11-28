@@ -4,6 +4,14 @@
 
 ## Не выпущено
 
+## 0.2.55
+
+- Новый гайд «Enchanting и Experiments» (`src/guides/enchanting.js`, группа skills) по вики (Experiments, Experimentation Table, Metaphysical Serum, Enchanting, 28.11.2026): ставки Superpairs, Chronomatron и Ultrasequencer (`SUPERPAIRS`, `CHRONOMATRON`, `ULTRASEQUENCER`, `runXp`), заряды и докупка за Bits (`RESETS`), как играть, что продаётся, Metaphysical Serum и RNG Meter, уровни Enchanting, зачарования по слотам (`ENCHANTS`). Шаги: пройти Experiments сегодня, играть на открытой ставке, следующий уровень, Serum, Guardian.
+- `extras.experiments`: `top` — самая высокая ставка, на которой играл (по `attempts_N`/`claims_N`), `claims` — всего наград Superpairs.
+- «Дела на сегодня»: Experiments — «игры стола», а не «столы», ссылка ведёт в гайд.
+- Совет Enchanting без Bookshelf Power (убран из игры в 0.26.1).
+- Фикстура: данные экспериментов и Serum.
+
 ## 0.2.54
 
 - Гайд Mining: блок Fossil Excavator (`src/guides/fossil.js`) — как открыть Suspicious Scrap, формы шести окаменелостей с процентом «Fossil Excavation Progress», сданные Dr. Stone (`gather.fossils`), выгода «открыть или продать» (`excavatorValue`: веса лута с вики, но забирается только откопанное — заряды, Citrine, Onyx, Aquamarine, Peridot из гемов Chisel через `chiselGems`) и Chisel игрока. Шаги «Скрап выгоднее продать / открой», «Сдай Dr. Stone» (только те окаменелости, что лежат у игрока), «Улучши Chisel».

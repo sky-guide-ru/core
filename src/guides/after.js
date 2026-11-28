@@ -135,6 +135,14 @@ export const AFTER = {
     ],
     related: ['foraging', 'fishing', 'kuudra'],
   },
+  enchanting: {
+    goals: [
+      'Experiments каждый день ради Titanic Experience Bottle и книг: стол остаётся одним из лучших ежедневных доходов.',
+      'Ultra-Rare книги в RNG Meter стола: каждые 1 000 XP из Superpairs — очко.',
+      'Mythic Guardian: +7% к шансу Ultra-Rare книг.',
+    ],
+    related: ['essence', 'museum'],
+  },
   chocolate: {
     goals: [
       'Все кролики: яйца Hoppity каждую весну, резиденты на островах и бродячие кролики в окне фабрики.',

@@ -22,10 +22,10 @@ export function dailiesOf(m, now = Date.now()) {
   const reset = dailyReset(now);
   const items = [];
 
-  // Experiments: Superpairs, Chronomatron, Ultrasequencer — по награде в день (стол в Hub или Private Island)
+  // Experiments: один заход — Chronomatron, Ultrasequencer и Superpairs (стол на Private Island)
   if ((m.skills?.enchanting?.level || 0) >= 10 || (d.experiments || []).some(Boolean)) {
     const n = (d.experiments || []).filter(t => t >= reset).length;
-    items.push({ id: 'experiments', title: 'Experiments', done: n >= 3, progress: [n, 3], text: n >= 3 ? 'Все три стола сегодня пройдены.' : ru`Пройдено ${n} из 3 столов: Superpairs, Chronomatron, Ultrasequencer.` , href: '#/guides' });
+    items.push({ id: 'experiments', title: 'Experiments', done: n >= 3, progress: [n, 3], text: n >= 3 ? 'Заход на Experimentation Table сегодня пройден.' : ru`Пройдено ${n} из 3 игр стола: Chronomatron, Ultrasequencer и Superpairs.`, href: '#/guides/enchanting' });
   }
 
   // Crimson Isle: ежедневные квесты фракции (обычно 5 в день)

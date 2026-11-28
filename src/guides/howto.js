@@ -111,6 +111,13 @@ export const HOWTO = {
     step('Извлекай осколки', '/huntingbox → кликни по осколку: он прокачивает свой атрибут. Нужен уровень Hunting под редкость (Uncommon 5, Rare 10, Epic 15, Legendary 20).'),
     step('Фьюжн', 'Fusion Machine в Tangleburg: два вида осколков → новый. Так делаются Hunter Fortune-атрибуты и Hideonring (слоты аксессуаров).'),
   ],
+  enchanting: [
+    step('Подними Enchanting до 10', 'Зачаровывай вещи на Enchantment Table (/et с Booster Cookie) или ставь книги на наковальне. Опыт Minecraft даёт Experience Bottle: Librarian в Hub продаёт их по 30 монет.', ['EXP_BOTTLE']),
+    step('Скрафти и поставь стол', 'Experimentation Table: 8 Oak Log и Experience Bottle. Поставь на Private Island (/warp home) и нажми ПКМ.', ['EXPERIMENTATION_TABLE']),
+    step('Сыграй две доп. игры', 'Chronomatron и Ultrasequencer: повтори цепочку цветов и порядок чисел. Они дают XP и лишние клики для Superpairs.'),
+    step('Сыграй Superpairs', 'Открывай клетки по две: одинаковая пара забирает награду. Выбирай самую высокую открытую ставку.'),
+    step('Повторяй каждый день', 'У стола 3 заряда, они возвращаются через 24 часа. Ещё 3 захода в день покупаются за Bits и уровни опыта.'),
+  ],
   chocolate: [
     step('Открой фабрику', 'Команда /cf. Накликай 50 Chocolate и найми Rabbit Bro: дальше Chocolate копится сам.'),
     step('Качай сотрудников до капа', 'Сначала младших: при равном уровне у них +1 Chocolate/с дешевле. Кап растёт с престижем.'),

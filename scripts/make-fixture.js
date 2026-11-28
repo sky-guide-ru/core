@@ -88,7 +88,7 @@ const member = {
     employees: { rabbit_bro: 220, rabbit_cousin: 220, rabbit_sis: 220, rabbit_father: 220, rabbit_grandma: 220, rabbit_uncle: 220, rabbit_dog: 220 }, time_tower: { level: 15 }, chocolate_since_prestige: 31200000000, rabbit_barn_capacity_level: 26, click_upgrades: 40 } },
   attributes: { stacks: { forest_fishing: 96, cheapstake: 96, hunter: 96, forest_strength: 96, arachno_resistance: 81, pest_luck: 64, ender: 64, arachno: 64, fig_collector: 12, chocolate_speed: 3, accessory_size: 20, almighty: 5, midas_touch: 7, deep_technique: 2 } },
   shards: { owned: [['ZEALOT', 1], ['HOWLING_SPIRIT', 5], ['BRUISER', 1], ['DRACONIC', 1], ['THYST', 1], ['ZOMBIE_SOLDIER', 1], ['BAL', 2], ['WITHER_SPECTER', 4], ['SYCOPHANT', 4], ['YOG', 1], ['FLARE', 1], ['PEST', 12], ['FLAMING_SPIDER', 2], ['GOLDEN_GHOUL', 2], ['VORACIOUS_SPIDER', 1]].map(([type, amount_owned]) => ({ type, amount_owned })) },
-  experimentation: { pairings: { best_score_5: 7 }, simon: { best_score_4: 30 }, numbers: { best_score_3: 28 } },
+  experimentation: { pairings: { best_score_5: 7, attempts_4: 40, claims_4: 40, last_claimed: Date.now() - 30 * 3600_000 }, simon: { best_score_4: 30, attempts_4: 40 }, numbers: { best_score_3: 28, attempts_3: 40 }, serums_drank: 2 },
   player_stats: { shard_fishing_hunts: 984, shard_combat_hunts: 306, shard_forest_hunts: 181, highest_damage: 33484284,
     auctions: { completed: 79, won: 334, gold_earned: 172247060, gold_spent: 2747041306, highest_bid: 462000000, fees: 5100000 },
     mythos: { kills: 65, burrows_dug_treasure: { total: 60 }, burrows_dug_combat: { total: 57 } }, gifts: { total_received: 2634, total_given: 489 },

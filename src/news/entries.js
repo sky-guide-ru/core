@@ -14,6 +14,17 @@
 
 export const NEWS = [
   {
+    id: '2026-11-28-experiments',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по Experimentation Table',
+    items: [
+      'В [гайде Enchanting](guides/enchanting#superpairs) — ставки Superpairs, Chronomatron и Ultrasequencer по уровням.',
+      'Подсказки, как играть в каждую игру, и что продаётся: Titanic Experience Bottle, Metaphysical Serum.',
+      'Прогресс из профиля: лучшая ставка, выпитые Serum, пройден ли стол сегодня.',
+    ],
+  },
+  {
     id: '2026-11-28-fossil',
     date: '2026-11-28',
     kind: 'new',

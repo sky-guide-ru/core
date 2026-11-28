@@ -409,7 +409,14 @@ export async function parseMember(profile, uuid, extra = {}) {
     experiments: (() => {
       const e = m.experimentation || {};
       const best = (o, pre) => Math.max(0, ...Object.entries(o || {}).filter(([k]) => k.startsWith(pre)).map(([, v]) => Number(v) || 0));
-      return { superpairs: best(e.pairings, 'best_score_'), chronomatron: best(e.simon, 'best_score_'), ultrasequencer: best(e.numbers, 'best_score_'), serums: e.serums_drank || 0 };
+      // Самая высокая ставка, на которой игрок хоть раз играл: attempts_N / claims_N, N — 0 Beginner … 5 Metaphysical
+      const top = o => Math.max(-1, ...Object.entries(o || {}).filter(([k, v]) => /^(attempts|claims)_\d+$/.test(k) && Number(v) > 0).map(([k]) => Number(k.split('_')[1])));
+      const sum = (o, pre) => Object.entries(o || {}).filter(([k]) => k.startsWith(pre)).reduce((s, [, v]) => s + (Number(v) || 0), 0);
+      return {
+        superpairs: best(e.pairings, 'best_score_'), chronomatron: best(e.simon, 'best_score_'), ultrasequencer: best(e.numbers, 'best_score_'), serums: e.serums_drank || 0,
+        top: { superpairs: top(e.pairings), chronomatron: top(e.simon), ultrasequencer: top(e.numbers) },
+        claims: sum(e.pairings, 'claims_'),
+      };
     })(),
     gardenChips: pd.garden_chips || {},
     deaths: pd.death_count || 0,
