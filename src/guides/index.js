@@ -17,6 +17,7 @@ import rift from './rift.js';
 import fishing from './fishing.js';
 import trophy from './trophy.js';
 import mining from './mining.js';
+import forge from './forge.js';
 import farming from './farming.js';
 import foraging from './foraging.js';
 import minions from './minions.js';
@@ -38,6 +39,7 @@ export const GUIDES = [
   fishing,
   trophy,
   mining,
+  forge,
   farming,
   foraging,
   hunting,
@@ -74,6 +76,8 @@ export function guideCtx(member, analysis = {}, deps = {}) {
     adv,                                    // полный контекст advisor (data.slayerXp и т. п.)
     constants: deps.constants || null,      // константы NEU (fairy_souls, abiphone, islands…)
     items: deps.items || null,              // Map id → предмет NEU (координаты NPC для подсказок)
+    market: deps.market || null,            // MarketCtx (цены Bazaar/AH для гайда The Forge); без него — только цены priceOf
+    collections: deps.collections || null,  // пороги коллекций для «Requires: Mithril X»
   };
 }
 
