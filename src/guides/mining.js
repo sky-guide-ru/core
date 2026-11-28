@@ -4,6 +4,7 @@ import { hotmTreeSection } from './trees/index.js';
 import { petLadderSection, petNextStep } from './pets.js';
 import { fmt, short, plural, hasItem, ladderPos, howText, constants, cell, tone, topNext, lc } from './gathering-util.js';
 import { tx } from '../../i18n/msg.js';
+import { NUCLEUS_CRYSTALS, OTHER_CRYSTALS } from './crystals.js';
 
 const POWDER = { MITHRIL: 'Mithril', GEMSTONE: 'Gemstone', GLACITE: 'Glacite' };
 
@@ -32,14 +33,7 @@ const KEY_PERKS = {
   sky_mall: 'Случайный бафф добычи каждый день',
 };
 
-// Кристаллы для Crystal Nucleus и где их искать
-const NUCLEUS = [
-  ['jade', 'Jade', 'Mines of Divan: найди Metal Detector’ом 4 потерянных инструмента и отдай их Keeper’ам'],
-  ['amber', 'Amber', 'Goblin Holdout: Goblin Queen в её логове'],
-  ['amethyst', 'Amethyst', 'Jungle: Jungle Temple, пройди храм ключом Jungle Key'],
-  ['sapphire', 'Sapphire', 'Precursor Remnants: Lost Precursor City, Professor Robot (собери 6 деталей)'],
-  ['topaz', 'Topaz', 'Magma Fields: убей босса Bal в Khazad-dûm'],
-];
+
 
 const DRILLS = ['MITHRIL_PICKAXE', 'REFINED_MITHRIL_PICKAXE', 'TITANIUM_PICKAXE', 'REFINED_TITANIUM_PICKAXE', 'MITHRIL_DRILL_1', 'MITHRIL_DRILL_2', 'TITANIUM_DRILL_1', 'TITANIUM_DRILL_2', 'TITANIUM_DRILL_3', 'TITANIUM_DRILL_4', 'DIVAN_DRILL'];
 const GEM_DRILLS = ['GEMSTONE_DRILL_1', 'GEMSTONE_DRILL_2', 'GEMSTONE_DRILL_3', 'GEMSTONE_DRILL_4'];
@@ -107,8 +101,8 @@ export default {
 
     // ---- Crystal Hollows ----
     const cr = mi.crystals || {};
-    const nucleusRuns = Math.min(...NUCLEUS.map(([k]) => cr[k]?.placed || 0));
-    const missing = NUCLEUS.filter(([k]) => cr[k]?.state !== 'FOUND' && cr[k]?.state !== 'PLACED');
+    const nucleusRuns = Math.min(...NUCLEUS_CRYSTALS.map(([k]) => cr[k]?.placed || 0));
+    const missing = NUCLEUS_CRYSTALS.filter(([k]) => cr[k]?.state !== 'FOUND' && cr[k]?.state !== 'PLACED');
     if (nucleusRuns < 1) {
       next.push({ title: 'Пройди первый Crystal Nucleus', priority: 58, why: 'Собери 5 кристаллов и поставь их в Crystal Nucleus в центре Crystal Hollows: это открывает сундук с частями Divan, гемами и Powder. Где искать: в разделе «Crystal Hollows».' });
     }
@@ -159,13 +153,24 @@ export default {
     sections.push({
       kind: 'checklist', title: 'Crystal Hollows: кристаллы для Crystal Nucleus',
       note: tx`Nucleus пройден ${fmt(nucleusRuns)} ${plural(nucleusRuns, 'раз', 'раза', 'раз')}. Кристаллы сбрасываются после каждого прохождения, поэтому «найден» — это текущий заход.`,
-      items: NUCLEUS.map(([k, n, where]) => ({
+      items: NUCLEUS_CRYSTALS.map(([k, n, where]) => ({
         text: tx`${n} Crystal${cr[k]?.placed ? tx` · поставлен ${fmt(cr[k].placed)} ${plural(cr[k].placed, 'раз', 'раза', 'раз')}` : ''}`,
         done: cr[k]?.state === 'FOUND' || cr[k]?.state === 'PLACED',
         hint: where,
       })),
     });
     if (missing.length && nucleusRuns > 0) sections[sections.length - 1].note += tx` Для следующего захода не хватает: ${missing.map(x => x[1]).join(', ')}.`;
+    const otherFound = OTHER_CRYSTALS.filter(([k]) => cr[k]?.state === 'FOUND').length;
+    sections.push({
+      kind: 'checklist', news: 'crystals', title: 'Другие кристаллы: для Perfect-гемов',
+      note: tx`Найдено ${otherFound} из ${OTHER_CRYSTALS.length}. Для Crystal Nucleus они не нужны: каждый кристалл уходит в Forge на один Perfect-гем (5 Flawless + 1 Crystal, 20 ч, HotM 5). В Mineshaft нужного типа кристалл появляется с шансом 25%, забрать его может только тот, кто нашёл шахту.`,
+      items: OTHER_CRYSTALS.map(([k, n, where]) => ({
+        text: tx`${n} Crystal${cr[k]?.found ? tx` · найден ${fmt(cr[k].found)} ${plural(cr[k].found, 'раз', 'раза', 'раз')}` : ''}`,
+        done: cr[k]?.state === 'FOUND',
+        hint: where,
+        item: `PERFECT_${n.toUpperCase()}_GEM`,
+      })),
+    });
 
     sections.push({
       kind: 'table', title: 'Glacite Tunnels и Mineshafts',

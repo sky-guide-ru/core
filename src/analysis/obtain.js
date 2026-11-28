@@ -20,6 +20,7 @@ import { SLAYER_COST, SLAYER_INFO, MASTER_REQ } from '../guides/combat/data.js';
 import { tx } from '../../i18n/msg.js';
 import { darkAuctionOf } from './dark-auction.js';
 import { ownedPool, takeOwned } from '../lib/owned.js';
+import { gemCrystal, crystalFound } from '../guides/crystals.js';
 
 const strip = s => String(s || '').replace(/§./g, '').trim();
 const SLOTS = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
@@ -262,6 +263,12 @@ export function costTree(id, count, ctx, depth = 0, seen = new Set(), budget = {
     if (cur.coins) Object.assign(node, { name: 'Монеты', unit: 1, total: count, via: 'coins', viaRu: 'монеты' });
     else Object.assign(node, { via: 'currency', viaRu: cur.how || cur.ru, name: cur.ru });
     return node;
+  }
+  // Gemstone Crystal — не предмет, а отметка в профиле: найден или нет, и где искать
+  const gc = gemCrystal(id);
+  if (gc) {
+    const found = crystalFound(ctx.member, gc.key);
+    return Object.assign(node, { via: 'none', crystal: { found }, viaRu: found === true ? 'кристалл найден' : found === false ? tx`кристалл не найден · ${gc.where}` : gc.where });
   }
   const opts = [];
   const mk = ctx.buy(id);
@@ -612,6 +619,21 @@ export function buildObtainGuide(id, ctx) {
     if (rc.tools) steps.push({ text: rc.tools });
     if (c?.tiers?.length) steps.push({ text: tx`Каждая штука идёт в коллекцию Рифта ${rc.name}: тиры на ${c.tiers.map(n => n.toLocaleString('ru-RU')).join(' / ')} шт. открывают рецепты${have != null ? tx`. У тебя сейчас ${have.toLocaleString('ru-RU')} шт.` : '.'}` });
     methods.push({ kind: 'rift', title: tx`Добыть в Рифте (${rc.area})`, guide: 'rift', steps });
+  }
+
+  // 6в. Gemstone Crystal: ищется в Crystal Hollows или Glacite Mineshafts
+  const gc = gemCrystal(id);
+  if (gc) {
+    const found = crystalFound(ctx.member, gc.key);
+    const steps = [
+      { text: gc.where.charAt(0).toUpperCase() + gc.where.slice(1) + '.' },
+      gc.nucleus
+        ? { text: 'Поставь его в Crystal Nucleus вместе с остальными четырьмя: откроется сундук с частями Divan, гемами и Powder.' }
+        : { text: tx`Кристалл уходит в Forge на один Perfect ${gc.name} Gemstone: 5 Flawless + 1 Crystal, 20 ч. Для следующего нужно найти его снова.` },
+    ];
+    if (found != null) steps.push({ text: found ? 'У тебя он найден.' : 'У тебя он пока не найден.' });
+    // главный способ (Mineshaft, задания Crystal Hollows) — первым, выше редких дропов с Frozen Corpse
+    methods.unshift({ kind: 'drop', title: gc.nucleus ? 'Найти в Crystal Hollows' : 'Найти кристалл', guide: 'mining', steps });
   }
 
   // 7. Обмен (режим Stranded и торговцы)

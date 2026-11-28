@@ -129,5 +129,13 @@
  "Catacombs {0} и пройденный {1}": "Catacombs {0} and a completed {1}",
  "F7 — без него Master Mode закрыт": "F7: Master Mode stays locked without it",
  "Сейчас BIN-лотов с «{0}» нет, но вещь продаётся: за неделю {1} шт., в среднем по {2}. Загляни позже — новые лоты появляются регулярно.": "No BIN listings of “{0}” right now, but it does sell: {1} sold this week, {2} on average. Check back later, new listings show up regularly.",
- " На аукционе 1 шт. уходит в среднем за {0}.": " On the Auction House 1 sells for {0} on average."
+ " На аукционе 1 шт. уходит в среднем за {0}.": " On the Auction House 1 sells for {0} on average.",
+ "кристалл найден": "crystal found",
+ "кристалл не найден · {0}": "crystal not found · {0}",
+ "Поставь его в Crystal Nucleus вместе с остальными четырьмя: откроется сундук с частями Divan, гемами и Powder.": "Place it in the Crystal Nucleus with the other four: it opens a chest with Divan parts, gems and Powder.",
+ "Кристалл уходит в Forge на один Perfect {0} Gemstone: 5 Flawless + 1 Crystal, 20 ч. Для следующего нужно найти его снова.": "The crystal goes into the Forge for one Perfect {0} Gemstone: 5 Flawless + 1 Crystal, 20h. The next one needs it found again.",
+ "У тебя он найден.": "You have found it.",
+ "У тебя он пока не найден.": "You have not found it yet.",
+ "Найти в Crystal Hollows": "Find in Crystal Hollows",
+ "Найти кристалл": "Find the crystal"
 }
