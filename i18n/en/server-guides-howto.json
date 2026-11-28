@@ -232,5 +232,6 @@
  "Сначала разбей Ender Crystal на шипах, потом стреляй луком с Dragon Tracer. Remnant of the Eye в инвентаре спасает от смерти.": "First break the Ender Crystals on the spikes, then shoot with a Dragon Tracer bow. A Remnant of the Eye in the inventory saves you from death.",
  "Сравни дроп с ценой глаз": "Compare loot to the eye price",
  "Чем больше вклад (свои глаза и место по урону), тем лучше дроп. Таблица «Выгода» ниже считает, окупается ли призыв.": "The more weight (own eyes and damage place), the better the loot. The \"Profit\" table below shows whether summoning pays off.",
- "Нужен Combat 12. С острова The End иди вниз по тропе к воротам гнезда. Команда /warp drag есть только с MVP+ и после Travel Scroll to Dragon's Nest.": "You need Combat 12. From The End island walk down the path to the nest gate. The /warp drag command needs MVP+ and the Travel Scroll to Dragon's Nest."
+ "Нужен Combat 12. С острова The End иди вниз по тропе к воротам гнезда. Команда /warp drag есть только с MVP+ и после Travel Scroll to Dragon's Nest.": "You need Combat 12. From The End island walk down the path to the nest gate. The /warp drag command needs MVP+ and the Travel Scroll to Dragon's Nest.",
+ "Нужен Combat 12. С острова The End иди вниз по тропе к воротам гнезда или телепортируйся: /warp drag ведёт прямо в гнездо.": "Needs Combat 12. From The End island walk down the path to the nest gates, or teleport: /warp drag leads straight into the nest."
 }

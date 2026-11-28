@@ -4,6 +4,11 @@
 
 ## Не выпущено
 
+## 0.2.65
+
+- Телепорты `/warp` и Travel Scrolls (`src/guides/warps.js`) по вики (Travel Scrolls, 28.11.2026): `warpTable(constants)` — для каждого варпа место, редкость свитка (`free` / `RARE` / `EPIC`), откуда свиток, запасной путь (главный варп острова и расстояние по NEU `island_warps`, или проверенная дорога); `warpStatus(entry, { rankId, marks, bingo })` → `ok` / `scroll` / `rank` / `plain`; `hasMvpPlus(rankId)`. `/warp` доступен всем, EPIC-свитки — только с MVP+, в Bingo открыто всё. API не показывает открытые свитки — отметки хранит сайт.
+- Гайд «Души и коллекции»: секция «Мои телепорты: Travel Scrolls» (`kind: 'tool', tool: 'warp-scrolls'`, `news: 'warps'`).
+
 ## 0.2.64
 
 - Новый гайд «Драконы и Zealots» (`src/guides/dragons.js`, данные `dragons-data.js`, группа combat) по вики (Ender Dragon, Summoning Eye, Zealot, Dragon's Nest, Dragon Armor, Draconic Altar, 28.11.2026): 7 вариантов дракона с шансами, Dragon Weight за глаза и место по урону, главный дроп с порогами и шансами (правка весов 2025/Sep 2), выгода раскладов по ценам (`lootFor`, `averageLoot`, `SCENARIOS`), источники Summoning Eye, шанс Special Zealot, бои игрока. Шаги: Combat 12, лук с Dragon Tracer, продать глаза или класть 4, Ender Dragon Epic → Legendary, Zealuck. Ironman/Stranded/Bingo — без цен.
