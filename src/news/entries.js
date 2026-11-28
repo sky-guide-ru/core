@@ -14,6 +14,17 @@
 
 export const NEWS = [
   {
+    id: '2026-11-28-commissions',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по Commissions',
+    items: [
+      'В [гайде Mining](guides/mining#commissions) — Commission Milestones с прогрессом и наградами за каждую веху.',
+      'Где брать задания на трёх островах, сколько дают опыта HotM и Powder, какие делать быстрее.',
+      'План считает, сколько заданий осталось до следующего уровня HotM.',
+    ],
+  },
+  {
     id: '2026-11-28-puzzles',
     date: '2026-11-28',
     kind: 'new',

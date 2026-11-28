@@ -4,6 +4,13 @@
 
 ## Не выпущено
 
+## 0.2.57
+
+- Гайд Mining: Commissions и Commission Milestones (`src/guides/commissions.js`: `COMMISSION_MILESTONES`, `COMMISSION_AREAS`, `commissionState`, `commissionsToNextHotm`, `commissionGuide`) по вики (Commissions, Emissaries, King, Royal Pigeon, Queen Mismyla, Heart of the Mountain, 28.11.2026). Таблица шести вех (`news: 'commissions'`), острова с Emissary, опытом HotM, Powder и быстрыми заданиями, чек-лист «Commissions быстрее» (слоты, Royal Pigeon / Queen Mismyla, King Talisman).
+- Шаги: «Забери награду за Commission Milestone N», «Четвёртый слот заданий: Core of the Mountain → 3», «Royal Pigeon». Шаг «Подними HotM» и совет плана считают, сколько заданий до следующего уровня.
+- Прогресс только по выбранному профилю: `mining.commissionMilestone` — забранная веха из `objectives.tutorial`, `mining.commissionsDone` — `mining_core.commissions_completed`, если API его отдаёт. Общее по аккаунту достижение Hard Working Miner не используется (смешивало бы профили); без числа по профилю гайд пишет «не меньше N» по забранной вехе.
+- Новость «Гайд по Commissions».
+
 ## 0.2.56
 
 - Гайд Dungeons: загадки, секреты и счёт (`src/guides/dungeons-rooms.js`) по вики (Catacombs Puzzle Rooms, Dungeon Secrets, Dungeon Score, Dungeon Blessing, The Watcher, Mimic, 28.11.2026). 10 текущих загадок карточками с решением (`PUZZLES`), таблица счёта по этажам из API (`best_score`, рекорд S+, норма секретов, лимит времени), разбор 300 очков, секреты, Blood Room и The Watcher, блессинги. Шаг «Добейся S+» на лучшем этаже.
