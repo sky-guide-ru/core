@@ -4,9 +4,15 @@
 
 ## Не выпущено
 
-## 0.2.49
+## 0.2.50
 
 - Гайды: «Питомцы по этапам» (`src/guides/pets.js`: `PET_LADDERS`, `petLadderSection`, `petNextStep`) в Mining, Farming, Foraging, Fishing, Trophy Fish, слеерах (свой босс), Dungeons (свой класс), Kuudra и Crimson Isle. Старт → средний → эндгейм с живой ценой AH, шансом выпадения и источником (fandom, NEU, 28.11.2026). Питомец той же цели ступенью выше закрывает младшего; в добыче стартовых не советуем после первого среднего; шаг плана — только по карману (30% монет), без рынка — по монетам NPC; Bingo без эндгейма; питомцы событий в план не идут. Старые таблицы питомцев в Mining, Farming, Foraging и строки питомцев в Fishing заменены.
+
+## 0.2.49
+
+- Дерево HotM: сборка `mithril` («Mithril и Titanium»): Titanium Insanium, Metal Head, Strong Arm, Precision Mining, Mining Speed Boost, Luck of the Cave, Sky Mall (×5 Titanium на день). Mithril и Titanium — Dwarven Metals (NEU), поэтому перки металлов сверху дерева.
+- `peel` (что снять при перестановке): сначала лишние перки, «по желанию» (Sky Mall и др.) — только если лишнее не снять; после каждого снятия снова с лишних.
+- Секция дерева HotM в гайде Mining: `news: 'hotm'` для ссылок из новостей.
 
 ## 0.2.48
 

@@ -216,15 +216,15 @@ export function connected(tree, ids) {
 // внутри — с меньшей прокачкой; несколько проходов, пока что-то снимается; не больше limit.
 function peel(tree, owned, groups, limit, by) {
   const weak = (x, y) => by[x].level / by[x].max - by[y].level / by[y].max;
-  const order = [...new Set(groups.flatMap(g => g.filter(id => owned.includes(id)).sort(weak)))];
   const removed = [];
-  let changed = true;
-  while (changed && removed.length < limit) {
-    changed = false;
-    for (const id of order) {
-      if (removed.length >= limit || removed.includes(id)) continue;
-      if (connected(tree, owned.filter(x => x !== id && !removed.includes(x)))) { removed.push(id); changed = true; }
-    }
+  const orders = groups.map(g => g.filter(id => owned.includes(id)).sort(weak));
+  // по одному перку: всегда сначала из первой группы (лишние), «по желанию» — только если лишнее не снять,
+  // и после каждого снятия снова с первой группы (снятый край мог открыть следующий)
+  const canDrop = id => !removed.includes(id) && connected(tree, owned.filter(x => x !== id && !removed.includes(x)));
+  while (removed.length < limit) {
+    const id = orders.map(o => o.find(canDrop)).find(Boolean);
+    if (!id) break;
+    removed.push(id);
   }
   return removed;
 }
