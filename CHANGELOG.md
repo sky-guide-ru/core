@@ -4,11 +4,23 @@
 
 ## Не выпущено
 
-## 0.2.64
+## 0.2.66
 
 - Выборы мэра (`src/calendar/election.js`, без диска и сети): снимки голосов (`addElection`), тренд доли за 3 ч (`trendOf`), шанс победы (`winChances`: доля + приглушённый тренд, разброс растёт с корнем из оставшихся часов, множитель `sigmaK` подбирается по прошлым выборам со снимками — `calibrate`), история (`historyStats`, `incumbentRuns`, `specialCycle` — правила выводятся из итогов, а не задаются руками), вид `electionView`: кандидаты с голосами, трендом, шансом, «почему», «если победит», пометками «новый» и «сильные перки»; лента «Ближайшие мэры», «когда снова» для каждого мэра (`nextFor`), доля побед, мэр для гайда (`GUIDE_MAYOR`).
 - `src/calendar/election-store.js`: итоги и снимки в `DATA_DIR/election-history.json`, `recordElection` из `refreshMayor`, `electionNow` для `/v1/election`. История с вики — `src/calendar/data/election-history.json`: 116 выборов (годы 400–527) с голосами из `Module:Mayor/Elections/ApiData` официальной вики (28.11.2026). По ней: действующий мэр не выдвигается, особый мэр раз в 8 лет по кругу Scorpius → Derpy → Jerry; доля побед считается без лет с особым мэром.
 - Новость «Выборы мэра: голоса и шансы», переводы блока выборов.
+
+## 0.2.65
+
+- Телепорты `/warp` и Travel Scrolls (`src/guides/warps.js`) по вики (Travel Scrolls, 28.11.2026): `warpTable(constants)` — для каждого варпа место, редкость свитка (`free` / `RARE` / `EPIC`), откуда свиток, запасной путь (главный варп острова и расстояние по NEU `island_warps`, или проверенная дорога); `warpStatus(entry, { rankId, marks, bingo })` → `ok` / `scroll` / `rank` / `plain`; `hasMvpPlus(rankId)`. `/warp` доступен всем, EPIC-свитки — только с MVP+, в Bingo открыто всё. API не показывает открытые свитки — отметки хранит сайт.
+- Гайд «Души и коллекции»: секция «Мои телепорты: Travel Scrolls» (`kind: 'tool', tool: 'warp-scrolls'`, `news: 'warps'`).
+
+## 0.2.64
+
+- Новый гайд «Драконы и Zealots» (`src/guides/dragons.js`, данные `dragons-data.js`, группа combat) по вики (Ender Dragon, Summoning Eye, Zealot, Dragon's Nest, Dragon Armor, Draconic Altar, 28.11.2026): 7 вариантов дракона с шансами, Dragon Weight за глаза и место по урону, главный дроп с порогами и шансами (правка весов 2025/Sep 2), выгода раскладов по ценам (`lootFor`, `averageLoot`, `SCENARIOS`), источники Summoning Eye, шанс Special Zealot, бои игрока. Шаги: Combat 12, лук с Dragon Tracer, продать глаза или класть 4, Ender Dragon Epic → Legendary, Zealuck. Ironman/Stranded/Bingo — без цен.
+- Гайд отдаёт `extra.dragons` для своей страницы в web: карточки вариантов, сетка калькулятора вклада (`grid[глаза][место]`: вклад, средний дроп, цена глаз, итог, что открыто), пороги дропа. Секции, показанные карточками, помечены `card`.
+- `extras.dragonFight`: убийства и смерти по видам драконов (`player_stats.kills/deaths.<тип>_dragon`), лучший урон, быстрейшее убийство, призвано, своих глаз положено, разбито Ender Crystal.
+- Личные шансы: Magic Find со «Снаряжения» + Bestiary «Dragon» (+45/60/75 с 15/20/25 уровня, `dragonBestiary`), Pet Luck (`statSheet`) для питомца, шанс Special Zealot с Enderman 100 и Zealuck (`zealotChance`). `lootFor`/`averageLoot` принимают `luck`, сетка калькулятора отдаёт `chance` — шанс каждой вещи за дракона. Секция «Твоя удача на драконах».
 
 ## 0.2.63
 

@@ -19,6 +19,13 @@ export const AFTER = {
     ],
     related: ['kuudra', 'slayer-enderman', 'slayer-blaze'],
   },
+  dragons: {
+    goals: [
+      'Superior Dragon Armor и Legendary Ender Dragon — главные цели боёв с драконами.',
+      'Enderman Slayer: Voidgloom Seraph тоже роняет Summoning Eye, а Juju Shortbow и Terminator лучше всего бьют драконов.',
+    ],
+    related: ['slayer-enderman', 'dungeons'],
+  },
   kuudra: {
     goals: [
       'Фарми Infernal ради денег: Kuudra Teeth, Wheel of Fate, Enrager, Burning Kuudra Core.',

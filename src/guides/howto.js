@@ -14,6 +14,13 @@ const SLAYER = [
 ];
 
 export const HOWTO = {
+  dragons: [
+    step('Доберись до Dragon\'s Nest', 'Нужен Combat 12. С острова The End иди вниз по тропе к воротам гнезда или телепортируйся: /warp drag ведёт прямо в гнездо.', ['DRAGON_NEST_TRAVEL_SCROLL']),
+    step('Фарми Zealot ради Summoning Eye', 'Примерно один Zealot из 420 вызывает Special Zealot: убей его, и Summoning Eye твой.', ['SUMMONING_EYE']),
+    step('Положи глаза в Ender Altar', 'ПКМ по пустой рамке в центре гнезда. Пока дракон не вылупился, глаз можно забрать обратно (Sleeping Eye).'),
+    step('Бей дракона луком', 'Сначала разбей Ender Crystal на шипах, потом стреляй луком с Dragon Tracer. Remnant of the Eye в инвентаре спасает от смерти.', ['DRAGON_SHORTBOW', 'REMNANT_OF_THE_EYE']),
+    step('Сравни дроп с ценой глаз', 'Чем больше вклад (свои глаза и место по урону), тем лучше дроп. Таблица «Выгода» ниже считает, окупается ли призыв.'),
+  ],
   dungeons: [
     step('Собери группу', 'Телепорт /warp dungeon_hub, затем Party Finder: выбери этаж, свой класс и минимальный Catacombs. В группе 5 человек, лучше разные классы.'),
     step('Подготовься', 'Возьми снаряжение из чек-листа ниже (маски «второй жизни», Aspect of the Void, Spirit-питомца) и зелья. Класс выбирается в меню данжа до старта.'),

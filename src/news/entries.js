@@ -25,6 +25,28 @@ export const NEWS = [
     ],
   },
   {
+    id: '2026-11-28-warps',
+    date: '2026-11-28',
+    kind: 'better',
+    title: 'Подсказки /warp учитывают MVP+ и свитки',
+    items: [
+      'Каждый /warp на сайте показывает, сработает ли телепорт у игрока: нужен ли Travel Scroll или MVP+.',
+      'Под закрытым телепортом — дорога пешком и где взять свиток.',
+      'Открытые свитки отмечаются в блоке [Мои телепорты](guides/collectibles#warps).',
+    ],
+  },
+  {
+    id: '2026-11-28-dragons',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по драконам и Zealots',
+    items: [
+      'В [гайде «Драконы и Zealots»](guides/dragons) — 7 видов Ender Dragon, вклад (Dragon Weight) и таблица дропа.',
+      'Блок [Выгода](guides/dragons#profit) считает по ценам, окупаются ли свои Summoning Eye.',
+      'Из профиля: убитые драконы по видам, лучший урон и Special Zealot.',
+    ],
+  },
+  {
     id: '2026-11-28-mining-events',
     date: '2026-11-28',
     kind: 'new',

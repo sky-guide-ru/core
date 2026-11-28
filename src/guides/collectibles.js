@@ -93,6 +93,12 @@ export default {
       ],
     });
 
+    // Отметки свитков ставит сам игрок (Hypixel не сообщает, какие открыты): таблица и галочки — на сайте (guides/warps.js)
+    sections.push({
+      kind: 'tool', tool: 'warp-scrolls', news: 'warps', title: 'Мои телепорты: Travel Scrolls',
+      note: 'Отметь открытые свитки — подсказки «/warp …» на всём сайте покажут, сработает ли телепорт. Hub, Private Island и Garden открыты всегда, EPIC-свитки работают только с MVP+.',
+    });
+
     const total = fairy.max + abi.total + harp.total + enigma.total;
     const got = fairy.collected + abi.have + harp.done + enigma.found;
     return {
