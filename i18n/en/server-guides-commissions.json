@@ -43,5 +43,9 @@
  "голубь — веха V или Rusty; Queen Mismyla в Royal Palace меняет голубя на контакт Abiphone, но в Glacite Tunnels у телефона нет связи": "the pigeon comes from milestone V or Rusty; Queen Mismyla in the Royal Palace trades the pigeon for her Abiphone contact, but the phone has no signal in the Glacite Tunnels",
  "King Talisman: +10 опыта HotM за каждое задание": "King Talisman: +10 HotM XP per commission",
  "поговори со всеми семью King в Royal Palace: король меняется каждые 20 минут, по кругу": "talk to all seven Kings in the Royal Palace: the King changes every 20 minutes, in a fixed order",
- "Задания: ≈{0} до HotM {1} ({2} опыта за задание в {3}), первые {4} за день дают ещё +{5}.": "Commissions: ≈{0} to HotM {1} ({2} XP per commission in {3}), and the first {4} each day give another +{5}."
+ "Задания: ≈{0} до HotM {1} ({2} опыта за задание в {3}), первые {4} за день дают ещё +{5}.": "Commissions: ≈{0} to HotM {1} ({2} XP per commission in {3}), and the first {4} each day give another +{5}.",
+ "В этом профиле выполнено {0} {1}, а забрана веха {2}. Награды не приходят сами: открой меню заданий у King, Emissary или через Royal Pigeon и нажми Commission Milestones. Там же {3} Mining XP.": "This profile has {0} {1} done, but milestone {2} is claimed. Rewards are not given automatically: open the commissions menu at the King, an Emissary or with the Royal Pigeon and click Commission Milestones. It also gives {3} Mining XP.",
+ "Выполнено заданий в этом профиле: {0}. Забрано вех: {1} из 6.": "Commissions completed on this profile: {0}. Milestones claimed: {1} of 6.",
+ "Забрано вех в этом профиле: {0} из 6{1}. Точное число заданий по профилю Hypixel не отдаёт: его видно в игре, в меню заданий → Commission Milestones.": "Milestones claimed on this profile: {0} of 6{1}. Hypixel does not share the exact per-profile commission count: you can see it in game, in the commissions menu → Commission Milestones.",
+ ", то есть выполнено не меньше {0} заданий": ", so at least {0} commissions are done"
 }
