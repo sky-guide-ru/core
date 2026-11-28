@@ -96,5 +96,6 @@
  "{0} раз": "{0} times",
  "F7 пройден {0}. M1 и M2 дают меньше опыта, чем F7, но открывают M3: там начинают падать Master Stars и опыта уже больше, чем на F7.": "F7 cleared {0}. M1 and M2 give less XP than F7, but unlock M3: Master Stars start dropping there and XP is already higher than on F7.",
  " · пройден {0}": " · cleared {0}",
- "Catacombs {0}, {1} {2}. F7 пройден {3}; Master Mode: {4}.": "Catacombs {0}, {1} {2}. F7 cleared {3}; Master Mode: {4}."
+ "Catacombs {0}, {1} {2}. F7 пройден {3}; Master Mode: {4}.": "Catacombs {0}, {1} {2}. F7 cleared {3}; Master Mode: {4}.",
+ "Питомцы по классам": "Pets by class"
 }

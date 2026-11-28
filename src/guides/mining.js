@@ -1,7 +1,8 @@
 // Гайд по добыче: Heart of the Mountain, Powder, Crystal Hollows, Glacite Tunnels и Mineshafts, снаряжение, заработок.
 import { treePerks } from '../advisor/lib/hotm.js';
 import { hotmTreeSection } from './trees/index.js';
-import { fmt, short, plural, hasItem, bestPet, ladderPos, howText, constants, cell, tone, topNext, lc } from './gathering-util.js';
+import { petLadderSection, petNextStep } from './pets.js';
+import { fmt, short, plural, hasItem, ladderPos, howText, constants, cell, tone, topNext, lc } from './gathering-util.js';
 import { tx } from '../../i18n/msg.js';
 import { NUCLEUS_CRYSTALS, OTHER_CRYSTALS } from './crystals.js';
 
@@ -43,13 +44,6 @@ const ARMOR = [
   { base: 'DIVAN', name: 'Divan', why: 'лучший сет для гемов, делается в Forge из Divan Fragment', ids: ['DIVAN_HELMET', 'DIVAN_CHESTPLATE', 'DIVAN_LEGGINGS', 'DIVAN_BOOTS'] },
 ];
 const EQUIP = ['TITANIUM_NECKLACE', 'TITANIUM_CLOAK', 'TITANIUM_BELT', 'DWARVEN_HANDWARMERS'];
-const PETS = [
-  ['GLACITE_GOLEM', 'Glacite Tunnels и Mineshafts: больше Glacite Powder, Fortune и Pristine в Mineshaft'],
-  ['MITHRIL_GOLEM', 'Dwarven Mines: скорость по Mithril и больше Mithril Powder'],
-  ['SCATHA', 'Гемы в Crystal Hollows: Gemstone Fortune на бурах и больше Gemstone Powder'],
-  ['BAL', 'Crystal Hollows: Pristine в Magma Fields, снижает жару'],
-  ['MOLE', 'Mines of Divan и Crystal Nucleus: лишний предмет с Nucleus'],
-];
 
 const pieces = (ctx, a) => (a.ids || ['HELMET', 'CHESTPLATE', 'LEGGINGS', 'BOOTS'].map(s => tx`${a.base}_${s}`)).filter(id => hasItem(ctx, id)).length;
 
@@ -140,9 +134,8 @@ export default {
     if (eqMissing.length && lvl >= 3) {
       next.push({ title: tx`Снаряжение для добычи: не хватает ${eqMissing.length} из ${EQUIP.length}`, priority: 44, why: eqMissing.map(id => tx`${ctx.name(id)}: ${howText(ctx, id)}`).join(' • ') });
     }
-    const petNotes = PETS.map(([t, why]) => ({ t, why, pet: bestPet(ctx, t) }));
-    const noPet = petNotes.filter(p => !p.pet).slice(0, 2);
-    if (noPet.length) next.push({ title: tx`Питомцы для добычи: ${noPet.map(p => ctx.name(p.t)).join(', ')}`, priority: 30, why: noPet.map(p => tx`${ctx.name(p.t)}: ${lc(p.why)}`).join('; ') + '.' });
+    const petStep = petNextStep(ctx, 'mining');
+    if (petStep) next.push(petStep);
 
     // ================= Секции =================
     sections.push({
@@ -200,11 +193,7 @@ export default {
     });
     if (!bestDrill.length) sections[sections.length - 1].note = 'Буров не нашлось в инвентаре, сундуках и рюкзаках. Если бур лежит в Storage на острове, API его не видит.';
 
-    sections.push({
-      kind: 'table', title: 'Питомцы для добычи',
-      columns: ['Питомец', 'Есть', 'Когда брать'],
-      rows: petNotes.map(p => [cell(ctx.name(tx`${p.t};4`).replace(/^\[Lvl \{LVL\}\] /, '') || p.t, { item: tx`${p.t};4` }), cell(p.pet ? tx`${p.pet.tier[0] + p.pet.tier.slice(1).toLowerCase()}${p.pet.level ? tx`, ур. ${p.pet.level}` : ''}` : 'нет', { tone: p.pet ? 'good' : 'muted' }), p.why]),
-    });
+    sections.push(petLadderSection(ctx, 'mining'));
 
     // Заработок: методы из модуля цен с тегом «Добыча»
     const methods = (ctx.analysis?.methods || []).filter(x => x.tag === 'Mining' || /gem|forge|mining/i.test(x.id || ''));
