@@ -456,7 +456,7 @@ export const TREES = {
     "stat": "(* level 5)"
    },
    "short": "Сильная рука",
-   "ru": "+{stat} Mining Speed по Dwarven Metals (Umber, Tungsten, Glacite и др.).",
+   "ru": "+{stat} Mining Speed по Dwarven Metals (Mithril, Titanium, Umber, Tungsten, Glacite).",
    "ability": false
   },
   "steady_hand": {

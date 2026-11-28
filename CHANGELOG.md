@@ -4,6 +4,12 @@
 
 ## Не выпущено
 
+## 0.2.49
+
+- Дерево HotM: сборка `mithril` («Mithril и Titanium»): Titanium Insanium, Metal Head, Strong Arm, Precision Mining, Mining Speed Boost, Luck of the Cave, Sky Mall (×5 Titanium на день). Mithril и Titanium — Dwarven Metals (NEU), поэтому перки металлов сверху дерева.
+- `peel` (что снять при перестановке): сначала лишние перки, «по желанию» (Sky Mall и др.) — только если лишнее не снять; после каждого снятия снова с лишних.
+- Секция дерева HotM в гайде Mining: `news: 'hotm'` для ссылок из новостей.
+
 ## 0.2.48
 
 - Гайд «The Forge» (`guides/forge.js`, вид `extra.forge`): слоты из `gather.forge` с временем готовности (Quick Forge учтён), выгодные рецепты под ритм заходов 4/12/24 ч (`forgeProfitPlans`: слот занят `ceil(длительность/ритм)·ритм`), цели под 🔒, цепочки деталей бура (`drillUpgrades`, `forgeChain`: вычитает запасы из хранилищ, Sacks и деталей на бурах, считает время по слотам и длинной ветке, цену материалов и готового).
