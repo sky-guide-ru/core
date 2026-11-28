@@ -312,8 +312,9 @@ export function gemsOf(ctx) {
   if (ctx.gear?.gems) return ctx.gear.gems;
   const costs = ctx.opts?.constants?.gemstonecosts;
   if (!costs || !ctx.gear) return null;
+  const buy = typeof ctx.opts?.buyPrice === 'function' ? id => Number(ctx.opts.buyPrice(id)) || ctx.price(id) : ctx.price;
   try {
-    return gemPlan(gemCandidates(ctx.gear, ctx.m, classify), { costs, price: ctx.price, sell: ctx.price, market: ctx.market, coins: ctx.liquid, stock: ctx.m.inv?.sacks });
+    return gemPlan(gemCandidates(ctx.gear, ctx.m, classify), { costs, price: buy, sell: ctx.price, market: ctx.market, coins: ctx.liquid, stock: ctx.m.inv?.sacks, stats: ctx.power?.world || null });
   } catch { return null; }
 }
 
@@ -333,7 +334,7 @@ export function gemRules(ctx, add) {
       why: ru`Камень в слоте даёт стат вещи навсегда. Самые выгодные ${top.length} ${plural(top.length, 'шаг', 'шага', 'шагов')} — ~${fmtCoins(cost)} на Bazaar. Качество подобрано под твои деньги.`,
       how: [
         ...top.map(m => tx`${m.item}, ${m.typeRu} слот: ${m.locked ? ru`открыть слот и вставить ` : m.current ? tx`${m.current} → ` : ru`вставить `}${m.name} (${m.text})${m.have ? ru` — камень уже есть` : ''}${m.cost ? tx` ~${fmtCoins(m.cost)}` : ''}`),
-        'Вставить и снять камень — Gemstone Grinder рядом с Geo. Снять платно, камень возвращается',
+        'Вставить и снять камень — Gemstone Grinder у Geo в Dwarven Mines (Dwarven Village). Снять платно, камень возвращается',
       ],
       items: [...new Set(top.map(m => m.id))],
       cost,
@@ -349,7 +350,7 @@ export function gemRules(ctx, add) {
       why: 'Камни добываются в Crystal Hollows и крафтятся: 80 штук дают камень следующего качества. Fine — уже хорошая прибавка.',
       how: [
         ...top.map(m => tx`${m.item}, ${m.typeRu} слот: ${m.name} (${m.text})`),
-        'Вставить камень — Gemstone Grinder рядом с Geo',
+        'Вставить камень — Gemstone Grinder у Geo в Dwarven Mines (Dwarven Village)',
       ],
       items: [...new Set(top.map(m => m.id))],
       link: 'gear',

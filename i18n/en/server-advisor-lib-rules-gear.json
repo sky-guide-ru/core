@@ -48,12 +48,12 @@
  "открыть слот и вставить ": "unlock the slot and apply ",
  "вставить ": "apply ",
  " — камень уже есть": " (you already have the gem)",
- "Вставить и снять камень — Gemstone Grinder рядом с Geo. Снять платно, камень возвращается": "The Gemstone Grinder next to Geo applies and removes gems. Removing costs coins, the gem comes back",
  "Больше статов на тех же вещах": "More stats on the same items",
  "пустой слот": "empty slot",
  "пустых слота": "empty slots",
  "пустых слотов": "empty slots",
  "Камни добываются в Crystal Hollows и крафтятся: 80 штук дают камень следующего качества. Fine — уже хорошая прибавка.": "Gems are mined in the Crystal Hollows and crafted: 80 of them make the next quality. Fine is already a good boost.",
  "{0}, {1} слот: {2} ({3})": "{0}, {1} slot: {2} ({3})",
- "Вставить камень — Gemstone Grinder рядом с Geo": "Apply the gem at the Gemstone Grinder next to Geo"
+ "Вставить и снять камень — Gemstone Grinder у Geo в Dwarven Mines (Dwarven Village). Снять платно, камень возвращается": "The Gemstone Grinder at Geo in the Dwarven Mines (Dwarven Village) applies and removes gems. Removing costs coins, the gem comes back",
+ "Вставить камень — Gemstone Grinder у Geo в Dwarven Mines (Dwarven Village)": "Apply the gem at the Gemstone Grinder at Geo in the Dwarven Mines (Dwarven Village)"
 }

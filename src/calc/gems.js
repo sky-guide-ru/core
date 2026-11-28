@@ -2,7 +2,8 @@ import { tx, ru } from '../../i18n/msg.js';
 // Gemstones в снаряжении: какие слоты есть у вещей игрока, что в них стоит, какой камень и какого качества
 // поставить под роль вещи, сколько стоит открыть слот и что выгоднее за монету.
 // Слоты и цена открытия — constants/gemstonecosts NEU (у свободных слотов список пуст), вставленные камни — NBT предмета.
-// Статы камней — таблица вики (hypixel-skyblock.fandom.com «Gemstone Slot/Stats», сверено 28.11.2026; Citrine удвоен в 0.23.3).
+// Статы камней — таблица официальной вики (hypixelskyblock.minecraft.wiki «Gemstone/Stats», сверено 28.11.2026):
+// Aquamarine с 0.22 даёт Fishing Speed, Citrine удвоен в 0.23.3. Слоты Chisel дают перки Fossil Excavator, а не статы — их не считаем.
 // Чистые функции: цены, роль и запасы передаются снаружи.
 
 export const QUALITIES = ['ROUGH', 'FLAWED', 'FINE', 'FLAWLESS', 'PERFECT'];
@@ -10,26 +11,26 @@ const RARITY_IDX = { COMMON: 0, UNCOMMON: 1, RARE: 2, EPIC: 3, LEGENDARY: 4, MYT
 
 /** Стат камня по качеству и редкости вещи: [Common, Uncommon, Rare, Epic, Legendary, Mythic, Divine]; null — так не бывает */
 export const GEM_STATS = {
-  RUBY: { ROUGH: [1, 2, 3, 4, 5, 7, 7], FLAWED: [3, 4, 5, 6, 8, 10, 10], FINE: [4, 5, 6, 8, 10, 14, 14], FLAWLESS: [5, 7, 10, 14, 18, 22, 22], PERFECT: [6, 9, 13, 18, 24, 30, 30] },
-  AMETHYST: { ROUGH: [1, 2, 3, 4, 5, 7, 7], FLAWED: [3, 4, 5, 6, 8, 10, 10], FINE: [4, 5, 6, 8, 10, 14, 14], FLAWLESS: [5, 7, 10, 14, 18, 22, 22], PERFECT: [6, 9, 13, 18, 24, 30, 30] },
+  RUBY: { ROUGH: [1, 2, 3, 4, 5, 7, null], FLAWED: [3, 4, 5, 6, 8, 10, null], FINE: [4, 5, 6, 8, 10, 14, null], FLAWLESS: [5, 7, 10, 14, 18, 22, null], PERFECT: [6, 9, 13, 18, 24, 30, null] },
+  AMETHYST: { ROUGH: [1, 2, 3, 4, 5, 7, null], FLAWED: [3, 4, 5, 6, 8, 10, null], FINE: [4, 5, 6, 8, 10, 14, null], FLAWLESS: [5, 7, 10, 14, 18, 22, null], PERFECT: [6, 9, 13, 18, 24, 30, null] },
   JADE: { ROUGH: [2, 4, 6, 8, 10, 12, 14], FLAWED: [3, 5, 7, 10, 14, 18, 22], FINE: [5, 7, 10, 15, 20, 25, 30], FLAWLESS: [7, 10, 15, 20, 27, 35, 44], PERFECT: [10, 14, 20, 30, 40, 50, 60] },
-  SAPPHIRE: { ROUGH: [2, 3, 4, 5, 6, 7, 7], FLAWED: [5, 5, 6, 7, 8, 10, 10], FINE: [7, 8, 9, 10, 11, 12, 12], FLAWLESS: [10, 11, 12, 14, 17, 20, 20], PERFECT: [12, 14, 17, 20, 24, 30, 30] },
+  SAPPHIRE: { ROUGH: [2, 3, 4, 5, 6, 7, null], FLAWED: [5, 5, 6, 8, 10, 10, null], FINE: [7, 8, 9, 10, 11, 12, null], FLAWLESS: [10, 11, 12, 14, 17, 20, null], PERFECT: [12, 14, 17, 20, 24, 30, null] },
   AMBER: { ROUGH: [4, 8, 12, 16, 20, 24, 28], FLAWED: [6, 10, 14, 18, 24, 30, 36], FINE: [10, 14, 20, 28, 36, 45, 54], FLAWLESS: [14, 20, 30, 44, 58, 75, 92], PERFECT: [20, 28, 40, 60, 80, 100, 120] },
   TOPAZ: { ROUGH: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.5], FLAWED: [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.9], FINE: [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.3], FLAWLESS: [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.8], PERFECT: [2, 2, 2, 2, 2, 2, 2.2] },
-  JASPER: { ROUGH: [1, 1, 1, 2, 3, 4, 4], FLAWED: [2, 2, 3, 4, 4, 5, 5], FINE: [3, 3, 4, 5, 6, 7, 7], FLAWLESS: [5, 6, 7, 8, 10, 12, 12], PERFECT: [6, 7, 9, 11, 13, 16, 16] },
+  JASPER: { ROUGH: [1, 1, 1, 2, 3, 4, null], FLAWED: [2, 2, 3, 4, 4, 5, null], FINE: [3, 3, 4, 5, 6, 7, null], FLAWLESS: [5, 6, 7, 8, 10, 12, null], PERFECT: [6, 7, 9, 11, 13, 16, null] },
   OPAL: { ROUGH: [1, 1, 1, 2, 2, 3, null], FLAWED: [2, 2, 2, 3, 3, 4, null], FINE: [3, 3, 3, 4, 4, 5, null], FLAWLESS: [4, 4, 5, 6, 8, 9, null], PERFECT: [5, 6, 7, 9, 11, 13, null] },
-  ONYX: { ROUGH: [null, 1, 2, 2, 3, 4, null], FLAWED: [null, 2, 3, 3, 4, 6, null], FINE: [null, 3, 4, 5, 6, 8, null], FLAWLESS: [null, 5, 6, 7, 8, 10, null], PERFECT: [null, 6, 7, 8, 10, 12, null] },
-  AQUAMARINE: { ROUGH: [null, 0.1, 0.2, 0.2, 0.3, 0.4, null], FLAWED: [null, 0.2, 0.3, 0.4, 0.6, 0.8, null], FINE: [null, 0.6, 0.7, 0.8, 1, 1.2, null], FLAWLESS: [null, 1, 1.1, 1.2, 1.4, 1.6, null], PERFECT: [null, 1.4, 1.5, 1.6, 1.8, 2, null] },
-  CITRINE: { ROUGH: [null, 2, 3, 4, 5, 6, null], FLAWED: [null, 3, 4, 5, 6, 8, null], FINE: [null, 4, 6, 8, 10, 12, null], FLAWLESS: [null, 6, 8, 10, 12, 16, null], PERFECT: [null, 8, 12, 12, 16, 20, null] },
+  ONYX: { ROUGH: [1, 1, 2, 2, 3, 4, null], FLAWED: [2, 2, 3, 3, 4, 6, null], FINE: [3, 3, 4, 5, 6, 8, null], FLAWLESS: [4, 5, 6, 7, 8, 10, null], PERFECT: [5, 6, 7, 8, 10, 12, null] },
+  AQUAMARINE: { ROUGH: [0.5, 0.5, 1, 1, 1.5, 2, null], FLAWED: [1, 1, 1.5, 1.5, 2, 2.5, null], FINE: [1.5, 1.5, 2, 2, 2.5, 3, null], FLAWLESS: [2, 2, 2.5, 3, 3.5, 4, null], PERFECT: [2.5, 2.5, 3.5, 4, 4.5, 5, null] },
+  CITRINE: { ROUGH: [1, 1, 2, 2, 3, 4, null], FLAWED: [3, 3, 4, 5, 6, 8, null], FINE: [4, 4, 6, 8, 10, 12, null], FLAWLESS: [6, 6, 8, 10, 12, 16, null], PERFECT: [6, 8, 10, 12, 16, 20, null] },
   PERIDOT: { ROUGH: [0.5, 1, 1.5, 2, 2.5, 3, null], FLAWED: [1, 1.5, 2, 2.5, 3, 4, null], FINE: [1.5, 2, 3, 4, 5, 6, null], FLAWLESS: [2, 3, 4, 5, 6, 8, null], PERFECT: [3, 4, 5, 6, 8, 10, null] },
 };
 
 /** Какой стат даёт камень (названия статов — как в игре) */
 export const GEM_STAT = {
   RUBY: 'Health', AMETHYST: 'Defense', JADE: 'Mining Fortune', SAPPHIRE: 'Intelligence', AMBER: 'Mining Speed', TOPAZ: 'Pristine',
-  JASPER: 'Strength', OPAL: 'True Defense', ONYX: 'Crit Damage', AQUAMARINE: 'Sea Creature Chance', CITRINE: 'Foraging Fortune', PERIDOT: 'Farming Fortune',
+  JASPER: 'Strength', OPAL: 'True Defense', ONYX: 'Crit Damage', AQUAMARINE: 'Fishing Speed', CITRINE: 'Foraging Fortune', PERIDOT: 'Farming Fortune',
 };
-const PCT = new Set(['TOPAZ', 'AQUAMARINE', 'ONYX']); // статы в процентах
+const PCT = new Set(['ONYX']); // Crit Damage пишется в процентах
 
 /** Какие камни подходят в слот (вики «Gemstone Slot»). Offensive и Chisel остались на старых вещах */
 export const SLOT_GEMS = {
@@ -55,24 +56,32 @@ const title = s => String(s || '').toLowerCase().split('_').map(w => (w ? w[0].t
 export const gemId = (quality, gem) => tx`${quality}_${gem}_GEM`;
 export const gemName = (quality, gem) => tx`${title(quality)} ${title(gem)} Gemstone`;
 
-/** Стат камня на вещи этой редкости; null — неизвестно */
-export function gemStat(gem, quality, rarity) {
+// На Talisman of Power и его улучшениях камни дают половину стата (вики «Gemstone Slot»)
+const HALF = new Set(['POWER_TALISMAN', 'POWER_RING', 'POWER_ARTIFACT', 'POWER_RELIC']);
+
+/** Стат камня на вещи этой редкости; null — неизвестно. itemId — для вещей с половинным статом */
+export function gemStat(gem, quality, rarity, itemId = null) {
   const row = GEM_STATS[gem]?.[quality];
   if (!row) return null;
   const i = RARITY_IDX[String(rarity || '').toUpperCase()] ?? 4; // Special и неизвестная редкость — как Legendary
-  return row[i] ?? row[Math.min(i, 5)] ?? row.find(v => v != null) ?? null;
+  const v = row[i] ?? row[Math.min(i, 5)] ?? row.find(x => x != null) ?? null;
+  return v != null && HALF.has(itemId) ? v / 2 : v;
 }
 
 /** «+13 Strength» / «+2 Pristine» */
 export function statText(gem, v) {
   if (v == null) return '';
-  return tx`+${String(v).replace('.', ',')}${PCT.has(gem) && gem !== 'TOPAZ' ? '%' : ''} ${GEM_STAT[gem] || gem}`;
+  return tx`+${String(v).replace('.', ',')}${PCT.has(gem) ? '%' : ''} ${GEM_STAT[gem] || gem}`;
 }
 
-/** Камень для слота под роль вещи */
-export function pickGem(base, role) {
+/**
+ * Камень для слота под роль вещи. stats { strength, crit_damage } — статы игрока: Onyx лучше Jasper,
+ * только если Strength больше Crit Damage хотя бы на треть (совет вики «Gemstone Slot»)
+ */
+export function pickGem(base, role, stats = null) {
   const allowed = SLOT_GEMS[base] || [base];
   if (allowed.length === 1) return allowed[0];
+  if ((role === 'melee' || role === 'archer') && allowed.includes('ONYX') && stats?.strength > 0 && stats.strength > (stats.crit_damage || 0) * 4 / 3) return 'ONYX';
   return (ROLE_GEMS[role] || []).find(g => allowed.includes(g)) || (base === 'DEFENSIVE' ? 'RUBY' : allowed[0]);
 }
 
@@ -102,6 +111,7 @@ export function itemGems(it, o) {
   const slots = [];
   for (const [slot, cost] of Object.entries(costs)) {
     const base = slot.replace(/_\d+$/, '');
+    if (base === 'CHISEL') continue; // перки Fossil Excavator, а не статы
     const cur = slotContent(gems, slot);
     const locked = !!(cost?.length) && !unlockedSet.has(slot) && !cur;
     let unlock = null;
@@ -115,15 +125,15 @@ export function itemGems(it, o) {
       const itemsCost = items.reduce((s, x) => s + x.count * x.price, 0);
       unlock = { coins, items, cost: market ? (items.every(x => x.price) ? coins + itemsCost : null) : coins };
     }
-    const pick = pickGem(base, o.role);
-    const curStat = cur ? gemStat(cur.gem, cur.quality, it.rarity) : 0;
+    const pick = pickGem(base, o.role, o.stats);
+    const curStat = cur ? gemStat(cur.gem, cur.quality, it.rarity, it.id) : 0;
     // Камень не под роль (Sapphire у мечника) — заменить даже на ту же редкость; подходящий (Onyx вместо Jasper) — только поднять качество
     const wrongType = !!cur && cur.gem !== pick && !!SLOT_GEMS[base] && !(ROLE_GEMS[o.role] || []).includes(cur.gem);
     const gem = cur && !wrongType ? cur.gem : pick;
-    const perfect = gemStat(gem, 'PERFECT', it.rarity) || 0;
+    const perfect = gemStat(gem, 'PERFECT', it.rarity, it.id) || 0;
     const options = [];
     for (const q of ['FINE', 'FLAWLESS', 'PERFECT']) {
-      const stat = gemStat(gem, q, it.rarity);
+      const stat = gemStat(gem, q, it.rarity, it.id);
       if (stat == null) continue;
       const same = cur && cur.gem === gem;
       if (same && QUALITIES.indexOf(q) <= QUALITIES.indexOf(cur.quality)) continue;
@@ -153,6 +163,7 @@ export function itemGems(it, o) {
       best: best ? best.quality : null, bestFits: fits,
     });
   }
+  if (!slots.length) return null;
   return { id: it.id, name: String(it.name || '').replace(/§./g, '').replace(/\s*[✪➊➋➌➍➎]+\s*/g, ' ').trim(), rarity: it.rarity, role: o.role || null, roleRu: ROLE_RU[o.role] || null, uuid: it.uuid || null, where: it.where || null, slots };
 }
 

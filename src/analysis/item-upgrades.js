@@ -349,6 +349,7 @@ function gemSteps(it, cls, ctx) {
   const steps = [];
   for (const [slot, unlockCost] of Object.entries(slots)) {
     const base = slot.replace(/_\d+$/, '');
+    if (base === 'CHISEL') continue; // слоты Chisel дают перки Fossil Excavator, а не статы
     const allowedGems = SLOT_GEMS[base] || [base];
     const rec = (GEM_PREF[cls.role] || []).find(g => allowedGems.includes(g)) || allowedGems[0];
     const isUnlocked = !unlockCost?.length || unlocked.has(slot) || gems[slot] != null;

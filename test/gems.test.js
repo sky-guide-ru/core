@@ -26,7 +26,14 @@ test('гемы: статы по таблице вики (качество × р�
   assert.equal(gemStat('CITRINE', 'PERFECT', 'MYTHIC'), 20); // удвоен в 0.23.3
   assert.equal(gemStat('TOPAZ', 'FLAWLESS', 'EPIC'), 1.6);
   assert.equal(gemStat('ONYX', 'PERFECT', 'EPIC'), 8);
-  assert.equal(statText('AQUAMARINE', 1.2), '+1,2% Sea Creature Chance');
+  assert.equal(gemStat('ONYX', 'FINE', 'COMMON'), 3);
+  assert.equal(gemStat('SAPPHIRE', 'FLAWED', 'LEGENDARY'), 10);
+  assert.equal(gemStat('CITRINE', 'ROUGH', 'COMMON'), 1);
+  assert.equal(gemStat('AQUAMARINE', 'PERFECT', 'MYTHIC'), 5); // с 0.22 — Fishing Speed
+  assert.equal(gemStat('RUBY', 'PERFECT', 'DIVINE'), 30); // нет на вики для Divine — как Mythic
+  assert.equal(gemStat('JADE', 'PERFECT', 'LEGENDARY', 'POWER_RELIC'), 20); // Talisman of Power — половина
+  assert.equal(statText('AQUAMARINE', 2.5), '+2,5 Fishing Speed');
+  assert.equal(statText('ONYX', 10), '+10% Crit Damage');
   assert.ok(SLOT_GEMS.COMBAT.includes('ONYX') && SLOT_GEMS.COMBAT.includes('OPAL'));
 });
 
@@ -36,9 +43,16 @@ test('гемы: камень под роль и разбор NBT слота', ()
   assert.equal(pickGem('DEFENSIVE', 'melee'), 'RUBY');
   assert.equal(pickGem('UNIVERSAL', 'farming'), 'PERIDOT');
   assert.equal(pickGem('SAPPHIRE', 'melee'), 'SAPPHIRE'); // слот одного камня
+  // Onyx — только если Strength больше Crit Damage хотя бы на треть
+  assert.equal(pickGem('COMBAT', 'melee', { strength: 500, crit_damage: 300 }), 'ONYX');
+  assert.equal(pickGem('COMBAT', 'melee', { strength: 500, crit_damage: 400 }), 'JASPER');
   assert.deepEqual(slotContent({ COMBAT_0: 'FLAWLESS', COMBAT_0_gem: 'SAPPHIRE' }, 'COMBAT_0'), { gem: 'SAPPHIRE', quality: 'FLAWLESS' });
   assert.deepEqual(slotContent({ JADE_0: { uuid: 'x', quality: 'PERFECT' } }, 'JADE_0'), { gem: 'JADE', quality: 'PERFECT' });
   assert.equal(slotContent({}, 'JADE_0'), null);
+});
+
+test('гемы: слоты Chisel (перки Fossil Excavator) не считаются', () => {
+  assert.equal(itemGems({ id: 'REINFORCED_CHISEL', rarity: 'RARE', gems: {} }, { costs: { REINFORCED_CHISEL: { CHISEL_0: [] } }, role: 'mining', price }), null);
 });
 
 test('гемы: закрытый слот — цена открытия входит в шаг, качество под бюджет', () => {

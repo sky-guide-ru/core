@@ -157,17 +157,17 @@ export function diffFeed(prev, cur) {
 export function analyzeMember(m) {
   const acc = analyzeAccessories(m);
   const gear = analyzeGear(m);
-  // Гемы в снаряжении — до плана: шаг «Гемы» берёт этот же расчёт (цены покупки на Bazaar)
+  const { roadmap, map, plan, summary, power } = advise(m, acc, gear);
+  // Гемы в снаряжении: цены покупки на Bazaar, статы игрока (Onyx или Jasper) — как в шаге плана «Гемы»
   if (gear) {
     try {
       const noMkt = profileMode(m.gameMode).market === false;
       gear.gems = gemPlan(gemCandidates(gear, m, classify, neu.items), {
         costs: neu.constants?.gemstonecosts, price: buyPriceOf, sell: priceOf, market: !noMkt,
-        coins: (m.purse || 0) + (m.bank || 0) + (m.personalBank || 0), stock: m.inv?.sacks,
+        coins: (m.purse || 0) + (m.bank || 0) + (m.personalBank || 0), stock: m.inv?.sacks, stats: power?.world || null,
       });
     } catch (e) { console.warn('[гемы]', e.message); }
   }
-  const { roadmap, map, plan, summary, power } = advise(m, acc, gear);
   const methods = moneyMethods(m, { networth: gear?.networth?.total });
   // Ironman, Stranded, Bingo: покупать можно только у NPC за монеты — Museum и Pet Score считают по ценам NPC, а не AH
   const noMarket = profileMode(m.gameMode).market === false;
