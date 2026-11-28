@@ -4,6 +4,15 @@
 
 ## Не выпущено
 
+## 0.2.56
+
+- Гайд Dungeons: загадки, секреты и счёт (`src/guides/dungeons-rooms.js`) по вики (Catacombs Puzzle Rooms, Dungeon Secrets, Dungeon Score, Dungeon Blessing, The Watcher, Mimic, 28.11.2026). 10 текущих загадок карточками с решением (`PUZZLES`), таблица счёта по этажам из API (`best_score`, рекорд S+, норма секретов, лимит времени), разбор 300 очков, секреты, Blood Room и The Watcher, блессинги. Шаг «Добейся S+» на лучшем этаже.
+- Интерактивные секции `kind: 'tool'`: калькулятор счёта (`SCORE_FLOORS`, `dungeonScore` по формулам Dungeon Score) и помощники для загадок (`WEIRDOS` — все 18 фраз Three Weirdos, `QUIZ` — вопросы и ответы Oruo).
+- Новый тип секции гайда `cards` (карточки с «Подробнее»), описан в `src/guides/README.md`.
+- `wiki/watch.js`: страницы вики гайда Dungeons, дата сверки по гайду (`VERIFIED_BY_GUIDE`).
+- Глоссарий: S+ и Secrets уточнены, новые — загадки, Blood Room, The Watcher, Mimic, Blessing.
+- Новость «Загадки и секреты Dungeons».
+
 ## 0.2.55
 
 - Новый гайд «Enchanting и Experiments» (`src/guides/enchanting.js`, группа skills) по вики (Experiments, Experimentation Table, Metaphysical Serum, Enchanting, 28.11.2026): ставки Superpairs, Chronomatron и Ultrasequencer (`SUPERPAIRS`, `CHRONOMATRON`, `ULTRASEQUENCER`, `runXp`), заряды и докупка за Bits (`RESETS`), как играть, что продаётся, Metaphysical Serum и RNG Meter, уровни Enchanting, зачарования по слотам (`ENCHANTS`). Шаги: пройти Experiments сегодня, играть на открытой ставке, следующий уровень, Serum, Guardian.
