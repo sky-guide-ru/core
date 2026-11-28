@@ -1,7 +1,8 @@
 // Снаряжение: лестницы брони/оружия/инструментов под этап и доводка надетого (рекомб, книги, звёзды).
 import LADDERS from '../../data/ladders.json' with { type: 'json' };
 import { fmtCoins, setPieces, plural } from '../util.js';
-import { planItemUpgrades } from '../../../analysis/item-upgrades.js';
+import { planItemUpgrades, classify } from '../../../analysis/item-upgrades.js';
+import { gemPlan, gemCandidates } from '../../../calc/gems.js';
 import { ownKuudraSet, kuudraUpgradePlan, kuudraSetName } from './kuudra-upgrade.js';
 import { witherFamily, witherOwned, dungeonLoadout } from '../loadouts.js';
 import { ru } from '../../../../i18n/msg.js';
@@ -243,7 +244,8 @@ export function upgradeRules(ctx, add) {
       let plan = null;
       try { plan = planItemUpgrades(it, { constants, getItem: () => null, priceOf: ctx.price, petPriceOf: () => 0, member: ctx.m }); } catch { plan = null; }
       if (plan) {
-        const top = plan.todo.filter(st => !st.locked && st.cost != null && st.cost > 0).slice(0, 4);
+        // Гемы — отдельным шагом «Гемы в снаряжении» (качество под бюджет), здесь не повторяем
+        const top = plan.todo.filter(st => st.group !== 'gems' && !st.locked && st.cost != null && st.cost > 0).slice(0, 4);
         if (!top.length) continue;
         for (const st of top) { cost += st.cost; for (const p of st.parts || []) if (p.id && !p.id.startsWith('ESSENCE_')) items.add(p.id); }
         lines.push(ru`${it.name || ctx.name(it.id)} (прокачано на ${plan.score}%): ${top.map(st => tx`${st.title} ~${fmtCoins(st.cost)}`).join('; ')}${plan.todo.length > top.length ? ru` · ещё ${plan.todo.length - top.length} ${plural(plan.todo.length - top.length, 'шаг', 'шага', 'шагов')} в карточке предмета` : ''}`);
@@ -300,6 +302,57 @@ export function equipmentRules(ctx, add) {
       items: MOLTEN,
       // Цена Molten-экипировки на пустые слоты: без неё шаг выглядел бесплатным и вставал наверх даже на пустом профиле
       cost: MOLTEN.map(id => ctx.price(id)).filter(Boolean).sort((a, b) => a - b).slice(0, empty).reduce((a, b) => a + b, 0) || undefined,
+      link: 'gear',
+    });
+  }
+}
+
+/** План гемов: из разбора снаряжения (ядро считает его по ценам покупки) или здесь же по ценам плана */
+export function gemsOf(ctx) {
+  if (ctx.gear?.gems) return ctx.gear.gems;
+  const costs = ctx.opts?.constants?.gemstonecosts;
+  if (!costs || !ctx.gear) return null;
+  const buy = typeof ctx.opts?.buyPrice === 'function' ? id => Number(ctx.opts.buyPrice(id)) || ctx.price(id) : ctx.price;
+  try {
+    return gemPlan(gemCandidates(ctx.gear, ctx.m, classify), { costs, price: buy, sell: ctx.price, market: ctx.market, coins: ctx.liquid, stock: ctx.m.inv?.sacks, stats: ctx.power?.world || null });
+  } catch { return null; }
+}
+
+/** Гемы: пустые и закрытые слоты, камень не под роль — самые выгодные шаги под бюджет игрока */
+export function gemRules(ctx, add) {
+  const g = gemsOf(ctx);
+  if (!g?.moves?.length) return;
+  const s = g.summary;
+  if (ctx.market) {
+    const top = g.moves.filter(m => m.cost != null).slice(0, 5);
+    if (!top.length) return;
+    const cost = top.reduce((n, m) => n + m.cost, 0);
+    const holes = s.empty + s.locked;
+    add({
+      id: 'gear-gems', cat: 'Снаряжение', priority: s.empty ? 60 : 48, effort: 'минуты, нужны монеты',
+      title: holes ? ru`Гемы: ${holes} ${plural(holes, 'пустой или закрытый слот', 'пустых или закрытых слота', 'пустых или закрытых слотов')} в снаряжении` : ru`Гемы: поднять качество камней в снаряжении`,
+      why: ru`Камень в слоте даёт стат вещи навсегда. Самые выгодные ${top.length} ${plural(top.length, 'шаг', 'шага', 'шагов')} — ~${fmtCoins(cost)} на Bazaar. Качество подобрано под твои деньги.`,
+      how: [
+        ...top.map(m => tx`${m.item}, ${m.typeRu} слот: ${m.locked ? ru`открыть слот и вставить ` : m.current ? tx`${m.current} → ` : ru`вставить `}${m.name} (${m.text})${m.have ? ru` — камень уже есть` : ''}${m.cost ? tx` ~${fmtCoins(m.cost)}` : ''}`),
+        'Вставить и снять камень — Gemstone Grinder у Geo в Dwarven Mines (Dwarven Village). Снять платно, камень возвращается',
+      ],
+      items: [...new Set(top.map(m => m.id))],
+      cost,
+      payoff: 'Больше статов на тех же вещах',
+      link: 'gear',
+    });
+  } else {
+    const top = g.moves.filter(m => !m.locked || !m.unlock?.items?.length).slice(0, 5);
+    if (!top.length || !(s.empty + s.locked)) return;
+    add({
+      id: 'gear-gems', cat: 'Снаряжение', priority: 44, effort: 'нужно добыть',
+      title: ru`Гемы: ${s.empty + s.locked} ${plural(s.empty + s.locked, 'пустой слот', 'пустых слота', 'пустых слотов')} в снаряжении`,
+      why: 'Камни добываются в Crystal Hollows и крафтятся: 80 штук дают камень следующего качества. Fine — уже хорошая прибавка.',
+      how: [
+        ...top.map(m => tx`${m.item}, ${m.typeRu} слот: ${m.name} (${m.text})`),
+        'Вставить камень — Gemstone Grinder у Geo в Dwarven Mines (Dwarven Village)',
+      ],
+      items: [...new Set(top.map(m => m.id))],
       link: 'gear',
     });
   }

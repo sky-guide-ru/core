@@ -8,6 +8,7 @@ import { fossilSections } from './fossil.js';
 import { NUCLEUS_CRYSTALS, OTHER_CRYSTALS } from './crystals.js';
 import { corpseGuide } from './corpses.js';
 import { fetchurPuzzlerSection, liveCtx } from '../analysis/daily-npcs.js';
+import { commissionGuide } from './commissions.js';
 
 const POWDER = { MITHRIL: 'Mithril', GEMSTONE: 'Gemstone', GLACITE: 'Glacite' };
 
@@ -62,6 +63,8 @@ export default {
     const perks = treePerks(nodes, layout);
     const next = [];
     const sections = [];
+    // Commissions и вехи (commissions.js): шаги, секции и подсказка «сколько заданий до следующего HotM»
+    const cm = commissionGuide(m, ctx);
 
     // ---- Powder: сколько есть и куда вложить ----
     const avail = { MITHRIL: mi.powder?.mithrilAvail || 0, GEMSTONE: mi.powder?.gemstoneAvail || 0, GLACITE: mi.powder?.glaciteAvail || 0 };
@@ -78,7 +81,7 @@ export default {
     if (lvl < 10) {
       next.push({
         title: tx`Подними Heart of the Mountain: ${lvl} → 10`, priority: 80,
-        why: 'Каждый уровень открывает новый ряд перков и токен. Опыт HotM дают задания (commissions) в Dwarven Mines, Crystal Hollows и Glacite Tunnels; первое задание за день на каждом острове даёт больше.',
+        why: tx`Каждый уровень открывает новый ряд перков и токен. Опыт HotM дают задания (commissions) в Dwarven Mines, Crystal Hollows и Glacite Tunnels. ${cm.hotmHow || 'Первые 4 задания за день дают больше.'} Подробнее — блок «Commission Milestones» ниже.`,
       });
     }
     for (const [k, n] of Object.entries(POWDER)) {
@@ -98,6 +101,7 @@ export default {
         why: tx`${(keyLocked.length ? keyLocked : locked).slice(0, 6).map(p => tx`${p.name}${KEY_PERKS[p.id] ? tx` (${lc(KEY_PERKS[p.id])})` : ''}`).join('; ')}. Если свободных токенов нет, перераспредели дерево под свой способ добычи: сброс в меню HotM.`,
       });
     }
+    next.push(...cm.next);
     if (layout && potm < 10) {
       next.push({ title: tx`Core of the Mountain: ${potm} → 10`, priority: 62, why: 'Даёт слоты Forge, токены HotM и бонусы к Powder. Уровни 1–3 стоят Mithril Powder, 4–7 Gemstone, 8–10 Glacite.' });
     }
@@ -138,12 +142,14 @@ export default {
     sections.push({
       kind: 'steps', title: 'Порядок прокачки добычи',
       items: [
-        { title: 'Dwarven Mines: HotM 1–3', text: 'Задания Royal Pigeon / Emissary, Mithril и Titanium. Первый бур Mithril Drill, затем Titanium Drill. Forge открывается с HotM 2.', done: lvl >= 3 },
+        { title: 'Dwarven Mines: HotM 1–3', text: 'Задания у King и Emissary (до 4 за раз), Mithril и Titanium. Первый бур Mithril Drill, затем Titanium Drill. Forge открывается с HotM 2.', done: lvl >= 3 },
         { title: 'Crystal Hollows: HotM 3–6', text: 'Пропуск в Crystal Hollows, задания и гемы. Собери 5 кристаллов и проходи Crystal Nucleus ради частей Divan и Gemstone Powder.', done: lvl >= 6 && nucleusRuns > 0, current: lvl >= 3 && lvl < 6 },
         { title: 'Glacite Tunnels: HotM 7–10', text: 'Dwarven Base Camp → Glacite Tunnels: Umber, Tungsten, Glacite и гемы Onyx, Aquamarine, Citrine, Peridot. Отсюда Glacite Powder и вход в Mineshafts.', done: lvl >= 10, current: lvl >= 7 && lvl < 10 },
         { title: 'Mineshafts и Divan', text: 'Frozen Corpse, Dwarven Handwarmers, Divan’s Drill и броня Divan. Дальше — фарм гемов и Glacite ради денег.', current: lvl >= 10 },
       ],
     });
+
+    sections.push(...cm.sections);
 
     const tree = hotmTreeSection(m, ctx);
     if (tree) sections.push({ ...tree, news: 'hotm' });   // ссылка из новостей: guides/mining#hotm
