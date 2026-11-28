@@ -15,7 +15,7 @@ const SLAYER = [
 
 export const HOWTO = {
   dragons: [
-    step('Доберись до Dragon\'s Nest', 'Нужен Combat 12. С острова The End иди вниз по тропе к воротам гнезда. Команда /warp drag есть только с MVP+ и после Travel Scroll to Dragon\'s Nest.', ['DRAGON_NEST_TRAVEL_SCROLL']),
+    step('Доберись до Dragon\'s Nest', 'Нужен Combat 12. С острова The End иди вниз по тропе к воротам гнезда или телепортируйся: /warp drag ведёт прямо в гнездо.', ['DRAGON_NEST_TRAVEL_SCROLL']),
     step('Фарми Zealot ради Summoning Eye', 'Примерно один Zealot из 420 вызывает Special Zealot: убей его, и Summoning Eye твой.', ['SUMMONING_EYE']),
     step('Положи глаза в Ender Altar', 'ПКМ по пустой рамке в центре гнезда. Пока дракон не вылупился, глаз можно забрать обратно (Sleeping Eye).'),
     step('Бей дракона луком', 'Сначала разбей Ender Crystal на шипах, потом стреляй луком с Dragon Tracer. Remnant of the Eye в инвентаре спасает от смерти.', ['DRAGON_SHORTBOW', 'REMNANT_OF_THE_EYE']),
