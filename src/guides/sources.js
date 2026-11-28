@@ -29,6 +29,7 @@ const WIKI_EXTRA = {
   rift: ['Rift Dimension'],
   fishing: ['Fishing'],
   mining: ['Mining', 'Heart of the Mountain'],
+  forge: ['The Forge', 'Drills'],
   farming: ['Farming', 'The Garden'],
   foraging: ['Galatea', 'Heart of the Forest'],
   minions: ['Minions'],
