@@ -8,6 +8,7 @@ export const networkLevel = exp => (exp > 0 ? Math.sqrt(2 * exp + 30625) / 50 - 
 export const SB_ACHIEVEMENTS = [
   { key: 'skyblock_crystal_nucleus', label: 'Crystal Nucleus: заходов', icon: 'JADE_CRYSTAL' },
   { key: 'skyblock_treasure_hunter', label: 'Рыбалка: сокровищ', icon: 'FISHING_ROD' },
+  { key: 'skyblock_hard_working_miner', label: 'Commissions: выполнено', icon: 'ROYAL_PIGEON' },
   { key: 'skyblock_unique_gifts', label: 'Подарки: разным игрокам', icon: 'WHITE_GIFT' },
 ];
 

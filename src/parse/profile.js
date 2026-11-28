@@ -346,6 +346,11 @@ export async function parseMember(profile, uuid, extra = {}) {
     mineshafts: g(m, 'glacite_player_data.mineshafts_entered', 0),
     corpses: g(m, 'glacite_player_data.corpses_looted', {}),
     nucleusRuns: g(m, 'leveling.completions.NUCLEUS_RUNS', 0),
+    // Забранная веха Commission Milestones: objectives.tutorial «commission_milestone_reward_mining_xp_tier_N»
+    commissionMilestone: (g(m, 'objectives.tutorial', []) || []).reduce((mx, k) => {
+      const t = /^commission_milestone_reward_mining_xp_tier_(\d+)$/.exec(String(k));
+      return t ? Math.max(mx, Number(t[1])) : mx;
+    }, 0),
     nucleusMeter: findNucleusMeter(m),
   };
 

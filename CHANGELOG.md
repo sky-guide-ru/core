@@ -4,6 +4,13 @@
 
 ## Не выпущено
 
+## 0.2.56
+
+- Гайд Mining: Commissions и Commission Milestones (`src/guides/commissions.js`: `COMMISSION_MILESTONES`, `COMMISSION_AREAS`, `commissionState`, `commissionsToNextHotm`, `commissionGuide`) по вики (Commissions, Emissaries, King, Royal Pigeon, Queen Mismyla, Heart of the Mountain, 28.11.2026). Таблица шести вех (`news: 'commissions'`), острова с Emissary, опытом HotM, Powder и быстрыми заданиями, чек-лист «Commissions быстрее» (слоты, Royal Pigeon / Queen Mismyla, King Talisman).
+- Шаги: «Забери награду за Commission Milestone N», «Четвёртый слот заданий: Core of the Mountain → 3», «Royal Pigeon». Шаг «Подними HotM» и совет плана считают, сколько заданий до следующего уровня.
+- `mining.commissionMilestone` — забранная веха из `objectives.tutorial`; достижение `skyblock_hard_working_miner` (число заданий) добавлено в `SB_ACHIEVEMENTS`.
+- Новость «Гайд по Commissions».
+
 ## 0.2.55
 
 - Новый гайд «Enchanting и Experiments» (`src/guides/enchanting.js`, группа skills) по вики (Experiments, Experimentation Table, Metaphysical Serum, Enchanting, 28.11.2026): ставки Superpairs, Chronomatron и Ultrasequencer (`SUPERPAIRS`, `CHRONOMATRON`, `ULTRASEQUENCER`, `runXp`), заряды и докупка за Bits (`RESETS`), как играть, что продаётся, Metaphysical Serum и RNG Meter, уровни Enchanting, зачарования по слотам (`ENCHANTS`). Шаги: пройти Experiments сегодня, играть на открытой ставке, следующий уровень, Serum, Guardian.
