@@ -4,6 +4,14 @@
 
 ## Не выпущено
 
+## 0.2.48
+
+- Гайд «The Forge» (`guides/forge.js`, вид `extra.forge`): слоты из `gather.forge` с временем готовности (Quick Forge учтён), выгодные рецепты под ритм заходов 4/12/24 ч (`forgeProfitPlans`: слот занят `ceil(длительность/ритм)·ритм`), цели под 🔒, цепочки деталей бура (`drillUpgrades`, `forgeChain`: вычитает запасы из хранилищ, Sacks и деталей на бурах, считает время по слотам и длинной ветке, цену материалов и готового).
+- Ironman/Stranded/Bingo: в гайде вместо цен — «Что ковать для себя» (`forgeForSelf`).
+- `guideCtx`: новые `deps.market` (MarketCtx) и `deps.collections`.
+- `craftFlips`: поле `hotm` (уровень HotM из рецепта) для колонки в «Заработке».
+- Шаг 3 гайда Mining ведёт в гайд The Forge (`link` у шага); новость «Гайд The Forge».
+
 ## 0.2.47
 
 - «Где XP дешевле» (`sbxpPlan`, опция `collections`): Collections считаются тем же `analyzeCollections`, что раздел «Коллекции» (кооп и максимум из справочника). Было 2696 / 2696 против 3172 в разделе.
