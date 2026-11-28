@@ -15,11 +15,19 @@
  "{0}пустых": "{0}empty",
  "{0}закрытых": "{0}locked",
  "{0}выгодных шагов на ~{1}": "{0}best-value steps for ~{1}",
- "Камень под роль вещи: Jasper на оружие и броню для боя, Jade, Amber и Topaz на Mining, Peridot на Farming, Aquamarine на Fishing, Citrine на Foraging. Камни добываются в Crystal Hollows, 80 штук крафтятся в камень следующего качества.": "Gem by item role: Jasper for combat weapons and armor, Jade, Amber and Topaz for Mining, Peridot for Farming, Aquamarine for Fishing, Citrine for Foraging. Gems are mined in the Crystal Hollows; 80 of them craft into the next quality.",
  "Выгоднее всего сейчас": "Best value right now",
  "По вещам": "By item",
  "Вещь": "Item",
  "До Perfect": "To Perfect",
- "Камень под роль вещи: Jasper на оружие и броню для боя (Onyx — если Strength больше Crit Damage на треть; маг — Sapphire, танк — Amethyst), Jade, Amber и Topaz на Mining, Peridot на Farming, Aquamarine на Fishing, Citrine на Foraging. Качество — под бюджет: за слот не дороже 1% твоих денег. Fine даёт около половины статов Perfect за малую долю цены.": "Gem by item role: Jasper for combat weapons and armor (Onyx if your Strength is at least a third higher than Crit Damage; mage: Sapphire, tank: Amethyst), Jade, Amber and Topaz for Mining, Peridot for Farming, Aquamarine for Fishing, Citrine for Foraging. Quality fits your budget: no more than 1% of your coins per slot. Fine gives about half the stats of Perfect for a small fraction of the price.",
- "Камни вставляет и снимает Gemstone Grinder у Geo в Dwarven Mines (Dwarven Village). Снять камень платно (Fine 10k, Flawless 100k, Perfect 500k), сам камень возвращается. Нажми на вещь — варианты Fine, Flawless и Perfect.": "The Gemstone Grinder at Geo in the Dwarven Mines (Dwarven Village) applies and removes gems. Removing costs coins (Fine 10k, Flawless 100k, Perfect 500k) and the gem comes back. Tap an item to see Fine, Flawless and Perfect."
+ "Камни вставляет и снимает Gemstone Grinder у Geo в Dwarven Mines (Dwarven Village). Снять камень платно (Fine 10k, Flawless 100k, Perfect 500k), сам камень возвращается. Нажми на вещь — варианты Fine, Flawless и Perfect.": "The Gemstone Grinder at Geo in the Dwarven Mines (Dwarven Village) applies and removes gems. Removing costs coins (Fine 10k, Flawless 100k, Perfect 500k) and the gem comes back. Tap an item to see Fine, Flawless and Perfect.",
+ "· {0}{1} слот": "· {0}{1} slot",
+ "с открытием": "incl. unlock",
+ "{0} слот{1}": "{0} slot{1}",
+ "Камни подобраны под роль каждой вещи и под твои деньги: за один слот — не дороже 1% монет. Fine даёт около половины статов Perfect за малую долю цены.": "Gems are picked for each item's role and your coins: no more than 1% of your coins per slot. Fine gives about half the stats of Perfect for a small fraction of the price.",
+ "Камни подобраны под роль каждой вещи. Добываются в Crystal Hollows, 80 штук крафтятся в камень следующего качества.": "Gems are picked for each item's role. They are mined in the Crystal Hollows; 80 of them craft into the next quality.",
+ "Какой камень куда": "Which gem goes where",
+ "Бой: Jasper (Strength). Onyx (Crit Damage) — если Strength больше Crit Damage хотя бы на треть.": "Combat: Jasper (Strength). Onyx (Crit Damage) if your Strength is at least a third higher than Crit Damage.",
+ "Маг — Sapphire (Intelligence), танк — Amethyst (Defense) или Ruby (Health).": "Mage: Sapphire (Intelligence); tank: Amethyst (Defense) or Ruby (Health).",
+ "Ещё {0}": "{0} more",
+ "Камни вставляет и снимает Gemstone Grinder у Geo в Dwarven Mines (Dwarven Village). Снять камень платно (Fine 10k, Flawless 100k, Perfect 500k), сам камень возвращается.": "The Gemstone Grinder at Geo in the Dwarven Mines (Dwarven Village) applies and removes gems. Removing costs coins (Fine 10k, Flawless 100k, Perfect 500k), and the gem comes back."
 }
