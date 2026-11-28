@@ -4,7 +4,7 @@
 
 ## Не выпущено
 
-## 0.2.53
+## 0.2.52
 
 - Гайд Mining: Frozen Corpse Milestones (`guides/corpses.js`: `CORPSE_TYPES`, `MILESTONES`, `RNG_METER`, `milestoneState`, `corpseGuide`) по вики «Frozen Corpses» / «Grandpa Wolf» (28.11.2026). Таблица 7 вех с прогрессом по `glacite_player_data.corpses_looted` (`news: 'corpses'`), таблица трупов с Glacite Powder и очками RNG Meter, таблица целей RNG Meter с монетами за труп.
 - Шаги: «Забери награду за веху у Grandpa Wolf» (веха пройдена, а Organ Donor нужного уровня нигде нет), «Frozen Corpse Milestone N» с ценой недостающих ключей; дороже трети денег — «На потом», перки Gifts from the Departed / Dead Man's Chest и ключи в инвентаре — в совете.
