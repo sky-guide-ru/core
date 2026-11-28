@@ -35,6 +35,7 @@ const WIKI_EXTRA = {
   minions: ['Minions'],
   museum: ['Museum', 'Museum/Items'],
   collectibles: ['Fairy Souls', 'Abiphones'],
+  enchanting: ['Experiments', 'Experimentation Table', 'Enchanting', 'Metaphysical Serum'],
 };
 
 // Проверено 23.11.2026 через oEmbed YouTube: видео открыто, название и канал ниже — как отдаёт YouTube.

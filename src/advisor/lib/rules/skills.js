@@ -8,7 +8,7 @@ const SKILL_HOWTO = {
   combat: ['Slayers T4–T5 и Master Mode дают больше всего опыта боя', 'Мини-боссы Crimson Isle и Kuudra', 'Зелье опыта боя и питомец с бонусом к Combat XP'],
   foraging: ['Galatea: рубка новых пород деревьев одновременно качает Foraging и Heart of the Forest', 'Топоры Galatea (Fig Axe → Figstone Splitter → Helix Chopper) и питомец Sloth', 'Foraging-зелье и Booster Cookie (+25% опыта скиллов)'],
   fishing: ['До 27 — вода (Backwater Bayou, Moonglade Marsh на Galatea, Хотспоты), с 27 — лава Crimson Isle', 'Sea Creatures во время Spooky Festival и Fishing Festival', 'Trophy Fishing параллельно даёт трофеи'],
-  enchanting: ['Experimentation Table: Superpairs и Chronomatron каждый день', 'Зачарование на столе с максимальным Bookshelf Power'],
+  enchanting: ['Experimentation Table: Superpairs и Chronomatron каждый день', 'Зачарование на Enchantment Table и книги на наковальне (до 500 тыс. XP в день)'],
   alchemy: ['Варка зелий с усилителями (Enchanted Sugar Cane, Enchanted Blaze Rod)', 'Ингредиенты дешевле купить на Bazaar, чем добывать'],
   taming: ['Опыт Taming идёт с любого опыта скиллов через активного питомца', 'Сначала подними кап до 60 (шаг в «Питомцах»)'],
   carpentry: ['Крафт на верстаке: самый дешёвый путь — массовый крафт из Bazaar-материалов'],
