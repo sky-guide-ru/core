@@ -1,5 +1,6 @@
 // Гайд «Trophy Fish»: механика (условия, шансы, тиры, гарантия), твой Trophy Fish Chance,
 // счётчик по тирам и личный план до алмаза у всех 18 видов — от самого быстрого шага к самому долгому.
+import { petLadderSection } from './pets.js';
 import { TROPHY_FISH, TIERS, TIER_RU, TROPHY_RANKS, armorIds, trophyTierCounts } from './fishing-data.js';
 import { TROPHY_INFO, TIER_ROLL, CHARM_PER_LVL, PERK_PER_LVL, PITY, TFC_CAP, SPOTS, TFC_SOURCES, ASSUME } from './trophy-data.js';
 import { fmtCoins, fmtNum } from '../advisor/lib/util.js';
@@ -316,6 +317,8 @@ export default {
       columns: ['Рыба', 'Бронза', 'Серебро', 'Золото', 'Алмаз'],
       rows: fish.map(x => [{ text: x.name, item: fishId(x.key) }, ...x.fillet.map(String)]),
     });
+
+    sections.push(petLadderSection(ctx, 'trophy', { title: 'Питомцы для Trophy Fish' }));
 
     const tierLine = TIERS.map(t => tx`${TIER_RU[t]} ${counts.tiers[t].exact}/18`).join(' · ');
     return {

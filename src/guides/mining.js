@@ -1,9 +1,11 @@
 // Гайд по добыче: Heart of the Mountain, Powder, Crystal Hollows, Glacite Tunnels и Mineshafts, снаряжение, заработок.
 import { treePerks } from '../advisor/lib/hotm.js';
 import { hotmTreeSection } from './trees/index.js';
-import { fmt, short, plural, hasItem, bestPet, ladderPos, howText, constants, cell, tone, topNext, lc } from './gathering-util.js';
+import { petLadderSection, petNextStep } from './pets.js';
+import { fmt, short, plural, hasItem, ladderPos, howText, constants, cell, tone, topNext, lc } from './gathering-util.js';
 import { tx } from '../../i18n/msg.js';
 import { fossilSections } from './fossil.js';
+import { NUCLEUS_CRYSTALS, OTHER_CRYSTALS } from './crystals.js';
 
 const POWDER = { MITHRIL: 'Mithril', GEMSTONE: 'Gemstone', GLACITE: 'Glacite' };
 
@@ -32,14 +34,7 @@ const KEY_PERKS = {
   sky_mall: 'Случайный бафф добычи каждый день',
 };
 
-// Кристаллы для Crystal Nucleus и где их искать
-const NUCLEUS = [
-  ['jade', 'Jade', 'Mines of Divan: найди Metal Detector’ом 4 потерянных инструмента и отдай их Keeper’ам'],
-  ['amber', 'Amber', 'Goblin Holdout: Goblin Queen в её логове'],
-  ['amethyst', 'Amethyst', 'Jungle: Jungle Temple, пройди храм ключом Jungle Key'],
-  ['sapphire', 'Sapphire', 'Precursor Remnants: Lost Precursor City, Professor Robot (собери 6 деталей)'],
-  ['topaz', 'Topaz', 'Magma Fields: убей босса Bal в Khazad-dûm'],
-];
+
 
 const DRILLS = ['MITHRIL_PICKAXE', 'REFINED_MITHRIL_PICKAXE', 'TITANIUM_PICKAXE', 'REFINED_TITANIUM_PICKAXE', 'MITHRIL_DRILL_1', 'MITHRIL_DRILL_2', 'TITANIUM_DRILL_1', 'TITANIUM_DRILL_2', 'TITANIUM_DRILL_3', 'TITANIUM_DRILL_4', 'DIVAN_DRILL'];
 const GEM_DRILLS = ['GEMSTONE_DRILL_1', 'GEMSTONE_DRILL_2', 'GEMSTONE_DRILL_3', 'GEMSTONE_DRILL_4'];
@@ -50,13 +45,6 @@ const ARMOR = [
   { base: 'DIVAN', name: 'Divan', why: 'лучший сет для гемов, делается в Forge из Divan Fragment', ids: ['DIVAN_HELMET', 'DIVAN_CHESTPLATE', 'DIVAN_LEGGINGS', 'DIVAN_BOOTS'] },
 ];
 const EQUIP = ['TITANIUM_NECKLACE', 'TITANIUM_CLOAK', 'TITANIUM_BELT', 'DWARVEN_HANDWARMERS'];
-const PETS = [
-  ['GLACITE_GOLEM', 'Glacite Tunnels и Mineshafts: больше Glacite Powder, Fortune и Pristine в Mineshaft'],
-  ['MITHRIL_GOLEM', 'Dwarven Mines: скорость по Mithril и больше Mithril Powder'],
-  ['SCATHA', 'Гемы в Crystal Hollows: Gemstone Fortune на бурах и больше Gemstone Powder'],
-  ['BAL', 'Crystal Hollows: Pristine в Magma Fields, снижает жару'],
-  ['MOLE', 'Mines of Divan и Crystal Nucleus: лишний предмет с Nucleus'],
-];
 
 const pieces = (ctx, a) => (a.ids || ['HELMET', 'CHESTPLATE', 'LEGGINGS', 'BOOTS'].map(s => tx`${a.base}_${s}`)).filter(id => hasItem(ctx, id)).length;
 
@@ -114,8 +102,8 @@ export default {
 
     // ---- Crystal Hollows ----
     const cr = mi.crystals || {};
-    const nucleusRuns = Math.min(...NUCLEUS.map(([k]) => cr[k]?.placed || 0));
-    const missing = NUCLEUS.filter(([k]) => cr[k]?.state !== 'FOUND' && cr[k]?.state !== 'PLACED');
+    const nucleusRuns = Math.min(...NUCLEUS_CRYSTALS.map(([k]) => cr[k]?.placed || 0));
+    const missing = NUCLEUS_CRYSTALS.filter(([k]) => cr[k]?.state !== 'FOUND' && cr[k]?.state !== 'PLACED');
     if (nucleusRuns < 1) {
       next.push({ title: 'Пройди первый Crystal Nucleus', priority: 58, why: 'Собери 5 кристаллов и поставь их в Crystal Nucleus в центре Crystal Hollows: это открывает сундук с частями Divan, гемами и Powder. Где искать: в разделе «Crystal Hollows».' });
     }
@@ -147,9 +135,8 @@ export default {
     if (eqMissing.length && lvl >= 3) {
       next.push({ title: tx`Снаряжение для добычи: не хватает ${eqMissing.length} из ${EQUIP.length}`, priority: 44, why: eqMissing.map(id => tx`${ctx.name(id)}: ${howText(ctx, id)}`).join(' • ') });
     }
-    const petNotes = PETS.map(([t, why]) => ({ t, why, pet: bestPet(ctx, t) }));
-    const noPet = petNotes.filter(p => !p.pet).slice(0, 2);
-    if (noPet.length) next.push({ title: tx`Питомцы для добычи: ${noPet.map(p => ctx.name(p.t)).join(', ')}`, priority: 30, why: noPet.map(p => tx`${ctx.name(p.t)}: ${lc(p.why)}`).join('; ') + '.' });
+    const petStep = petNextStep(ctx, 'mining');
+    if (petStep) next.push(petStep);
 
     // ================= Секции =================
     sections.push({
@@ -167,13 +154,24 @@ export default {
     sections.push({
       kind: 'checklist', title: 'Crystal Hollows: кристаллы для Crystal Nucleus',
       note: tx`Nucleus пройден ${fmt(nucleusRuns)} ${plural(nucleusRuns, 'раз', 'раза', 'раз')}. Кристаллы сбрасываются после каждого прохождения, поэтому «найден» — это текущий заход.`,
-      items: NUCLEUS.map(([k, n, where]) => ({
+      items: NUCLEUS_CRYSTALS.map(([k, n, where]) => ({
         text: tx`${n} Crystal${cr[k]?.placed ? tx` · поставлен ${fmt(cr[k].placed)} ${plural(cr[k].placed, 'раз', 'раза', 'раз')}` : ''}`,
         done: cr[k]?.state === 'FOUND' || cr[k]?.state === 'PLACED',
         hint: where,
       })),
     });
     if (missing.length && nucleusRuns > 0) sections[sections.length - 1].note += tx` Для следующего захода не хватает: ${missing.map(x => x[1]).join(', ')}.`;
+    const otherFound = OTHER_CRYSTALS.filter(([k]) => cr[k]?.state === 'FOUND').length;
+    sections.push({
+      kind: 'checklist', news: 'crystals', title: 'Другие кристаллы: для Perfect-гемов',
+      note: tx`Найдено ${otherFound} из ${OTHER_CRYSTALS.length}. Для Crystal Nucleus они не нужны: каждый кристалл уходит в Forge на один Perfect-гем (5 Flawless + 1 Crystal, 20 ч, HotM 5). В Mineshaft нужного типа кристалл появляется с шансом 25%, забрать его может только тот, кто нашёл шахту.`,
+      items: OTHER_CRYSTALS.map(([k, n, where]) => ({
+        text: tx`${n} Crystal${cr[k]?.found ? tx` · найден ${fmt(cr[k].found)} ${plural(cr[k].found, 'раз', 'раза', 'раз')}` : ''}`,
+        done: cr[k]?.state === 'FOUND',
+        hint: where,
+        item: `PERFECT_${n.toUpperCase()}_GEM`,
+      })),
+    });
 
     sections.push({
       kind: 'table', title: 'Glacite Tunnels и Mineshafts',
@@ -201,11 +199,7 @@ export default {
     });
     if (!bestDrill.length) sections[sections.length - 1].note = 'Буров не нашлось в инвентаре, сундуках и рюкзаках. Если бур лежит в Storage на острове, API его не видит.';
 
-    sections.push({
-      kind: 'table', title: 'Питомцы для добычи',
-      columns: ['Питомец', 'Есть', 'Когда брать'],
-      rows: petNotes.map(p => [cell(ctx.name(tx`${p.t};4`).replace(/^\[Lvl \{LVL\}\] /, '') || p.t, { item: tx`${p.t};4` }), cell(p.pet ? tx`${p.pet.tier[0] + p.pet.tier.slice(1).toLowerCase()}${p.pet.level ? tx`, ур. ${p.pet.level}` : ''}` : 'нет', { tone: p.pet ? 'good' : 'muted' }), p.why]),
-    });
+    sections.push(petLadderSection(ctx, 'mining'));
 
     // Заработок: методы из модуля цен с тегом «Добыча»
     const methods = (ctx.analysis?.methods || []).filter(x => x.tag === 'Mining' || /gem|forge|mining/i.test(x.id || ''));

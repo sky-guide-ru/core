@@ -3,6 +3,7 @@
 // Данные (NEU-REPO, патч 0.27.x) — в foraging-data.js.
 import { treePerks } from '../advisor/lib/hotm.js';
 import { getItemRu } from '../items-ru/index.js';
+import { petLadderSection } from './pets.js';
 import { fmt, short, hasItem, bestPet, ladderPos, howText, constants, cell, tone, topNext, lc } from './gathering-util.js';
 import { AXES, SIDE_AXES, ARMOR, EQUIP, PETS, BOOSTS, SHARDS, AGATHA_SHOP, MIRIA_SHOP, GIFT_DROPS, SKILL_GATES, LOGS } from './foraging-data.js';
 import { tx } from '../../i18n/msg.js';
@@ -44,7 +45,6 @@ export function hotfLevel(xp, t) {
 
 const stat = (id, key) => Number(getItemRu(id)?.stats?.[key] || 0);
 const ownedItem = (ctx, id) => ctx.owned?.get?.(id)?.[0] || null;
-const petName = (ctx, t) => String(ctx.name(tx`${t};4`) || t).replace(/^\[Lvl \{LVL\}\] /, '');
 const lvlOf = s => (s ? s.level : 0);
 
 /** Цена шарда: на Bazaar шарды лежат как SHARD_<ИМЯ>, в базе предметов — ATTRIBUTE_SHARD_<АТРИБУТ>;1 */
@@ -266,15 +266,7 @@ export default {
       ],
     });
 
-    sections.push({
-      kind: 'table', title: 'Питомцы для Foraging',
-      columns: ['Питомец', 'Есть', 'Зачем', 'Где взять'],
-      rows: pets.map(p => [
-        cell(petName(ctx, p.type), { item: tx`${p.type};4` }),
-        cell(p.pet ? tx`${p.pet.tier[0] + p.pet.tier.slice(1).toLowerCase()}${p.pet.level ? tx`, ур. ${p.pet.level}` : ''}` : 'нет', { tone: p.pet ? 'good' : p.best ? 'bad' : 'muted' }),
-        p.why, p.how,
-      ]),
-    });
+    sections.push(petLadderSection(ctx, 'foraging'));
 
     sections.push({
       kind: 'table', title: 'Осколки Hunting для Foraging',
