@@ -37,14 +37,15 @@ test('Fetchur: дешевле у NPC, чем на рынке; что уже ес
   assert.match(m.best.where, /Dwarven Mines/);
 });
 
-test('Fetchur и Puzzler: только с доступом в Dwarven Mines, отметка — вручную', () => {
+test('Fetchur и Puzzler: только с доступом в Dwarven Mines, напоминания без отметки', () => {
   assert.deepEqual(fetchurPuzzlerDailies({}, {}, NOW), []);
   const list = fetchurPuzzlerDailies({ mining: { hotm: { level: 3 } } }, {}, NOW);
   assert.deepEqual(list.map(i => i.id), ['fetchur', 'puzzler']);
-  assert.ok(list.every(i => i.done === null && i.manual));
+  assert.ok(list.every(i => i.done === null && i.reminder));
   assert.match(list[0].text, /Firework Rocket/);
   const d = dailiesOf({ mining: { hotm: { level: 3 } } }, NOW);
-  assert.equal(d.total, 2);
+  assert.equal(d.items.length, 2);
+  assert.equal(d.total, 0); // напоминания не входят в счёт
   assert.equal(d.done, 0);
 });
 
