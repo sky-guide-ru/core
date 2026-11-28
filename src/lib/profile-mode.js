@@ -17,7 +17,7 @@ export function profileMode(gameMode) {
 // Skills, у которых кап по умолчанию ниже настоящего максимума, и как его поднять
 export const CAP_RAISE = {
   farming: { max: 60, how: 'у NPC Anita (рядом с Jacob) за медали Jacob\'s Farming Contest' },
-  taming: { max: 60, how: 'сдавая питомцев новых типов в Pet Care (каждый тип +1 к капу)' },
+  taming: { max: 60, how: 'отдав George в Pet Care 10 питомцев из его списка (каждый +1 к капу)' },
 };
 
 // Платные ранги Hypixel из /player: что показать. На геймплей SkyBlock ранг почти не влияет

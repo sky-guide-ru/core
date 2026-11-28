@@ -60,7 +60,6 @@
  "Докачай важных легендарных питомцев до 100: {0} шт.": "Level important legendary pets to 100: {0}",
  "Питомец даёт полный бонус только на 100 уровне. Сейчас на 100 уровне: {0} из {1} типов.": "A pet gives its full bonus only at level 100. Now at level 100: {0} of {1} types.",
  "{0} — {1} ур.": "{0}: lvl {1}",
- "Качай на основном занятии; второй питомец получает часть опыта через предмет EXP Share": "Level them on your main activity; a second pet gets part of the XP via the EXP Share item",
  "Скрафти {0} {1} миньонов: откроется {2}-й слот": "Craft {0} {1} of minions: unlocks slot {2}",
  "новый тир": "new tier",
  "новых тира": "new tiers",
@@ -97,5 +96,6 @@
  "После употребления даёт +11 Magical Power навсегда и бесплатный вход в Rift.": "Once consumed it gives +11 Magical Power forever and free entry to the Rift.",
  "; где взять: {0}": "; where to get: {0}",
  "Своего рабочего питомца не отдавай: добудь или скрафти отдельного": "Don't give away your working pet: obtain or craft a separate one",
- "Засчитывается каждый новый тир каждого типа; низкие тиры самые дешёвые — материалы копят сами миньоны и мешки Sacks": "Every new tier of every type counts; low tiers are cheapest — minions and Sacks collect the materials for you"
+ "Засчитывается каждый новый тир каждого типа; низкие тиры самые дешёвые — материалы копят сами миньоны и мешки Sacks": "Every new tier of every type counts; low tiers are cheapest — minions and Sacks collect the materials for you",
+ "Качай на основном занятии; питомец в слоте Exp Share (/pets) получает часть опыта, предмет Exp Share добавляет +15%": "Level them in your main activity; a pet in an Exp Share slot (/pets) gets part of the XP, and the Exp Share item adds +15%"
 }

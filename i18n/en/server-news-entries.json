@@ -312,5 +312,20 @@
  "Гайд по Experimentation Table": "Experimentation Table guide",
  "В [гайде Enchanting](guides/enchanting#superpairs) — ставки Superpairs, Chronomatron и Ultrasequencer по уровням.": "The [Enchanting guide](guides/enchanting#superpairs) lists Superpairs, Chronomatron and Ultrasequencer stakes by level.",
  "Подсказки, как играть в каждую игру, и что продаётся: Titanic Experience Bottle, Metaphysical Serum.": "Tips for playing each game, and what sells: Titanic Experience Bottle, Metaphysical Serum.",
- "Прогресс из профиля: лучшая ставка, выпитые Serum, пройден ли стол сегодня.": "Progress from the profile: best stake, Serums drunk, whether the table is done today."
+ "Прогресс из профиля: лучшая ставка, выпитые Serum, пройден ли стол сегодня.": "Progress from the profile: best stake, Serums drunk, whether the table is done today.",
+ "Гайд по Taming и прокачке питомцев": "Taming and pet leveling guide",
+ "В [гайде Taming](guides/taming#xp) — что ускоряет опыт питомцев: Exp Boost, Beastmaster Crest, Diana, Exp Share.": "The [Taming guide](guides/taming#xp) shows what speeds up pet XP: Exp Boost, Beastmaster Crest, Diana, Exp Share.",
+ "Тренировка у Fann и Carrot Candy: сколько дней и монет нужно до 100 уровня.": "Fann's training and Carrot Candy: how many days and coins it takes to reach level 100.",
+ "«Питомцы по этапам» учитывают монеты": "\"Pets by stage\" counts your coins",
+ "Исправлена ошибка: [питомцы по этапам](guides/mining#pets) всегда считались дорогими, а Ironman видел цены аукциона.": "Fixed a bug: [pets by stage](guides/mining#pets) were always shown as too expensive, and Ironman saw auction prices.",
+ "Для своих питомцев — где каждый качается без штрафа, какой предмет ему надеть и стоит ли докачать.": "For your own pets: where each one levels without a penalty, which item to give it and whether leveling pays off.",
+ "Загадки и секреты Dungeons": "Dungeons puzzles and secrets",
+ "В [гайде Dungeons](guides/dungeons#puzzles) — решения всех загадок: Three Weirdos, Water Board, Quiz и других.": "The [Dungeons guide](guides/dungeons#puzzles) has solutions for every puzzle: Three Weirdos, Water Board, Quiz and more.",
+ "Блоки про секреты, Blood Room, The Watcher и блессинги.": "Blocks about secrets, the Blood Room, The Watcher and blessings.",
+ "[Помощники](guides/dungeons#helpers) подсказывают ход в Tic Tac Toe, нужного NPC в Three Weirdos и ответы Quiz.": "[Helpers](guides/dungeons#helpers) suggest the Tic Tac Toe move, the right NPC in Three Weirdos and Quiz answers.",
+ "Калькулятор показывает, чего не хватает до S+, а таблица — лучший счёт по этажам.": "A calculator shows what is missing for S+, and a table shows the best score per floor.",
+ "Гайд по Commissions": "Commissions guide",
+ "В [гайде Mining](guides/mining#commissions) — Commission Milestones с прогрессом и наградами за каждую веху.": "The [Mining guide](guides/mining#commissions) now has Commission Milestones with progress and the reward for each milestone.",
+ "Где брать задания на трёх островах, сколько дают опыта HotM и Powder, какие делать быстрее.": "Where to get commissions on three islands, how much HotM XP and Powder they give, and which are fastest.",
+ "План считает, сколько заданий осталось до следующего уровня HotM.": "The plan counts how many commissions are left to the next HotM level."
 }

@@ -151,6 +151,14 @@ export const AFTER = {
     ],
     related: ['essence', 'museum'],
   },
+  taming: {
+    goals: [
+      'Pet Score: каждый новый вид питомца и каждый питомец 100 уровня дают очки и Magic Find.',
+      'Exp Share с предметом Exp Share: запасные питомцы качаются сами, пока ты играешь основным.',
+      'Golden, Jade и Rose Dragon растут до 200 уровня: на это уходит больше 200 млн опыта.',
+    ],
+    related: ['diana', 'dungeons'],
+  },
   chocolate: {
     goals: [
       'Все кролики: яйца Hoppity каждую весну, резиденты на островах и бродячие кролики в окне фабрики.',

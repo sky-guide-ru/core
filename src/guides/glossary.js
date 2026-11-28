@@ -124,8 +124,8 @@ export const GLOSSARY = {
   },
   s_plus: {
     names: ['S+'], kind: 'mech', title: 'Оценка S+',
-    text: 'Высшая оценка захода в данж: 300+ очков. Очки — за мастерство (без смертей), скорость, найденные секреты и убитых мобов (Exploration). S+ даёт больше опыта Catacombs и лучший лут в сундуках.',
-    how: ['Не умирай: каждая смерть −2 очка (первая с Spirit-питомцем бесплатна).', 'Ищи секреты в комнатах: моды вроде Skytils/SkyHanni подсвечивают их.', 'Чисти комнаты до конца и не затягивай заход.'],
+    text: 'Высшая оценка захода в данж: 300+ очков из 305. Счёт складывается из Skill (смерти и проваленные загадки), Explore (зачищенные комнаты и секреты), Speed (время) и бонуса (Crypts, Mimic). S+ даёт больше опыта Catacombs и лучший лут в сундуках.',
+    how: ['Не умирай: каждая смерть −2 очка (первая с Spirit-питомцем — −1).', 'Не проваливай загадки: провал −14 очков.', 'Собери нужную долю секретов этажа (на F7 и Master Mode — все) и взорви 5 Crypts.'],
   },
   master_mode: {
     names: ['Master Mode', 'Master-этаж', 'Master-этажи', 'M-этажи', 'M-этажах', 'M-этажей'], kind: 'mech', title: 'Master Mode',
@@ -144,7 +144,29 @@ export const GLOSSARY = {
   },
   secrets: {
     names: ['секреты', 'Секреты', 'секретов', 'Секретов', 'Secrets'], kind: 'mech', title: 'Secrets',
-    text: 'Спрятанные сундуки, предметы, летучие мыши и рычаги в комнатах. Дают очки Exploration для S+ и полезный лут; общее число секретов влияет на некоторые предметы.',
+    text: 'Спрятанные сундуки, предметы на земле, летучие мыши и Wither Essence в комнатах данжа. Дают до 40 очков Explore для S+ и полезный лут: Spirit Leap, Decoy, Architect\'s First Draft, Dungeon Chest Key.',
+  },
+  puzzle_room: {
+    names: ['загадки', 'Загадки', 'загадку', 'загадка', 'Загадка', 'загадок', 'puzzle-комнаты'], kind: 'mech', title: 'Загадки (Puzzle Rooms)',
+    text: 'Фиолетовые комнаты на Magical Map, в каждом данже их минимум две и без повторов. Решённая загадка даёт всей команде Blessing V, проваленная — −14 очков Skill.',
+    how: ['Проваленную загадку можно начать заново с Architect\'s First Draft: он падает из секретных сундуков.'],
+    items: ['ARCHITECT_FIRST_DRAFT'],
+  },
+  blood_room: {
+    names: ['Blood Room', 'Blood Door', 'Blood Key'], kind: 'place', title: 'Blood Room',
+    text: 'Красная комната с The Watcher. Дверь открывается Blood Key: он падает с минибосса или после всех мобов со звездой в комнате. Пока Watcher не побеждён, портал к боссу этажа закрыт.',
+  },
+  watcher: {
+    names: ['The Watcher', 'Watcher'], kind: 'mob', title: 'The Watcher',
+    text: 'Хранитель Blood Room. Его нельзя ранить: он призывает Undead, и победа — когда убиты все. После фразы «That will be enough for now.» новых призывов не будет.',
+  },
+  mimic: {
+    names: ['Mimic'], kind: 'mob', title: 'Mimic',
+    text: 'Моб в ловушечном сундуке (Trapped Chest) вместо секрета. Есть в каждом данже с F6. Убийство даёт +2 бонусных очка к счёту.',
+  },
+  blessing: {
+    names: ['Blessing', 'блессинг', 'блессинги', 'Блессинги', 'блессингов'], kind: 'mech', title: 'Blessings',
+    text: 'Усиление статов всей команды до конца захода: Life, Power, Stone, Wisdom, Time. Загадки и мобы дают уровень V, секреты — I–II, одинаковые складываются.',
   },
   catacombs: {
     names: ['Catacombs'], kind: 'skill', title: 'Catacombs',

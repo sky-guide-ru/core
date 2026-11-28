@@ -212,5 +212,15 @@
  "Каждый уровень даёт +3 Magic Find и +3 Strength против этого семейства: на мобах для фарма и слееров это заметно.": "Each tier gives +3 Magic Find and +3 Strength against that family: noticeable on mobs you farm and on slayers.",
  "SkyBlock Menu → Your Skills → Combat → Bestiary → Milestones: +1 Health за веху и Combat XP каждые 5 вех.": "SkyBlock Menu → Your Skills → Combat → Bestiary → Milestones: +1 Health per milestone and Combat XP every 5 milestones.",
  "Не пропускай события": "Don't skip events",
- "Spooky Festival, Diana и Season of Jerry: у их мобов первые уровни почти бесплатные, но только пока идёт событие.": "Spooky Festival, Diana and Season of Jerry: their mobs' first tiers are almost free, but only while the event runs."
+ "Spooky Festival, Diana и Season of Jerry: у их мобов первые уровни почти бесплатные, но только пока идёт событие.": "Spooky Festival, Diana and Season of Jerry: their mobs' first tiers are almost free, but only while the event runs.",
+ "Выбери питомца под занятие": "Pick a pet for the activity",
+ "Питомец растёт от опыта скилла своего типа: Combat-питомец в бою, Mining-питомец на шахте. Чужой скилл даёт втрое меньше.": "A pet grows from XP of its own skill type: a Combat pet in combat, a Mining pet in the mines. Another skill gives three times less.",
+ "Дай ему Exp Boost": "Give it an Exp Boost",
+ "Zog в Pet Care (Hub) продаёт Exp Boost за 50–60 тыс.: +20% опыта от своего скилла или +10% от всех.": "Zog in Pet Care (Hub) sells Exp Boosts for 50–60k: +20% XP from its skill or +10% from all.",
+ "Заполни слот Exp Share": "Fill the Exp Share slot",
+ "Меню /pets → Exp Share: питомец в слоте получает долю опыта активного, даже когда не призван.": "/pets menu → Exp Share: a pet in the slot gets a share of the active pet's XP even when not summoned.",
+ "Отдай питомца Fann": "Give a pet to Fann",
+ "С Taming 10 Fann в Pet Care тренирует питомца, пока ты играешь: бесплатно или быстрее за монеты.": "From Taming 10 Fann in Pet Care trains a pet while you play: for free or faster for coins.",
+ "Подними кап у George": "Raise the cap at George",
+ "После Taming 50 George в Pet Care берёт 10 питомцев из своего списка и поднимает кап до 60.": "After Taming 50 George in Pet Care takes 10 pets from his list and raises the cap to 60."
 }

@@ -20,7 +20,50 @@ export const NEWS = [
     title: 'Гайд по Bestiary',
     items: [
       'В [гайде Bestiary](guides/bestiary#plan) — какие мобы быстрее всего доведут до следующей вехи и где их искать.',
-      'Видно уровни всех семейств, Magic Find и Strength против своих основных мобов и забытые награды вех.',
+      'Видно уровни всех семейств, Magic Find и Strength против своих основных мобов и незабранные награды вех.',
+    ],
+  },
+  {
+    id: '2026-11-28-taming',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по Taming и прокачке питомцев',
+    items: [
+      'В [гайде Taming](guides/taming#xp) — что ускоряет опыт питомцев: Exp Boost, Beastmaster Crest, Diana, Exp Share.',
+      'Тренировка у Fann и Carrot Candy: сколько дней и монет нужно до 100 уровня.',
+      'Для своих питомцев — где каждый качается без штрафа, какой предмет ему надеть и стоит ли докачать.',
+    ],
+  },
+  {
+    id: '2026-11-28-pets-fix',
+    date: '2026-11-28',
+    kind: 'fix',
+    title: '«Питомцы по этапам» учитывают монеты',
+    items: [
+      'Исправлена ошибка: [питомцы по этапам](guides/mining#pets) всегда считались дорогими, а Ironman видел цены аукциона.',
+    ],
+  },
+  {
+    id: '2026-11-28-commissions',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по Commissions',
+    items: [
+      'В [гайде Mining](guides/mining#commissions) — Commission Milestones с прогрессом и наградами за каждую веху.',
+      'Где брать задания на трёх островах, сколько дают опыта HotM и Powder, какие делать быстрее.',
+      'План считает, сколько заданий осталось до следующего уровня HotM.',
+    ],
+  },
+  {
+    id: '2026-11-28-puzzles',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Загадки и секреты Dungeons',
+    items: [
+      'В [гайде Dungeons](guides/dungeons#puzzles) — решения всех загадок: Three Weirdos, Water Board, Quiz и других.',
+      '[Помощники](guides/dungeons#helpers) подсказывают ход в Tic Tac Toe, нужного NPC в Three Weirdos и ответы Quiz.',
+      'Калькулятор показывает, чего не хватает до S+, а таблица — лучший счёт по этажам.',
+      'Блоки про секреты, Blood Room, The Watcher и блессинги.',
     ],
   },
   {
