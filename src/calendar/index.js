@@ -21,6 +21,7 @@ export function setElection(raw, at = Date.now()) {
   if (raw && (raw.mayor || raw.current)) { state.raw = raw; state.at = at; }
 }
 export const electionRaw = () => state.raw;
+export const electionUpdatedAt = () => state.at || null;
 
 // Fire Sales: косметика за SkyBlock Gems в магазине (Community Center). { sales: [{ item_id, start, end, amount, price }] }
 const fire = { sales: [] };
