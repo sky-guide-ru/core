@@ -136,7 +136,9 @@ export function calibrate(results, polls, fallback = 1) {
 /** Как часто мэр побеждает, когда выдвигается (последние last выборов): { key: { runs, wins, rate, lastWin } } */
 export function historyStats(results, last = 60) {
   const out = {};
-  for (const r of results.slice(-last)) {
+  // годы с особым мэром и годы без голосов на вики не считаем: там обычные мэры проигрывают все или данных нет
+  const usable = results.filter(r => (r.candidates || []).filter(c => c.votes > 0).length >= 3 && !(r.candidates || []).some(c => MAYORS[keyOf(c.name)]?.special));
+  for (const r of usable.slice(-last)) {
     const w = keyOf(r.winner);
     for (const c of r.candidates || []) {
       const k = keyOf(c.name);
@@ -171,7 +173,10 @@ export function specialCycle(results) {
   for (let i = 1; i < years.length; i++) { const g = years[i] - years[i - 1]; if (g > 1) gaps[g] = (gaps[g] || 0) + 1; }
   const every = Number(Object.entries(gaps).sort((a, b) => b[1] - a[1])[0]?.[0]) || null;
   const order = results.filter(r => years.includes(r.year)).map(r => keyOf((r.candidates || []).find(c => MAYORS[keyOf(c.name)]?.special)?.name));
-  return { last, every, next: every ? last + every : null, recent: order.slice(-3) };
+  // особые мэры идут по кругу (Scorpius → Derpy → Jerry): следующий — тот, кто был три особых выборов назад
+  const recent = order.slice(-3);
+  const nextName = recent.length === 3 && new Set(recent).size === 3 ? MAYORS[recent[0]]?.name || null : null;
+  return { last, every, next: every ? last + every : null, recent, nextName };
 }
 
 // ---------- вид для сайта ----------
@@ -258,9 +263,9 @@ export function electionView(raw, data, now = Date.now()) {
   if (spec?.next && year != null) {
     // выборы года Y решают мэра, который вступит на смене мэра через (Y - year) лет после ближайшей
     const at = termEnd + (spec.next - year) * YEAR;
-    if (at > now) special = { year: spec.next, start: at, every: spec.every, recent: spec.recent };
+    if (at > now) special = { year: spec.next, start: at, every: spec.every, recent: spec.recent, name: spec.nextName };
   }
-  if (special) timeline.push({ kind: 'special', start: special.start, every: special.every, names: Object.values(MAYORS).filter(m => m.special).map(m => m.name) });
+  if (special) timeline.push({ kind: 'special', start: special.start, every: special.every, likely: special.name, names: Object.values(MAYORS).filter(m => m.special).map(m => m.name) });
 
   // «когда снова» — для каждого обычного мэра
   const nextFor = {};

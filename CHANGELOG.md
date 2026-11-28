@@ -7,7 +7,7 @@
 ## 0.2.64
 
 - Выборы мэра (`src/calendar/election.js`, без диска и сети): снимки голосов (`addElection`), тренд доли за 3 ч (`trendOf`), шанс победы (`winChances`: доля + приглушённый тренд, разброс растёт с корнем из оставшихся часов, множитель `sigmaK` подбирается по прошлым выборам со снимками — `calibrate`), история (`historyStats`, `incumbentRuns`, `specialCycle` — правила выводятся из итогов, а не задаются руками), вид `electionView`: кандидаты с голосами, трендом, шансом, «почему», «если победит», пометками «новый» и «сильные перки»; лента «Ближайшие мэры», «когда снова» для каждого мэра (`nextFor`), доля побед, мэр для гайда (`GUIDE_MAYOR`).
-- `src/calendar/election-store.js`: итоги и снимки в `DATA_DIR/election-history.json`, `recordElection` из `refreshMayor`, `electionNow` для `/v1/election`. История с вики подключается файлом `src/calendar/data/election-history.json`, если он есть.
+- `src/calendar/election-store.js`: итоги и снимки в `DATA_DIR/election-history.json`, `recordElection` из `refreshMayor`, `electionNow` для `/v1/election`. История с вики — `src/calendar/data/election-history.json`: 116 выборов (годы 400–527) с голосами из `Module:Mayor/Elections/ApiData` официальной вики (28.11.2026). По ней: действующий мэр не выдвигается, особый мэр раз в 8 лет по кругу Scorpius → Derpy → Jerry; доля побед считается без лет с особым мэром.
 - Новость «Выборы мэра: голоса и шансы», переводы блока выборов.
 
 ## 0.2.63
