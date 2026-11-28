@@ -49,5 +49,6 @@
  ", следующий шанс — выборы с {0}": ", next chance — the election from {0}",
  " (побеждает в {0}% выборов, где выдвигается)": " (wins {0}% of elections they run in)",
  "Мэр для этой темы:": "Mayor for this topic:",
- "Выборы →": "Election →"
+ "Выборы →": "Election →",
+ "скорее всего {0} (идут по кругу: {1})": "most likely {0} (they rotate: {1})"
 }
