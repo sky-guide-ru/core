@@ -1,6 +1,6 @@
 // Fetchur и Puzzler (Dwarven Mines): бесплатный Mithril Powder каждый день. Сверено с вики 28.11.2026
 // (hypixelskyblock.minecraft.wiki/w/Fetchur, /w/Puzzler). Hypixel API не отдаёт, сдан ли Fetchur или решён ли Puzzler сегодня,
-// поэтому это напоминания без отметки (reminder: true, done: null).
+// поэтому на сайте отметку ставит сам игрок.
 import { ru, tx } from '../../i18n/msg.js';
 import { short, cell } from '../guides/gathering-util.js';
 import { npcCoinOffer, obtainHint } from '../lib/npc-shop.js';
@@ -83,7 +83,7 @@ export function hasDwarvenMines(m) {
   return (mi.hotm?.level || 0) >= 1 || (mi.powder?.mithril || 0) > 0;
 }
 
-/** Строки «Дел на сегодня» для Fetchur и Puzzler: напоминания, сделано ли — игра не сообщает (done = null). */
+/** Строки «Дел на сегодня» для Fetchur и Puzzler (отметку ставит игрок: done = null). */
 export function fetchurPuzzlerDailies(m, ctx = {}, now = Date.now()) {
   if (!hasDwarvenMines(m)) return [];
   const f = fetchurRequest(m, ctx, now);
@@ -91,12 +91,12 @@ export function fetchurPuzzlerDailies(m, ctx = {}, now = Date.now()) {
   const how = f.have >= f.n ? ru`уже есть: ${f.have} шт.` : f.total > 0 ? ru`${f.best.where}, около ${short(f.total)} монет` : f.best.where;
   return [
     {
-      id: 'fetchur', title: 'Fetchur', reminder: true, done: null, href: '#/guides/mining', anchor: 'fetchur',
+      id: 'fetchur', title: 'Fetchur', manual: 'day', done: null, href: '#/guides/mining', anchor: 'fetchur',
       text: ru`Сегодня просит ${what} (${how}). Награда: 2 500 Mithril Powder и 20 000 монет. Завтра: ${f.tomorrow.n}× ${f.tomorrow.name}.`,
       fetchur: { n: f.n, name: f.name, ids: f.ids, item: f.best.id, coins: f.total, have: f.have },
     },
     {
-      id: 'puzzler', title: 'Puzzler', reminder: true, done: null, href: '#/guides/mining', anchor: 'fetchur',
+      id: 'puzzler', title: 'Puzzler', manual: '24h', done: null, href: '#/guides/mining', anchor: 'fetchur',
       text: 'У Grand Library: встаньте на Glowstone лицом к выходу из комнаты, пройдите по стрелкам и сломайте блок под ногами. Награда: 2 500 Mithril Powder.',
     },
   ];

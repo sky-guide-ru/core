@@ -16,8 +16,8 @@ export function dailyReset(now = Date.now()) {
 /**
  * @param {object} m разобранный участник (member.daily, crimson, skills…)
  * @param {object} [ctx] цены для Fetchur: { items, buy, market, noMarket } (daily-npcs.js liveCtx)
- * reminder: true — напоминание: API не показывает, сделано ли (done = null), в счёт done/total не входит.
- * @returns {null | { reset: number, next: number, done: number, total: number, items: Array<{ id, title, done, reminder?, progress?, text, href? }> }}
+ * Дела с manual ('day' | '24h') API не видит: done = null, отметку ставит игрок на сайте.
+ * @returns {null | { reset: number, next: number, done: number, total: number, items: Array<{ id, title, done, manual?, progress?, text, href? }> }}
  */
 export function dailiesOf(m, now = Date.now(), ctx = {}) {
   const d = m?.daily || {};
@@ -56,6 +56,5 @@ export function dailiesOf(m, now = Date.now(), ctx = {}) {
   items.push(...fetchurPuzzlerDailies(m, ctx, now));
 
   if (!items.length) return null;
-  const tracked = items.filter(i => !i.reminder);
-  return { reset, next: reset + DAY, done: tracked.filter(i => i.done).length, total: tracked.length, items };
+  return { reset, next: reset + DAY, done: items.filter(i => i.done).length, total: items.length, items };
 }

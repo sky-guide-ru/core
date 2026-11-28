@@ -11,6 +11,9 @@
  "{0}/{1} · новый день в {2}": "{0}/{1} · new day at {2}",
  "{0} Снова в {1}.": "{0} Available again at {1}.",
  "Отметки ставятся сами по данным профиля, он обновляется раз в несколько минут.": "Ticks are set automatically from profile data, which updates every few minutes.",
- "новый день в {0}": "new day at {0}",
- "Отметки ставятся сами по данным профиля, он обновляется раз в несколько минут. Fetchur и Puzzler — напоминания: игра не сообщает, сделаны ли они.": "Marks are set automatically from your profile, which refreshes every few minutes. Fetchur and Puzzler are reminders: the game doesn't report whether they're done."
+ "Снять отметку": "Remove the mark",
+ "Отметить: сделано": "Mark as done",
+ "снять отметку": "remove the mark",
+ "отметить, что сделано": "mark as done",
+ "Отметки ставятся сами по данным профиля, он обновляется раз в несколько минут. Fetchur и Puzzler игра не показывает: отметьте их сами, нажав на квадрат.": "Marks are set automatically from your profile, which refreshes every few minutes. The game doesn't show Fetchur and Puzzler: tick them yourself by clicking the square."
 }
