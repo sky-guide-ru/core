@@ -5,6 +5,7 @@
 ## Не выпущено
 
 - Гайд майнинга: чек-лист «Другие кристаллы: для Perfect-гемов» (Jasper, Ruby, Opal, Aquamarine, Peridot, Onyx, Citrine) — где искать и что найдено по `mining_core.crystals`.
+- `guides/crystals.js`: справочник 12 Gemstone Crystals (где искать) и `crystalFound(member, key)`. «Как получить» (`costTree`, `buildObtainGuide`): кристалл в рецепте Perfect-гема — «найден / не найден · где искать» вместо «нет цены и рецепта», у карточки кристалла первым способ «Найти кристалл».
 - Новость «Кристаллы для Perfect-гемов в гайде».
 
 ## 0.2.47

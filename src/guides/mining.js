@@ -3,6 +3,7 @@ import { treePerks } from '../advisor/lib/hotm.js';
 import { hotmTreeSection } from './trees/index.js';
 import { fmt, short, plural, hasItem, bestPet, ladderPos, howText, constants, cell, tone, topNext, lc } from './gathering-util.js';
 import { tx } from '../../i18n/msg.js';
+import { NUCLEUS_CRYSTALS, OTHER_CRYSTALS } from './crystals.js';
 
 const POWDER = { MITHRIL: 'Mithril', GEMSTONE: 'Gemstone', GLACITE: 'Glacite' };
 
@@ -31,26 +32,7 @@ const KEY_PERKS = {
   sky_mall: 'Случайный бафф добычи каждый день',
 };
 
-// Кристаллы для Crystal Nucleus и где их искать
-const NUCLEUS = [
-  ['jade', 'Jade', 'Mines of Divan: найди Metal Detector’ом 4 потерянных инструмента и отдай их Keeper’ам'],
-  ['amber', 'Amber', 'Goblin Holdout: Goblin Queen в её логове'],
-  ['amethyst', 'Amethyst', 'Jungle: Jungle Temple, пройди храм ключом Jungle Key'],
-  ['sapphire', 'Sapphire', 'Precursor Remnants: Lost Precursor City, Professor Robot (собери 6 деталей)'],
-  ['topaz', 'Topaz', 'Magma Fields: убей босса Bal в Khazad-dûm'],
-];
 
-// Остальные кристаллы (меню HotM → «Your Other Crystals»): каждый идёт в Forge на один Perfect-гем
-// (5 Flawless + 1 Crystal, 20 ч). Источник: вики, страница Gemstone Crystals (после v0.20, апрель 2024).
-const OTHER_CRYSTALS = [
-  ['jasper', 'Jasper', 'Fairy Grotto в Crystal Hollows: 0.1% с Butterfly и сундуков; ещё сундук Crystal Nucleus и Jasper Mineshaft'],
-  ['ruby', 'Ruby', '0.002% с добычи Ruby, сундук Crystal Nucleus (~0.8%) или Ruby Mineshaft'],
-  ['opal', 'Opal', 'Opal Mineshaft; редко с Frozen Corpse, которым нужен ключ'],
-  ['aquamarine', 'Aquamarine', 'Aquamarine Mineshaft; редко с Frozen Corpse, которым нужен ключ'],
-  ['peridot', 'Peridot', 'Peridot Mineshaft; редко с Frozen Corpse, которым нужен ключ'],
-  ['onyx', 'Onyx', 'Onyx Mineshaft; редко с Frozen Corpse, которым нужен ключ'],
-  ['citrine', 'Citrine', 'Citrine Mineshaft; редко с Frozen Corpse, которым нужен ключ'],
-];
 
 const DRILLS = ['MITHRIL_PICKAXE', 'REFINED_MITHRIL_PICKAXE', 'TITANIUM_PICKAXE', 'REFINED_TITANIUM_PICKAXE', 'MITHRIL_DRILL_1', 'MITHRIL_DRILL_2', 'TITANIUM_DRILL_1', 'TITANIUM_DRILL_2', 'TITANIUM_DRILL_3', 'TITANIUM_DRILL_4', 'DIVAN_DRILL'];
 const GEM_DRILLS = ['GEMSTONE_DRILL_1', 'GEMSTONE_DRILL_2', 'GEMSTONE_DRILL_3', 'GEMSTONE_DRILL_4'];
@@ -125,8 +107,8 @@ export default {
 
     // ---- Crystal Hollows ----
     const cr = mi.crystals || {};
-    const nucleusRuns = Math.min(...NUCLEUS.map(([k]) => cr[k]?.placed || 0));
-    const missing = NUCLEUS.filter(([k]) => cr[k]?.state !== 'FOUND' && cr[k]?.state !== 'PLACED');
+    const nucleusRuns = Math.min(...NUCLEUS_CRYSTALS.map(([k]) => cr[k]?.placed || 0));
+    const missing = NUCLEUS_CRYSTALS.filter(([k]) => cr[k]?.state !== 'FOUND' && cr[k]?.state !== 'PLACED');
     if (nucleusRuns < 1) {
       next.push({ title: 'Пройди первый Crystal Nucleus', priority: 58, why: 'Собери 5 кристаллов и поставь их в Crystal Nucleus в центре Crystal Hollows: это открывает сундук с частями Divan, гемами и Powder. Где искать: в разделе «Crystal Hollows».' });
     }
@@ -178,7 +160,7 @@ export default {
     sections.push({
       kind: 'checklist', title: 'Crystal Hollows: кристаллы для Crystal Nucleus',
       note: tx`Nucleus пройден ${fmt(nucleusRuns)} ${plural(nucleusRuns, 'раз', 'раза', 'раз')}. Кристаллы сбрасываются после каждого прохождения, поэтому «найден» — это текущий заход.`,
-      items: NUCLEUS.map(([k, n, where]) => ({
+      items: NUCLEUS_CRYSTALS.map(([k, n, where]) => ({
         text: tx`${n} Crystal${cr[k]?.placed ? tx` · поставлен ${fmt(cr[k].placed)} ${plural(cr[k].placed, 'раз', 'раза', 'раз')}` : ''}`,
         done: cr[k]?.state === 'FOUND' || cr[k]?.state === 'PLACED',
         hint: where,
