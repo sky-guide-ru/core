@@ -154,6 +154,33 @@ export function build(m, ctx) {
     fight?.fastestKill?.[d.key] ? tx`${Math.round(fight.fastestKill[d.key] / 1000)} с` : '—',
   ]);
 
+  // ---------- для своей страницы (web/src/guides/Dragons.jsx): карточки драконов и калькулятор вклада ----------
+  const grid = Array.from({ length: 9 }, (_, e) => PLACE_WEIGHT.map(pl => {
+    const weight = e * 100 + pl.w + pl.share;
+    const loot = averageLoot(e, weight, price);
+    const cost = e * eyeP;
+    const open = MAJOR.map((mj, i) => (weight >= mj.req && DRAGONS.some(d => mj.chance(e, d.key) > 0) ? i : -1)).filter(i => i >= 0);
+    return { weight, loot: Math.round(loot), cost: Math.round(cost), net: Math.round(loot - cost), open };
+  }));
+  const extra = { dragons: {
+    noMarket, eyePrice: eyeP, eyes, combat,
+    stats: fight ? { total: totalKills, superior: kills.superior || 0, bestDmg, placed, summoned, crystals: fight.crystals || 0 } : null,
+    zealots: { kills: zk, specials },
+    variants: DRAGONS.map(d => ({
+      key: d.key, name: d.name, chance: d.chance, hp: d.hp, note: d.note, bonus: d.bonus,
+      icon: `${d.set}_HELMET`, frag: fragId(d.key), fragName: nice(ctx, fragId(d.key)), fragPrice: price(fragId(d.key)),
+      setPrice: SLOTS.reduce((s, sl) => s + price(`${d.set}_${sl}`), 0),
+      only: d.only || null, onlyName: d.only ? nice(ctx, d.only) : null,
+      kills: kills[d.key] || 0, bestDmg: fight?.mostDamage?.[d.key] || 0, fastest: fight?.fastestKill?.[d.key] || 0,
+    })),
+    places: PLACE_WEIGHT.map(x => ({ label: x.place, w: x.w })),
+    major: MAJOR.map(mj => {
+      const id = majorId(mj, mj.slot ? DRAGONS[6] : (DRAGONS.find(d => mj.chance(4, d.key) > 0) || DRAGONS[0]));
+      return { id, label: majorLabel(ctx, mj), req: mj.req, text: mj.text };
+    }),
+    grid,
+  } };
+
   const status = combat < 12 ? 'locked' : totalKills ? 'progress' : 'start';
   const summary = combat < 12
     ? tx`The End откроется с Combat 12 (сейчас ${combat}).`
@@ -165,6 +192,7 @@ export function build(m, ctx) {
     summary,
     status,
     next: sortNext(next),
+    extra,
     sections: [
       { kind: 'text', title: 'Как это устроено', text: [
         'Zealot — эндермены в Dragon\'s Nest, внизу острова The End. После убийства Zealot примерно 1 раз из 420 рядом появляется Special Zealot с порталом в руках: с него всегда падает Summoning Eye.',
@@ -173,20 +201,20 @@ export function build(m, ctx) {
         'Урон по дракону режется: всё, что выше 0,4% его HP за удар, почти не засчитывается. Поэтому важнее частые попадания (Ferocity, шортбоу), чем один огромный удар.',
         'Не путать с Dragon\'s Lair в Crystal Hollows: там продают Golden Dragon, драконов там не призывают.',
       ] },
-      { kind: 'table', title: 'Варианты дракона', note: 'Шанс — с каким вариантом вылупится дракон. Фрагменты падают того же вида. Цена брони — полный сет на аукционе.',
+      { kind: 'table', title: 'Варианты дракона', card: 'variants', note: 'Шанс — с каким вариантом вылупится дракон. Фрагменты падают того же вида. Цена брони — полный сет на аукционе.',
         columns: ['Дракон', 'Шанс', 'Особенность', 'Фрагмент', 'Цена', 'Броня: сет и бонус', 'Только с него'], rows: typeRows },
-      { kind: 'table', title: 'Вклад (Dragon Weight)', note: 'Вклад = 100 за каждый свой Summoning Eye + бонус за место по урону + до 100 за долю урона от лидера. Максимум с глаз — 800.',
+      { kind: 'table', title: 'Вклад (Dragon Weight)', card: 'weight', note: 'Вклад = 100 за каждый свой Summoning Eye + бонус за место по урону + до 100 за долю урона от лидера. Максимум с глаз — 800.',
         columns: ['Место по урону', 'Бонус'], rows: PLACE_WEIGHT.map(x => [x.place, `+${x.w}`]) },
       { kind: 'table', title: 'Дроп: порог вклада и шанс', note: 'Вещи проверяются сверху вниз. Выпала одна — остальные главные уже не выпадут, а порог вычитается из вклада. Остаток вклада идёт в фрагменты (22 за штуку, до 32), затем в Enchanted Ender Pearl. Magic Find и Pet Luck повышают шансы.',
         columns: ['Вещь', 'Нужно вклада', 'Шанс', 'Цена'], rows: lootRows },
-      { kind: 'table', title: 'Выгода: сколько глаз класть', news: 'profit', note: noMarket
+      { kind: 'table', title: 'Выгода: сколько глаз класть', card: 'profit', news: 'profit', note: noMarket
         ? 'В этом режиме профиля рынка нет: глаза только из Special Zealot, броня и фрагменты — для себя.'
         : tx`Средний дроп с дракона по нынешним ценам, без Magic Find. Summoning Eye сейчас ${coins(eyeP)}. Цифра — среднее за много боёв: обычно в минус, плюс дают редкие Ender Dragon и Aspect of the Dragons.`,
         columns: ['Расклад', 'Вклад', 'Средний дроп', 'Свои глаза', 'Итог'], rows: scenRows },
       { kind: 'table', title: 'Откуда Summoning Eye', columns: ['Источник', 'Шанс', 'Условие'], rows: EYE_SOURCES.map(r => [...r]) },
       { kind: 'table', title: 'Special Zealot: что повышает шанс', note: tx`Базово 1 из ${ZEALOT.base} (с Zealot Bruiser 1 из ${ZEALOT.bruiser}), Magic Find не влияет. Глаз получает тот, кто вызвал Special Zealot, даже если добил другой.`,
         columns: ['Что', 'Эффект'], rows: ZEALOT.boosts.map(r => [...r]) },
-      { kind: 'table', title: 'Твои бои с драконами', note: fight
+      { kind: 'table', title: 'Твои бои с драконами', card: 'mine', note: fight
         ? tx`Всего призвано при тебе: ${num(summoned)}. Своих глаз положено: ${num(placed)}. Разбито Ender Crystal: ${num(fight.crystals)}.${bestDmg ? tx` Лучший урон за бой: ${num(bestDmg)}.` : ''}`
         : 'В профиле пока нет боёв с драконами.',
         columns: ['Дракон', 'Убито', 'Лучший урон', 'Быстрее всего'], rows: myRows },

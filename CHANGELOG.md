@@ -7,6 +7,7 @@
 ## 0.2.56
 
 - Новый гайд «Драконы и Zealots» (`src/guides/dragons.js`, данные `dragons-data.js`, группа combat) по вики (Ender Dragon, Summoning Eye, Zealot, Dragon's Nest, Dragon Armor, Draconic Altar, 28.11.2026): 7 вариантов дракона с шансами, Dragon Weight за глаза и место по урону, главный дроп с порогами и шансами (правка весов 2025/Sep 2), выгода раскладов по ценам (`lootFor`, `averageLoot`, `SCENARIOS`), источники Summoning Eye, шанс Special Zealot, бои игрока. Шаги: Combat 12, лук с Dragon Tracer, продать глаза или класть 4, Ender Dragon Epic → Legendary, Zealuck. Ironman/Stranded/Bingo — без цен.
+- Гайд отдаёт `extra.dragons` для своей страницы в web: карточки вариантов, сетка калькулятора вклада (`grid[глаза][место]`: вклад, средний дроп, цена глаз, итог, что открыто), пороги дропа. Секции, показанные карточками, помечены `card`.
 - `extras.dragonFight`: убийства и смерти по видам драконов (`player_stats.kills/deaths.<тип>_dragon`), лучший урон, быстрейшее убийство, призвано, своих глаз положено, разбито Ender Crystal.
 ## 0.2.55
 
