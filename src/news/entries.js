@@ -14,6 +14,17 @@
 
 export const NEWS = [
   {
+    id: '2026-11-28-alchemy',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Гайд по зельям и Alchemy',
+    items: [
+      '[Зелья и Alchemy](guides/alchemy#activities): какие зелья держать для боя, Mining, Farming, Fishing и Dungeons.',
+      'God Potion и Booster Cookie: что дают, сколько стоят сейчас и цена часа игры.',
+      'Таблица [Сварить или купить](guides/alchemy#brews) и самая дешёвая прокачка Alchemy по ценам Bazaar.',
+    ],
+  },
+  {
     id: '2026-11-28-experiments',
     date: '2026-11-28',
     kind: 'new',

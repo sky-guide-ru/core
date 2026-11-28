@@ -28,6 +28,7 @@ import diana from './diana.js';
 import hunting from './hunting.js';
 import chocolate from './chocolate.js';
 import enchanting from './enchanting.js';
+import alchemy from './alchemy.js';
 import { tx } from '../../i18n/msg.js';
 
 export const GUIDES = [
@@ -51,6 +52,7 @@ export const GUIDES = [
   diana,
   chocolate,
   enchanting,
+  alchemy,
 ];
 
 export const GROUPS = {

@@ -143,6 +143,14 @@ export const AFTER = {
     ],
     related: ['essence', 'museum'],
   },
+  alchemy: {
+    goals: [
+      'God Potion без перерыва: с Alchemy 50 одна бутылка — 24 часа игры, Parrot добавляет ещё до 20%.',
+      'Mixins к God Potion: Spider Egg (+15 Crit Damage) и Zombie Brain (+10 Ferocity) открываются на Slayer 8.',
+      'Harvest Harbinger и Mushed Glowy Tonic под Farming и Fishing: их нет в God Potion.',
+    ],
+    related: ['enchanting', 'dungeons'],
+  },
   chocolate: {
     goals: [
       'Все кролики: яйца Hoppity каждую весну, резиденты на островах и бродячие кролики в окне фабрики.',

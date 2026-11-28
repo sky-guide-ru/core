@@ -26,6 +26,11 @@ export function auctionKey(item, ea = {}) {
     const [name, lvl] = ench[0];
     return { key: tx`ENCHANTMENT_${String(name).toUpperCase()}_${lvl}` };
   }
+  // Зелья лежат под общим id POTION: ключ как в NEU — POTION_STRENGTH;8. Splash-зелья не смешиваем с обычными.
+  if (id === 'POTION' && ea?.potion && !ea.splash) {
+    const lvl = Number(ea.potion_level) || 0;
+    if (lvl > 0) return { key: `POTION_${String(ea.potion).toUpperCase()};${lvl}` };
+  }
   if ((id === 'RUNE' || id === 'UNIQUE_RUNE') && ea?.runes) {
     const r = Object.entries(ea.runes)[0];
     if (r) return { key: tx`${String(r[0]).toUpperCase()}_RUNE;${r[1]}` };
