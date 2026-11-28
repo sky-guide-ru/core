@@ -1,6 +1,7 @@
 // «Дела на сегодня»: ежедневные дела, которые видно по профилю. Отметка ставится сама, по меткам времени из API.
 // Сброс дня в SkyBlock — полночь по Нью-Йорку (America/New_York).
 import { ru } from '../../i18n/msg.js';
+import { fetchurPuzzlerDailies } from './daily-npcs.js';
 
 const DAY = 86400_000;
 
@@ -14,11 +15,13 @@ export function dailyReset(now = Date.now()) {
 
 /**
  * @param {object} m разобранный участник (member.daily, crimson, skills…)
- * @returns {null | { reset: number, next: number, done: number, total: number, items: Array<{ id, title, done, progress?, text, href? }> }}
+ * @param {object} [ctx] цены для Fetchur: { items, buy, market, noMarket } (daily-npcs.js liveCtx)
+ * Дела с manual ('day' | '24h') API не видит: done = null, отметку ставит игрок на сайте.
+ * @returns {null | { reset: number, next: number, done: number, total: number, items: Array<{ id, title, done, manual?, progress?, text, href? }> }}
  */
-export function dailiesOf(m, now = Date.now()) {
-  const d = m?.daily;
-  if (!d) return null;
+export function dailiesOf(m, now = Date.now(), ctx = {}) {
+  const d = m?.daily || {};
+  if (!m?.daily && !m?.mining) return null;
   const reset = dailyReset(now);
   const items = [];
 
@@ -48,6 +51,9 @@ export function dailiesOf(m, now = Date.now()) {
     const n = d.visitors || 0;
     items.push({ id: 'visitors', title: 'Garden Visitors', done: n === 0, progress: null, text: n ? ru`Ждут посетители: ${n}. Copper и опыт Garden.` : 'Посетителей нет, новые приходят сами.', href: '#/guides/farming' });
   }
+
+  // Dwarven Mines: Fetchur и Puzzler — по 2 500 Mithril Powder; API не показывает, сделано ли
+  items.push(...fetchurPuzzlerDailies(m, ctx, now));
 
   if (!items.length) return null;
   return { reset, next: reset + DAY, done: items.filter(i => i.done).length, total: items.length, items };

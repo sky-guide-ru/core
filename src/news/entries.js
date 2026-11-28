@@ -14,6 +14,17 @@
 
 export const NEWS = [
   {
+    id: '2026-11-28-fetchur',
+    date: '2026-11-28',
+    kind: 'new',
+    title: 'Fetchur и Puzzler в делах дня',
+    items: [
+      'В [Делах на сегодня](overview#dailies) — что Fetchur просит сегодня, где это купить и почём.',
+      'Puzzler там же: как решить головоломку; оба дают по 2 500 Mithril Powder в день.',
+      'Круг просьб Fetchur по числам месяца — в [гайде Mining](guides/mining#fetchur).',
+    ],
+  },
+  {
     id: '2026-11-28-experiments',
     date: '2026-11-28',
     kind: 'new',

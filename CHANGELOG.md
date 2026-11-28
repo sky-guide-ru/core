@@ -4,6 +4,10 @@
 
 ## Не выпущено
 
+- «Дела на сегодня»: Fetchur и Puzzler (`src/analysis/daily-npcs.js`) по вики (Fetchur, Puzzler, 28.11.2026). Fetchur — 12 предметов по кругу, с 1-го числа заново, день по Нью-Йорку (`FETCHUR`, `fetchurIndex`, `fetchurRequest`): что просит сегодня и завтра, где взять дешевле (NPC за монеты или Bazaar/AH через `liveCtx`; Ironman, Stranded, Bingo — только NPC), сколько уже есть у игрока. Puzzler — как решать. Оба только с доступом в Dwarven Mines. API не показывает, сделано ли, поэтому у дел новый признак `manual: 'day' | '24h'` и `done: null` — отметку ставит сайт.
+- `dailiesOf(m, now, ctx)`: третий аргумент — цены для Fetchur; без `member.daily`, но с `mining` тоже возвращает дела.
+- Гайд Mining: секция «Каждый день: Fetchur и Puzzler» (`news: 'fetchur'`) — круг Fetchur по числам месяца с ценами, координаты NPC, решение Puzzler.
+
 ## 0.2.55
 
 - Новый гайд «Enchanting и Experiments» (`src/guides/enchanting.js`, группа skills) по вики (Experiments, Experimentation Table, Metaphysical Serum, Enchanting, 28.11.2026): ставки Superpairs, Chronomatron и Ultrasequencer (`SUPERPAIRS`, `CHRONOMATRON`, `ULTRASEQUENCER`, `runXp`), заряды и докупка за Bits (`RESETS`), как играть, что продаётся, Metaphysical Serum и RNG Meter, уровни Enchanting, зачарования по слотам (`ENCHANTS`). Шаги: пройти Experiments сегодня, играть на открытой ставке, следующий уровень, Serum, Guardian.
